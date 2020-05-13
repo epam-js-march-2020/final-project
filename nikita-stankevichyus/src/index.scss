@@ -1,0 +1,211 @@
+@import "scss/fonts";
+@import "scss/grid";
+@import "scss/mixins";
+@import "scss/normalize";
+@import "scss/positioning";
+@import "scss/reset";
+@import "scss/templates";
+@import "scss/vars";
+@import "scss/margins-paddings";
+@import "scss/colors";
+@import "scss/animations";
+@import "scss/fonts/FontAwesome/fontawesome.scss";
+@import "scss/fonts/FontAwesome/solid.scss";
+
+// Setting data from vars.scss for each part of the page (header, main, aside, footer)
+// Or, if there universal parameters, they'll be setted to everything
+@if $use-universal != true {
+
+  body * {
+    font-family: map-get(map-get($fonts, main), font-main);
+  }
+  // COLORS
+  @each $part, $data in $colors {
+    #{$part} {
+      background-color: map-get($data, background);
+      border-color: map-get($data, border);
+      .text-main, p, * {
+        color: map-get($data, text-main);
+      }
+      .text-header, h1, h2, h3, h4, h5, h6 {
+        color: map-get($data, text-header);
+      }
+      .text-link, a, link {
+        color: map-get($data, text-link);
+      }
+      button {
+        padding: 10px;
+        background-color: map-get($data, text-link);
+        border: 1px solid map-get($data, text-link);
+        border-radius: 5px;
+        color: map-get($data, background);
+        -webkit-transition: background-color 0.5s, color 0.5s;
+        transition: background-color 0.5s, color 0.5s;
+      }
+
+      button:hover, button:active {
+        background-color: desaturate(map-get($data, background), 50%);
+        color: map-get($data, text-link);
+      }
+
+      input {
+        background-color: white;
+        border: 3px solid map-get($data, border);
+        color: #333;
+        border-radius: 5px;
+        padding: 10px;
+      }
+    }
+  }
+
+  // SIZES
+  @each $part, $data in $sizes {
+    #{$part} {
+      .text-main, p{
+        font-size: map-get($data, font-main);
+      }
+
+      @each $header, $size in map-get($data, font-header) {
+        #{$header} {
+          font-size: $size;
+        }
+      }
+
+      .text-link, a, link {
+        font-size: map-get($data, font-link);
+      }
+    }
+  }
+
+  // FONTS
+  @each $part, $data in $fonts {
+    #{$part} {
+      .text-main, p , *{
+        font-family: map-get($data, font-main);
+        font-weight: map-get($data, font-weight-main);
+        font-style: map-get($data, font-style-main);
+      }
+      .text-header, h1, h2, h3, h4, h5, h6 {
+        font-family: map-get($data, font-header);
+        font-weight: map-get($data, font-weight-header);
+        font-style: map-get($data, font-style-header);
+      }
+      .text-link, a, link {
+        font-family: map-get($data, font-link);
+        font-weight: map-get($data, font-weight-link);
+        font-style: map-get($data, font-style-link);
+      }
+    }
+  }
+} @else {
+
+  $parts: (header, main, aside, footer);
+
+  // COLORS
+  @each $part in $parts {
+
+    #{$part} {
+      background-color: map-get(map-get($universal, colors), background);
+      border-color: map-get(map-get($universal, colors), border);
+      .text-main, p, * {
+        color: map-get(map-get($universal, colors), text-main);
+      }
+      .text-header, h1, h2, h3, h4, h5, h6 {
+        color: map-get(map-get($universal, colors), text-header);
+      }
+      .text-link, a, link {
+        color: map-get(map-get($universal, colors), text-link);
+      }
+    }
+  
+
+  // SIZES
+  
+    #{$part} {
+
+      .text-main, p{
+        font-size: map-get(map-get($universal, font), font-main);
+      }
+
+      @each $header, $size in map-get(map-get($universal, size), font-header) {
+        #{$header} {
+          font-size: $size;
+        }
+      }
+
+      .text-link, a, link {
+        font-size: map-get($universal, font-link);
+      }
+    }
+  
+
+  // FONTS
+  
+    #{$part} {
+      .text-main, p, *{
+        font-family: map-get(map-get($universal, font), font-main);
+        font-weight: map-get(map-get($universal, font), font-weight-main);
+        font-style: map-get(map-get($universal, font), font-style-main);
+      }
+      .text-header, h1, h2, h3, h4, h5, h6 {
+        font-family: map-get(map-get($universal, font), font-header);
+        font-weight:  map-get(map-get($universal, font), font-weight-header);
+        font-style:  map-get(map-get($universal, font), font-style-header);
+      }
+      .text-link, a, link {
+        font-family: map-get(map-get($universal, font), font-link);
+        font-weight: map-get(map-get($universal, font), font-weight-link);
+        font-style: map-get(map-get($universal, font), font-style-link);
+      }
+    }
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.text-link, a, link {
+  display: block;
+  text-decoration: underline;
+}
+
+
+code {
+  background-color: $light;
+  color: map-get(map-get($colors, main), font-main);
+  font-family: 'JetBrains Mono';
+  padding: 5px;
+}
+
+main h1, header h1 {
+  @include text-gradient(135deg, orange, 40%, rgb(228, 0, 111), 125%);
+}
+
+aside h1, footer h1 {
+  @include text-gradient(135deg, #2b5876   , 10%,  #4e4376, 70%);
+}
+
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  > * {
+    margin-bottom: 10px;
+  }
+}
+.examples > *{
+  margin-top: 15px;
+}
+
+.test-modal {
+  background-color: white;
+  width: 200px;
+  height: 200px;
+  border: 2px solid orange;
+  border-radius: 5px;
+}

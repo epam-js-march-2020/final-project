@@ -1,0 +1,21 @@
+@import "./vars";
+
+$general-colors: (
+  primary: $primary,
+  secondary: $secondary,
+  success: $success,
+  danger: $danger,
+  warning: $warning,
+  info: $info,
+  light: $light,
+  dark: $dark,
+  muted: $muted
+);
+
+// Making rules for each color in fashion of atomic css
+@each $color-name, $color-value in $general-colors {
+  .text-color-#{$color-name} { color: $color-value; }
+  .bg-color-#{$color-name} { background-color: $color-value; }
+  .border-color-#{$color-name} { border-color: $color-value; }
+} 
+
