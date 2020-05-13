@@ -90,7 +90,7 @@
         font-weight: map-get($data, font-weight-header);
         font-style: map-get($data, font-style-header);
       }
-      .text-link, a, link {
+      .text-link, a, link{
         font-family: map-get($data, font-link);
         font-weight: map-get($data, font-weight-link);
         font-style: map-get($data, font-style-link);
@@ -188,6 +188,18 @@ aside h1, footer h1 {
   @include text-gradient(135deg, #2b5876   , 10%,  #4e4376, 70%);
 }
 
+img {
+  width: 100%;
+  height: auto;
+}
+
+.logo {
+
+}
+
+ul {
+  width: 100%;
+}
 
 .buttons {
   display: flex;

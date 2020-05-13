@@ -18,8 +18,8 @@ $general-colors: (
 	$md-height: 200px;
 	$sm-height: 215px;
 	$xs-height: 230px;
-	$accumulator: 17.5px;
-
+	$accumulator: 7.5px;
+	$margin-accumulator: 0;
 	position: fixed;
 	top: 0;
 	width: 100%;
@@ -35,7 +35,7 @@ $general-colors: (
 			height: $height;
 			
 			+ main {
-				margin-top: $height + 5.5 * $accumulator;
+				margin-top: $height + $margin-accumulator * $accumulator;
 			}
 		}
 	}
@@ -44,7 +44,8 @@ $general-colors: (
 }
 
 .header--regular {
-	min-height: max-content;
+	// min-height: max-content;
+	max-height: max-content;
 	flex: 1;
 	.container {
 		height: 100%;
@@ -91,7 +92,11 @@ $general-colors: (
 
 .nav--horizontal {
 	min-height: max-content;
-	height: 25%;
+	height: 70%;
+	width: 100%;
+	margin: 0 auto;
+	// display: flex;
+	// justify-content: center;
 	> ul {
 		height: 100%;
 		list-style-type: none;
@@ -109,7 +114,8 @@ $general-colors: (
 		justify-content: center;
 		background-color: map-get(map-get($colors, header), text-link);
 		flex: 1;
-		margin-right: 0.5%;
+		margin-right: 0.25%;
+		margin-left: 0.25%;
 		a {
 			
 			text-align: center;
@@ -117,6 +123,10 @@ $general-colors: (
 			font-style: normal;
 			font-size: 24px;
 			color: map-get(map-get($colors, header), background);
+
+			* {
+				color: map-get(map-get($colors, header), background);
+			}
 		}
 		cursor: pointer;
 		transition: background-color 0.5s, color 0.5s;
@@ -126,6 +136,9 @@ $general-colors: (
 		background-color: map-get(map-get($colors, header), background);
 		a {
 			color: map-get(map-get($colors, header), text-link);
+			* {
+				color: map-get(map-get($colors, header), text-link);
+			}
 		}
 	}
 	
