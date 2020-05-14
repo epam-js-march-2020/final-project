@@ -1,0 +1,29 @@
+@import './header-logo';
+@import './header-links';
+@import './header-link';
+
+// $header: (
+//     height: 60px
+// );
+
+.header {
+    height: map-get($header, 'height' );
+    width: 100vw;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-top: 5px;
+}
+
+$theme-header-yellow: (
+    background: rgb(58, 58, 58),
+    font-color: white
+);
+
+.header-yellow {
+    background-color: map-get($theme-header-yellow, 'background');
+    color:map-get($theme-header-yellow , 'font-color' );
+}
+

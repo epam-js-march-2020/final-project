@@ -1,0 +1,33 @@
+@import './about';
+
+.main_contacts_map {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: calc(100vh - #{map-get($header, 'height')} );
+    // calc( 100% - #{map-get($sizes, 'header-logo-width')} )
+    margin-top: map-get($header, 'height' )
+}
+
+.notFoundContainer {
+    position: relative;
+    width: 100wv;
+    height: calc(100vh - #{map-get($header, 'height')} );
+    margin-top: map-get($header, 'height' );
+    background-image: url('../../img/404/404.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.notFoundContainer_text {
+    position: absolute;
+    top: 20%;
+    right: 15%;
+    font-size: 1.4em;
+}
+
+.notFoundContainer_link-yellow {
+    font-size: 2em;
+    text-decoration: underline;
+    color: rgb(255, 222, 32);
+}

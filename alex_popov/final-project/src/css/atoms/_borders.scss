@@ -1,0 +1,49 @@
+.px {
+    @each $name, $val in $spaces {
+      &-#{$name} {
+        padding-right: $val;
+        padding-left: $val;
+      }
+    } 
+  }
+
+  .py {
+    @each $name, $val in  $spaces {
+      &-#{$name} {
+        padding-top: $val;
+        padding-bottom: $val;
+      }
+    }
+  }
+
+  .pt {
+    @each $name, $val in $spaces {
+      &-#{$name} {
+        padding-top: $val;
+      }
+    }
+  }
+
+  .pr {
+    @each $name, $val in $spaces {
+      &-#{$name} {
+        padding-right: $val;
+      }
+    }
+  }
+
+  .pb {
+    @each $name, $val in $spaces {
+      &-#{$name} {
+        padding-bottom: $val;
+      }
+    }
+  }
+
+  .pl {
+    @each $name, $val in $spaces {
+      &-#{$name} {
+        padding-left: $val;
+      }
+    }
+  }

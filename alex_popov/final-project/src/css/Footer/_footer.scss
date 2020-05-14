@@ -1,0 +1,25 @@
+@import './footer-logo';
+
+// $colors: (
+//   header-background: rgb(250, 217, 32),
+//   header-logo: rgb(0, 0, 0),
+//   header-text: black,
+//   footer-background: rgb(56, 56, 56),
+//   footer-logo: rgb(216, 216, 216),
+//   footer-text: white
+// );
+
+.footer {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+$theme-foorer-dark: (
+    text-color: white,
+    background-color: rgb(56, 56, 56),
+);
+
+.footer-dark {
+    color: map-get($theme-foorer-dark, 'text-color');
+    background-color: map-get($theme-foorer-dark, 'background-color');
+}
