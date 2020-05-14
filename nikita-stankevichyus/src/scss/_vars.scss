@@ -32,7 +32,7 @@ $colors: (
     border: #75ABBC,
     shadow: #75ABBC,
     text-main: #071013,
-    text-header: #23B5D3,
+    text-header: #071013,
     text-link: #23B5D3,
   ),
 
@@ -48,12 +48,12 @@ $colors: (
 
   // footer
   footer: (
-    background: #20FC8F,
+    background: #75ABBC,
     border: #38423B,
     shadow: #0F0,
-    text-main: #2D2D2A,
-    text-header: #38423B,
-    text-link: #3F5E5A,
+    text-main: #071013,
+    text-header: #23B5D3,
+    text-link: #23B5D3,
   ),
 );
 
@@ -91,7 +91,7 @@ $sizes: (
 
   // main
   main: (
-    font-main: 14px,
+    font-main: 18px,
     font-header: (
       h1: 36px,
       h2: 32px,
