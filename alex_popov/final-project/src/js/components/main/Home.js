@@ -5,7 +5,7 @@ function Home() {
   return (
     <>
       <Player />
-      <div className='container'>
+      <div className='container container_main'>
         <h1>Huntingdons Finest Barber Shop</h1>
         <p>
           Welcome to The Barbers Den! The Barbers Den is a traditional barbershop based in Huntingdon high street. Our main focus is customer satisfaction, we aim to give our customers the best barbering experience possible and tailor our services in line with our customer’s expectations and needs.

@@ -1,5 +1,10 @@
 @import './about';
 
+.container_main {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
 .main_contacts_map {
     position: relative;
     top: 0;
@@ -31,3 +36,4 @@
     text-decoration: underline;
     color: rgb(255, 222, 32);
 }
+
