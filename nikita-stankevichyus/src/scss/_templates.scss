@@ -18,7 +18,7 @@ $general-colors: (
 	$md-height: 200px;
 	$sm-height: 215px;
 	$xs-height: 230px;
-	$accumulator: 7.5px;
+	$accumulator: 4px;
 	$margin-accumulator: 0;
 	position: fixed;
 	top: 0;
@@ -29,16 +29,21 @@ $general-colors: (
 		width: 100%;
 	}
 
-	@for $i from 1 through 16 {
-		@media (max-width: $i * 100px) {
-			$height: $i * $accumulator;
-			height: $height;
-			
-			+ main {
-				margin-top: $height + $margin-accumulator * $accumulator;
-			}
-		}
+	height: 10vh;
+	+ main {
+		margin-top: 10vh;
 	}
+
+	// @for $i from 1 through 20 {
+	// 	@media (max-width: $i * 100px) {
+	// 		$height: $i * $accumulator;
+	// 		height: $height;
+			
+	// 		+ main {
+	// 			margin-top: $height + $margin-accumulator * $accumulator;
+	// 		}
+	// 	}
+	// }
 
 	
 }
@@ -95,6 +100,7 @@ $general-colors: (
 	height: 70%;
 	width: 100%;
 	margin: 0 auto;
+	
 	// display: flex;
 	// justify-content: center;
 	> ul {
@@ -112,7 +118,7 @@ $general-colors: (
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		background-color: map-get(map-get($colors, header), text-link);
+		background-color: map-get(map-get($colors, header), background);
 		flex: 1;
 		margin-right: 0.25%;
 		margin-left: 0.25%;
@@ -122,10 +128,10 @@ $general-colors: (
 			text-decoration: none;
 			font-style: normal;
 			font-size: 24px;
-			color: map-get(map-get($colors, header), background);
+			color: map-get(map-get($colors, header), text-link);
 
 			* {
-				color: map-get(map-get($colors, header), background);
+				color: map-get(map-get($colors, header), text-link);
 			}
 		}
 		cursor: pointer;
@@ -133,11 +139,11 @@ $general-colors: (
 	}
 
 	.nav_link:hover {
-		background-color: map-get(map-get($colors, header), background);
+		background-color: map-get(map-get($colors, header), text-link);
 		a {
-			color: map-get(map-get($colors, header), text-link);
+			color: map-get(map-get($colors, header), background);
 			* {
-				color: map-get(map-get($colors, header), text-link);
+				color: map-get(map-get($colors, header), background);
 			}
 		}
 	}
