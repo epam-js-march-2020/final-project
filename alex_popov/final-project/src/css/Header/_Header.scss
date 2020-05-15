@@ -1,10 +1,3 @@
-@import './header-logo';
-@import './header-links';
-@import './header-link';
-
-// $header: (
-//     height: 60px
-// );
 
 .header {
     height: map-get($header, 'height' );
@@ -26,4 +19,29 @@ $theme-header-yellow: (
     background-color: map-get($theme-header-yellow, 'background');
     color:map-get($theme-header-yellow , 'font-color' );
 }
+
+.header_logo {
+    // fill: map-get($colors, 'header-logo' );
+    // width: map-get($sizes, 'header-logo-width')
+    height: 50px;
+}
+
+
+
+.header-links {
+    width: calc( 100% - #{map-get($sizes, 'header-logo-width')} );
+}
+
+.header_link {
+    font-size: 1em;
+    text-transform: uppercase;
+    font-family: 'Open Sans';
+    font-weight: 400;
+    margin-left: 60px;
+}
+
+.header_link-active {
+    border-bottom: 2px solid rgb(255, 222, 32);
+}
+
 

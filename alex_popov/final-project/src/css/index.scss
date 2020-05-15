@@ -1,5 +1,12 @@
 @font-face {
   font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Light.ttf');
+  font-weight: 200;
+  font-style: normal
+}
+
+@font-face {
+  font-family: 'Open Sans';
   src: url('../fonts/OpenSans-Regular.ttf');
   font-weight: 400;
   font-style: normal;
@@ -50,8 +57,17 @@ li {
 .container {
   max-width: 1000px;
   margin: auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 p {
   margin-top: 20px;
+}
+
+.fullScreen {
+  position: relative;
+  width: 100wv;
+  height: calc(100vh - #{map-get($header, 'height')} );
+  margin-top: map-get($header, 'height' );
 }
