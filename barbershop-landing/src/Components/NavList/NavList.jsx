@@ -1,17 +1,18 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
+import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
 const NavList = (props) => {
     const [t] = useTranslation();
     return (
         <Nav className={props.className}>
-            <Nav.Link href="#home">{t('navList.home')}</Nav.Link>
-            <Nav.Link href="#about">{t('navList.about')}</Nav.Link>
-            <Nav.Link href="#gallery">{t('navList.gallery')}</Nav.Link>
-            <Nav.Link href="#services">{t('navList.services')}</Nav.Link>
-            <Nav.Link href="#contacts">{t('navList.contacts')}</Nav.Link>
-            <Nav.Link href="#appointment">{t('navList.appointment')}</Nav.Link>
+            <Link className="btn btn-light m-1" to="/">{t('navList.home')}</Link>
+            <Link className="btn btn-light m-1" to="/about">{t('navList.about')}</Link>
+            <Link className="btn btn-light m-1" to="/gallery">{t('navList.gallery')}</Link>
+            <Link className="btn btn-light m-1" to="/services">{t('navList.services')}</Link>
+            <Link className="btn btn-light m-1" to="/contacts">{t('navList.contacts')}</Link>
+            <Link className="btn btn-light m-1" to="/appointment">{t('navList.appointment')}</Link>
         </Nav>
     );
 }
