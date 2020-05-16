@@ -14,9 +14,10 @@ const SocialMediaLinks = () => {
     )
 }
 
-const Footer = () => {
+const Footer = ({footerClassName}) => {
+    console.log(footerClassName)
     return (
-        <footer className='footer footer-dark'>
+        <footer className={footerClassName}>
             <div className='container flex fd-column ai-center'>
                 <Logo logoClassName={'footer-logo logo-white'} />
                 <p className='py-m'>33 High Street, Huntingdon, Cambs. PE293AQ</p>

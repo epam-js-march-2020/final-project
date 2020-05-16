@@ -21,8 +21,6 @@ $theme-header-yellow: (
 }
 
 .header_logo {
-    // fill: map-get($colors, 'header-logo' );
-    // width: map-get($sizes, 'header-logo-width')
     height: 50px;
 }
 
@@ -44,4 +42,10 @@ $theme-header-yellow: (
     border-bottom: 2px solid rgb(255, 222, 32);
 }
 
+.header-liginIcon-passive {
+    fill: white;
+}
 
+.header-liginIcon-active {
+    fill: rgb(255, 222, 32);
+}

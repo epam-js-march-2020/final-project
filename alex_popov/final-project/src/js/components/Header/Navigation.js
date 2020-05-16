@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
-// const links = [{path: '/' , name: 'main'}, {path: '/services', name: 'services'}, {path: '/barbers', name: 'barbers'}, {path: '/contacts', name: 'contacts'}];
+import LoginIcon from './LoginIcon';
 
 const Navigation = () => {
     return (
@@ -41,8 +40,11 @@ const Navigation = () => {
                 >
                     contacts
                 </NavLink>
+                <button id='activate'>activate</button>
             </div>
-            <NavLink className='header-link' to='/login' >log in</NavLink>
+            <NavLink className='header-link' to='/user' >
+                <LoginIcon />
+            </NavLink>
       </nav>
     )
 }

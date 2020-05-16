@@ -1,4 +1,5 @@
 @import './about';
+@import './cervices';
 
 .container_main {
     padding-top: 80px;
@@ -31,58 +32,17 @@
     color: rgb(255, 222, 32);
 }
 
-$services-themes: (
-    default: '../../img/services/default.jpg',
-    cut: '../../img/services/haircut.jpg',
-    trim: '../../img/services/trim.jpg',
-    cuttrim: '../../img/services/all.jpg',
-    children: '../../img/services/child.jpg' 
-);
-
-.container_service {
+.container_craft {
     @extend .fullScreen;
-    background-size: cover;
-    background-color: #d8cdc9;
-    background-position: -250px;
+    background-color: orange;
 }
 
-.container_service {
-    @each $key, $val in $services-themes {
-        &-#{$key} {
-            background-image: url(#{$val});
-        }
-    }
-}
-
-.services_links {
-    display: inline-flex;
-    flex-direction: column;
+.stuff_image {
     position: absolute;
-    width: 280px;
-    top: 150px;
-    left: 50%;
-    padding-top: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    font-size: 1.9em;
-}
-
-
-.services_links-white {
-    border-radius: 15px;
-    background-color: rgb(107, 107, 107);
-    color: white;
-    font-weight: 200;
-}
-
-.services_linkContainer {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid transparent;
-}
-
-.services_linkContainer-active {
-    color: rgb(255, 222, 32);
-    border-bottom: 1px solid rgb(255, 222, 32);
+    top: 0;
+    width: 100%;
+    // right: 0;
+    // left: 0;
+    // bottom: 0;
+    // width: 100vw;
 }

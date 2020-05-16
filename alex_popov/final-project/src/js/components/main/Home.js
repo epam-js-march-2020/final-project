@@ -1,6 +1,6 @@
 import React from 'react';
 import Player from './Player';
-
+import Footer from '../Footer/Footer';
 function Home() {
   return (
     <>
@@ -14,6 +14,7 @@ function Home() {
           On May 1st we are launching The Barbers Den club. Members will be entitled to a regular newsletter with regular offers and perks. We welcome any feedback our customers have to offer and are constantly looking to improve and enhance the customer’s experience.
         </p>
       </div>
+      <Footer footerClassName='footer footer-dark' />
     </>
   )
 }

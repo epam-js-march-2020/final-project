@@ -5,6 +5,17 @@
     padding-bottom: 25px;
 }
 
+.footer-contacts {
+    @extend .footer;
+    position: absolute;
+    top: 300px;
+    right: 50px;
+    padding-right: 32px;
+    padding-left: 32px;
+    border-radius: 15px;
+
+}
+
 $theme-foorer-dark: (
     text-color: white,
     background-color: rgb(41, 41, 41),
