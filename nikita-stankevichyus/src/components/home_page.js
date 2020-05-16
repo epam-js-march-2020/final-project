@@ -1,36 +1,12 @@
 import React from 'react';
-import logo from './logo.png';
-import work1 from './work-1.jpg';
-import work2 from './work-2.jpg';
-import work3 from './work-3.jpg';
-import './App.css';
-import './index.scss';
+import logo from '../images/logo.png';
+import work1 from '../images/work-1.jpg';
+import work2 from '../images/work-2.jpg';
+import work3 from '../images/work-3.jpg';
 
-function Icon(props) {
+export function HomePage(props) {
   return (
-    <i className={props.icon}></i>
-  )
-}
-
-function App() {
-  return (
-    <div className="App body">
-      <div id = 'home'></div>
-      <header className='header header--fixed container--flex'>
-        <nav className='nav--horizontal container--flex justify-content--center mg-t-15'>
-          <ul className = 'container--flex'>
-            <li className="nav_link"><a href="#home"><Icon icon='fas fa-home mg-l--15'/><span className='mg-l-5'>Home</span></a></li>
-            <li className="nav_link"><a href='#contacts'><Icon icon='fas fa-cut mg-l--15'/><span className='mg-l-5'>Contacts</span></a></li>
-            <li className="nav_link"><a href='#whyWe'><Icon icon='fas fa-cut mg-l--15'/><span className='mg-l-5'>Why We</span></a></li>
-            <li className="nav_link"><a><Icon icon='fas fa-cut mg-l--15'/><span className='mg-l-5'>Services</span></a></li>
-            <li className="nav_link"><a><Icon icon='fas fa-user mg-l--15'/><span className='mg-l-5'>Profile</span></a></li>
-            <li className="nav_link"><a><Icon icon='fas fa-sign-in-alt mg-l--15'/><span className='mg-l-5'>Log In</span></a></li>
-            <li className="nav_link"><a><Icon icon='fas fa-user-plus mg-l--15'/><span className='mg-l-5'>Sign Up</span></a></li>
-          </ul>
-      </nav>
-      </header>
-      <main  className="main main--regular">
-        <div className = "main_content container--flex direction--column justify--between align-between items--between">
+    <div className = "main_content container--flex direction--column justify--between align-between items--between">
           <section id='contacts' className = "main_presentation presentation mg-t-35 container--flex justify--center align--start items--center direction--column">
             <h1>Einheria Barbershop</h1>
             <img className="logo mg-t-15" src={logo}></img>
@@ -63,14 +39,6 @@ function App() {
             </div>
           </section>
 
-        </div>
-      </main>
-      <footer className = 'footer footer--fixed container--flex direction--row justify--start align--end items--end'>
-        <span className = 'text-color-dark mg-b-5'>© EPAM, React Project. 2020</span>
-      </footer>
-
     </div>
-  );
+  )
 }
-
-export default App;

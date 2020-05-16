@@ -2,11 +2,69 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+
+import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import { createStore, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { combineReducers } from 'redux';
+
+// import { defaultState } from './default_state';
+
+
+import { addService } from './actions/add_service';
+import { changeData } from './actions/change_data';
+import { deleteService } from './actions/delete_service';
+import { logIn } from './actions/login';
+import { signUp } from './actions/sign_up';
+import { toHome } from './actions/to_home';
+import { toProfile } from './actions/to_profile';
+import { toServices } from './actions/to_services';
+
+import { reducerService } from './reducers/service_reducer';
+import { reducerAuth } from './reducers/auth_reducer';
+import { reducerNavigation } from './reducers/navigation_reducer';
+import { defaultState } from './default_state';
+
+
+
+const rootReducer = combineReducers({
+  loged: reducerAuth,
+  navigation: reducerNavigation,
+  services: reducerService
+});
+
+
+const store = createStore(rootReducer);
+
+const mapStateToProps = (state) => {
+  return {
+    loged: state.loged,
+    navigation: state.navigation,
+    services: state.services
+  }
+}
+
+const mapActionsToProps = (dispatch) => {
+  return {
+    addService: bindActionCreators(addService, dispatch),
+    changeData: bindActionCreators(changeData, dispatch),
+    deleteService: bindActionCreators(deleteService, dispatch),
+    logIn: bindActionCreators(logIn, dispatch),
+    signUp: bindActionCreators(signUp, dispatch),
+    toHome: bindActionCreators(toHome, dispatch),
+    toProfile: bindActionCreators(toProfile, dispatch),
+    toServices: bindActionCreators(toServices, dispatch),
+  }
+}
+
+const WrappedApp = connect(mapStateToProps, mapActionsToProps)(App);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <WrappedApp />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
