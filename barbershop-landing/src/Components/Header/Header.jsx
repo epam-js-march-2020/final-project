@@ -7,6 +7,8 @@ import NavList from '../NavList/NavList';
 
 import userIcon from './user.svg';
 
+import './Header.css';
+
 const Header = () => {
     const [t] = useTranslation();
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -15,7 +17,7 @@ const Header = () => {
         </span>
       ));
     return (
-        <Navbar collapseOnSelect expand="md" className="flex-md-row-reverse">
+        <Navbar collapseOnSelect expand="md" className="flex-md-row-reverse px-0">
             <Navbar.Toggle aria-controls="basic-navbar-nav" id="navbar-toggle"/>
             <Navbar.Brand className="d-md-none">
                 {t('header.brand')}
