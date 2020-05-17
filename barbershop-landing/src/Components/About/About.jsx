@@ -57,6 +57,7 @@ const About = () => {
     console.log('useEffect');
     fetchEmployeeData();
     fetchCarouselData();
+// eslint-disable-next-line
   }, []);
 
   return (

@@ -37,6 +37,7 @@ const Gallery = () => {
   useEffect(() => {
     console.log('useEffect');
     fetchData();
+// eslint-disable-next-line
   }, []);
 
   return (
