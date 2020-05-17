@@ -51,9 +51,13 @@ class App extends React.Component {
         { this.props.navigation.atHome ? <HomePage />
           : this.props.navigation.atProfile ? 
           <Profile 
-            user = {this.props.user}                             
+            user = {this.props.user}
+            deleteService = {this.props.deleteService}                             
           />
-          : <Services />
+          : <Services 
+              addService = {this.props.addService}
+              user = {this.props.user}
+            />
         }
       </main>
       <footer className = 'footer footer--fixed container--flex direction--row justify--start align--end items--end'>

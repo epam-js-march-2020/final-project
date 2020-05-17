@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { serviceList } from './service_list';
 
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
@@ -69,6 +70,7 @@ const mapActionsToProps = (dispatch) => {
 
 const WrappedApp = connect(mapStateToProps, mapActionsToProps)(App);
 localStorage.setItem('users', '0');
+localStorage.setItem('services', JSON.stringify(serviceList));
 
 ReactDOM.render(
   <React.StrictMode>
