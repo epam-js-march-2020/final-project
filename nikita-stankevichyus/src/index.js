@@ -20,10 +20,13 @@ import { signUp } from './actions/sign_up';
 import { toHome } from './actions/to_home';
 import { toProfile } from './actions/to_profile';
 import { toServices } from './actions/to_services';
+import { toSignUp, toLogIn, outModals } from './actions/to_modals';
 
 import { reducerService } from './reducers/service_reducer';
 import { reducerAuth } from './reducers/auth_reducer';
 import { reducerNavigation } from './reducers/navigation_reducer';
+import { reducerModals } from './reducers/modal_reducer';
+
 import { defaultState } from './default_state';
 
 
@@ -31,7 +34,8 @@ import { defaultState } from './default_state';
 const rootReducer = combineReducers({
   loged: reducerAuth,
   navigation: reducerNavigation,
-  services: reducerService
+  services: reducerService,
+  modals: reducerModals,
 });
 
 
@@ -41,7 +45,9 @@ const mapStateToProps = (state) => {
   return {
     loged: state.loged,
     navigation: state.navigation,
-    services: state.services
+    services: state.services,
+    modals: state.modals,
+    userId: state.userId,
   }
 }
 
@@ -55,10 +61,16 @@ const mapActionsToProps = (dispatch) => {
     toHome: bindActionCreators(toHome, dispatch),
     toProfile: bindActionCreators(toProfile, dispatch),
     toServices: bindActionCreators(toServices, dispatch),
+    toSignUp: bindActionCreators(toSignUp, dispatch), 
+    toLogIn: bindActionCreators(toLogIn, dispatch), 
+    outModals: bindActionCreators(outModals, dispatch), 
   }
 }
 
 const WrappedApp = connect(mapStateToProps, mapActionsToProps)(App);
+localStorage.clear();
+localStorage.setItem('users', '0');
+alert(localStorage.getItem('users'));
 
 ReactDOM.render(
   <React.StrictMode>

@@ -6,4 +6,10 @@ export const defaultState = {
     atServices: false,
   },
   services: [],
+  userId: -1,
+  modals: {
+    fadeOn: false,
+    signUp: false,
+    logIn: false,
+  }
 }

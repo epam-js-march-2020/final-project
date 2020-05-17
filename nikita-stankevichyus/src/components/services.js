@@ -4,6 +4,8 @@ import React from 'react';
 
 export function Services() {
   return (
-    <div></div>
+    <div>
+      <h1>SERVICES</h1>
+    </div>
   )
 }

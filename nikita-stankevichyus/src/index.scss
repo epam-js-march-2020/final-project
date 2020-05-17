@@ -12,6 +12,8 @@
 @import "scss/fonts/FontAwesome/fontawesome.scss";
 @import "scss/fonts/FontAwesome/solid.scss";
 @import "../node_modules/bootstrap/dist/css/bootstrap-grid.css";
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
 
 // Setting data from vars.scss for each part of the page (header, main, aside, footer)
 // Or, if there universal parameters, they'll be setted to everything
@@ -34,20 +36,20 @@
       .text-link, a, link {
         color: map-get($data, text-link);
       }
-      button {
-        padding: 10px;
-        background-color: map-get($data, text-link);
-        border: 1px solid map-get($data, text-link);
-        border-radius: 5px;
-        color: map-get($data, background);
-        -webkit-transition: background-color 0.5s, color 0.5s;
-        transition: background-color 0.5s, color 0.5s;
-      }
+      // button {
+      //   padding: 10px;
+      //   background-color: map-get($data, text-link);
+      //   border: 1px solid map-get($data, text-link);
+      //   border-radius: 5px;
+      //   color: map-get($data, background);
+      //   -webkit-transition: background-color 0.5s, color 0.5s;
+      //   transition: background-color 0.5s, color 0.5s;
+      // }
 
-      button:hover, button:active {
-        background-color: desaturate(map-get($data, background), 50%);
-        color: map-get($data, text-link);
-      }
+      // button:hover, button:active {
+      //   background-color: desaturate(map-get($data, background), 50%);
+      //   color: map-get($data, text-link);
+      // }
 
       input {
         background-color: white;
@@ -304,4 +306,12 @@ a{
     }
 
   }
+}
+
+.sign_up {
+  padding: 35px;
+  height: 450px;
+  width: 300px;
+  background-color: map-get(map-get($colors, header), background);
+  color: map-get(map-get($colors, header), text-main);
 }

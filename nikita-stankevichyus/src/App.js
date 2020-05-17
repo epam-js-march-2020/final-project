@@ -6,7 +6,7 @@ import { NavBar } from './components/nav_bar.js';
 import { HomePage } from './components/home_page.js';
 import { Profile } from './components/profile.js';
 import { Services } from './components/services.js';
-import { Auth } from './components/auth.js';
+import { SignUp } from './components/sign_up.js';
 import { AddService } from './components/add_service.js';
 
 
@@ -18,6 +18,13 @@ class App extends React.Component {
     console.log(this.props.navigation)
   return (
     <div className="App body">
+      <div 
+        className={this.props.modals.fadeOn ? 
+                  'modal_fade modal_fade_trick' 
+                : 'modal_fade'}>
+
+      </div>
+      <SignUp signUp = {this.props.modals.signUp}/>
       <div id = 'home'></div>
       <header className='header header--fixed container--flex'>
         <NavBar 
