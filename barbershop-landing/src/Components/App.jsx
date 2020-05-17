@@ -14,9 +14,13 @@ import Services from './Services/Services';
 import Contacts from './Contacts/Contacts';
 import Appointment from './Appointment/Appointment';
 
+
+import ScrollTotop from './ScrollToTop';
+
 function App() {
   return (
     <Router>
+      <ScrollTotop />
       <Container>
         <I18nextProvider i18n={i18n}>
           <Header />
