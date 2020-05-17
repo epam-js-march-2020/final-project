@@ -30,7 +30,6 @@ export default function BuildInCarousel({imgArray}) {
           infinite={true}
           autoPlay={true}
           autoPlaySpeed={5000}
-          customTransition="all .5"
           transitionDuration={500}
           containerClass="carousel-container"
           removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
@@ -49,3 +48,4 @@ export default function BuildInCarousel({imgArray}) {
       </Carousel>
     );
   }
+  

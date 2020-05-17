@@ -19,7 +19,7 @@ const Contacts = () => {
           <p className="text-center">{t('contacts.phone')}: {t('contacts.phoneNumber')}</p>
         </Col>
         <Col md="5" sm="6">
-          <table class="table table-striped">
+          <table className="table table-striped">
             <thead>
               <tr>
                 <th scope="col">{t('contacts.day')}</th>
