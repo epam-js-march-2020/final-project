@@ -24,8 +24,8 @@ export class NavBar extends React.Component{
               <li className="nav_link"><a onClick = {this.props.toProfile}><Icon icon='fas fa-user mg-l--15'/><span className='mg-l-5'>Profile</span></a></li>
               : 
               <>
-                <li className="nav_link"><a onClick = {this.props.logIn}><Icon icon='fas fa-sign-in-alt mg-l--15'/><span className='mg-l-5'>Log In</span></a></li>
-                <li className="nav_link"><a><Icon icon='fas fa-user-plus mg-l--15'/><span className='mg-l-5'>Sign Up</span></a></li>
+                <li className="nav_link"><a onClick = {this.props.toLogIn}><Icon icon='fas fa-sign-in-alt mg-l--15'/><span className='mg-l-5'>Log In</span></a></li>
+                <li className="nav_link"><a onClick = {this.props.toSignUp}><Icon icon='fas fa-user-plus mg-l--15'/><span className='mg-l-5'>Sign Up</span></a></li>
               </>
             }
           </ul>

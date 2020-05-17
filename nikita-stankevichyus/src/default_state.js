@@ -1,12 +1,16 @@
 export const defaultState = {
-  loged: false,
   navigation: {
     atHome: true,
     atProfile: false,
     atServices: false,
   },
-  services: [],
-  userId: -1,
+  user: {
+    loged: false,
+    name: '',
+    secondName: '',
+    email: '',
+    services: [],
+  },
   modals: {
     fadeOn: false,
     signUp: false,

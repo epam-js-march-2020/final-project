@@ -32,7 +32,7 @@ import { defaultState } from './default_state';
 
 
 const rootReducer = combineReducers({
-  loged: reducerAuth,
+  user: reducerAuth,
   navigation: reducerNavigation,
   services: reducerService,
   modals: reducerModals,
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
     navigation: state.navigation,
     services: state.services,
     modals: state.modals,
-    userId: state.userId,
+    user: state.user,
   }
 }
 
@@ -68,9 +68,7 @@ const mapActionsToProps = (dispatch) => {
 }
 
 const WrappedApp = connect(mapStateToProps, mapActionsToProps)(App);
-localStorage.clear();
 localStorage.setItem('users', '0');
-alert(localStorage.getItem('users'));
 
 ReactDOM.render(
   <React.StrictMode>

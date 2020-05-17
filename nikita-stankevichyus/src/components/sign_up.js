@@ -1,6 +1,11 @@
 import React from 'react';
 
-
+const clearState = {
+  name: '',
+  secondName: '',
+  email: '',
+  password: '',
+}
 
 export class SignUp extends React.Component {
   constructor(props){
@@ -8,35 +13,41 @@ export class SignUp extends React.Component {
     this.state = {}
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value, 
     })
-
-    console.log(this.state);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(localStorage.getItem('users'));
-    console.log(Object.keys(localStorage));
-    localStorage.setItem('user_' + localStorage.getItem('users'), 
+
+    localStorage.setItem(this.state.email, 
       JSON.stringify({
         'name': this.state.name,
         'secondName': this.state.secondName,
         'email': this.state.email,
         'password': this.state.password,
+        'services': [],
       })
     )
     localStorage.setItem('users', parseInt(localStorage.getItem('users'), 10)+1);
-    console.log(localStorage.getItem('user_0'));
+    
+    this.setState({ clearState });
+    this.props.outModals();
+  }
+
+  handleClick(event) {
+    this.setState({ clearState });
+    this.props.outModals(); 
   }
 
   render() {
     return (
-      <div id='sign_up' className = { this.props.signUp ? 'sign_up modal_window' : 'sign_up modal_window'}>
+      <div id='sign_up' className = { this.props.signUp ? 'sign_up modal_window' : 'sign_up modal_window hidden'}>
         <form onSubmit = {this.handleSubmit} id='sign_up_form container'>
 
             <label className = 'row mg-b-10'>
@@ -59,7 +70,7 @@ export class SignUp extends React.Component {
           
             <div className = 'mg-t-35 container row justify-content-between'>
               <button className = 'col-6 btn btn-light mg-l--15' type='submit'>Commit</button>
-              <button className = 'col-5 btn btn-light mg-r--45' type='button'>Close</button>
+              <button onClick = {this.handleClick} className = 'col-5 btn btn-light mg-r--45' type='button'>Close</button>
             </div>
         </form>
       </div>
