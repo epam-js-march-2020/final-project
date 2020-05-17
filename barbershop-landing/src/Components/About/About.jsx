@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
+import Carousel from 'react-bootstrap/Carousel';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
@@ -7,18 +8,20 @@ import './About.css';
 
 const About = () => {
   const [t] = useTranslation();
-  const [images, setImages] = useState([]);
+  const [avatars, setAvatars] = useState([]);
   const [names, setNames] = useState([]);
+  const [images, setImages] = useState([]);
   const jsonBin = {
     root: 'https://api.jsonbin.io',
-    binId: '5ec06669a47fdd6af16469bd',
+    binIdEmployee: '5ec06669a47fdd6af16469bd', 
+    binIdCarousel: '5ec0837da47fdd6af164767c',
     binVersion: 'latest',
     key: '$2b$10$ltjATMhqY0JfYN5Mi1k1nOVTEQIGJwabv1R6Fb9CUjOUl7jTe6PwG',
   };
 
-  async function fetchData() {
-    console.log('fetchData');
-    const response = await fetch([jsonBin.root, 'b', jsonBin.binId, jsonBin.binVersion].join('/'), {
+  async function fetchEmployeeData() {
+    console.log('fetchEmployeeData');
+    const response = await fetch([jsonBin.root, 'b', jsonBin.binIdEmployee, jsonBin.binVersion].join('/'), {
       type: 'GET',
       headers: {
         'secret-key': jsonBin.key,
@@ -32,23 +35,38 @@ const About = () => {
         return res;
       })
       .then(res => {
-        setImages(res.photos); 
+        setAvatars(res.photos); 
         setNames(res.names);
       })
   };
 
+  async function fetchCarouselData() {
+    console.log('fetchCarouselData');
+    const response = await fetch([jsonBin.root, 'b', jsonBin.binIdCarousel, jsonBin.binVersion].join('/'), {
+      type: 'GET',
+      headers: {
+        'secret-key': jsonBin.key,
+      }
+    });
+    response
+      .json()
+      .then(res => setImages(res));
+  }
+
   useEffect(() => {
     console.log('useEffect');
-    fetchData();
+    fetchEmployeeData();
+    fetchCarouselData();
   }, []);
 
   return (
     <Container>
+      <h3 className="text-center">{t('about.team')}</h3>
       { names.map((name, i) => (
         <div className="card mb-3 w-100 mx-auto border-0" key={i}>
           <div className={`row align-items-center no-gutters ${i % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}>
             <div className="col-md-4 ">
-              <img src={images[i]} className={`card-img mx-auto employee-avatar rounded-circle ${i % 2 === 1 ? "float-right float-md-left" : "float-left float-md-right"}`} alt={`${name}Avatar`} />
+              <img src={avatars[i]} className={`card-img mx-auto employee-avatar rounded-circle ${i % 2 === 1 ? "float-right float-md-left" : "float-left float-md-right"}`} alt={`${name}Avatar`} />
             </div>
             <div className="col-md-8">
               <div className="card-body">
@@ -59,6 +77,18 @@ const About = () => {
           </div>
         </div>
       ))}
+      <h3 className="text-center">{t('about.shop')}</h3>
+      <Carousel controls={false}>
+        {images.map((image, i) => (
+          <Carousel.Item key={i}>
+            <img
+              className="d-block mx-auto carousel-image"
+              src={image}
+              alt={`${i} slide`}
+            />
+          </Carousel.Item>
+        ))}
+      </Carousel>
     </Container>
   );
 }

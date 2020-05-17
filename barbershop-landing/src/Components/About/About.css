@@ -3,3 +3,8 @@
     width: auto;
     border: 5px solid black;
 }
+
+.carousel-image{
+    height: 15rem;
+    width: auto;
+}
