@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+// import 'bootstrap';
 import App from './App';
 import { serviceList } from './service_list';
 
@@ -21,7 +22,7 @@ import { signUp } from './actions/sign_up';
 import { toHome } from './actions/to_home';
 import { toProfile } from './actions/to_profile';
 import { toServices } from './actions/to_services';
-import { toSignUp, toLogIn, outModals } from './actions/to_modals';
+import { toSignUp, toLogIn, toAddService, outModals } from './actions/to_modals';
 
 import { reducerService } from './reducers/service_reducer';
 import { reducerAuth } from './reducers/auth_reducer';
@@ -63,7 +64,8 @@ const mapActionsToProps = (dispatch) => {
     toProfile: bindActionCreators(toProfile, dispatch),
     toServices: bindActionCreators(toServices, dispatch),
     toSignUp: bindActionCreators(toSignUp, dispatch), 
-    toLogIn: bindActionCreators(toLogIn, dispatch), 
+    toLogIn: bindActionCreators(toLogIn, dispatch),
+    toAddService: bindActionCreators(toAddService, dispatch), 
     outModals: bindActionCreators(outModals, dispatch), 
   }
 }

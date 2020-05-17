@@ -11,6 +11,13 @@ export class ServiceProfile extends React.PureComponent {
 
   deleteService = () => {
     this.props.deleteService(this.props.index);
+
+    let user = localStorage.getItem(this.props.user.email);
+    user = JSON.parse(user);
+    user.services.splice(this.props.index, 1);
+    user = JSON.stringify(user);
+    localStorage[this.props.user.email] = user;
+
   }
 
   render() {

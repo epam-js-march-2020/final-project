@@ -15,5 +15,6 @@ export const defaultState = {
     fadeOn: false,
     signUp: false,
     logIn: false,
+    addService: false,
   }
 }

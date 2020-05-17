@@ -2,6 +2,7 @@ export const LOG_IN = 'LOGIN';
 export const SIGN_UP = 'SIGN_UP';
 export const TO_SIGN_UP = 'TO_SIGN_UP';
 export const TO_LOG_IN = 'TO_LOG_IN';
+export const TO_ADD_SERVICE = 'TO_ADD_SERVICE';
 export const OUT_MODALS = 'OUT_MODALS';
 export const TO_HOME = 'TO_HOME';
 export const TO_PROFILE = 'TO_PROFILE';

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import './index.scss';
-import 'bootstrap';
+
 import { NavBar } from './components/nav_bar.js';
 import { HomePage } from './components/home_page.js';
 import { Profile } from './components/profile.js';
@@ -20,20 +20,31 @@ class App extends React.Component {
     console.log(this.props.navigation)
   return (
     <div className="App body">
+
       <div 
         className={this.props.modals.fadeOn ? 
                   'modal_fade modal_fade_trick' 
                 : 'modal_fade'}>
 
       </div>
+
       <SignUp 
         signUp = {this.props.modals.signUp}
         outModals = {this.props.outModals}
       />
+
       <LogIn
         makeLogIn = {this.props.logIn}
         logIn = {this.props.modals.logIn}
         outModals = {this.props.outModals}
+      />
+
+      <AddService 
+        toAddService = {this.props.toAddService}
+        outModals = {this.props.outModals}
+        addService = {this.props.addService}
+        addingService = {this.props.modals.addService}
+        user = {this.props.user}
       />
 
       <div id = 'home'></div>
@@ -55,7 +66,7 @@ class App extends React.Component {
             deleteService = {this.props.deleteService}                             
           />
           : <Services 
-              addService = {this.props.addService}
+              addService = {this.props.toAddService}
               user = {this.props.user}
             />
         }

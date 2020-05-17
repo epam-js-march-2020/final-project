@@ -34,7 +34,7 @@ export class Service extends React.PureComponent{
         <td className = 'text-color-light align-middle'>${this.props.price}</td>
         <td className = 'text-color-light'>
           <button 
-            onClick = {this.addService} 
+            onClick = {this.props.addService} 
             className = 'btn btn-light'>
               Request
           </button>

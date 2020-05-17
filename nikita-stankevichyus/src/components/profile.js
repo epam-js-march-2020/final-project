@@ -7,15 +7,13 @@ export class Profile extends React.PureComponent{
   
   constructor(props) {
     super(props);
-
-
-    
   }
 
   render () {
     
     const serviceCollection = this.props.user.services;
     const deleteService = this.props.deleteService;
+    const user = this.props.user;
 
     const services =  this.props.user.services.map((element)=>{
       return <ServiceProfile
@@ -23,6 +21,7 @@ export class Profile extends React.PureComponent{
         name = {element.name}
         date = {element.date}
         index = {serviceCollection.indexOf(element)}
+        user = {user}
         deleteService = {deleteService}
       />
     })
