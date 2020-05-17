@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
-import Carousel from 'react-bootstrap/Carousel';
+import BuildInCarousel from "../BuildInCarousel";
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
@@ -78,17 +78,7 @@ const About = () => {
         </div>
       ))}
       <h3 className="text-center">{t('about.shop')}</h3>
-      <Carousel controls={false}>
-        {images.map((image, i) => (
-          <Carousel.Item key={i}>
-            <img
-              className="d-block mx-auto carousel-image"
-              src={image}
-              alt={`${i} slide`}
-            />
-          </Carousel.Item>
-        ))}
-      </Carousel>
+      <BuildInCarousel imgArray={images} />
     </Container>
   );
 }
