@@ -10,6 +10,18 @@ import userIcon from './user.svg';
 
 import './Header.css';
 
+const LanguageToggle = () => {
+    return (
+        <div className="switch mr-2">
+            <input type="radio" name="switch" id="switch--left" checked />
+            <input type="radio" name="switch" id="switch--right" />
+            <label htmlFor="switch--left">EN</label>
+            <label htmlFor="switch--right">RU</label>
+            <span className="toggle"></span>
+        </div>
+    )
+}
+
 const Header = () => {
     const [t] = useTranslation();
     const [show, setShow] = useState(false);
@@ -23,20 +35,22 @@ const Header = () => {
     return (
         <Navbar collapseOnSelect expand="md" className="flex-md-row-reverse px-0">
             <Navbar.Toggle aria-controls="basic-navbar-nav" id="navbar-toggle"/>
-            <Navbar.Brand className="d-md-none">
+            <Navbar.Brand className="d-md-none mx-1">
                 {t('header.brand')}
             </Navbar.Brand>
-            <Dropdown drop={'left'}>
-                <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                <img src={userIcon} alt="login icon" className="login-icon"/>
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    <Dropdown.Item onClick={handleShow}>{t('header.signIn')}</Dropdown.Item>
-                    <Dropdown.Item href="#/userAppointments">{t('header.userAppointments')}</Dropdown.Item>
-                    <Dropdown.Item href="#/userSettings">{t('header.userSettings')}</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
+            <div className="d-flex align-items-center">
+                <LanguageToggle />
+                <Dropdown drop={'left'}>
+                    <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                        <img src={userIcon} alt="login icon" className="login-icon"/>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={handleShow}>{t('header.signIn')}</Dropdown.Item>
+                        <Dropdown.Item href="#/userAppointments">{t('header.userAppointments')}</Dropdown.Item>
+                        <Dropdown.Item href="#/userSettings">{t('header.userSettings')}</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
             <SignIn show={show} handleClose={handleClose}/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <NavList />
