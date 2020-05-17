@@ -13,6 +13,8 @@ import galleryEn from '../../Components/Gallery/locales/default.json';
 import galleryRu from '../../Components/Gallery/locales/default.ru.json';
 import signInEn from '../../Components/SignIn/locales/default.json';
 import signInRu from '../../Components/SignIn/locales/default.ru.json';
+import contactsEn from '../../Components/Contacts/locales/default.json';
+import contactsRu from '../../Components/Contacts/locales/default.ru.json';
 
 ru['ru'].footer = footerRu['ru'];
 en['en'].footer = footerEn['en'];
@@ -26,6 +28,8 @@ ru['ru'].gallery = galleryRu['ru'];
 en['en'].gallery = galleryEn['en'];
 ru['ru'].signIn = signInRu['ru'];
 en['en'].signIn = signInEn['en'];
+ru['ru'].contacts = contactsRu['ru'];
+en['en'].contacts = contactsEn['en'];
 
 export {
   en,
