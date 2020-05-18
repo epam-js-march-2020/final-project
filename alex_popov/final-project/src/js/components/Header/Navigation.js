@@ -40,7 +40,7 @@ const Navigation = () => {
                 >
                     contacts
                 </NavLink>
-                <button id='activate'>activate</button>
+                {/* <button id='activate'>activate</button> */}
             </div>
             <NavLink className='header-link' to='/user' >
                 <LoginIcon />

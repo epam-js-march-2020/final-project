@@ -16,12 +16,23 @@ export function second(state = 0, action) {
     }
 };
 
-export function user(state = false, action) {
+// export function user(state = false, action) {
+//     switch (action.type) {
+//         case 'activate':
+//             return !state;
+//         default:
+//             return state;
+//     }
+// }
+
+export const user = (state = null, action) => {
     switch (action.type) {
-        case 'activate':
-            return !state;
+        case 'login' :
+            return {
+                ... action.user,
+                appointments: action.user.appointments.slice()
+            };
         default:
-            return state;
+            return state
     }
 }
-

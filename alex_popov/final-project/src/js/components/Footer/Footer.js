@@ -15,7 +15,7 @@ const SocialMediaLinks = () => {
 }
 
 const Footer = ({footerClassName}) => {
-    console.log(footerClassName)
+    // console.log(footerClassName)
     return (
         <footer className={footerClassName}>
             <div className='container flex fd-column ai-center'>

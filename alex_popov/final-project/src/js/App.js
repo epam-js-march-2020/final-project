@@ -1,75 +1,42 @@
 import React from 'react';
 
-import Header from './components/Header/Header';
-import Home from './components/main/Home';
-import Services from './components/main/Services';
-import Contacts from './components/main/Contacts'
-// import Footer from './components/Footer/Footer';
-import NotFound from './components/main/NotFound';
-
-import pic from '../img/stuff/3.jpg';
-
-import { Switch, Route } from 'react-router-dom';
-
-
 import {connect} from 'react-redux';
-import { activate } from './actions/actions';
+import { activate, login } from './actions/actions';
 
-
-
-
-const Main = () => {
-  return (
-    <main>
-      <Switch>
-        <Route exact path='/'  component={Home} />
-        <Route exact path='/services' component={Services} />
-        <Route path='/services/:name' component={Services} />
-        <Route exact path='/craft' component={Craft} />
-        <Route exact path='/contacts' component={Contacts} />
-        <Route path='/user' component={User} />
-        <Route path='/404' component={NotFound} />
-        <Route path='/' component={NotFound} />
-      </Switch>
-    </main>
-  )
-}
-
-
-class User extends React.Component {
-  render() {
-
-    return (
-      <div className="container pt-xxxl">
-        user
-      </div>
-    )
-  }
-}
-
-
-class Craft extends React.Component{
-
-  render() {
-    return (
-      <div className='container_craft'>
-        <img alt='stuff' className='stuff_image' src={pic} />
-      </div>
-    )
-  }
-}
-
-
+import Header from './components/Header/Header';
+import Main from './components/main/Main';
+// import Footer from './components/Footer/Footer';
 
 
 class App extends React.Component {
+  // constructor(props) {
+  //   super(props);
+    
+  // }
   componentDidMount() {
-    console.log('did')
+    // console.log('app did')
     document.querySelector('#root').addEventListener('click', this.onclick.bind(this))
+    
+    if (!this.props.user) {
+      const cookie = document.cookie;
+      const code = cookie.split('=')[1]
+      console.log(code)
+      
+      const users = JSON.parse( localStorage.getItem('users') )
+      const userId = users.findIndex( (el) => {
+        return el.code == code
+      })
+      console.log(userId)
+      if(userId !== -1) {
+        this.props.login(users[userId])
+      }
+      console.log(this.props.user)
+    }
   }
-  componentWillUnmount() {
-    console.log('will')
-  }
+
+  // componentWillUnmount() {
+  //   console.log('app will')
+  // }
 
   onclick(ev) {
     // console.log(ev.target.id)
@@ -81,7 +48,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <>
         <Header />
@@ -94,14 +61,15 @@ class App extends React.Component {
 
 // Какие свойства будут связаны между store и компонентом
 // state destruction
-const props = ({user}) => ({
+const propsMap = ({user}) => ({
   user
 });
 
 // Какие actions будут доступны компоненту
-const actions = (dispatch) => ({
-  activate: () => dispatch(activate())
+const actionsMap = (dispatch) => ({
+  activate: () => dispatch(activate()),
+  login: (user) => dispatch(login(user))
 });
 
 
-export default connect(props, actions)(App);;
+export default connect(propsMap, actionsMap)(App);;

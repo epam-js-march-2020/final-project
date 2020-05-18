@@ -1,25 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import { BrowserRouter } from 'react-router-dom';
 
 import './css/index.scss'
 
 import App from './js/App';
+
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import * as reducers from './js/reducers/reducers';
 
-const store = createStore(combineReducers(reducers));
+import * as data from './localStorageData'
+// console.log(data)
+// localStorage.clear()
+data.loadData();
+
+const store = createStore( combineReducers(reducers) );
 
 const render = () => {
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     </React.StrictMode>,
     document.getElementById('root')
