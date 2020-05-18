@@ -19,7 +19,7 @@ export function reducerModals(state = defaultState.modals, action) {
     }
 
     case TO_ADD_SERVICE: {
-      return {...defaultState.modals, addService: true, fadeOn: true};
+      return {...defaultState.modals, addService: true, fadeOn: true, bufferService: action.name};
     }
 
     case OUT_MODALS: {

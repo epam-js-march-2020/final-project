@@ -44,6 +44,7 @@ class App extends React.Component {
         outModals = {this.props.outModals}
         addService = {this.props.addService}
         addingService = {this.props.modals.addService}
+        bufferService = {this.props.modals.bufferService}
         user = {this.props.user}
       />
 

@@ -26,7 +26,7 @@ export const reducerAuth = (state = defaultState.user, action) => {
 
       const service = {
         name: action.serviceName,
-        price: action.servicePrice,
+        date: action.serviceDate,
       }
 
       const newState = Object.assign({}, state);

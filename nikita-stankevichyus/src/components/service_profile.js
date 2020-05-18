@@ -21,6 +21,7 @@ export class ServiceProfile extends React.PureComponent {
   }
 
   render() {
+    console.log(this.props.date);
   return (
     <div className = 'mg-b-10 profile_service service container row'>
       <div className = 'service_name col-4 container row justify-content-center align-items-center align-content-center'>

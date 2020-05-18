@@ -12,9 +12,10 @@ export const toLogIn = () => {
   }
 }
 
-export const toAddService = () => {
+export const toAddService = (name) => {
   return {
-    type: TO_ADD_SERVICE,  
+    type: TO_ADD_SERVICE,
+    name: name,
   }
 }
 

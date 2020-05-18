@@ -322,3 +322,11 @@ a{
   background-color: map-get(map-get($colors, header), background);
   color: map-get(map-get($colors, header), text-main);
 }
+
+.add_service {
+  padding: 35px;
+  height: 250px;
+  width: 300px;
+  background-color: map-get(map-get($colors, header), background);
+  color: map-get(map-get($colors, header), text-main);
+}

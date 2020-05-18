@@ -8,23 +8,11 @@ export class Service extends React.PureComponent{
 
   addService = () => {
     if (this.props.user.loged) {
-      this.props.addService(this.props.name, this.props.price);
-
-      let user = localStorage.getItem(this.props.user.email);
-      user = JSON.parse(user);
-      user.services.push({
-        name: this.props.name,
-        price: this.props.price,
-        date: '123',
-      })
-
-      user = JSON.stringify(user);
-
-      localStorage[this.props.user.email] = user;
-
+      this.props.addService(this.props.name);
     } else {
       alert('You should log in first!');
     }
+
   }
 
   render() {
@@ -34,7 +22,7 @@ export class Service extends React.PureComponent{
         <td className = 'text-color-light align-middle'>${this.props.price}</td>
         <td className = 'text-color-light'>
           <button 
-            onClick = {this.props.addService} 
+            onClick = {this.addService} 
             className = 'btn btn-light'>
               Request
           </button>

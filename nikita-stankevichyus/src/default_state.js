@@ -16,5 +16,6 @@ export const defaultState = {
     signUp: false,
     logIn: false,
     addService: false,
+    bufferService: ''
   }
 }
