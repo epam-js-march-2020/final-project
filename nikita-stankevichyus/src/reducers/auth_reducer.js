@@ -2,6 +2,7 @@ import { LOG_IN } from '../actions_types/actions_types.js';
 import { SIGN_UP } from '../actions_types/actions_types.js';
 import { ADD_SERVICE } from '../actions_types/actions_types.js';
 import { DELETE_SERVICE } from '../actions_types/actions_types.js';
+import { CHANGE_NAME, CHANGE_SECOND_NAME, CHANGE_EMAIL } from '../actions_types/actions_types.js'
 
 
 import { defaultState } from '../default_state';
@@ -42,6 +43,18 @@ export const reducerAuth = (state = defaultState.user, action) => {
       newState.services.splice(action.index, 1);
       
       return newState;
+    }
+
+    case CHANGE_NAME: {
+      return {...state, name: action.name}
+    }
+
+    case CHANGE_SECOND_NAME: {
+      return {...state, secondName: action.secondName}
+    }
+
+    case CHANGE_EMAIL: {
+      return {...state, email: action.email}
     }
 
     default:  return state;

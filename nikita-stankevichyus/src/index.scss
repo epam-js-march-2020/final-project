@@ -330,3 +330,11 @@ a{
   background-color: map-get(map-get($colors, header), background);
   color: map-get(map-get($colors, header), text-main);
 }
+
+.edit_name, .edit_second_name, .edit_email {
+  padding: 25px;
+  height: 200px;
+  width: 300px;
+  background-color: map-get(map-get($colors, header), background);
+  color: map-get(map-get($colors, header), text-main);
+}

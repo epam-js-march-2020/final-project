@@ -1,10 +1,22 @@
-import { CHANGE_DATA } from '../actions_types/actions_types.js';
+import { CHANGE_NAME, CHANGE_SECOND_NAME, CHANGE_EMAIL } from '../actions_types/actions_types.js';
 
-export function changeData(firstName, secondName, email) {
+export function changeName(name) {
   return {
-    type: CHANGE_DATA,
-    firstName: firstName,
+    type: CHANGE_NAME,
+    name: name,
+  }
+}
+
+export function changeSecondName(secondName) {
+  return {
+    type: CHANGE_SECOND_NAME,
     secondName: secondName,
+  }
+}
+
+export function changeEmail(email) {
+  return {
+    type: CHANGE_EMAIL,
     email: email,
   }
 }

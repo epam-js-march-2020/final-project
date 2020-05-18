@@ -64,7 +64,15 @@ class App extends React.Component {
           : this.props.navigation.atProfile ? 
           <Profile 
             user = {this.props.user}
-            deleteService = {this.props.deleteService}                             
+            modals = {this.props.modals}
+            deleteService = {this.props.deleteService}
+            changeName = {this.props.changeName}
+            changeSecondName = {this.props.changeSecondName}
+            changeEmail = {this.props.changeEmail}
+            toChangeName = {this.props.toChangeName}
+            toChangeSecondName = {this.props.toChangeSecondName}
+            toChangeEmail = {this.props.toChangeEmail}
+            outModals = {this.props.outModals}               
           />
           : <Services 
               addService = {this.props.toAddService}

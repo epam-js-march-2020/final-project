@@ -15,14 +15,14 @@ import { combineReducers } from 'redux';
 
 
 import { addService } from './actions/add_service';
-import { changeData } from './actions/change_data';
+import { changeName, changeSecondName, changeEmail } from './actions/change_data';
 import { deleteService } from './actions/delete_service';
 import { logIn } from './actions/login';
 import { signUp } from './actions/sign_up';
 import { toHome } from './actions/to_home';
 import { toProfile } from './actions/to_profile';
 import { toServices } from './actions/to_services';
-import { toSignUp, toLogIn, toAddService, outModals } from './actions/to_modals';
+import { toSignUp, toLogIn, toAddService, toChangeName, toChangeSecondName, toChangeEmail, outModals } from './actions/to_modals';
 
 import { reducerService } from './reducers/service_reducer';
 import { reducerAuth } from './reducers/auth_reducer';
@@ -56,7 +56,9 @@ const mapStateToProps = (state) => {
 const mapActionsToProps = (dispatch) => {
   return {
     addService: bindActionCreators(addService, dispatch),
-    changeData: bindActionCreators(changeData, dispatch),
+    changeName: bindActionCreators(changeName, dispatch),
+    changeSecondName: bindActionCreators(changeSecondName, dispatch),
+    changeEmail: bindActionCreators(changeEmail, dispatch),
     deleteService: bindActionCreators(deleteService, dispatch),
     logIn: bindActionCreators(logIn, dispatch),
     signUp: bindActionCreators(signUp, dispatch),
@@ -65,7 +67,10 @@ const mapActionsToProps = (dispatch) => {
     toServices: bindActionCreators(toServices, dispatch),
     toSignUp: bindActionCreators(toSignUp, dispatch), 
     toLogIn: bindActionCreators(toLogIn, dispatch),
-    toAddService: bindActionCreators(toAddService, dispatch), 
+    toAddService: bindActionCreators(toAddService, dispatch),
+    toChangeName: bindActionCreators(toChangeName, dispatch),
+    toChangeSecondName: bindActionCreators(toChangeSecondName, dispatch),
+    toChangeEmail: bindActionCreators(toChangeEmail, dispatch),
     outModals: bindActionCreators(outModals, dispatch), 
   }
 }

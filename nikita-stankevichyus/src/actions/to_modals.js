@@ -1,4 +1,4 @@
-import { TO_SIGN_UP, TO_LOG_IN, TO_ADD_SERVICE, OUT_MODALS } from '../actions_types/actions_types.js';
+import { TO_SIGN_UP, TO_LOG_IN, TO_ADD_SERVICE, TO_CHANGE_NAME, TO_CHANGE_SECOND_NAME, TO_CHANGE_EMAIL, OUT_MODALS } from '../actions_types/actions_types.js';
 
 export const toSignUp = () => {
   return {
@@ -16,6 +16,24 @@ export const toAddService = (name) => {
   return {
     type: TO_ADD_SERVICE,
     name: name,
+  }
+}
+
+export const toChangeName = () => {
+  return {
+    type: TO_CHANGE_NAME,
+  }
+}
+
+export const toChangeSecondName = () => {
+  return {
+    type: TO_CHANGE_SECOND_NAME,
+  }
+}
+
+export const toChangeEmail = () => {
+  return {
+    type: TO_CHANGE_EMAIL,
   }
 }
 

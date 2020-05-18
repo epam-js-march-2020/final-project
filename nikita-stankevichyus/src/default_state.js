@@ -16,6 +16,9 @@ export const defaultState = {
     signUp: false,
     logIn: false,
     addService: false,
+    editName: false,
+    editSecondName: false,
+    editEmail: false,
     bufferService: ''
   }
 }
