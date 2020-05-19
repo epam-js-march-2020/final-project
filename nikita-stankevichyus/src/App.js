@@ -9,6 +9,7 @@ import { Services } from './components/services.js';
 import { SignUp } from './components/sign_up.js';
 import { LogIn } from './components/login.js';
 import { AddService } from './components/add_service.js';
+import { ServicePage } from './components/service_page.js';
 
 
 class App extends React.Component {
@@ -44,7 +45,7 @@ class App extends React.Component {
         outModals = {this.props.outModals}
         addService = {this.props.addService}
         addingService = {this.props.modals.addService}
-        bufferService = {this.props.modals.bufferService}
+        bufferService = {this.props.navigation.bufferService}
         user = {this.props.user}
       />
 
@@ -74,9 +75,16 @@ class App extends React.Component {
             toChangeEmail = {this.props.toChangeEmail}
             outModals = {this.props.outModals}               
           />
-          : <Services 
+          : this.props.navigation.atServices ?
+            <Services 
               addService = {this.props.toAddService}
+              toService = {this.props.toService}
               user = {this.props.user}
+            />
+          : <ServicePage
+              bufferService = {this.props.navigation.bufferService}
+              user = {this.props.user}
+              toAddService = {this.props.toAddService}
             />
         }
       </main>

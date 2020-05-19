@@ -3,6 +3,8 @@ export const defaultState = {
     atHome: true,
     atProfile: false,
     atServices: false,
+    atService: false,
+    bufferService: {},
   },
   user: {
     loged: false,

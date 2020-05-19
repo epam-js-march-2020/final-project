@@ -22,6 +22,7 @@ import { signUp } from './actions/sign_up';
 import { toHome } from './actions/to_home';
 import { toProfile } from './actions/to_profile';
 import { toServices } from './actions/to_services';
+import { toService } from './actions/to_service';
 import { toSignUp, toLogIn, toAddService, toChangeName, toChangeSecondName, toChangeEmail, outModals } from './actions/to_modals';
 
 import { reducerService } from './reducers/service_reducer';
@@ -65,6 +66,7 @@ const mapActionsToProps = (dispatch) => {
     toHome: bindActionCreators(toHome, dispatch),
     toProfile: bindActionCreators(toProfile, dispatch),
     toServices: bindActionCreators(toServices, dispatch),
+    toService: bindActionCreators(toService, dispatch),
     toSignUp: bindActionCreators(toSignUp, dispatch), 
     toLogIn: bindActionCreators(toLogIn, dispatch),
     toAddService: bindActionCreators(toAddService, dispatch),

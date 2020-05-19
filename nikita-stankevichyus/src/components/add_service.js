@@ -13,6 +13,7 @@ export class AddService extends React.PureComponent {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   formatDate(date) {
@@ -60,13 +61,13 @@ export class AddService extends React.PureComponent {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.date !== undefined && this.state.date !== '') { 
-      this.props.addService(this.props.bufferService, this.state.date);
+    if (this.state.date !== undefined && this.state.date !== '') {
+      this.props.addService(this.props.bufferService.name, this.state.date);
 
       let user = localStorage.getItem(this.props.user.email);
       user = JSON.parse(user);
       user.services.push({
-        name: this.props.bufferService,
+        name: this.props.bufferService.name,
         date: this.state.date,
       })
 

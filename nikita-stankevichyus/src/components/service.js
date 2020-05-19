@@ -3,16 +3,15 @@ import React from 'react';
 export class Service extends React.PureComponent{
   constructor(props) {
     super(props);
-    this.addService = this.addService.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  addService = () => {
-    if (this.props.user.loged) {
-      this.props.addService(this.props.name);
-    } else {
-      alert('You should log in first!');
-    }
-
+  handleClick = () => {
+    this.props.toService({
+      name: this.props.name,
+      price: this.props.price,
+      description: this.props.description,
+    })
   }
 
   render() {
@@ -22,9 +21,9 @@ export class Service extends React.PureComponent{
         <td className = 'text-color-light align-middle'>${this.props.price}</td>
         <td className = 'text-color-light'>
           <button 
-            onClick = {this.addService} 
+            onClick = {this.handleClick} 
             className = 'btn btn-light'>
-              Request
+              See more
           </button>
         </td>
     </tr>

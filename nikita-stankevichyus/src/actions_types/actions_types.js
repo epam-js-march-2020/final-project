@@ -10,6 +10,7 @@ export const OUT_MODALS = 'OUT_MODALS';
 export const TO_HOME = 'TO_HOME';
 export const TO_PROFILE = 'TO_PROFILE';
 export const TO_SERVICES = 'TO_SERVICES';
+export const TO_SERVICE = 'TO_SERVICE';
 export const ADD_SERVICE = 'ADD_SERVICE';
 export const DELETE_SERVICE = 'DELETE_SERVICE';
 export const CHANGE_NAME = 'CHANGE_NAME';
