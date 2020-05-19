@@ -1,0 +1,10 @@
+.ProfilePageBackground{
+    position: relative;
+    height: 85vh;
+    overflow: auto;
+    width: 100%;
+    background:linear-gradient(0deg, rgba(17, 10, 1, 0.85), rgb(0, 0, 0));
+    background-size:cover;
+    padding-top: 80px;
+    color:whitesmoke;
+}

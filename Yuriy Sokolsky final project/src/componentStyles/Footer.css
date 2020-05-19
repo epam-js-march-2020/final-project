@@ -1,0 +1,8 @@
+.footerContainer{
+    height: 15vh;
+    background: rgba(0,0,0,1);
+    color:whitesmoke;
+    font-family: Ruso One;
+    letter-spacing: 0.15em;
+    overflow: hidden;
+}
