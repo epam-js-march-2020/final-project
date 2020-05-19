@@ -318,7 +318,7 @@ a{
 }
 .log_in {
   padding: 35px;
-  height: 250px;
+  min-height: max-content; 
   width: 300px;
   background-color: map-get(map-get($colors, header), background);
   color: map-get(map-get($colors, header), text-main);

@@ -3,14 +3,18 @@ import React from 'react';
 const clearState = {
   email: '',
   password: '',
+  wrongEmail: false,
+  wrongPassword: false,
 }
 
-
+const capitalizeFirst = (string) =>{
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 export class LogIn extends React.Component {
   constructor(props){
     super(props);
-    this.state = {}
+    this.state = clearState;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -18,8 +22,11 @@ export class LogIn extends React.Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value, 
+      [event.target.name]: event.target.value,
+      ['wrong' + capitalizeFirst(event.target.name)]: false,
     })
+
+    
   }
 
   handleSubmit(event) {
@@ -36,15 +43,21 @@ export class LogIn extends React.Component {
           user['email'],
           user['services'],
         );
+        
+        this.setState({ clearState });
+        this.props.outModals();
+
       } else {
-        alert('Wrong password!');
+        this.setState({
+          wrongPassword: true,
+        })
       }
     } else {
-      alert('No such user!');
+      this.setState({
+        wrongEmail: true,
+      })
     }
     
-    this.setState({ clearState });
-    this.props.outModals();
   }
 
   handleClick(event) {
@@ -57,14 +70,26 @@ export class LogIn extends React.Component {
       <div id='log_in' className = { this.props.logIn ? 'log_in modal_window' : 'log_in modal_window hidden'}>
         <form onSubmit = {this.handleSubmit} id='sign_up_form container'>
 
-            <label className = 'row mg-b-10'>
+            <label className = 'row mg-b-15'>
               <div className = 'mg-b-5'>Enter your email</div>
-              <input onChange = {this.handleChange} name = 'email' className = 'form-control' type = 'email' placeholder='Your email'></input>
+              <input onChange = {this.handleChange} name = 'email' 
+                className = {'form-control' + (this.state.wrongEmail ? ' invalid_input' : '')} 
+                type = 'email' placeholder='Your email'></input>
+              <div 
+                className = {'invalid_login invalid_note mg-t-5' + (this.state.wrongEmail ? '' : ' hidden')}>
+                  Account does not exist.
+              </div>
             </label>
 
             <label className = 'row mg-b-15'>
               <div className = 'mg-b-5'>Enter your password</div>
-              <input onChange = {this.handleChange} name = 'password' className = 'form-control' type = 'password' placeholder='Your password'></input>
+              <input onChange = {this.handleChange} name = 'password' 
+                className = {'form-control' + (this.state.wrongPassword ? ' invalid_input' : '')} 
+                type = 'password' placeholder='Your password'></input>
+              <div 
+                className = {'invalid_login_password invalid_note mg-t-5' + (this.state.wrongPassword ? '' : ' hidden')}>
+                  Wrong password.
+              </div>
             </label>
           
             <div className = 'mg-t-35 container row justify-content-between'>

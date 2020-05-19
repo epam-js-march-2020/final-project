@@ -1,6 +1,12 @@
 import React from 'react';
 import { ServiceProfile } from './service_profile';
+import { validateName, validateEmail } from './validation'
 
+const initialState = {
+  name: '',
+  secondName: '',
+  email: '',
+}
 
 
 export class Profile extends React.PureComponent{
