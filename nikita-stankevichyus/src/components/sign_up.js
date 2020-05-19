@@ -6,10 +6,10 @@ const clearState = {
   secondName: '',
   email: '',
   password: '',
-  validName: false,
-  validSecondName: false,
-  validEmail: false,
-  validPassword: false,
+  validName: true,
+  validSecondName: true,
+  validEmail: true,
+  validPassword: true,
 }
 
 const capitalizeFirst = (string) =>{
@@ -19,7 +19,14 @@ const capitalizeFirst = (string) =>{
 export class SignUp extends React.Component {
   constructor(props){
     super(props);
-    this.state = {}
+
+    this.state = {
+      validName: true,
+      validSecondName: true,
+      validEmail: true,
+      validPassword: true,
+      takenEmail: false,
+    };
 
     this.allValid = this.allValid.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -66,19 +73,21 @@ export class SignUp extends React.Component {
     })
 
     let form = document.getElementById('sign_up');
-    let invalidNote = form.getElementsByClassName('invalid_'+event.target.name)[0];
+    // let invalidNote = form.getElementsByClassName('invalid_'+event.target.name)[0];
 
     if(event.target.name === 'email') {
-      form.getElementsByClassName('invalid_email_exists')[0].classList.add('hidden');
+      this.setState({
+        takenEmail: false,
+      })
     }
 
-    if (!validation) {
-      invalidNote.classList.remove('hidden');
-      event.target.classList.add('invalid_input');
-    } else {
-      invalidNote.classList.add('hidden');
-      event.target.classList.remove('invalid_input');
-    }
+    // if (!validation) {
+    //   invalidNote.classList.remove('hidden');
+    //   event.target.classList.add('invalid_input');
+    // } else {
+    //   invalidNote.classList.add('hidden');
+    //   event.target.classList.remove('invalid_input');
+    // }
   }
 
 
@@ -104,16 +113,14 @@ export class SignUp extends React.Component {
 
         let form = document.getElementById('sign_up');
         let inputs = form.getElementsByTagName('input');
-        let notes = form.getElementsByClassName('invalid_note');
 
         for(let i = 0; i < inputs.length; i++){
           inputs[i].value = '';
-          inputs[i].classList.remove('invalid_input');
-          notes[i].classList.add('hidden');
         }
       } else {
-        let form = document.getElementById('sign_up');
-        form.getElementsByClassName('invalid_email_exists')[0].classList.remove('hidden');
+        this.setState({
+          takenEmail: true,
+        })
       }
     }
 
@@ -125,14 +132,18 @@ export class SignUp extends React.Component {
   }
 
   render() {
+    console.log(this.state.validName);
     return (
       <div id='sign_up' className = { this.props.signUp ? 'sign_up modal_window' : 'sign_up modal_window hidden'}>
         <form onSubmit = {this.handleSubmit} id='sign_up_form container' className = 'needs-validation' novalidate>
           <div className = 'form-row'>
             <label className = 'row mg-b-10'>
               <div className = 'mg-b-5'>Enter your name</div>
-              <input onChange = {this.handleChange} name = 'name' className = 'form-control mg-b-10' type = 'text' placeholder='Your name' required></input>
-              <div className = 'invalid_note invalid_name hidden'>
+              <input onChange = {this.handleChange} name = 'name' 
+                     className = {'form-control mg-b-10' + (this.state.validName ? '' : ' invalid_input')} 
+                     type = 'text' placeholder='Your name' required></input>
+              <div 
+                className = {'invalid_note invalid_name' +  (this.state.validName ? ' hidden' : '')}>
                 The name must be at least 3 characters long.
               </div>
             </label>
@@ -140,9 +151,15 @@ export class SignUp extends React.Component {
           </div>
           <div className = 'form-row'>
             <label className = 'row mg-b-10'>
-              <div className = 'mg-b-5'>Enter your second name</div>
-              <input onChange = {this.handleChange} name = 'secondName' className = 'form-control mg-b-10' type = 'text' placeholder='Your second name' required></input>
-              <div className = 'invalid_note invalid_secondName hidden'>
+              <div 
+                className = 'mg-b-5'>Enter your second name</div>
+              <input onChange = {this.handleChange} 
+                     name = 'secondName' 
+                     className = {'form-control mg-b-10' + (this.state.validSecondName ? '' : ' invalid_input')} 
+                     type = 'text' 
+                     placeholder='Your second name' required></input>
+              <div 
+                className = {'invalid_note invalid_secondName' +  (this.state.validSecondName ? ' hidden' : '')}>
                 The second name must be at least 3 characters long.
               </div>
             </label>
@@ -150,11 +167,16 @@ export class SignUp extends React.Component {
           <div className = 'form-row'>
             <label className = 'row mg-b-15'>
               <div className = 'mg-b-5'>Enter your email</div>
-              <input onChange = {this.handleChange} name = 'email' className = 'form-control' type = 'email' placeholder='Your email' required></input>
-              <div className = 'invalid_note invalid_email hidden mg-t-5'>
+              <input onChange = {this.handleChange} name = 'email' 
+                     className = {'form-control mg-b-10' + (this.state.validEmail ? '' : ' invalid_input')} 
+                     type = 'email' placeholder='Your email' 
+                     required></input>
+              <div 
+                className = {'invalid_note invalid_email mg-t-5' + (this.state.validEmail ? ' hidden' : '')}>
                 Please enter the correct email.
               </div>
-              <div className = 'invalid_note invalid_email_exists hidden mg-t-5'>
+              <div 
+                className = {'invalid_note invalid_email_exists mg-t-5' + (this.state.takenEmail ? '' : ' hidden')}>
                 This email is already taken!
               </div>
             </label>
@@ -162,8 +184,11 @@ export class SignUp extends React.Component {
           <div className = 'form-row'>
             <label className = 'row mg-b-15'>
               <div className = 'mg-b-5'>Enter your password</div>
-              <input onChange = {this.handleChange} name = 'password' className = 'form-control' type = 'password' placeholder='Your password' required></input>
-              <div className = 'invalid_note invalid_password hidden mg-t-5'>
+              <input onChange = {this.handleChange} name = 'password' 
+                    className = {'form-control mg-b-10' + (this.state.validPassword ? '' : ' invalid_input')} 
+                    type = 'password' placeholder='Your password' required></input>
+              <div 
+                className = {'invalid_note invalid_password mg-t-5' +  (this.state.validPassword ? ' hidden' : '')}>
                 The password must be at least 5 characters long.
               </div>
             </label>
