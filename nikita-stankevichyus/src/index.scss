@@ -310,7 +310,8 @@ a{
 
 .sign_up {
   padding: 35px;
-  height: 450px;
+  // height: 550px;
+  min-height: max-content;
   width: 300px;
   background-color: map-get(map-get($colors, header), background);
   color: map-get(map-get($colors, header), text-main);
@@ -337,4 +338,12 @@ a{
   width: 300px;
   background-color: map-get(map-get($colors, header), background);
   color: map-get(map-get($colors, header), text-main);
+}
+
+.invalid_note {
+  color:rgba(255, 50, 50, 1);
+}
+
+.invalid_input {
+  border: 3px solid rgba(255, 0, 0, 0.5) !important;
 }
