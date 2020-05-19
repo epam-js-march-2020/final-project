@@ -1,9 +1,9 @@
 import React from 'react';
+import WithFormChecker from './WithFormChecker';
 import {connect} from 'react-redux';
-import * as actions from '../../actions/actions'
-import { Redirect } from 'react-router-dom';
+import * as actions from '../../actions/actions';
 
-class Login extends React.Component {
+class Login extends WithFormChecker {
     constructor(props) {
         super(props)
         this.state = {
@@ -34,84 +34,59 @@ class Login extends React.Component {
 
     formCheck(phone, pass) {
         if (phone.length === this.minLen.phone && pass.length >= this.minLen.pass ) {
-            return true
+            return true;
         }
         return false;
     }
 
-    onInput(ev) {
-        const id = ev.target.id; 
-        let val = ev.target.value.replace(this.regExps[id], '')
-
-        if (val.length > this.len[id]) {
-            val = val.slice(0, this.len[id])
-        }
-        ev.target.value = val;
-    
-        if (val.length < this.minLen[id]) {
-            ev.target.previousSibling.classList.add('form_label-invalid')
-            ev.target.classList.add('form_input-invalid')
-        } else {
-            ev.target.previousSibling.classList.remove('form_label-invalid')
-            ev.target.classList.remove('form_input-invalid')
-        }
-
-        if ( val !== '' && val !== this.state[id]) {
-            // console.log('change')
-            this.setState({[id]: val})
-        }
-
-    }
-
     phoneChecker(arr, phone) {
         return arr.findIndex( (el) => {
-            return el.phone ===  phone
+            return el.phone ===  phone;
         })
     }
 
     signUp(phone, pass) {
-        // console.log('up')
+        
         const users = JSON.parse( localStorage.getItem('users') );
         const userId = this.phoneChecker(users, phone);
-        // console.log( users.length )
+        
         if ( userId === -1 ) {
-            // console.log('add')
+        
             const id = users.length === 0 ? 1 : users[users.length - 1].id + 1;
             const newUser = {
                 id,
                 phone,
                 pass,
-                name: undefined,
+                name: '',
                 appointments: [],
                 code: this.cookier()
             };
-            // console.log(Array.isArray( newUser.apointmets ) )
-            this.props.login(newUser)
-            users.push(newUser)
+            // console.log( newUser )
+            this.props.login(newUser);
+            users.push(newUser);
             
-            localStorage.setItem('users', JSON.stringify(users))
-            // setTimeout( ()=> {this.props.history.push('/user')}, 300)
-            // setTimeout( ()=> { console.log(this.props)}, 300)
-        } else (
-            console.log('this number have already used')
-        )
+            localStorage.setItem('users', JSON.stringify(users));
+
+        } else {
+            // console.log('this number have already used')
+            this.messageRender('#message', 'this number have already used', false);
+        }
     }
 
     login(phone, pass) {
         const users = JSON.parse( localStorage.getItem('users'));
         const userId = this.phoneChecker(users, phone);
-        console.log(this.props)
+        // console.log(this.props)
         if (userId !== -1) {
             if ( users[userId].pass === pass) {
-                // console.log('regregreg')
-                // console.log( Array.isArray( users[userId].apintments ) ) 
+                
                 const user = {
-                    ... users[userId],
+                    ...users[userId],
                     appointments: users[userId].appointments.slice(),
-                    code: this.cookier()
+                    code: this.cookier(userId)
                 }
                 // console.log(user)
-                console.log(this.props)
+                // console.log(this.props)
                 this.props.login(user)
                 
                 // setTimeout( ()=> {this.props.history.push('/user')}, 300);
@@ -119,20 +94,29 @@ class Login extends React.Component {
                 // return <Redirect to='/user' />
                 // this.cookier()
             } else {
-                console.log('password is wrong')
+                // console.log('password is wrong')
+                this.messageRender('#message', 'password is wrong', false);
             }
         } else {
-            console.log('we do not have such a number')
+            // console.log('we do not have such a number')
+            this.messageRender('#message', 'phone number is wrong', false);
         }
         
     }
 
-    cookier() {
+    cookier(userId) {
         const code = Date.now();
         const till = new Date(code + 3600000 ).toUTCString();
-        console.log(code)
+
         document.cookie = `session=${code}; expires=${till}`;
-        // console.log( typeof document.cookie);
+
+        const users = JSON.parse( localStorage.getItem('users') );
+
+        if (users[userId]) {
+            users[userId].code = code;
+        }
+
+        localStorage.setItem( 'users', JSON.stringify(users));
         return code;
         
         // +1 день от текущей даты
@@ -150,21 +134,21 @@ class Login extends React.Component {
         if (this.formCheck(phone, pass)) {
             // console.log(ev.target.id)
             if (ev.target.id === 'signup') {
-                this.signUp(phone, pass)
+                this.signUp(phone, pass);
             }
             if (ev.target.id === 'login') {
                 // console.log('login')
-                this.login(phone, pass)
+                this.login(phone, pass);
             }
         }
     }
 
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div className="container_login">
                 <h2 className='login_header'>Join the Barbers Den Club</h2>
-                <div className='login_form'>
+                <div className='login_form login_login_form login_form-phone'>
     
                     <label className='form_label' htmlFor='phone'>Phone number 10 digits</label>
                     <input onInput={this.onInput} id='phone' className='form_input' type="text"/>
@@ -176,6 +160,7 @@ class Login extends React.Component {
                         <button id='login' onClick={this.onClickButton} className='form_button' >Sign In</button>
                         <button id='signup' onClick={this.onClickButton} className='form_button' >Sign Up</button>
                     </div>
+                    <p id='message' className="message transparent">example</p>
                 </div>
             </div>
         )

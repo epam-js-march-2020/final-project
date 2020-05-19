@@ -42,7 +42,7 @@ class Main extends React.Component {
 }
   
   
-  class Craft extends React.Component{
+class Craft extends React.Component{
   
     render() {
       return (
@@ -51,7 +51,7 @@ class Main extends React.Component {
         </div>
       )
     }
-  }
+}
 
 const propMap = ({user}) => ( {user} )
 

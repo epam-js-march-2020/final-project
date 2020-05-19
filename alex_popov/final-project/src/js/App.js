@@ -9,37 +9,33 @@ import Main from './components/main/Main';
 
 
 class App extends React.Component {
-  // constructor(props) {
-  //   super(props);
-    
-  // }
+
   componentDidMount() {
-    // console.log('app did')
-    document.querySelector('#root').addEventListener('click', this.onclick.bind(this))
+    
+    document.querySelector('#root').addEventListener('click', this.onclick.bind(this));
     
     if (!this.props.user) {
-      const cookie = document.cookie;
-      const code = cookie.split('=')[1]
-      console.log(code)
-      
-      const users = JSON.parse( localStorage.getItem('users') )
-      const userId = users.findIndex( (el) => {
-        return el.code == code
-      })
-      console.log(userId)
-      if(userId !== -1) {
-        this.props.login(users[userId])
-      }
-      console.log(this.props.user)
+      this.loginer()
     }
   }
 
-  // componentWillUnmount() {
-  //   console.log('app will')
-  // }
+  loginer() {
+      const cookie = document.cookie;
+      const code = cookie.split('=')[1];
+      // console.log(code)
+      
+      const users = JSON.parse( localStorage.getItem('users') )
+
+      const userId = users.findIndex( (el) => {
+        return String( el.code ) ===  String( code )
+      })
+      
+      if(userId !== -1) {
+        this.props.login(users[userId])
+      }
+  }
 
   onclick(ev) {
-    // console.log(ev.target.id)
     const action = ev.target.id;
     if ( action === 'activate') {
       this.props.activate()
@@ -48,7 +44,6 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log(this.props)
     return (
       <>
         <Header />
@@ -65,7 +60,6 @@ const propsMap = ({user}) => ({
   user
 });
 
-// Какие actions будут доступны компоненту
 const actionsMap = (dispatch) => ({
   activate: () => dispatch(activate()),
   login: (user) => dispatch(login(user))

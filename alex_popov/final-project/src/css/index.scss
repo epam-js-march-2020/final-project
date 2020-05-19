@@ -55,6 +55,15 @@ li {
   list-style-type: none;
 }
 
+p {
+  margin-top: 20px;
+}
+
+
+.margin-top {
+  margin-top: map-get($header, 'height' );
+}
+
 .container {
   max-width: 1000px;
   margin: auto;
@@ -62,13 +71,33 @@ li {
   padding-right: 15px;
 }
 
-p {
-  margin-top: 20px;
+
+.margin-top {
+  margin-top: map-get($header, 'height' );
 }
 
 .fullScreen {
+  @extend .margin-top;
   position: relative;
   width: 100wv;
   height: calc(100vh - #{map-get($header, 'height')} );
-  margin-top: map-get($header, 'height' );
+  // margin-top: map-get($header, 'height' );
+}
+
+.transparent {
+  opacity: 0;
+}
+
+.message {
+  margin-top: 45px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.message-valid {
+  color: greenyellow;
+}
+
+.message-invalid {
+  color: red;
 }

@@ -1,33 +1,36 @@
 import React from 'react';
+
+import UserInformation from './UserInformation';
+import Footer from '../Footer/Footer';
+
 import {connect} from 'react-redux';
+import * as actions from '../../actions/actions'
 
 class User extends React.Component {
+
     render() {
-        console.log(this.props)
         return (
-            <div className="container pt-xxxl">
-                    <h2 className='login_header'>Join the Barbers Den Club</h2>
-                    <div className='login_form'>
-        
-                        <label className='form_label' htmlFor='phone'>Phone number 10 digits</label>
-                        <input onInput={this.onInput} id='phone' className='form_input' type="text"/>
-        
-                        <label htmlFor='pass'>Password 5 characters min, max - 15</label>
-                        <input onInput={this.onInput} id='pass' className='form_input' type="password"/>
-        
-                        <div className='form_buttonsContainer'>
-                            <button id='login' onClick={this.onClickButton} className='form_button' >Sign In</button>
-                            <button id='signup' onClick={this.onClickButton} className='form_button' >Sign Up</button>
-                        </div>
-                    </div>
-                
+            <>
+            <div className="container_main">
+                <UserInformation />
             </div>
+            <Footer footerClassName='footer footer-dark' />
+            </>
         )
     }
 }
 
-const propsMap = ({user}) => (
+const propsMap = (user) => (
     user
 );
 
-export default connect(propsMap)( User );
+const actionsMap = (dispatch) =>({
+    logout: () => dispatch(actions.logOut())
+})
+
+// const actionsMap = (dispatch) => ({
+//     activate: () => dispatch(activate()),
+//     login: (user) => dispatch(login(user))
+//   });
+
+export default connect(propsMap, actionsMap)( User );
