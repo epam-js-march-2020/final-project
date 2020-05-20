@@ -11,6 +11,7 @@ const Contacts = () => {
   const [t] = useTranslation();
   return (
     <Container>
+      <h3 className="text-center mb-4">{t('contacts.title')}</h3>
       <Row>
         <Col md="7" sm="6">
           <LocationMap t={t}/>
