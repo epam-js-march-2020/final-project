@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,10 +12,15 @@ import userIcon from './user.svg';
 import './Header.css';
 
 const LanguageToggle = () => {
+    const [lang, setLang] = useState('ru');
+    const toggleLang = () => {
+        lang === 'en' ? setLang('ru') : setLang('en');
+        i18n.changeLanguage(lang);
+    };
     return (
         <div className="switch mr-2">
-            <input type="radio" name="switch" id="switch--left" checked />
-            <input type="radio" name="switch" id="switch--right" />
+            <input type="radio" name="switch" id="switch--left" onChange={toggleLang}/>
+            <input type="radio" name="switch" id="switch--right" onChange={toggleLang}/>
             <label htmlFor="switch--left">EN</label>
             <label htmlFor="switch--right">RU</label>
             <span className="toggle"></span>
