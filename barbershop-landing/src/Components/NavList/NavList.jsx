@@ -24,11 +24,11 @@ const NavList = (props) => {
                     {t('navList.gallery')}
                 </Nav.Link>
             </Nav.Item>
-            <Nav.Item className="btn btn-light m-1 p-0">
+            {/* <Nav.Item className="btn btn-light m-1 p-0">
                 <Nav.Link className="link-color" eventKey="1" as={Link} to="/services">
                     {t('navList.services')}
                 </Nav.Link>
-            </Nav.Item>
+            </Nav.Item> */}
             <Nav.Item className="btn btn-light m-1 p-0">
                 <Nav.Link className="link-color" eventKey="1" as={Link} to="/contacts">
                     {t('navList.contacts')}
