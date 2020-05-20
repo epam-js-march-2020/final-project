@@ -42,6 +42,7 @@ const Gallery = () => {
 
   return (
     <Container>
+      <h3 className="text-center">{t('gallery.title')}</h3>
       <h3 className="text-center">{t('gallery.men')}</h3>
       <BuildInCarousel imgArray={menHaircuts} />
       <hr />
