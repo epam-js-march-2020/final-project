@@ -74,7 +74,9 @@ export class LogIn extends React.Component {
               <div className = 'mg-b-5'>Enter your email</div>
               <input onChange = {this.handleChange} name = 'email' 
                 className = {'form-control' + (this.state.wrongEmail ? ' invalid_input' : '')} 
-                type = 'email' placeholder='Your email'></input>
+                type = 'email' 
+                placeholder='Your email'
+                required  ></input>
               <div 
                 className = {'invalid_login invalid_note mg-t-5' + (this.state.wrongEmail ? '' : ' hidden')}>
                   Account does not exist.
@@ -85,7 +87,9 @@ export class LogIn extends React.Component {
               <div className = 'mg-b-5'>Enter your password</div>
               <input onChange = {this.handleChange} name = 'password' 
                 className = {'form-control' + (this.state.wrongPassword ? ' invalid_input' : '')} 
-                type = 'password' placeholder='Your password'></input>
+                type = 'password' 
+                placeholder='Your password'
+                required ></input>
               <div 
                 className = {'invalid_login_password invalid_note mg-t-5' + (this.state.wrongPassword ? '' : ' hidden')}>
                   Wrong password.

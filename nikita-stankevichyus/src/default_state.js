@@ -12,6 +12,7 @@ export const defaultState = {
     secondName: '',
     email: '',
     services: [],
+    guests: {},
   },
   modals: {
     fadeOn: false,
@@ -22,5 +23,6 @@ export const defaultState = {
     editSecondName: false,
     editEmail: false,
     bufferService: ''
-  }
+  },
+
 }

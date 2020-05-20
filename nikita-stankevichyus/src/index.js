@@ -14,7 +14,7 @@ import { combineReducers } from 'redux';
 // import { defaultState } from './default_state';
 
 
-import { addService } from './actions/add_service';
+import { addService, addGuestService } from './actions/add_service';
 import { changeName, changeSecondName, changeEmail } from './actions/change_data';
 import { deleteService } from './actions/delete_service';
 import { logIn } from './actions/login';
@@ -57,6 +57,7 @@ const mapStateToProps = (state) => {
 const mapActionsToProps = (dispatch) => {
   return {
     addService: bindActionCreators(addService, dispatch),
+    addGuestService: bindActionCreators(addGuestService, dispatch),
     changeName: bindActionCreators(changeName, dispatch),
     changeSecondName: bindActionCreators(changeSecondName, dispatch),
     changeEmail: bindActionCreators(changeEmail, dispatch),
@@ -78,8 +79,9 @@ const mapActionsToProps = (dispatch) => {
 }
 
 const WrappedApp = connect(mapStateToProps, mapActionsToProps)(App);
-localStorage.setItem('users', '0');
+
 localStorage.setItem('services', JSON.stringify(serviceList));
+localStorage.setItem('guests', JSON.stringify({})); 
 
 ReactDOM.render(
   <React.StrictMode>

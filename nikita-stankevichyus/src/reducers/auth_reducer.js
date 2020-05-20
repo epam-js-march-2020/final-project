@@ -1,6 +1,6 @@
 import { LOG_IN } from '../actions_types/actions_types.js';
 import { SIGN_UP } from '../actions_types/actions_types.js';
-import { ADD_SERVICE } from '../actions_types/actions_types.js';
+import { ADD_SERVICE, ADD_GUEST_SERVICE } from '../actions_types/actions_types.js';
 import { DELETE_SERVICE } from '../actions_types/actions_types.js';
 import { CHANGE_NAME, CHANGE_SECOND_NAME, CHANGE_EMAIL } from '../actions_types/actions_types.js'
 
@@ -35,6 +35,22 @@ export const reducerAuth = (state = defaultState.user, action) => {
       
       return newState;
       
+    }
+
+    case ADD_GUEST_SERVICE: {
+
+      const service = {
+        name: action.serviceName,
+        date: action.serviceDate,
+      }
+
+      const newState = Object.assign({}, state);
+      if (newState.guests[action.number]) {
+        newState.guests[action.number].services ? 
+          newState.guests[action.number].services.push(service)
+        : newState.guests[action.number].services = [service];
+      }
+
     }
 
     case DELETE_SERVICE: {
