@@ -54,7 +54,6 @@ const About = () => {
   }
 
   useEffect(() => {
-    console.log('useEffect');
     fetchEmployeeData();
     fetchCarouselData();
 // eslint-disable-next-line
