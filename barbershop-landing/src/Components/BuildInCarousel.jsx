@@ -24,7 +24,7 @@ export default function BuildInCarousel({imgArray}) {
     return(
       <Carousel
           swipeable={true}
-          draggable={false}
+          draggable={true}
           showDots={true}
           responsive={responsive}
           infinite={true}
@@ -42,6 +42,7 @@ export default function BuildInCarousel({imgArray}) {
               className="d-block mx-auto carousel-image"
               src={image}
               alt={`${i} slide`}
+              draggable={false}
             />
           </div>
         ))}
