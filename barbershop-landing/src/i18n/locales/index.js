@@ -15,6 +15,8 @@ import signInEn from '../../Components/SignIn/locales/default.json';
 import signInRu from '../../Components/SignIn/locales/default.ru.json';
 import contactsEn from '../../Components/Contacts/locales/default.json';
 import contactsRu from '../../Components/Contacts/locales/default.ru.json';
+import appointmentEn from '../../Components/Appointment/locales/default.json';
+import appointmentRu from '../../Components/Appointment/locales/default.ru.json';
 
 ru['ru'].footer = footerRu['ru'];
 en['en'].footer = footerEn['en'];
@@ -30,6 +32,8 @@ ru['ru'].signIn = signInRu['ru'];
 en['en'].signIn = signInEn['en'];
 ru['ru'].contacts = contactsRu['ru'];
 en['en'].contacts = contactsEn['en'];
+ru['ru'].appointment = appointmentRu['ru'];
+en['en'].appointment = appointmentEn['en'];
 
 export {
   en,
