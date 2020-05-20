@@ -6,6 +6,7 @@ import Services from './Services';
 import Contacts from './Contacts';
 import Login from './Login';
 import User from './User';
+import Appointment from './Appointment'
 import NotFound from './NotFound';
 
 import pic from '../../../img/stuff/3.jpg'
@@ -31,6 +32,8 @@ class Main extends React.Component {
                     <Route path='/login' render={() => (
                         this.props.user ? (<Redirect to='/user' />) : (<Login />)
                     )} />
+
+                    <Route path='/appointment' component={Appointment} />
 
                     <Route path='/404' component={NotFound} />
                     <Route component={NotFound} />

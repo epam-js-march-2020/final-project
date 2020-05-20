@@ -1,6 +1,5 @@
 import React from 'react';
 import WithFormChecker from './WithFormChecker';
-// import Footer from '../Footer/Footer';
 
 import {connect} from 'react-redux';
 import * as actions from '../../actions/actions';
@@ -15,24 +14,6 @@ class UserInformation extends WithFormChecker {
             phone: ''
         }
 
-        this.regExps = {
-            phone: /\D/g,
-            pass: /\*/,
-            name: /\*/
-        }
-
-        this.len = {
-            phone: 10,
-            pass: 15,
-            name: 15
-        }
-
-        this.minLen = {
-            phone: 10,
-            pass: 5,
-            name: 5
-        }
-
         this.onInput = this.onInput.bind(this);
         this.onClickLogOut = this.onClickLogOut.bind(this);
         this.onClickChangeInformation = this.onClickChangeInformation.bind(this);
@@ -43,71 +24,62 @@ class UserInformation extends WithFormChecker {
         document.cookie = `session=; expires=-1`;
     }
 
+    valueChacker(value, parametrName, isUnique = false) {
+
+        if (value === this.props.user[parametrName]) {
+            this.messageRender('#message', `you are using this ${parametrName}`, true);
+            return false
+        } 
+
+        if (isUnique) {
+            const users = JSON.parse( localStorage.getItem('users') );
+            const used = users.findIndex( (el) => {
+                return el[parametrName] === value;
+            })
+            console.log(used)
+            if (used !== -1) {
+                this.messageRender('#message', `this ${parametrName} is used`, false)
+                return false
+            }
+        }
+
+        return true;
+    }
+
+    loadInformation(id, users, name, phone, pass) {
+        const userId = users.findIndex( (el) => {
+            return el.id === id
+        });
+        
+        const newInformation = {
+            ...users[userId],
+            name: name ? name : this.props.user.name,
+            phone: phone ? phone : this.props.user.phone,
+            pass: pass ? pass : this.props.user.pass,
+            appointments: users[userId].appointments.slice()
+        }
+
+        users.splice(userId, 1, newInformation);
+        
+        localStorage.setItem('users', JSON.stringify(users));
+        this.props.login(newInformation);
+    }
+
     onClickChangeInformation() {
 
         if ( this.formCheck() ) {
+            const {id, name, phone, pass} = this.state;
+            const isInformationValid = this.valueChacker(name, 'name') && 
+                                        this.valueChacker(phone, 'phone', true) && 
+                                        this.valueChacker(pass, 'pass');
+            
             document.querySelector('#message').classList.remove('message-valid', 'message-invalid');
 
-            const users = JSON.parse( localStorage.getItem('users') );
-            const {id, name, phone, pass} = this.state;
-            let isInformationValid = false;
-            if (phone) {
-
-                if (phone === this.props.user.phone) {
-                    this.messageRender('#message', 'you are using this phone', false);
-                    return;
-                }
-
-                const used = users.findIndex( (el) => {
-                    return el.phone === phone;
-                })
-                console.log(used)
-                if (used === -1) {
-                    isInformationValid = true;
-                } else {
-                    this.messageRender('#message', 'this phone number used', false)
-                    return
-                }
-            }
-
-            if (name) {
-                if (name === this.props.user.name) {
-                    this.messageRender('#message', 'you are using this name', false);
-                    return
-                } else {
-                    isInformationValid = true;
-                }
-            }
-
-            if (pass) {
-                if (pass === this.props.user.pass) {
-                    this.messageRender('#message', 'you are using this pass', false);
-                    return
-                } else {
-                    isInformationValid = true;
-                }
-            }
-
-             if (isInformationValid) {
-                console.log('change information')
-                const userId = users.findIndex( (el) => {
-                    return el.id === id
-                });
-                // console.log(userId)
-                const newInformation = {
-                    ...users[userId],
-                    name: name ? name : this.props.user.name,
-                    phone: phone ? phone : this.props.user.phone,
-                    pass: pass ? pass : this.props.user.pass,
-                    appointments: users[userId].appointments.slice()
-                }
-
-                // console.log(users)
-                users.splice(userId, 1, newInformation);
-                // console.log(users)
-                localStorage.setItem('users', JSON.stringify(users));
-                this.props.login(newInformation);
-
+            
+            
+            if (isInformationValid) {
+                const users = JSON.parse( localStorage.getItem('users') );
+                this.loadInformation(id, users, name, phone, pass)
                 this.messageRender('#message', 'information changed', true);
                 this.fromCleaner();
             }
@@ -118,6 +90,12 @@ class UserInformation extends WithFormChecker {
         document.querySelector('#phone').value = '';
         document.querySelector('#pass').value = '';
         document.querySelector('#name').value = '';
+
+        this.setState({
+            name: '',
+            pass: '',
+            phone: ''
+        })
 
     }
 
@@ -138,9 +116,9 @@ class UserInformation extends WithFormChecker {
 
 
     render() {
-        console.log(this.props)
-        const form = this.formCheck();
-        const changeButtonClassName = form ? 'form_button' : 'form_button form_button-disabled' ; 
+        // console.log(this.props.user)
+        const changeButtonClassName = this.formCheck() ? 'form_button' : 'form_button form_button-disabled';
+
         return (
             <div className='login_form user_login_form login_form-phone'>
                         
@@ -150,11 +128,11 @@ class UserInformation extends WithFormChecker {
                 <label htmlFor='pass'>Password 5 characters min, max - 15</label>
                 <input onInput={this.onInput} id='pass' className='form_input' type="password"/>
 
-                <label htmlFor='name'>Name 5 characters min, max - 15</label>
+                <label htmlFor='name'>Name {this.minLen.name} characters min, max - {this.len.name} </label>
                 <input onInput={this.onInput} placeholder={this.props.user.name} id='name' className='form_input' type="text"/>
                         
                 <div className='form_buttonsContainer'>
-                    <button disabled={!form} id='changeInformation' onClick={this.onClickChangeInformation} className={changeButtonClassName} >Change</button>
+                    <button disabled={!this.formCheck()} id='changeInformation' onClick={this.onClickChangeInformation} className={changeButtonClassName} >Change</button>
                     <button id='logout' onClick={this.onClickLogOut} className='form_button' >Log out</button>
                 </div>
                 <p id='message' className="message transparent">example</p>

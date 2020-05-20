@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {connect} from 'react-redux';
-import { activate, login } from './actions/actions';
+import { login } from './actions/actions';
 
 import Header from './components/Header/Header';
 import Main from './components/main/Main';
@@ -61,7 +61,6 @@ const propsMap = ({user}) => ({
 });
 
 const actionsMap = (dispatch) => ({
-  activate: () => dispatch(activate()),
   login: (user) => dispatch(login(user))
 });
 

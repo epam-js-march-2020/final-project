@@ -152,3 +152,16 @@
     display: flex;
     flex-direction: column;
 }
+
+.appointments_dateContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+.appoinments_daysContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.appointment_item-active {
+    color: red;
+}

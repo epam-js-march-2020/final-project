@@ -53,6 +53,7 @@ function Services(props) {
         <div className={className}>
             <div className='services_links services_links-white'>
                 <ServiceNav activeService={serviceName} links={prices} />
+                <NavLink to='/appointment' > to make an appointment</NavLink>
             </div>
         </div>
     )

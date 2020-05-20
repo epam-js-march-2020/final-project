@@ -11,20 +11,6 @@ class Login extends WithFormChecker {
             pass: ''
         }
 
-        this.regExps = {
-            phone: /\D/g,
-            pass: /\*/
-        }
-
-        this.len = {
-            phone: 10,
-            pass: 15
-        }
-        this.minLen = {
-            phone: 10,
-            pass: 5
-        }
-
         this.onInput = this.onInput.bind(this);
         this.onClickButton = this.onClickButton.bind(this);
         this.formCheck =this.formCheck.bind(this);
@@ -68,7 +54,6 @@ class Login extends WithFormChecker {
             localStorage.setItem('users', JSON.stringify(users));
 
         } else {
-            // console.log('this number have already used')
             this.messageRender('#message', 'this number have already used', false);
         }
     }
@@ -76,7 +61,7 @@ class Login extends WithFormChecker {
     login(phone, pass) {
         const users = JSON.parse( localStorage.getItem('users'));
         const userId = this.phoneChecker(users, phone);
-        // console.log(this.props)
+        
         if (userId !== -1) {
             if ( users[userId].pass === pass) {
                 
@@ -85,20 +70,13 @@ class Login extends WithFormChecker {
                     appointments: users[userId].appointments.slice(),
                     code: this.cookier(userId)
                 }
-                // console.log(user)
-                // console.log(this.props)
+
                 this.props.login(user)
-                
-                // setTimeout( ()=> {this.props.history.push('/user')}, 300);
-                // setTimeout( () => (<Redirect to='/user' />), 10000)
-                // return <Redirect to='/user' />
-                // this.cookier()
+
             } else {
-                // console.log('password is wrong')
                 this.messageRender('#message', 'password is wrong', false);
             }
         } else {
-            // console.log('we do not have such a number')
             this.messageRender('#message', 'phone number is wrong', false);
         }
         
@@ -118,33 +96,26 @@ class Login extends WithFormChecker {
 
         localStorage.setItem( 'users', JSON.stringify(users));
         return code;
-        
-        // +1 день от текущей даты
-        // let date = new Date(Date.now() + 86400e3);
-        // date = date.toUTCString();
-        // document.cookie = "user=John; expires=" + date;
     }
 
     onClickButton(ev) {
-        // console.log('click')
-        // console.log(document.querySelector('#'))
+
         const phone = this.state.phone;
         const pass = this.state.pass;
-        // console.log( this.formCheck( phone, pass) )
+        
         if (this.formCheck(phone, pass)) {
-            // console.log(ev.target.id)
+            
             if (ev.target.id === 'signup') {
                 this.signUp(phone, pass);
             }
             if (ev.target.id === 'login') {
-                // console.log('login')
                 this.login(phone, pass);
             }
         }
     }
 
     render() {
-        // console.log(this.props)
+        
         return (
             <div className="container_login">
                 <h2 className='login_header'>Join the Barbers Den Club</h2>
@@ -167,8 +138,6 @@ class Login extends WithFormChecker {
     }
     
 }
-
-// console.log(actions)
 
 const propsMap = ({user}) => (
     {user}
