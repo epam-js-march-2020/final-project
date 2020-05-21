@@ -22,11 +22,19 @@ export class  Services extends React.PureComponent {
   }
   render () {
   return (
-    <table className="table table-dark table-striped mg-t-150">
+    <div className = 'services row container-fluid justify-content-center align-content-center'>
+    <table className="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th colspan='1'>SERVICE</th>
+          <th colspan='1'>PRICE</th>
+        </tr>
+      </thead>
       <tbody>
         {this.services}
       </tbody>
     </table>
+    </div> 
   )
   }
 }

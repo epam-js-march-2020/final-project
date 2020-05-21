@@ -28,20 +28,24 @@ export function HomePage(props) {
             </div>
             
           </section>
-          <section className = 'home_whyWe row col-12'>
-            <div className = 'row col-12 justify-content-center mg-t-35'>
-              <h1 className = ''>Why we?</h1>
+          <section className = 'home_whyWe row col-12 align-content-evenly'>
+            <div className = 'row col-12 align-content-start'>
+              <div className = 'col-12 justify-content-center mg-t-35'>
+                <h1 className = ''>Why we?</h1>
+              </div>
+              <p className = "col-12 mg-t-15">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
             </div>
-            <p className = "row col-12">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <div className = 'row col-12 justify-content-center mg-t-35'>
-              <h1 id='examples' className = "">Our Work Examples</h1>
-            </div>
-            <div className = 'row col-12 mg-t-10 justify-content-around'>
-              <div><img className = 'col-12 mg-b-5' src = {work1}></img></div>
-              <div><img className = 'col-12 mg-b-5' src = {work2}></img></div>
-              <div><img className = 'col-12 mg-b-5' src = {work3}></img></div>
+            <div className = 'row col-12 align-content-start justify-content-center'>
+              <div className = 'col-12 mg-t-55'>
+                <h1 id='examples' className = "">Our Work Examples</h1>
+              </div>
+              <div className = 'row col-12 mg-t-25 justify-content-around'>
+                <div className = 'col-12 col-md-4 mg-b-5'><img src = {work1}></img></div>
+                <div className = 'col-12 col-md-4 mg-b-5'><img  src = {work2}></img></div>
+                <div className = 'col-12 col-md-4 mg-b-5'><img src = {work3}></img></div>
+              </div>
             </div>
           </section>
 

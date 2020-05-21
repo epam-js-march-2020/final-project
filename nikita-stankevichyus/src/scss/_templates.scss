@@ -29,7 +29,7 @@ $general-colors: (
 		width: 100%;
 	}
 
-	height: 10vh;
+	height: 70px;
 	// + main {
 	// 	margin-top: 10vh;
 	// }
@@ -136,7 +136,7 @@ $general-colors: (
 			}
 		}
 		cursor: pointer;
-		transition: background-color 0.5s, color 0.5s;
+		transition: background-color 0.5s, color 0.5s, opacity 0.5s;
 	}
 
 	.nav_link:hover {

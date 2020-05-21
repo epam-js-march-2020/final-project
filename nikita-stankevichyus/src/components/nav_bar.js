@@ -36,11 +36,11 @@ export class NavBar extends React.Component{
   return (
     <nav className='nav--horizontal container--flex justify-content--center mg-t-15'>
           <ul className = 'container--flex'>
-          <li className = 'nav_link toggler'>
+          <li className = {'nav_link toggler' + (this.state.barShown ? '' : ' semi-transparent')}>
             <a 
               onClick = {this.handleClick}
             >
-              <i className={'fas fa-bars' + ' mg-l--15'}/>
+              <i className={(this.state.barShown ? 'fas fa-times' : 'fas fa-bars') + ' mg-l--15'}/>
             </a>
           </li>
             
