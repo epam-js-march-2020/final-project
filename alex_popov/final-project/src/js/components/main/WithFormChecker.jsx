@@ -22,6 +22,10 @@ class WithFormChecker extends React.Component {
             name: 3
         }
 
+        this.month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        this.monthFull = ['January', 'February', 'March', 'April', 'May', 'June', 'Jule', 'August', 'September', 'October', 'November', 'December'];
+       
+
     }
 
     onInput(ev) {

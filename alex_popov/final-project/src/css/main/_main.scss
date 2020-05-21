@@ -103,6 +103,7 @@
     font-size: 1.6em;
     font-weight: 200;
     background-color: transparent;
+    transition: 0.7s
 }
 
 .form_input-invalid {
@@ -127,6 +128,7 @@
     font-family: 'Open Sans';
     font-weight: 600;
     font-size: 1em;
+    transition: 0.7s
 }
 
 .form_button-disabled {
@@ -136,6 +138,7 @@
 
 .form_label {
     margin-top: 15px;
+    transition: 0.7s
 }
 
 
@@ -162,6 +165,31 @@
     flex-wrap: wrap;
 }
 
+.appointment_item {
+    transition: 0.7s;
+}
+
 .appointment_item-active {
     color: red;
+}
+
+.appointments_item {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    border-bottom: 1px solid rgb(255, 222, 32);
+}
+
+.appointments_information {
+    margin-right: 15px;
+}
+
+.appointments_day {
+    margin-top: 5px;
+}
+
+.delete_icon {
+    cursor: pointer;
 }

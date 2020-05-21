@@ -1,8 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-function ServiceNav(props) {
-    const {links, activeService} = props;
+function ServiceNav({links, activeService}) {
     return (
         <>
             {Object.keys(links).map( (link) => {
@@ -19,44 +18,92 @@ function ServiceNav(props) {
     )
 }
   
-const prices = {
-    cut: {
-        price: 25,
-        name: 'Hair cut',
-        path: '/services/cut'
-    },
-    trim: {
-        price: 15,
-        name: 'Beard trim',
-        path: '/services/trim'
-    },
-    cuttrim: {
-        price: 35,
-        name: 'Cut and Trim',
-        path: '/services/cuttrim'
-    },
-    children: {
-        price: 10,
-        name: 'Children',
-        path: '/services/children'
+// const prices = {
+//     cut: {
+//         price: 25,
+//         name: 'Hair cut',
+//         path: '/services/cut'
+//     },
+//     trim: {
+//         price: 15,
+//         name: 'Beard trim',
+//         path: '/services/trim'
+//     },
+//     cuttrim: {
+//         price: 35,
+//         name: 'Cut and Trim',
+//         path: '/services/cuttrim'
+//     },
+//     children: {
+//         price: 10,
+//         name: 'Children',
+//         path: '/services/children'
+//     }
+// }
+class Services extends React.Component{
+    constructor(props) {
+        super(props)
+        this.prices = {
+            cut: {
+                price: 25,
+                name: 'Hair cut',
+                path: '/services/cut'
+            },
+            trim: {
+                price: 15,
+                name: 'Beard trim',
+                path: '/services/trim'
+            },
+            cuttrim: {
+                price: 35,
+                name: 'Cut and Trim',
+                path: '/services/cuttrim'
+            },
+            children: {
+                price: 10,
+                name: 'Children',
+                path: '/services/children'
+            }
+        }
+    } 
+
+    render() {
+        console.log(this.props)
+        const serviceName = this.props.match.params.name ? this.props.match.params.name : 'default';
+        console.log(this.props.match.params.name)
+        const appointmentLink = this.props.match.params.name ? `/${this.props.match.params.name}` : '';
+        const className = `container_service container_service-${serviceName}`;
+        
+        if ( !( serviceName in this.prices ) && serviceName !== 'default') {
+            this.props.history.push('/404')
+        }
+        return (
+            <div className={className}>
+                <div className='services_links services_links-white'>
+                    <ServiceNav activeService={serviceName} links={this.prices} />
+                    <NavLink to={`/appointment${appointmentLink}`} >Book time</NavLink>
+                </div>
+            </div>
+        )
     }
+    
 }
   
-function Services(props) { 
-    const serviceName = props.match.params.name ? props.match.params.name : 'default';
-    const className = `container_service container_service-${serviceName}`;
-    // console.log(serviceName  in prices)
-    if ( !( serviceName in prices ) && serviceName !== 'default') {
-        props.history.push('/404')
-    }
-    return (
-        <div className={className}>
-            <div className='services_links services_links-white'>
-                <ServiceNav activeService={serviceName} links={prices} />
-                <NavLink to='/appointment' > to make an appointment</NavLink>
-            </div>
-        </div>
-    )
-}
+// function Services(props) { 
+//     const serviceName = props.match.params.name ? props.match.params.name : 'default';
+//     const className = `container_service container_service-${serviceName}`;
+    
+//     if ( !( serviceName in prices ) && serviceName !== 'default') {
+//         props.history.push('/404')
+//     }
+//     return (
+//         <div className={className}>
+//             <div className='services_links services_links-white'>
+//                 <ServiceNav activeService={serviceName} links={prices} />
+//                 <NavLink to='/appointment' >Book time</NavLink>
+//             </div>
+//         </div>
+//     )
+// }
 
 export default Services;

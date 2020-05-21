@@ -10,12 +10,11 @@ export function loadData() {
     if (!appointments) {
         console.log('the list of appoinments created')
         const list = createList()
-        // console.log(list)
+        console.log(list)
         localStorage.setItem('appointments', JSON.stringify(list))
     }
     // console.log( JSON.parse(localStorage.getItem('appointments')) )
 }
-
 
 function createClearDay() {
     const day = {};

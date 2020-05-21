@@ -20,8 +20,10 @@ class Main extends React.Component {
             <main>
                 <Switch>
                     <Route exact path='/'  component={Home} />
+
                     <Route exact path='/services' component={Services} />
                     <Route path='/services/:name' component={Services} />
+
                     <Route exact path='/craft' component={Craft} />
                     <Route exact path='/contacts' component={Contacts} />
 
@@ -32,8 +34,8 @@ class Main extends React.Component {
                     <Route path='/login' render={() => (
                         this.props.user ? (<Redirect to='/user' />) : (<Login />)
                     )} />
-
-                    <Route path='/appointment' component={Appointment} />
+                    <Route exact path='/appointment' component={Appointment} />
+                    <Route path='/appointment/:name' component={Appointment} />
 
                     <Route path='/404' component={NotFound} />
                     <Route component={NotFound} />

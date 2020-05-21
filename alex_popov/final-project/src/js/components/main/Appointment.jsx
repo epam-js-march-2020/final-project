@@ -3,23 +3,25 @@ import WithFormChecker from './WithFormChecker';
 import Footer from '../Footer/Footer'
 
 import {connect} from 'react-redux';
+import * as actions from '../../actions/actions';
 
 
 class Appointment extends WithFormChecker {
     constructor(props) {
-        super(props)
+        super(props);
+
         this.state = {
             list: [],
             date: '',
             time: 0,
+            name: this.props.user ? this.props.user.name : '',
             phone: this.props.user ? this.props.user.phone : '',
-            name: this.props.user ? this.props.user.name : ''
+            serviceType: this.props.match.params.name ? this.props.match.params.name : '',
         }
 
-        this.month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        // console.log(this.props)
         this.onClickContainer = this.onClickContainer.bind(this);
-        this.onInput = this.onInput.bind(this)
+        this.onInput = this.onInput.bind(this);
+        this.onClickBook = this.onClickBook.bind(this);
     }
 
     componentDidMount() {
@@ -30,13 +32,19 @@ class Appointment extends WithFormChecker {
             date: list[0].date
         })
     }
+
     componentDidUpdate() {
         // console.log(this.props)
-        if (this.props.user && this.props.user.phone !== this.state.phone) {
-            this.setState({
-                phone: this.props.user.phone,
-                name: this.props.user.name
-            })
+        const newState = {}
+        if ( this.props.user && this.props.user.phone !== this.state.phone) {
+            newState.phone = this.props.user.phone;
+        }
+        if ( this.props.user && this.props.user.name !== this.state.name) {
+            newState.name = this.props.user.name;
+        }
+        // console.log('newState--->', newState)
+        if (newState.phone) {
+            this.setState(newState)
         }
     }
 
@@ -76,10 +84,9 @@ class Appointment extends WithFormChecker {
                     response.push(<p className={lassName} key={key} data-schedule={key}>{key}</p>)
                 }
             }
-            return response;
+            // console.log(response.length)
+            return response.length > 0 ? response : <p className='appointment_item appointment_item-active'>There is no time available this day. Sorry.</p> ;
         }
-        
-        return 'there is no available time this day'
     }
 
     onClickContainer(ev) {
@@ -97,19 +104,62 @@ class Appointment extends WithFormChecker {
     }
 
     formCheck() {
+        // console.log(!!this.state.date)
         return !!this.state.date && 
                 !!this.state.time && 
-                this.state.phone.length === this.minLen.phone && 
-                !!this.state.name
+                this.state.phone.length === this.minLen.phone 
     }
 
     onClickBook() {
-        console.log('book')
+        console.log('book');
+
+        const date = this.state.date;
+        const time = this.state.time;
+        // console.log(date, time)
+        const schedule = JSON.parse( localStorage.getItem('appointments') );
+        
+        const dayId = schedule.findIndex( (el) => {
+            return el.date === date;
+        });
+        
+        if (dayId !== -1) {
+            const scheduleDay = schedule[dayId]
+            if (time in scheduleDay.appointments && scheduleDay.appointments[time] === 0) {
+
+                scheduleDay.appointments[time] = {
+                    id: this.props.user ? this.props.user.id : 0,
+                    name: this.state.name,
+                    phone: this.state.phone
+                }
+                // console.log(scheduleDay.appointments[time])
+                console.log(schedule)
+                localStorage.setItem('appointments', JSON.stringify(schedule))
+                console.log(this.props)
+                this.setState({
+                    list: schedule.slice(),
+                    date: date
+                })
+
+                this.showMessage(date, time)
+            }
+        }
+    }
+
+    showMessage(date, time) {
+        const month = this.monthFull[new Date(date).getMonth()];
+        const day = new Date(date).getDate();
+
+        document.querySelector('#message').classList.remove('transparent');
+        document.querySelector('#message').classList.add('message-valid');
+        document.querySelector('#message').innerText = `we are wiating for you on ${day}th of ${month} at ${time}`; 
     }
 
     render() {
+        const serviceType = this.props.match.params.name ? this.props.match.params.name : '';
+        // console.log(serviceType)
         console.log(this.state)
-        console.log(this.formCheck())
+        // console.log(this.props)
+        // console.log(this.formCheck())
 
         const bookButtonClassName = this.formCheck() ? 'form_button' : 'form_button form_button-disabled';
         const formClassName = this.props.user ? 'login_form user_login_form' : 'login_form user_login_form login_form-phone'
@@ -128,18 +178,16 @@ class Appointment extends WithFormChecker {
                 <div className={formClassName}>
 
                     {this.props.user ? null : 
-                    <>
-                    <label className='form_label' htmlFor='phone'>Phone number 10 digits</label>
-                    <input onInput={this.onInput} id='phone' className='form_input' type="text"/>
-
-                    <label htmlFor='name'>Name {this.minLen.name} characters min, max - {this.len.name} </label>
-                    <input onInput={this.onInput} id='name' className='form_input' type="text"/>
-                    </>
+                        <>
+                        <label className='form_label' htmlFor='phone'>Phone number 10 digits</label>
+                        <input onInput={this.onInput} id='phone' className='form_input' type="text"/>
+                        </>
                     }
-                            
+                    <ServiceSelect activeService={serviceType} />
                     <div className='form_buttonsContainer'>
                         <button id='book' disabled={!this.formCheck()} onClick={this.onClickBook} className={bookButtonClassName} >Book</button>
                     </div>
+                    
                     <p id='message' className="message transparent">example</p>
                 </div>
             </div>
@@ -149,12 +197,50 @@ class Appointment extends WithFormChecker {
     }
 }
 
-function FormInput ({ name, handler, message }) {
+class ServiceSelect extends React.Component {
+    constructor(props) {
+        super(props);
+        this.services = {
+            cut: {
+                price: 25,
+                name: 'Hair cut',
+                path: '/services/cut'
+            },
+            trim: {
+                price: 15,
+                name: 'Beard trim',
+                path: '/services/trim'
+            },
+            cuttrim: {
+                price: 35,
+                name: 'Cut and Trim',
+                path: '/services/cuttrim'
+            },
+            children: {
+                price: 10,
+                name: 'Children',
+                path: '/services/children'
+            }
+        }
+        // this.keys = Object.keys(this.service)
+    }
+
+    render() {
+        console.log(this.props.activeService)
+        return (
+            <select defaultValue={this.props.activeService}>
+                <option>choose service</option>
+                {Object.keys(this.services).map( (el) => {
+                    return <ServiceOption key={el} value={el} name={this.services[el].name} active={this.props.activeService} />
+                })}
+            </select>
+        )
+    }
+}
+
+function ServiceOption({value, name}) {
     return (
-        <>
-            <label htmlFor={name}>{message}</label>
-            <input onInput={handler} id={name} className='form_input' type="text"/>
-        </>
+        <option value={value}>{name}</option>
     )
 }
 
@@ -162,4 +248,8 @@ const propsMap = (user) => (
     user
 )
 
-export default connect(propsMap)( Appointment );
+const actionsMap = (dispatch) => ({
+    login: (user) => dispatch(actions.login(user))
+})
+
+export default connect(propsMap, actionsMap)( Appointment );

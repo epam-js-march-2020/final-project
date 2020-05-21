@@ -11,12 +11,21 @@ class UserInformation extends WithFormChecker {
             id: this.props.user.id,
             name: '',
             pass: '',
-            phone: ''
+            phone: '',
+            appoinments: this.props.user ? this.props.user.appointments.slice() : []
         }
 
         this.onInput = this.onInput.bind(this);
         this.onClickLogOut = this.onClickLogOut.bind(this);
         this.onClickChangeInformation = this.onClickChangeInformation.bind(this);
+        this.onClickAppointmentsList = this.onClickAppointmentsList.bind(this);
+    }
+
+    componentDidUpdate() {
+        console.log('didupt')
+        if (this.state.appoinments.length !== this.props.user.appoinments.length) {
+            this.setState({appoinments: this.props.user.appoinments.slice()})
+        }
     }
 
     onClickLogOut() {
@@ -114,12 +123,48 @@ class UserInformation extends WithFormChecker {
         return true;
     }
 
+    getAppointments() {
+        // console.log(this.state.appoinments.slice())
+        const appointments = this.state.appoinments.slice()
+        if (appointments.length > 0) {
+            appointments.sort((a,b) => (a.date.localeCompare(b.date)))
+            console.log(appointments)
+            return appointments.map( (el) => {
+                const dateObj = new Date(el.date)
+                // console.log(dateObj)
+                const month = dateObj.getMonth()
+                const date = dateObj.getDate()
+                const time = dateObj.getHours()
+                // console.log(month, date, time)
+                return (
+                    <div key={dateObj} className='appointments_item'>
+                        <div className="appointments_information">
+                            <h3 className='appoints_header'>the {date} of {this.monthFull[month]}</h3>
+                            <p className='appointments_day'>{time} hours</p>
+                        </div>
+                        <CloseIcon />
+                    </div>
+                )
+            })
+        }
+        return null;
+    }
+
+    onClickAppointmentsList(ev) {
+        console.log('asdff')
+        console.log(ev.target)
+    }
+
 
     render() {
-        // console.log(this.props.user)
+        const appointments = this.getAppointments()
+        console.log(appointments)
+        // console.log(this.state)
+        // console.log(this.props)
         const changeButtonClassName = this.formCheck() ? 'form_button' : 'form_button form_button-disabled';
 
         return (
+            <>
             <div className='login_form user_login_form login_form-phone'>
                         
                 <label className='form_label' htmlFor='phone'>Phone number 10 digits</label>
@@ -137,8 +182,36 @@ class UserInformation extends WithFormChecker {
                 </div>
                 <p id='message' className="message transparent">example</p>
             </div>
+            <div id='appointmentsList' onClick={this.onClickAppointmentsList} className='userInformation_appointments'>
+                <h2>You booked:</h2>
+                {
+                    appointments ? appointments : null
+                }
+            </div>
+            </>
         )
     }
+}
+
+function CloseIcon() {
+    return (
+        <div className='delete_icon'>
+            <svg fill="white"
+                xmlns="http://www.w3.org/2000/svg" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                width="24"
+            >
+            <path 
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+            />
+            <path 
+                d="M0 0h24v24H0z"  
+                fill="none"
+            />
+            </svg>
+        </div>
+    )
 }
 
 const propsMap = (user) => (
