@@ -91,8 +91,8 @@ class App extends React.Component {
             />
         }
       </main>
-      <footer className = ''>
-        <span className = ''>© EPAM, React Project. 2020</span>
+      <footer className = 'footer'>
+        <span className = 'text-color-muted mg-b-5 mg-l-5'>Stankevichyus Nikita, React Project. 2020</span>
       </footer>
 
     </div>

@@ -280,9 +280,6 @@ a{
   align-items: center;
 }
 
-.footer {
-  height: 10vh;
-}
 
 .header {
   @media (min-width: 1050px) {
@@ -369,6 +366,7 @@ a{
 
 .home {
   height: 2000px;
+  flex: 1 0 auto;
   &_presentation {
     min-height: 50%;
     h1, h2, h3, h4, h5, h6 {
@@ -385,4 +383,13 @@ a{
     }
     @include gradient(0deg, #071013, -10%, #23B5D3, 125%);
   }
+}
+
+.footer {
+  height: 100px;
+  flex-shrink: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
 }
