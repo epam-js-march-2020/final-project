@@ -183,9 +183,9 @@ code {
   padding: 5px;
 }
 
-main .presentation, header  {
+.main_presentation, header  {
   h1, h2, h3, h4, h5, h6 {
-    @include text-gradient(45deg, #071013, 40%, #23B5D3, 125%);
+    @include text-gradient(45deg, #071013, 40%, #23B5D3, 90%);
     
   }
 
@@ -208,7 +208,6 @@ img {
 
 .logo {
   width: 20%;
-  margin: 0 auto;
 }
 
 
@@ -253,8 +252,7 @@ ul {
   }
   &_presentation {
     min-height: 50%;
-    margin-top: 5% !important;
-    
+
   }
   &_whyWe {
     // background-color: map-get(map-get($colors, main), text-link);
@@ -368,3 +366,23 @@ a{
   pointer-events: none !important;
 }
 
+
+.home {
+  height: 2000px;
+  &_presentation {
+    min-height: 50%;
+    h1, h2, h3, h4, h5, h6 {
+      @include text-gradient(45deg, #071013, 40%, #23B5D3, 90%);
+      
+    }
+  }
+
+  &_whyWe {
+    min-height: 50%;
+    max-width: 100vw;
+    h1, p {
+      color: #DFE0E2 !important;
+    }
+    @include gradient(0deg, #071013, -10%, #23B5D3, 125%);
+  }
+}

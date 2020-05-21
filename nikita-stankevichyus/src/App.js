@@ -61,7 +61,7 @@ class App extends React.Component {
         toLogIn = {this.props.toLogIn}
         />
       </header>
-      <main className="main main--regular">  
+      <main className="main">  
         { this.props.navigation.atHome ? <HomePage />
           : this.props.navigation.atProfile ? 
           <Profile 
@@ -91,8 +91,8 @@ class App extends React.Component {
             />
         }
       </main>
-      <footer className = 'footer footer--fixed container--flex direction--row justify--start align--end items--end'>
-        <span className = 'text-color-dark mg-b-5'>© EPAM, React Project. 2020</span>
+      <footer className = ''>
+        <span className = ''>© EPAM, React Project. 2020</span>
       </footer>
 
     </div>

@@ -46,7 +46,8 @@ export class NavBar extends React.Component{
             
             <NavLink 
               onClick = {this.props.toHome} 
-              href = '#home' icon = 'fas fa-home' 
+              href = '#home' 
+              icon = 'fas fa-home' 
               shown = {this.state.barShown} 
               text='Home'/>
               

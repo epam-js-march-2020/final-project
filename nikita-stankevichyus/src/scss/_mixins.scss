@@ -1,6 +1,6 @@
 // NOTE: It would be better to have a possibily to add more than two colors
 @mixin text-gradient($direction, $color_1, $color_1_percent, $color_2, $color_2_percent){
-  width: max-content;
+  min-width: max-content;
   background: -webkit-linear-gradient($direction, $color_1 $color_1_percent, $color_2 $color_2_percent);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
