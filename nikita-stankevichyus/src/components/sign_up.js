@@ -194,8 +194,8 @@ export class SignUp extends React.Component {
             </label>
             </div>  
             <div className = 'mg-t-35 container row justify-content-between'>
-              <button className = 'col-6 btn btn-light mg-l--15' type='submit'>Commit</button>
-              <button onClick = {this.handleClick} className = 'col-5 btn btn-light mg-r--45' type='button'>Close</button>
+              <button className = 'col-6 button_project button_project--alternative mg-l--15' type='submit'>Commit</button>
+              <button onClick = {this.handleClick} className = 'col-5 button_project button_project--alternative mg-r--45' type='button'>Close</button>
             </div>
         </form>
       </div>

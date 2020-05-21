@@ -128,7 +128,7 @@ export class AddService extends React.PureComponent {
       <div id='add_service' className = {'add_service modal_window ' + (this.props.addingService ? '' : ' hidden') }> 
         <form onSubmit = {this.handleSubmit} id = 'add_service_form' className = 'container'>
           <label className = 'row'>
-            <span>Choose desirable date</span>
+            <div className = 'mg-b-5'>Choose desirable date</div>
             <input onChange = {this.handleChange} min = {this.formatDate(date)} 
                    type='date' 
                    className = 'form-control'
@@ -139,7 +139,7 @@ export class AddService extends React.PureComponent {
           {
             this.props.user.loged ? <></>
             : <label className = 'row mg-t-15'>
-                  <span>Leave your telephone number</span>
+                  <div className = 'mg-b-5'>Leave your telephone number</div>
                   <input 
                    onChange = {this.handleChange}
                    value={this.state.number}
@@ -156,8 +156,8 @@ export class AddService extends React.PureComponent {
 
           }
           <div className = 'row mg-t-45 justify-content-between'>
-            <button type='submit' className = 'btn btn-light col-5'>Commit</button>
-            <button onClick = {this.handleClick} type='button' className = 'btn btn-light col-5'>Close</button>
+            <button type='submit' className = 'button_project button_project--alternative col-5'>Commit</button>
+            <button onClick = {this.handleClick} type='button' className = 'button_project button_project--alternative col-5'>Close</button>
           </div>
         </form>
       </div>

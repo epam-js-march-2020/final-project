@@ -168,6 +168,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow-x: hidden !important;
 }
 
 .text-link, a, link {
@@ -406,9 +407,12 @@ a{
 }
 
 .button_project {
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 18px;
   min-width: max-content;
   width: 200px;
 	box-sizing: border-box;
@@ -422,23 +426,50 @@ a{
 }
 
 .button_project--dark {
-  background-color: map-get(map-get($colors, header), background);
-  color: map-get(map-get($colors, header), text-link);
+  background-color: map-get(map-get($colors, header), background) !important;
+  color: map-get(map-get($colors, header), text-link) !important;
 }
 
 .button_project--dark:hover, .button_project--dark:active {
-  background-color: map-get(map-get($colors, header), text-link);
-  color: map-get(map-get($colors, header), background);
+  background-color: map-get(map-get($colors, header), text-link) !important;
+  color: map-get(map-get($colors, header), background) !important;
 }
 
 .button_project--primary {
-  background-color: map-get(map-get($colors, header), text-link);
-  color: map-get(map-get($colors, header), background);
+  background-color: map-get(map-get($colors, header), text-link) !important;
+  color: map-get(map-get($colors, header), background) !important;
 }
 
 .button_project--primary:hover, .button_project--primary:active {
-  background-color: map-get(map-get($colors, header), background);
-  color: map-get(map-get($colors, header), text-link);
+  background-color: map-get(map-get($colors, header), background) !important;
+  color: map-get(map-get($colors, header), text-link) !important;
+}
+
+.button_project--light {
+  background-color: map-get(map-get($colors, header), text-main) !important;
+  color: map-get(map-get($colors, header), background) !important;
+}
+
+.button_project--light:hover, .button_project--primary:active {
+  background-color: map-get(map-get($colors, header), background) !important;
+  color: map-get(map-get($colors, header), text-main) !important;
+}
+
+.button_project--alternative {
+  border: 1px solid map-get(map-get($colors, header), text-main);
+  background-color: map-get(map-get($colors, header), background) !important;
+  color: map-get(map-get($colors, header), text-main) !important;
+
+}
+
+.button_project--alternative:hover, .button_project--primary:active {
+  border: 1px solid map-get(map-get($colors, header), background);
+  background-color: map-get(map-get($colors, header), text-main) !important;
+  color: map-get(map-get($colors, header), background) !important;
+}
+
+.form-control {
+  border-radius: 0px !important;
 }
 
 .services {
@@ -452,9 +483,17 @@ a{
   }
 
   table {
-    background-color: map-get(map-get($colors, header), background) !important;
+    background-color: rgba(map-get(map-get($colors, header), background), 0.7) !important;
     width: 75%;
+    height: 60vh;
     text-transform: uppercase;
+    border-color: map-get(map-get($colors, header), background) !important;
+    border-collapse: collapse;
+    border-style: none;
+    border-width: 0;
+    * {
+      border: 0 solid red !important;
+    }
     tr {
       cursor: pointer;
     }
@@ -473,4 +512,71 @@ a{
   }
 
   
+}
+
+
+.main {
+  width: 100vw !important;
+}
+
+.service_page {
+  flex: 1 0 auto;
+  min-height: 100vh;
+  @include gradient(0deg, #071013, -10%, #23B5D3, 125%);
+  * {
+    color: map-get(map-get($colors, header), text-main);
+  }
+
+  h1, h3 {
+    text-transform: uppercase;
+  }
+  width: 100vw;
+}
+
+.profile {
+  flex: 1 0 auto;
+  min-height: 100vh;
+  &_header {
+    margin-right: -25px;
+    width: 105vw !important;
+    padding: 15px;
+    @media(min-width: 1050px){
+      margin-top: 70px;
+      margin-bottom: 25px;
+    }
+    @include gradient(0deg, #071013, -10%, #23B5D3, 125%);
+    * {
+      color: map-get(map-get($colors, header), text-main);
+    }
+  }
+
+  .ordered_services {
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7) inset;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    @include gradient(0deg, #071013, -10%, #23B5D3, 125%);
+    // background-color: rgba(map-get(map-get($colors, header), background), 0.7);
+    min-height: 30vh;
+	  height: max-content;
+	  max-height: 60vh;
+    overflow: scroll;
+    width: max-content;
+    .profile_service {
+      // width: 500px;
+      margin-left: 5px;
+      // box-shadow: 5px 5px 5px rgba(0,0,0, 0.7);
+    }
+    .profile_service *{
+      
+     
+      text-transform: uppercase;
+      background-color: map-get(map-get($colors, header), text-link);
+    }
+  }
+}
+
+.logo_text {
+  font-family: 'Norse';
+  font-weight: bold;
+  font-size: 50px;
 }

@@ -9,7 +9,7 @@ export function HomePage(props) {
     <div className = "container-fluid home">
           <section className = 'home_presentation row col-12 justify-content-center align-items-center align-content-center container'>
             <div className = 'row col-12 justify-content-center'>
-              <h1 className = ''>Einheria Barbershop</h1>
+              <h1 className = 'logo_text'>Einheria Barbershop</h1>
             </div>
             <img id = 'contacts' className='logo row col-md-4 col-lg-3 col-6 mg-t-15' src={logo}></img>
             <div className='row col-12 mg-t-35'>

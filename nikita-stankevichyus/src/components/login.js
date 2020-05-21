@@ -65,6 +65,8 @@ export class LogIn extends React.Component {
     this.props.outModals(); 
   }
 
+ 
+
   render() {
     return (
       <div id='log_in' className = { this.props.logIn ? 'log_in modal_window' : 'log_in modal_window hidden'}>
@@ -85,7 +87,7 @@ export class LogIn extends React.Component {
             </label>
 
             <label className = 'row mg-b-15'>
-              <div className = 'mg-b-5'>Enter your password</div>
+              <div className = 'mg-b-5 text-header'>Enter your password</div>
               <input onChange = {this.handleChange} name = 'password' 
                 className = {'form-control' + (this.state.wrongPassword ? ' invalid_input' : '')} 
                 type = 'password'
@@ -99,8 +101,8 @@ export class LogIn extends React.Component {
             </label>
           
             <div className = 'mg-t-35 container row justify-content-between'>
-              <button className = 'col-6 btn btn-light mg-l--15' type='submit'>Commit</button>
-              <button onClick = {this.handleClick} className = 'col-5 btn btn-light mg-r--45' type='button'>Close</button>
+              <button className = 'col-6 button_project button_project--alternative mg-l--15' type='submit'>Commit</button>
+              <button onClick = {this.handleClick} className = 'col-5 button_project button_project--alternative mg-r--45' type='button'>Close</button>
             </div>
         </form>
       </div>

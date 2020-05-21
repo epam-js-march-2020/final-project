@@ -30,9 +30,11 @@ export class ServiceProfile extends React.PureComponent {
       <div className = 'service_date col-4 container row justify-content-center align-items-center align-content-center'>
         {this.props.date}
       </div>
-      <button onClick = {this.deleteService} className = 'btn btn-dark service_cancel col-4'>
-        Cancel
-      </button>
+      <div className = 'col-4'>
+        <button onClick = {this.deleteService} className = 'col-12 button_project button_project--dark service_cancel'>
+          Cancel
+        </button>
+      </div>
     </div>
   )
   }

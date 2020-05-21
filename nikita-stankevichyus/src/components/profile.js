@@ -215,28 +215,40 @@ export class Profile extends React.PureComponent{
       </form>
     </div>
 
-    <div className = 'container row profile justify-content-between align-items-center'>
-      <h1 className = 'row col-12 mg-l-15 mg-t-15'>Your profile</h1>
-      <div className = 'row col-12'>
-      <div className = 'row col-6'>
-        <div className = 'row col-12 mg-b-15'>
-          <p className = 'col-6'>{this.props.user.name}</p>
-          <button onClick = {this.props.toChangeName} className = 'col-6 btn btn-dark'>Edit</button>
-        </div>
-        <div className = 'row col-12 mg-b-15'>
-          <p className = 'col-6'>{this.props.user.secondName}</p>
-          <button onClick = {this.props.toChangeSecondName} className = 'col-6 btn btn-dark'>Edit</button>
-        </div>
-        <div className = 'row col-12'>
-          <p className = 'col-6'>{this.props.user.email}</p>
-          <button onClick ={this.props.toChangeEmail} className = 'col-6 btn btn-dark'>Edit</button>
-        </div>
-        <div className = 'row col-12'>
-          <button onClick={this.logOut} className = 'btn btn-dark'>Log Out</button>
-        </div>
+    <div className = 'container-fluid row profile justify-content-center align-items-start'>
+      <div className = 'row container-fluid profile_header'>
+        <h1 className = 'row col-12 mg-l-15'>{this.props.user.name + ' ' + this.props.user.secondName}</h1>
+        <p className = 'row col-12 mg-l-15 mg-t-5'>{this.props.user.email}</p>
       </div>
-    <div className = 'col-6'>
-      {services}
+      <div className = 'row col-12'>
+        <div className = 'row col-xl-6 col-12 mg-b-25'>
+          <div className = 'row col-12'>
+            <h1>Manage your profile: </h1>
+          </div>
+          <div className = 'row col-12'>
+            <div className = 'row col-12 mg-t-25 mg-b-15'>
+              <button onClick = {this.props.toChangeName} className = 'col-8 button_project button_project--primary'>EDIT NAME</button>
+            </div>
+            <div className = 'row col-12 mg-b-15'>
+              <button onClick = {this.props.toChangeSecondName} className = 'col-8 button_project button_project--primary'>EDIT SECOND NAME</button>
+            </div>
+            <div className = 'row col-12 mg-b-15'>
+              <button onClick ={this.props.toChangeEmail} className = 'col-8 button_project button_project--primary'>EDIT EMAIL</button>
+            </div>
+            <div className = 'row col-12'>
+              <button onClick={this.logOut} className = 'col-8 button_project button_project--dark'>LOG OUT</button>
+            </div>
+          </div>
+        </div>
+    <div className = 'row col-xl-6 col-12 align-content-start align-items-start'>
+        <div className = 'row col-12'>
+          <h1>Ordered services: </h1>
+        </div>
+        <div className = 'row col-12 mg-t-25'>
+          <div className = 'col-12 ordered_services'>{services}</div>
+          
+        </div>
+      
     </div>
     </div>
     </div>
