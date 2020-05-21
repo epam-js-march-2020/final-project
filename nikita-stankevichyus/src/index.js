@@ -17,7 +17,7 @@ import { combineReducers } from 'redux';
 import { addService, addGuestService } from './actions/add_service';
 import { changeName, changeSecondName, changeEmail } from './actions/change_data';
 import { deleteService } from './actions/delete_service';
-import { logIn } from './actions/login';
+import { logIn, logOut } from './actions/login';
 import { signUp } from './actions/sign_up';
 import { toHome } from './actions/to_home';
 import { toProfile } from './actions/to_profile';
@@ -63,6 +63,7 @@ const mapActionsToProps = (dispatch) => {
     changeEmail: bindActionCreators(changeEmail, dispatch),
     deleteService: bindActionCreators(deleteService, dispatch),
     logIn: bindActionCreators(logIn, dispatch),
+    logOut: bindActionCreators(logOut, dispatch),
     signUp: bindActionCreators(signUp, dispatch),
     toHome: bindActionCreators(toHome, dispatch),
     toProfile: bindActionCreators(toProfile, dispatch),

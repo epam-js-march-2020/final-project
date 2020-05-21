@@ -1,31 +1,98 @@
 import React from 'react';
 
-function Icon(props) {
+function NavLink(props) {
   return (
-    <i className={props.icon}></i>
+    <li className = {'nav_link' + (props.shown ? '' : ' transparent')}>
+      <a 
+        onClick = {props.onClick}
+        href = {props.href}
+        >
+          <i className={props.icon + ' mg-l--15'}/>
+          <span className='mg-l-5'>{props.text}</span>
+      </a>
+    </li>
   )
+}
+
+const initialState = {
+  barShown: true,
 }
 
 export class NavBar extends React.Component{
   constructor(props){
     super(props);
+    this.state = initialState;
+    this.handleClick = this.handleClick.bind(this);
   }
+
+  handleClick() {
+    this.setState({
+      barShown: !this.state.barShown,
+    })
+  }
+
   
   render() {
   return (
     <nav className='nav--horizontal container--flex justify-content--center mg-t-15'>
           <ul className = 'container--flex'>
-            <li className="nav_link"><a onClick = {this.props.toHome} href="#home"><Icon icon='fas fa-home mg-l--15'/><span className='mg-l-5'>Home</span></a></li>
-            <li className="nav_link"><a onClick = {this.props.toHome} href='#contacts'><Icon icon='fas fa-cut mg-l--15'/><span className='mg-l-5'>Contacts</span></a></li>
-            <li className="nav_link"><a onClick = {this.props.toHome} href='#whyWe'><Icon icon='fas fa-cut mg-l--15'/><span className='mg-l-5'>Why We</span></a></li>
-            <li className="nav_link"><a onClick = {this.props.toServices}><Icon icon='fas fa-cut mg-l--15'/><span className='mg-l-5'>Services</span></a></li>
+          <li className = 'nav_link toggler'>
+            <a 
+              onClick = {this.handleClick}
+            >
+              <i className={'fas fa-bars' + ' mg-l--15'}/>
+            </a>
+          </li>
+            
+            <NavLink 
+              onClick = {this.props.toHome} 
+              href = '#home' icon = 'fas fa-home' 
+              shown = {this.state.barShown} 
+              text='Home'/>
+              
+            <NavLink 
+              onClick = {this.props.toHome} 
+              href = '#contacts' 
+              icon = 'fas fa-phone-alt' 
+              shown = {this.state.barShown} 
+              text='Contacts'/>
+
+            <NavLink 
+              onClick = {this.props.toHome} 
+              href = '#examples' 
+              icon = 'fas fa-portrait' 
+              shown = {this.state.barShown} 
+              text='Work Examples'/>
+
+            <NavLink 
+              onClick = {this.props.toServices} 
+              href = '#' 
+              icon = 'fas fa-cut'
+              shown = {this.state.barShown} 
+              text='Services'/>
+
             {
-              this.props.loged ? 
-              <li className="nav_link"><a onClick = {this.props.toProfile}><Icon icon='fas fa-user mg-l--15'/><span className='mg-l-5'>Profile</span></a></li>
+              this.props.loged ?
+              <NavLink 
+                onClick = {this.props.toProfile} 
+                href='#' 
+                icon = 'fas fa-user text' 
+                shown = {this.state.barShown} 
+                text = 'Profile'/>
               : 
               <>
-                <li className="nav_link"><a onClick = {this.props.toLogIn}><Icon icon='fas fa-sign-in-alt mg-l--15'/><span className='mg-l-5'>Log In</span></a></li>
-                <li className="nav_link"><a onClick = {this.props.toSignUp}><Icon icon='fas fa-user-plus mg-l--15'/><span className='mg-l-5'>Sign Up</span></a></li>
+                <NavLink 
+                  onClick = {this.props.toLogIn} 
+                  href='#' 
+                  icon = 'fas fa-sign-in-alt text' 
+                  shown = {this.state.barShown} 
+                  text = 'Log In'/>
+                <NavLink 
+                  onClick = {this.props.toSignUp} 
+                  href='#' 
+                  icon = 'fas fa-user-plus text' 
+                  shown = {this.state.barShown} 
+                  text = 'Sign Up'/>
               </>
             }
           </ul>

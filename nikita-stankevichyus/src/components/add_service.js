@@ -8,11 +8,6 @@ const initialState = {
   wrongNumber: false,
 }
 
-
-const capitalizeFirst = (string) =>{
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 export class AddService extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -39,29 +34,6 @@ export class AddService extends React.PureComponent {
     return yy + '-' + mm + '-' + dd;
   }
 
-
-  // addService = () => {
-  //   if (this.props.user.loged) {
-  //     this.props.addService(this.props.name, this.props.price);
-
-  //     let user = localStorage.getItem(this.props.user.email);
-  //     user = JSON.parse(user);
-  //     user.services.push({
-  //       name: this.props.name,
-  //       price: this.props.price,
-  //       date: '123',
-  //     })
-
-  //     user = JSON.stringify(user);
-
-  //     localStorage[this.props.user.email] = user;
-
-  //   } else {
-  //     alert('You should log in first!');
-  //   }
-  // }
-
-
   handleClick(event) {
     this.setState(this.initialState)
     this.props.outModals();
@@ -71,7 +43,6 @@ export class AddService extends React.PureComponent {
   handleSubmit(event) {
     event.preventDefault();
 
-    alert(this.state.wrongNumber);
     if (!this.state.wrongNumber) {
       if (this.props.user.loged) {
 

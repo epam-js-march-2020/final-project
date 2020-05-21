@@ -1,4 +1,4 @@
-import { LOG_IN } from '../actions_types/actions_types.js';
+import { LOG_IN, LOG_OUT } from '../actions_types/actions_types.js';
 import { SIGN_UP } from '../actions_types/actions_types.js';
 import { ADD_SERVICE, ADD_GUEST_SERVICE } from '../actions_types/actions_types.js';
 import { DELETE_SERVICE } from '../actions_types/actions_types.js';
@@ -20,6 +20,10 @@ export const reducerAuth = (state = defaultState.user, action) => {
         services: action.services,
       }
     };
+
+    case LOG_OUT: {
+      return defaultState.user;
+    }
     
     case SIGN_UP: return state;
     

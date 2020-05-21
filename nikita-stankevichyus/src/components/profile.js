@@ -31,6 +31,7 @@ export class Profile extends React.PureComponent{
     this.editSecondName = this.editSecondName.bind(this);
     this.editEmail = this.editEmail.bind(this);
     this.outModals = this.outModals.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   handleChange(event) {
@@ -123,6 +124,11 @@ export class Profile extends React.PureComponent{
 
   outModals() {
     this.props.outModals();
+  }
+
+  logOut() {
+    this.props.logOut();
+    this.props.toHome();
   }
 
   render () {
@@ -224,7 +230,10 @@ export class Profile extends React.PureComponent{
         <div className = 'row col-12'>
           <p className = 'col-6'>{this.props.user.email}</p>
           <button onClick ={this.props.toChangeEmail} className = 'col-6 btn btn-dark'>Edit</button>
-          </div>
+        </div>
+        <div className = 'row col-12'>
+          <button onClick={this.logOut} className = 'btn btn-dark'>Log Out</button>
+        </div>
       </div>
     <div className = 'col-6'>
       {services}

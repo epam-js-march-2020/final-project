@@ -287,7 +287,22 @@ a{
 }
 
 .header {
-  @media (max-width: 1000px){
+  @media (min-width: 1050px) {
+    .toggler {
+      display: none !important;
+      position: absolute !important;
+      pointer-events: none !important;
+    }
+    .nav--horizontal {
+      .transparent {
+        opacity: 1 !important;
+	      pointer-events: all !important;
+      }
+    }
+  }
+  @media (max-width: 1050px){
+  
+    background: none;
     + main {
       margin-top: 0 !important;
     }
@@ -347,3 +362,9 @@ a{
 .invalid_input {
   border: 3px solid rgba(255, 0, 0, 0.5) !important;
 }
+
+.transparent {
+  opacity: 0;
+  pointer-events: none !important;
+}
+

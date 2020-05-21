@@ -71,10 +71,12 @@ class App extends React.Component {
             changeName = {this.props.changeName}
             changeSecondName = {this.props.changeSecondName}
             changeEmail = {this.props.changeEmail}
+            toHome = {this.props.toHome}
             toChangeName = {this.props.toChangeName}
             toChangeSecondName = {this.props.toChangeSecondName}
             toChangeEmail = {this.props.toChangeEmail}
-            outModals = {this.props.outModals}               
+            outModals = {this.props.outModals}
+            logOut = {this.props.logOut}               
           />
           : this.props.navigation.atServices ?
             <Services 

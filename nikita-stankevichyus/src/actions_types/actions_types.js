@@ -1,4 +1,5 @@
 export const LOG_IN = 'LOGIN';
+export const LOG_OUT = 'LOG_OUT';
 export const SIGN_UP = 'SIGN_UP';
 export const TO_SIGN_UP = 'TO_SIGN_UP';
 export const TO_LOG_IN = 'TO_LOG_IN';

@@ -27,7 +27,7 @@ export function HomePage(props) {
             
           </section>
           <section className = "main_whyWe whyWe container--flex justify-center align--center direction--column">
-            <h1 id='whyWe' className = "mg-t-35">Why we?</h1>
+            <h1 id='examples' className = "mg-t-35">Why we?</h1>
             <p className = "mg-t-15">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>

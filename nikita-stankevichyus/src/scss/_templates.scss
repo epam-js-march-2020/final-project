@@ -115,6 +115,7 @@ $general-colors: (
 	}
 	.nav_link {
 		height: 100%;
+		min-width: max-content;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -127,7 +128,7 @@ $general-colors: (
 			text-align: center;
 			text-decoration: none;
 			font-style: normal;
-			font-size: 24px;
+			font-size: 21px;
 			color: map-get(map-get($colors, header), text-link);
 
 			* {
