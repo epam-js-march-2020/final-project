@@ -16,12 +16,13 @@ class Appointment extends WithFormChecker {
             time: 0,
             name: this.props.user ? this.props.user.name : '',
             phone: this.props.user ? this.props.user.phone : '',
-            serviceType: this.props.match.params.name ? this.props.match.params.name : '',
+            serviceType: this.props.match.params.name ? this.props.match.params.name : 'choose service',
         }
 
         this.onClickContainer = this.onClickContainer.bind(this);
         this.onInput = this.onInput.bind(this);
         this.onClickBook = this.onClickBook.bind(this);
+        this.onChangeService = this.onChangeService.bind(this);
     }
 
     componentDidMount() {
@@ -107,7 +108,8 @@ class Appointment extends WithFormChecker {
         // console.log(!!this.state.date)
         return !!this.state.date && 
                 !!this.state.time && 
-                this.state.phone.length === this.minLen.phone 
+                this.state.phone.length === this.minLen.phone &&
+                this.state.serviceType !== 'choose service';
     }
 
     onClickBook() {
@@ -129,12 +131,13 @@ class Appointment extends WithFormChecker {
                 scheduleDay.appointments[time] = {
                     id: this.props.user ? this.props.user.id : 0,
                     name: this.state.name,
-                    phone: this.state.phone
+                    phone: this.state.phone,
+                    serviceType: this.state.serviceType
                 }
                 // console.log(scheduleDay.appointments[time])
-                console.log(schedule)
+                // console.log(schedule)
                 localStorage.setItem('appointments', JSON.stringify(schedule))
-                console.log(this.props)
+                // console.log(this.props)
                 this.setState({
                     list: schedule.slice(),
                     date: date
@@ -152,6 +155,11 @@ class Appointment extends WithFormChecker {
         document.querySelector('#message').classList.remove('transparent');
         document.querySelector('#message').classList.add('message-valid');
         document.querySelector('#message').innerText = `we are wiating for you on ${day}th of ${month} at ${time}`; 
+    }
+
+    onChangeService(ev) {
+        // console.log(ev.target.value)
+        this.setState({[ev.target.id]: ev.target.value})
     }
 
     render() {
@@ -183,7 +191,7 @@ class Appointment extends WithFormChecker {
                         <input onInput={this.onInput} id='phone' className='form_input' type="text"/>
                         </>
                     }
-                    <ServiceSelect activeService={serviceType} />
+                    <ServiceSelect onChangeService={this.onChangeService} activeService={serviceType} />
                     <div className='form_buttonsContainer'>
                         <button id='book' disabled={!this.formCheck()} onClick={this.onClickBook} className={bookButtonClassName} >Book</button>
                     </div>
@@ -226,22 +234,18 @@ class ServiceSelect extends React.Component {
     }
 
     render() {
-        console.log(this.props.activeService)
+        // console.log(this.props.activeService)
+        const {onChangeService} = this.props
+        // console.log(onChangeService)
         return (
-            <select defaultValue={this.props.activeService}>
+            <select id='serviceType' onChange={onChangeService} defaultValue={this.props.activeService}>
                 <option>choose service</option>
                 {Object.keys(this.services).map( (el) => {
-                    return <ServiceOption key={el} value={el} name={this.services[el].name} active={this.props.activeService} />
+                    return <option key={el} value={el}>{this.services[el].name}</option>
                 })}
             </select>
         )
     }
-}
-
-function ServiceOption({value, name}) {
-    return (
-        <option value={value}>{name}</option>
-    )
 }
 
 const propsMap = (user) => (

@@ -22,10 +22,10 @@ class UserInformation extends WithFormChecker {
     }
 
     componentDidUpdate() {
-        console.log('didupt')
-        if (this.state.appoinments.length !== this.props.user.appoinments.length) {
-            this.setState({appoinments: this.props.user.appoinments.slice()})
-        }
+        // console.log('didupt')
+        // if (this.state.appoinments.length !== this.props.user.appoinments.length) {
+        //     this.setState({appoinments: this.props.user.appoinments.slice()})
+        // }
     }
 
     onClickLogOut() {

@@ -12,6 +12,13 @@ export function loadData() {
         const list = createList()
         console.log(list)
         localStorage.setItem('appointments', JSON.stringify(list))
+    } else {
+      // console.log( listChecker(JSON.parse(appointments)) )
+
+      // const newData = listFiller( listChecker(JSON.parse(appointments)) );
+      // console.log(newData)
+
+      // console.log(listFiller( listChecker(JSON.parse(appointments)) ) )
     }
     // console.log( JSON.parse(localStorage.getItem('appointments')) )
 }
@@ -57,19 +64,22 @@ function createClearDay() {
 //     const newList = []
   
 //     list.forEach( (el) => {
-//         if (el.date.getMonth() >= now.getMonth()) {
-//             if ( (el.date.getMonth() >= now.getMonth() && el.date.getDate() >= now.getDate()) || el.date.getMonth() > now.getMonth())
-//             newList.push(el)
-//         }
+//       const date = new Date( el.date);
+//       // console.log( date )
+//       if (date.getMonth() >= now.getMonth() && date.getFullYear() >= now.getFullYear()) {
+//         if ( date.getDate() > now.getDate() || date.getMonth() > now.getMonth() || date.getFullYear() > now.getFullYear())
+//         newList.push(el)
+//       }
 //     })
 //     return newList;
 // }
   
 // function listFiller(list) {
 //     if (list.length < 30) {
-//         const year = list[list.length - 1].date.getFullYear();
-//         const month = list[list.length - 1].date.getMonth();
-//         const date = list[list.length - 1].date.getDate();
+//         const last = new Date( list[list.length - 1].date )
+//         const year = last.getFullYear();
+//         const month = last.getMonth();
+//         const date = last.getDate();
     
 //         for (let i = 1; list.length < 30; i++) {
             
@@ -80,4 +90,6 @@ function createClearDay() {
 //             list.push(day);
 //         }
 //     }
+//     // console.log(new Date( list[0].date ).getDate(), new Date( list[0].date ).getMonth())
+//     return list;
 // }
