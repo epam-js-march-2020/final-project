@@ -73,10 +73,10 @@ export class NavBar extends React.Component{
               text='Services'/>
 
             {
-              this.props.loged ?
+              this.props.user.loged ?
               <NavLink 
                 onClick = {this.props.toProfile} 
-                href='#' 
+                href='#home' 
                 icon = 'fas fa-user text' 
                 shown = {this.state.barShown} 
                 text = 'Profile'/>

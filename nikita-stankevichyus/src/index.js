@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import 'bootstrap';
 import App from './App';
 import { serviceList } from './service_list';
+import { companyInfo } from './company_info';
 
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
@@ -11,21 +11,37 @@ import { createStore, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { combineReducers } from 'redux';
 
-// import { defaultState } from './default_state';
+
+import { 
+  logIn, 
+  logOut, 
+  signUp, 
+  addService, 
+  addGuestService, 
+  deleteService, 
+  changeName, 
+  changeSecondName, 
+  changeEmail 
+} from './actions/auth_actions';
 
 
-import { addService, addGuestService } from './actions/add_service';
-import { changeName, changeSecondName, changeEmail } from './actions/change_data';
-import { deleteService } from './actions/delete_service';
-import { logIn, logOut } from './actions/login';
-import { signUp } from './actions/sign_up';
-import { toHome } from './actions/to_home';
-import { toProfile } from './actions/to_profile';
-import { toServices } from './actions/to_services';
-import { toService } from './actions/to_service';
-import { toSignUp, toLogIn, toAddService, toChangeName, toChangeSecondName, toChangeEmail, outModals } from './actions/to_modals';
+import { 
+  toHome, 
+  toProfile, 
+  toServices, 
+  toService 
+} from './actions/navigation_actions';
 
-import { reducerService } from './reducers/service_reducer';
+import { 
+  toSignUp, 
+  toLogIn, 
+  toAddService, 
+  toChangeName, 
+  toChangeSecondName, 
+  toChangeEmail, 
+  outModals } from './actions/modal_actions';
+
+
 import { reducerAuth } from './reducers/auth_reducer';
 import { reducerNavigation } from './reducers/navigation_reducer';
 import { reducerModals } from './reducers/modal_reducer';
@@ -37,7 +53,6 @@ import { defaultState } from './default_state';
 const rootReducer = combineReducers({
   user: reducerAuth,
   navigation: reducerNavigation,
-  services: reducerService,
   modals: reducerModals,
 });
 
@@ -46,9 +61,7 @@ const store = createStore(rootReducer);
 
 const mapStateToProps = (state) => {
   return {
-    loged: state.loged,
     navigation: state.navigation,
-    services: state.services,
     modals: state.modals,
     user: state.user,
   }
@@ -81,6 +94,7 @@ const mapActionsToProps = (dispatch) => {
 
 const WrappedApp = connect(mapStateToProps, mapActionsToProps)(App);
 
+localStorage.setItem('companyInfo', JSON.stringify(companyInfo));
 localStorage.setItem('services', JSON.stringify(serviceList));
 localStorage.setItem('guests', JSON.stringify({})); 
 

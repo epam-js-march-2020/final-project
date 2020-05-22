@@ -30,13 +30,13 @@ class App extends React.Component {
       </div>
 
       <SignUp 
-        signUp = {this.props.modals.signUp}
+        modals = {this.props.modals}
         outModals = {this.props.outModals}
       />
 
       <LogIn
-        makeLogIn = {this.props.logIn}
-        logIn = {this.props.modals.logIn}
+        logIn = {this.props.logIn}
+        modals = {this.props.modals}
         outModals = {this.props.outModals}
       />
 
@@ -45,20 +45,20 @@ class App extends React.Component {
         outModals = {this.props.outModals}
         addService = {this.props.addService}
         addGuestService = {this.props.addGuestService}
-        addingService = {this.props.modals.addService}
-        bufferService = {this.props.navigation.bufferService}
+        modals = {this.props.modals}
+        navigation = {this.props.navigation}
         user = {this.props.user}
       />
 
       <div id = 'home'></div>
       <header className='header header--fixed container--flex'>
         <NavBar 
-        loged = {this.props.user.loged} 
-        toHome = {this.props.toHome}
-        toProfile = {this.props.toProfile}
-        toServices = {this.props.toServices}
-        toSignUp = {this.props.toSignUp}
-        toLogIn = {this.props.toLogIn}
+          user = {this.props.user} 
+          toHome = {this.props.toHome}
+          toProfile = {this.props.toProfile}
+          toServices = {this.props.toServices}
+          toSignUp = {this.props.toSignUp}
+          toLogIn = {this.props.toLogIn}
         />
       </header>
       <main className="main">  
@@ -85,7 +85,7 @@ class App extends React.Component {
               user = {this.props.user}
             />
           : <ServicePage
-              bufferService = {this.props.navigation.bufferService}
+              navigation = {this.props.navigation}
               user = {this.props.user}
               toAddService = {this.props.toAddService}
             />

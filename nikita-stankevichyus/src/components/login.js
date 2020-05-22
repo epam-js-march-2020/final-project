@@ -37,7 +37,7 @@ export class LogIn extends React.Component {
     if (user !== undefined && user !== '' && user !== null) {
       user = JSON.parse(user);
       if(user['password'] === this.state.password){
-        this.props.makeLogIn(
+        this.props.logIn(
           user['name'],
           user['secondName'],
           user['email'],
@@ -69,7 +69,7 @@ export class LogIn extends React.Component {
 
   render() {
     return (
-      <div id='log_in' className = { this.props.logIn ? 'log_in modal_window' : 'log_in modal_window hidden'}>
+      <div id='log_in' className = { this.props.modals.logIn ? 'log_in modal_window' : 'log_in modal_window hidden'}>
         <form onSubmit = {this.handleSubmit} id='sign_up_form container'>
 
             <label className = 'row mg-b-15'>

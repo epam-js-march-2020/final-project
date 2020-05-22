@@ -15,15 +15,29 @@ export function HomePage(props) {
             <div className='row col-12 mg-t-35'>
               <div className='col-12 col-lg-4 mg-b-15'>
                 <h2>Adress</h2>
-                <p className = 'mg-t-10'>Asgard, Valhalla</p>
+                <p className = 'mg-t-10'>
+                  {
+                    JSON.parse(localStorage.getItem('companyInfo')).adress
+                  }
+                </p>
               </div>
               <div className='col-12 col-lg-4 mg-b-15'>
                 <h2>Telephone Number</h2>
-                <p className = 'mg-t-10'>+0-123-456-78-99</p>
+                <p className = 'mg-t-10'>
+                  {
+                    JSON.parse(localStorage.getItem('companyInfo')).telephone
+                  }
+                </p>
               </div>
               <div className='col-12 col-lg-4'>
                 <h2>Work Hours</h2>
-                <p className = 'mg-t-10'>00:00 — Ragnarok</p>
+                <p className = 'mg-t-10'>
+                  {
+                    JSON.parse(localStorage.getItem('companyInfo')).workStart
+                    + ' — ' +
+                    JSON.parse(localStorage.getItem('companyInfo')).workEnd
+                  }
+                </p>
               </div>
             </div>
             
@@ -34,7 +48,9 @@ export function HomePage(props) {
                 <h1 className = ''>Why we?</h1>
               </div>
               <p className = "col-12 mg-t-15">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                {
+                  JSON.parse(localStorage.getItem('companyInfo')).whyWe
+                }
               </p>
             </div>
             <div className = 'row col-12 align-content-start justify-content-center'>

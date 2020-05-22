@@ -46,12 +46,12 @@ export class AddService extends React.PureComponent {
     if (!this.state.wrongNumber) {
       if (this.props.user.loged) {
 
-        this.props.addService(this.props.bufferService.name, this.state.date);
+        this.props.addService(this.props.navigation.bufferService.name, this.state.date);
 
         let user = localStorage.getItem(this.props.user.email);
         user = JSON.parse(user);
         user.services.push({
-          name: this.props.bufferService.name,
+          name: this.props.navigation.bufferService.name,
           date: this.state.date,
         })
 
@@ -62,7 +62,7 @@ export class AddService extends React.PureComponent {
         this.props.outModals();
       
       } else {
-        this.props.addGuestService(this.props.bufferService.name, this.state.date, this.state.number)
+        this.props.addGuestService(this.props.navigation.bufferService.name, this.state.date, this.state.number)
 
         let guests = localStorage.getItem('guests');
 
@@ -72,18 +72,18 @@ export class AddService extends React.PureComponent {
 
           guests[this.state.number].services ? 
             guests[this.state.number].services.push({
-              name: this.props.bufferService.name,
+              name: this.props.navigation.bufferService.name,
               date: this.state.date,
             })
           : guests[this.state.number].services = [{
-              name: this.props.bufferService.name,
+              name: this.props.navigation.bufferService.name,
               date: this.state.date,
           }]
 
         } else {
           guests[this.state.number] = {
             services: [{
-              name: this.props.bufferService.name,
+              name: this.props.navigation.bufferService.name,
               date: this.state.date,
             }]
           }
@@ -125,7 +125,7 @@ export class AddService extends React.PureComponent {
     let date = new Date();
     
     return (
-      <div id='add_service' className = {'add_service modal_window ' + (this.props.addingService ? '' : ' hidden') }> 
+      <div id='add_service' className = {'add_service modal_window ' + (this.props.modals.addService ? '' : ' hidden') }> 
         <form onSubmit = {this.handleSubmit} id = 'add_service_form' className = 'container'>
           <label className = 'row'>
             <div className = 'mg-b-5'>Choose desirable date</div>

@@ -1,9 +1,14 @@
-import { LOG_IN, LOG_OUT } from '../actions_types/actions_types.js';
-import { SIGN_UP } from '../actions_types/actions_types.js';
-import { ADD_SERVICE, ADD_GUEST_SERVICE } from '../actions_types/actions_types.js';
-import { DELETE_SERVICE } from '../actions_types/actions_types.js';
-import { CHANGE_NAME, CHANGE_SECOND_NAME, CHANGE_EMAIL } from '../actions_types/actions_types.js'
-
+import { 
+  LOG_IN, 
+  LOG_OUT, 
+  SIGN_UP, 
+  ADD_SERVICE, 
+  ADD_GUEST_SERVICE, 
+  DELETE_SERVICE, 
+  CHANGE_NAME, 
+  CHANGE_SECOND_NAME, 
+  CHANGE_EMAIL 
+} from '../actions_types/actions_types.js';
 
 import { defaultState } from '../default_state';
 

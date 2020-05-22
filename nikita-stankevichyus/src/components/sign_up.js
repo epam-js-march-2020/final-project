@@ -134,7 +134,7 @@ export class SignUp extends React.Component {
   render() {
     console.log(this.state.validName);
     return (
-      <div id='sign_up' className = { this.props.signUp ? 'sign_up modal_window' : 'sign_up modal_window hidden'}>
+      <div id='sign_up' className = { this.props.modals.signUp ? 'sign_up modal_window' : 'sign_up modal_window hidden'}>
         <form onSubmit = {this.handleSubmit} id='sign_up_form container' className = 'needs-validation' novalidate>
           <div className = 'form-row'>
             <label className = 'row mg-b-10'>
