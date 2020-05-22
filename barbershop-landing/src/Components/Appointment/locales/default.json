@@ -5,6 +5,9 @@
         "woman": "Woman Haircut",
         "dyeing": "Hair Dyeing",
         "styling": "Hair Styling",
-        "beard": "Beard Styling"
+        "beard": "Beard Styling",
+        "confirm": "Make Appointment",
+        "cancel": "Cancel",
+        "selectTime": "Select Date and Time"
     }
 }
