@@ -1,6 +1,7 @@
 import React from 'react';
 
 import UserInformation from './UserInformation';
+import UserSchedule from './UserSchedule';
 import Footer from '../Footer/Footer';
 
 import {connect} from 'react-redux';
@@ -13,6 +14,7 @@ class User extends React.Component {
             <>
             <div className="container_main">
                 <UserInformation />
+                <UserSchedule />
             </div>
             <Footer footerClassName='footer footer-dark' />
             </>
