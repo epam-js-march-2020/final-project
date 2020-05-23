@@ -1,3 +1,10 @@
+$form-yellow-theme: (
+    passive-color: rgb(255, 255, 255),
+    active-color: rgb(255, 222, 32),
+    button-color: rgb(255, 222, 32),
+    invalid-color: rgb(255, 29, 29),
+);
+
 .container_login {
     @extend .fullScreen;
 
@@ -51,8 +58,6 @@
     margin-bottom: 25px;
     padding-left: 8px;
     padding-left: 8px;
-    border-bottom: 1px solid rgb(255, 222, 32);
-    color: white;
     font-family: 'Open Sans';
     font-size: 1.6em;
     font-weight: 200;
@@ -60,17 +65,17 @@
     transition: 0.7s
 }
 
+.form_input-yellow {
+    color: map-get($form-yellow-theme, 'passive-color' );
+    border-bottom: 1px solid map-get($form-yellow-theme, 'active-color' );
+}
+
 .input_options {
     background-color: black;
-    outline: none;
-    border: none;
-    &:hover {
-        background-color: black;
-    }
 }
 
 .form_input-invalid {
-    border-bottom-color: rgb(255, 29, 29);
+    border-bottom-color: map-get($form-yellow-theme , 'invalid-color' );
 }
 
 .form_buttonsContainer {
@@ -104,7 +109,6 @@
     transition: 0.7s
 }
 
-
 .form_label-invalid {
-    color: rgb(255, 29, 29);
+    color: map-get($form-yellow-theme , 'invalid-color' );
 }

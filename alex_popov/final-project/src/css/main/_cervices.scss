@@ -6,10 +6,18 @@ $services-themes: (
     children: '../../img/services/child.jpg' 
 );
 
+$services-yellow-theme: (
+    passive-color: rgb(255, 255, 255),
+    active-color: rgb(255, 222, 32),
+    background-color: rgb(107, 107, 107),
+    photo-alt-color: #d8cdc9
+);
+
+
 .container_service {
     @extend .fullScreen;
     background-size: cover;
-    background-color: #d8cdc9;
+    background-color:  map-get($services-yellow-theme, 'photo-alt-color');
     background-position: -250px;
 }
 
@@ -37,8 +45,8 @@ $services-themes: (
 
 .services_links-white {
     border-radius: 15px;
-    background-color: rgb(107, 107, 107);
-    color: white;
+    background-color: map-get($services-yellow-theme , 'background-color' );
+    color: map-get($services-yellow-theme, 'passive-color' );
     font-weight: 200;
 }
 
@@ -48,11 +56,11 @@ $services-themes: (
     border-bottom: 1px solid transparent;
     &:last-child {
         margin-top: 20px;
-        color: rgb(255, 222, 32);
+        color: map-get($services-yellow-theme , 'active-color' );
     }
 }
 
 .services_linkContainer-active {
-    color: rgb(255, 222, 32);
-    border-bottom: 1px solid rgb(255, 222, 32);
+    color: map-get($services-yellow-theme , 'active-color' );
+    border-bottom: 1px solid map-get($services-yellow-theme , 'active-color' );
 }

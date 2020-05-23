@@ -4,11 +4,12 @@ export function loadData() {
     if (!users) {
         const startValue = [{
           code: '',
-          id: 'admin',
+          id: 1,
           name: 'Den',
           pass: '77777',
           phone: '7777777777',
-          appointments: []
+          appointments: [],
+          admin: true
         }]
         localStorage.setItem('users', JSON.stringify(startValue));
         console.log( 'users arr loaded in the LS' )

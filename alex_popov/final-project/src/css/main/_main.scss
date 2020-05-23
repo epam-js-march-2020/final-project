@@ -3,10 +3,10 @@
 @import './login';
 @import './notFound';
 
-.container_main {
-    padding-top: 80px;
-    padding-bottom: 80px;
-}
+// .container_main {
+//     padding-top: 80px;
+//     padding-bottom: 80px;
+// }
 
 .main_contacts_map {
     @extend .fullScreen;
@@ -14,20 +14,10 @@
     width: 100%;
 }
 
-// .container_craft {
-//     @extend .fullScreen;
-//     background-color: orange;
-// }
-
-// .stuff_image {
-//     position: absolute;
-//     top: 0;
-//     width: 100%;
-// }
-
 .container_main {
     @extend .container;
-    // @extend .margin-top;
+    padding-top: 80px;
+    padding-bottom: 80px;
 }
 
 .user_form {
@@ -58,12 +48,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 15px;
+    // margin-top: 15px;
+    padding-top: 20px;
+    padding-bottom: 8px;
     border-bottom: 1px solid rgb(255, 222, 32);
-}
-
-.appointments_information {
-    margin-right: 15px;
 }
 
 .appointments_day {

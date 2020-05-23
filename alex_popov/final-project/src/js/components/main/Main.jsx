@@ -31,6 +31,7 @@ class Main extends React.Component {
                     <Route path='/login' render={() => (
                         this.props.user ? (<Redirect to='/user' />) : (<Login />)
                     )} />
+                    
                     <Route exact path='/appointment' component={Appointment} />
                     <Route path='/appointment/:name' component={Appointment} />
 
@@ -40,9 +41,8 @@ class Main extends React.Component {
             </main>
         )
     }
-    
 }
 
 const propMap = ({user}) => ( {user} )
 
-export default connect(propMap)(Main)   // Main;
+export default connect(propMap)(Main)

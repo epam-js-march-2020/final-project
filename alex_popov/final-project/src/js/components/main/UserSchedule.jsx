@@ -23,10 +23,32 @@ class UserSchedule extends WithFormChecker {
     componentDidMount() {
         // console.log('did mount');
         const schedule = JSON.parse( localStorage.getItem('appointments') );
-        // console.log(schedule)
-        const userAppointments = this.filterSchedule(this.state.id, schedule);
+        // console.log(this.state)
+        const userAppointments = this.state.id === 1 ? this.filterScheduleAdmin(schedule) : this.filterSchedule(this.state.id, schedule);
         // console.log(userAppointments)
         this.setState({schedule: userAppointments})
+    }
+
+    filterScheduleAdmin(list) {
+        // console.log('asdf')
+        const response = [];
+        list.forEach( (el) => {
+            // console.log(el.appointments)
+            const hours = Object.keys(el.appointments)
+            // console.log(hours)
+            hours.forEach( (hour) => {
+                if (el.appointments[hour] !== 0) {
+                    // console.log(el.appointments[hour])
+                    response.push({
+                        date: el.date,
+                        hour: hour,
+                        service: el.appointments[hour].serviceType,
+                        phone: el.appointments[hour].phone
+                    })
+                }
+            })
+        });
+        return response;
     }
 
     filterSchedule(id, list) {
@@ -70,6 +92,7 @@ class UserSchedule extends WithFormChecker {
                         date={date} 
                         time={time} 
                         service={el.service}
+                        phone={el.phone}
                         delHandle={this.onClickDeleteItem}
                         dayId={el.date}
                     />
@@ -81,23 +104,13 @@ class UserSchedule extends WithFormChecker {
     }
 
     onClickDeleteItem(ev) {
-        // console.log('asdff')
-        // console.log(ev.currentTarget.dataset)
         const {date, time, service} =ev.currentTarget.dataset;
-        // console.log(date, time, service)
+        
         this.setState({
             date,
             time,
             service
         })
-
-        // const schedule = JSON.parse( localStorage.getItem('appointments') );
-        // console.log(schedule)
-        // const dayId = schedule.findIndex( (el) => {
-        //     return el.date === date
-        // })
-        // console.log(schedule[dayId].appointments[time])
-
     }
 
     onClickDeleteModal() {
@@ -118,7 +131,6 @@ class UserSchedule extends WithFormChecker {
                 service: ''
             })
         }
-        // console.log(schedule[dayId].appointments[this.state.time])
     }
 
     onClickCancelModal() {
@@ -132,11 +144,11 @@ class UserSchedule extends WithFormChecker {
 
     render() {
         // console.log(this.props)
-        console.log(this.state)
+        // console.log(this.state)
         const list = this.getAppointments();
         const month = this.state.date ? (new Date(this.state.date)).getMonth() : '';
         const date = this.state.date ? (new Date(this.state.date)).getDate() : '';
-        console.log(month)
+        // console.log(month)
         // console.log(list)
         if (list) {
             return (
@@ -176,7 +188,7 @@ class DeleteConfirmation extends React.Component {
             <div className="deleteConfirmation_container">
                 
                 <div className='deleteconrifmation_info'>
-                    <h3 className='delteConfirmation_header'>You are roing to delete your appointment.</h3>
+                    <h3 className='delteConfirmation_header'>You are going to delete the appointment.</h3>
                     <p>{type}</p>
                     <p>the {date} of {month} at {time}</p>
                     <div className='delteConfirmation_buttons form_buttonsContainer'>
@@ -192,14 +204,14 @@ class DeleteConfirmation extends React.Component {
     }
 }
 
-function Appointment({month, date, time, service, delHandle, dayId}) {
+function Appointment({month, date, time, service, phone, delHandle, dayId}) {
     return (
         <div key={`${month}${date}${time}`} className='appointments_item'>
 
             <div className="appointments_information">
                 <h3 className='appoints_header'>the {date} of {month} at {time}:00</h3>
-                {/* <p className='appointments_day'>{time} hours</p> */}
                 <p className='appointments_day'>Service type: {service}</p>
+                {phone ? <p className='appointments_day'>client's phone: {phone}</p>: null }
             </div>
 
             <div 
@@ -218,7 +230,8 @@ function Appointment({month, date, time, service, delHandle, dayId}) {
 
 function DelIcon() {
     return (
-        <svg fill="white"
+        <svg 
+            fill="white"
             xmlns="http://www.w3.org/2000/svg" 
             height="24" 
             viewBox="0 0 24 24" 

@@ -19,7 +19,7 @@
   font-style: normal;
 }
 
-@import './atoms/_data';
+@import './data';
 @import './atoms/_borders.scss';
 @import './atoms/flex';
 
@@ -33,6 +33,10 @@
   padding: 0;
   border: 0;
   outline: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 30px;
 }
 
 main {

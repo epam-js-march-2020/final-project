@@ -1,5 +1,7 @@
 import React from 'react';
+
 import WithFormChecker from './WithFormChecker';
+
 import {connect} from 'react-redux';
 import * as actions from '../../actions/actions';
 
@@ -122,10 +124,10 @@ class Login extends WithFormChecker {
                 <div className='login_form login_login_form login_form-phone'>
     
                     <label className='form_label' htmlFor='phone'>Phone number 10 digits</label>
-                    <input onInput={this.onInput} id='phone' className='form_input' type="text"/>
+                    <input onInput={this.onInput} id='phone' className='form_input form_input-yellow' type="text"/>
     
                     <label htmlFor='pass'>Password 5 characters min, max - 15</label>
-                    <input onInput={this.onInput} id='pass' className='form_input' type="password"/>
+                    <input onInput={this.onInput} id='pass' className='form_input form_input-yellow' type="password"/>
     
                     <div className='form_buttonsContainer'>
                         <button id='login' onClick={this.onClickButton} className='form_button' >Sign In</button>

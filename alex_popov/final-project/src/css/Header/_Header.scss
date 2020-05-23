@@ -1,6 +1,20 @@
+$theme-header-yellow: (
+    background: rgb(41, 41, 41),
+    font-color: rgb(255, 255, 255),
+    main-color: rgb(255, 222, 32),
+);
+
+$sizes: (
+  header-logo-width: 100px,
+  header-height: 60px,
+);
+
+$header: (
+    height: 60px
+);
 
 .header {
-    height: map-get($header, 'height' );
+    height: map-get($sizes, 'header-height' );
     width: 100vw;
     z-index: 10;
     position: fixed;
@@ -10,11 +24,6 @@
     padding-top: 5px;
 }
 
-$theme-header-yellow: (
-    background: rgb(41, 41, 41),
-    font-color: white
-);
-
 .header-yellow {
     background-color: map-get($theme-header-yellow, 'background');
     color:map-get($theme-header-yellow , 'font-color' );
@@ -23,8 +32,6 @@ $theme-header-yellow: (
 .header_logo {
     height: 50px;
 }
-
-
 
 .header-links {
     width: calc( 100% - #{map-get($sizes, 'header-logo-width')} );
@@ -39,13 +46,13 @@ $theme-header-yellow: (
 }
 
 .header_link-active {
-    border-bottom: 2px solid rgb(255, 222, 32);
+    border-bottom: 2px solid map-get($theme-header-yellow, 'main-color');
 }
 
-.header-liginIcon-passive {
-    fill: white;
+.header_loginIcon-passive {
+    fill: map-get($theme-header-yellow, 'font-color' );
 }
 
-.header-liginIcon-active {
-    fill: rgb(255, 222, 32);
+.header_loginIcon-active {
+    fill: map-get($theme-header-yellow, 'main-color');
 }
