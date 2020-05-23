@@ -10,8 +10,11 @@ export class ServiceProfile extends React.PureComponent {
   }
 
   deleteService = () => {
+
+    // Dispatching action
     this.props.deleteService(this.props.index);
 
+    // Interacting with DB via get, parse, change, stringify pattern
     let user = localStorage.getItem(this.props.user.email);
     user = JSON.parse(user);
     user.services.splice(this.props.index, 1);

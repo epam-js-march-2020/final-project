@@ -1,13 +1,14 @@
 import React from 'react';
 import { Service } from './service';
 
-export class  Services extends React.PureComponent {
+export class Services extends React.PureComponent {
 
   constructor(props) {
     super(props);
 
     this.serviceList = JSON.parse(localStorage.getItem('services'));
 
+    // Mapping each available service from DB
     this.services = this.serviceList.map((element)=>{
       return <Service
         key = {element.name}

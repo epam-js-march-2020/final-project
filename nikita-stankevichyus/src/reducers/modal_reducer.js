@@ -11,6 +11,12 @@ import { defaultState } from '../default_state';
 
 export function reducerModals(state = defaultState.modals, action) {
 
+  /*
+   * If corresponding to modal window parameter is true the window is shown
+   * fadeOn corresponds to fade "behind" the modal window during interaction
+   * bufferService is field containing service that is being added -- to deliver it to another part of the app 
+  */
+
   switch (action.type) {
 
     case TO_LOG_IN:{

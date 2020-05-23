@@ -1,8 +1,5 @@
 import React from 'react';
 
-const initialState = {
-  
-}
 
 export class ServicePage extends React.PureComponent {
   constructor(props) {
@@ -11,6 +8,8 @@ export class ServicePage extends React.PureComponent {
   }
 
   handleClick() {
+
+    // Dispatching action
     this.props.toAddService(this.props.name);
   }
   

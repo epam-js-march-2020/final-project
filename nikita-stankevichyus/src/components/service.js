@@ -7,6 +7,8 @@ export class Service extends React.PureComponent{
   }
 
   handleClick = () => {
+
+    // Dispatching action
     this.props.toService({
       name: this.props.name,
       price: this.props.price,

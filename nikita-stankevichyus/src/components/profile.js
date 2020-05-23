@@ -1,9 +1,13 @@
 import React from 'react';
+
+// Element that represents an ordered service by user 
 import { ServiceProfile } from './service_profile';
+
+// Validation functions, which return 'true' if validation is successful
 import { validateName, validateEmail } from './validation'
 
 
-
+// Function capitalizes given string
 const capitalizeFirst = (string) =>{
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -14,6 +18,7 @@ export class Profile extends React.PureComponent{
   constructor(props) {
     super(props);
 
+    // Initial state of the component
     const initialState = {
       name: this.props.user.name,
       secondName: this.props.user.secondName,
@@ -26,6 +31,7 @@ export class Profile extends React.PureComponent{
 
     this.state = initialState;
 
+    // Binding methods
     this.handleChange = this.handleChange.bind(this);
     this.editName = this.editName.bind(this);
     this.editSecondName = this.editSecondName.bind(this);
@@ -34,10 +40,12 @@ export class Profile extends React.PureComponent{
     this.logOut = this.logOut.bind(this);
   }
 
+  // Handles each change in inputs
   handleChange(event) {
 
     let validation;
 
+    // Validating depending on type of the input
     if(event.target.name === 'email') {
       validation = validateEmail(event.target.value);
       this.setState({
@@ -47,18 +55,25 @@ export class Profile extends React.PureComponent{
       validation = validateName(event.target.value);
     }
 
-    console.log(validation);
 
     this.setState({
+      
+      // Writing value
       [event.target.name]: event.target.value,
+      
+      // It's either wrongName or wrongEmail
       ['wrong' + capitalizeFirst(event.target.name)]: !validation,
     })
   }
 
+  // On name change's submit
   editName(event) {
     event.preventDefault()
 
+    // If name is valid
     if (!this.state.wrongName) {
+
+      // Getting item, parsing, changing, stringifying, setting
       let user = localStorage.getItem(this.props.user.email);
       user = JSON.parse(user);
 
@@ -73,10 +88,12 @@ export class Profile extends React.PureComponent{
 
   }
 
+  // On name changes's submit
   editSecondName(event) {
 
     event.preventDefault()
 
+    // Everything just like the 'editName' one
     if (!this.state.wrongSecondName) {
       let user = localStorage.getItem(this.props.user.email);
       user = JSON.parse(user);
@@ -91,6 +108,7 @@ export class Profile extends React.PureComponent{
     }
   }
 
+  // On email change's submit
   editEmail(event) {
     event.preventDefault()
     
@@ -99,8 +117,10 @@ export class Profile extends React.PureComponent{
 
         let user = localStorage.getItem(this.props.user.email);
 
+        // This additionally checks if the new email is already taken
         if (localStorage.getItem(this.state.email) === null) {
 
+          // Everything is just like the othertwo
           user = JSON.parse(user);
 
           user.email = this.state.email;
@@ -122,10 +142,12 @@ export class Profile extends React.PureComponent{
     }
   }
 
+  // Closing modals
   outModals() {
     this.props.outModals();
   }
 
+  // On log out 
   logOut() {
     this.props.logOut();
     this.props.toHome();
@@ -137,6 +159,7 @@ export class Profile extends React.PureComponent{
     const deleteService = this.props.deleteService;
     const user = this.props.user;
 
+    // Mapping every service user's got to render later
     const services =  this.props.user.services.map((element)=>{
       return <ServiceProfile
         key = {serviceCollection.indexOf(element)}
@@ -148,14 +171,15 @@ export class Profile extends React.PureComponent{
       />
     })
 
-    console.log(this.props.user.services);
   return (
     <>
+
+    {/* Name edit modal window */}
     <div id = 'edit_name' 
       className = {'modal_window edit_name ' + (this.props.modals.changeName ? '' : 'hidden')}>
       <form onSubmit = {this.editName} className = 'container'>
         <label className = 'row col-12 mg-b-25'>
-          <span className = 'text-color-light mg-b-15'>Enter new name</span>
+          <span className = 'text-color-light mg-b-15 input_note'>Enter new name</span>
           <input onChange = {this.handleChange} name = 'name' 
               value = {this.state.name}
               className = {'form-control' + (this.state.wrongName ? ' invalid_input' : '')} type = 'text' placeholder = 'New name'></input>
@@ -165,17 +189,19 @@ export class Profile extends React.PureComponent{
           </div>
         </label>
         <div className = 'row col-12 justify-content-between'>
-          <button className = 'btn btn-light col-5' type='submit'>Commit</button>
-          <button onClick = {this.outModals} className = 'btn btn-light col-5' type='button'>Cancel</button>
+          <button className = 'button_project button_project--alternative col-5' type='submit'>Commit</button>
+          <button onClick = {this.outModals} className = 'button_project button_project--alternative col-5' type='button'>Cancel</button>
         </div>
       </form>
     </div>
 
+
+    {/* Second name edit modal window */}
     <div id = 'edit_second_name' 
       className = {'modal_window edit_second_name '+ (this.props.modals.changeSecondName ? '' : 'hidden')}>
          <form onSubmit = {this.editSecondName} className = 'container'>
         <label className = 'row col-12 mg-b-25'>
-          <span className = 'text-color-light mg-b-15'>Enter new second name</span>
+          <span className = 'text-color-light mg-b-15 input_note'>Enter new second name</span>
           <input onChange = {this.handleChange} name = 'secondName' 
             value = {this.state.secondName}
             className = {'form-control' + (this.state.wrongSecondName ? ' invalid_input' : '')} type = 'text' placeholder = 'New second name'></input>
@@ -185,17 +211,18 @@ export class Profile extends React.PureComponent{
           </div>
         </label>
         <div className = 'row col-12 justify-content-between'>
-          <button className = 'btn btn-light col-5' type='submit'>Commit</button>
-          <button onClick = {this.outModals} className = 'btn btn-light col-5' type='button'>Cancel</button>
+          <button className = 'button_project button_project--alternative col-5' type='submit'>Commit</button>
+          <button onClick = {this.outModals} className = 'button_project button_project--alternative col-5' type='button'>Cancel</button>
         </div>
       </form>
     </div>
 
+    {/* Email edit window */}
     <div id = 'edit_email' 
       className = {'modal_window edit_email '+ (this.props.modals.changeEmail ? '' : 'hidden')}>
       <form onSubmit = {this.editEmail} className = 'container'>
         <label className = 'row col-12 mg-b-25'>
-          <span className = 'text-color-light mg-b-15'>Enter new email</span>
+          <span className = 'text-color-light mg-b-15 input_note'>Enter new email</span>
           <input onChange = {this.handleChange} name = 'email' 
               value = {this.state.email}
               className = {'form-control' + (this.state.wrongEmail ? ' invalid_input' : '')} type = 'email' placeholder = 'New email'></input>
@@ -209,12 +236,13 @@ export class Profile extends React.PureComponent{
           </div>
         </label>
         <div className = 'row col-12 justify-content-between'>
-          <button className = 'btn btn-light col-5' type='submit'>Commit</button>
-          <button onClick = {this.outModals} className = 'btn btn-light col-5' type='button'>Cancel</button>
+          <button className = 'button_project button_project--alternative col-5' type='submit'>Commit</button>
+          <button onClick = {this.outModals} className = 'button_project button_project--alternative col-5' type='button'>Cancel</button>
         </div>
       </form>
     </div>
 
+    {/* Profile itself */}
     <div className = 'container-fluid row profile justify-content-center align-items-start'>
       <div className = 'row container-fluid profile_header'>
         <h1 className = 'row col-12 mg-l-15'>{this.props.user.name + ' ' + this.props.user.secondName}</h1>
@@ -245,7 +273,10 @@ export class Profile extends React.PureComponent{
           <h1>Ordered services: </h1>
         </div>
         <div className = 'row col-12 mg-t-25'>
-          <div className = 'col-12 ordered_services'>{services}</div>
+          
+          <div className = 'col-12 ordered_services'>
+            {services}
+          </div>
           
         </div>
       

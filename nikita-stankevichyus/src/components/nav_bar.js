@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+// Component representing element of the navbar
 function NavLink(props) {
   return (
     <li className = {'nav_link' + (props.shown ? '' : ' transparent')}>
@@ -39,6 +41,7 @@ export class NavBar extends React.Component{
           <li className = {'nav_link toggler' + (this.state.barShown ? '' : ' semi-transparent')}>
             <a 
               onClick = {this.handleClick}
+              href = '#'
             >
               <i className={(this.state.barShown ? 'fas fa-times' : 'fas fa-bars') + ' mg-l--15'}/>
             </a>
@@ -73,6 +76,7 @@ export class NavBar extends React.Component{
               text='Services'/>
 
             {
+              // If user logged instead of 'log in' and 'sign up' buttons only 'profile' button will be shown
               this.props.user.loged ?
               <NavLink 
                 onClick = {this.props.toProfile} 

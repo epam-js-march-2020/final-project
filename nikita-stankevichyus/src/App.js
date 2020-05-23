@@ -13,84 +13,100 @@ import { ServicePage } from './components/service_page.js';
 
 
 class App extends React.Component {
-  constructor(props){
-    super(props);
-  }
+  
 
   render() {
-    console.log(this.props.navigation)
-  return (
-    <div className="App body">
+    return (
+      <div className="App body">
 
-      <div 
-        className={this.props.modals.fadeOn ? 
-                  'modal_fade modal_fade_trick' 
-                : 'modal_fade'}>
-
-      </div>
-
-      <SignUp 
-        modals = {this.props.modals}
-        outModals = {this.props.outModals}
-      />
-
-      <LogIn
-        logIn = {this.props.logIn}
-        modals = {this.props.modals}
-        outModals = {this.props.outModals}
-      />
-
-      <AddService 
-        toAddService = {this.props.toAddService}
-        outModals = {this.props.outModals}
-        addService = {this.props.addService}
-        addGuestService = {this.props.addGuestService}
-        modals = {this.props.modals}
-        navigation = {this.props.navigation}
-        user = {this.props.user}
-      />
-
-      <div id = 'home'></div>
-      <header className='header header--fixed container--flex'>
-        <NavBar 
-          user = {this.props.user} 
-          toHome = {this.props.toHome}
-          toProfile = {this.props.toProfile}
-          toServices = {this.props.toServices}
-          toSignUp = {this.props.toSignUp}
-          toLogIn = {this.props.toLogIn}
+        {/* Modal fade that is shown "behind" modal windows during interaction */}
+        <div 
+          className={this.props.modals.fadeOn ? 
+                    'modal_fade modal_fade_trick' 
+                  : 'modal_fade'}>
+        </div>
+        
+        {/* Sign up modal window */}
+        <SignUp 
+          modals = {this.props.modals}
+          outModals = {this.props.outModals}
         />
-      </header>
-      <main className="main">  
-        { this.props.navigation.atHome ? <HomePage />
-          : this.props.navigation.atProfile ? 
-          <Profile 
-            user = {this.props.user}
-            modals = {this.props.modals}
-            deleteService = {this.props.deleteService}
-            changeName = {this.props.changeName}
-            changeSecondName = {this.props.changeSecondName}
-            changeEmail = {this.props.changeEmail}
+
+        {/* Log in modal window */}
+        <LogIn
+          logIn = {this.props.logIn}
+          modals = {this.props.modals}
+          outModals = {this.props.outModals}
+        />
+
+        {/* Service adding modal window */}
+        <AddService 
+          toAddService = {this.props.toAddService}
+          outModals = {this.props.outModals}
+          addService = {this.props.addService}
+          addGuestService = {this.props.addGuestService}
+          modals = {this.props.modals}
+          navigation = {this.props.navigation}
+          user = {this.props.user}
+        />
+
+        {/* Top element for '#home' anchor */}
+        <div id = 'home'></div>
+
+        <header className='header header--fixed container--flex'>
+
+          {/* Horizontal responsive navigation bar */}
+          <NavBar 
+            user = {this.props.user} 
             toHome = {this.props.toHome}
-            toChangeName = {this.props.toChangeName}
-            toChangeSecondName = {this.props.toChangeSecondName}
-            toChangeEmail = {this.props.toChangeEmail}
-            outModals = {this.props.outModals}
-            logOut = {this.props.logOut}               
+            toProfile = {this.props.toProfile}
+            toServices = {this.props.toServices}
+            toSignUp = {this.props.toSignUp}
+            toLogIn = {this.props.toLogIn}
           />
+        </header>
+
+        <main className="main">  
+        { 
+          this.props.navigation.atHome ?
+
+              // Home page
+              <HomePage />
+          : this.props.navigation.atProfile ? 
+
+              // User's profile page
+              <Profile 
+                user = {this.props.user}
+                modals = {this.props.modals}
+                deleteService = {this.props.deleteService}
+                changeName = {this.props.changeName}
+                changeSecondName = {this.props.changeSecondName}
+                changeEmail = {this.props.changeEmail}
+                toHome = {this.props.toHome}
+                toChangeName = {this.props.toChangeName}
+                toChangeSecondName = {this.props.toChangeSecondName}
+                toChangeEmail = {this.props.toChangeEmail}
+                outModals = {this.props.outModals}
+                logOut = {this.props.logOut}               
+              />
           : this.props.navigation.atServices ?
-            <Services 
-              addService = {this.props.toAddService}
-              toService = {this.props.toService}
-              user = {this.props.user}
-            />
-          : <ServicePage
-              navigation = {this.props.navigation}
-              user = {this.props.user}
-              toAddService = {this.props.toAddService}
-            />
+
+              // Services list page
+              <Services 
+                addService = {this.props.toAddService}
+                toService = {this.props.toService}
+                user = {this.props.user}
+                />
+          : 
+              // ServicePage page
+              <ServicePage
+                navigation = {this.props.navigation}
+                user = {this.props.user}
+                toAddService = {this.props.toAddService}
+              />
         }
       </main>
+      
       <footer className = 'footer'>
         <span className = 'text-color-muted mg-b-5 mg-l-5'>Stankevichyus Nikita, React Project. 2020</span>
       </footer>

@@ -8,6 +8,12 @@ import { defaultState } from '../default_state';
 
 export const reducerNavigation = (state = defaultState.navigation, action) => {
   
+  /*
+   * If corresponding parameter is true page is shown
+   * bufferService field is used to deliver service info to another part of the programm
+  */
+
+
   switch (action.type) {
     case TO_HOME: return {
       atHome: true,

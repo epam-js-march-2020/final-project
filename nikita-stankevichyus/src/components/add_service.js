@@ -1,7 +1,7 @@
 import React from 'react';
 import { validateNumber } from './validation';
 
-
+// State before any changes
 const initialState = {
   date: '',
   number: '',
@@ -11,8 +11,7 @@ const initialState = {
 export class AddService extends React.PureComponent {
   constructor(props) {
     super(props);
-
-  
+    
     this.state = initialState;
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,6 +19,7 @@ export class AddService extends React.PureComponent {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // Formatting date string to YYMMDD format for 'input' 'min' attribute
   formatDate(date) {
 
     var dd = date.getDate();
@@ -34,6 +34,7 @@ export class AddService extends React.PureComponent {
     return yy + '-' + mm + '-' + dd;
   }
 
+  // When canceled
   handleClick(event) {
     this.setState(this.initialState)
     this.props.outModals();
@@ -43,11 +44,17 @@ export class AddService extends React.PureComponent {
   handleSubmit(event) {
     event.preventDefault();
 
+    // If input is valid
     if (!this.state.wrongNumber) {
+
+      // If user is logged
       if (this.props.user.loged) {
 
+        // Dispatching action
         this.props.addService(this.props.navigation.bufferService.name, this.state.date);
 
+
+        // Adding in DB by get, parse, change, stringify pattern
         let user = localStorage.getItem(this.props.user.email);
         user = JSON.parse(user);
         user.services.push({
@@ -61,13 +68,19 @@ export class AddService extends React.PureComponent {
         this.setState(this.initialState)
         this.props.outModals();
       
+        // If we are dealing with guest
       } else {
+
+        // Dispatching action
         this.props.addGuestService(this.props.navigation.bufferService.name, this.state.date, this.state.number)
+
+        // Adding in DB by get, parse, change, stringify pattern
 
         let guests = localStorage.getItem('guests');
 
         guests = JSON.parse(guests);
 
+        
         if(guests[this.state.number]){
 
           guests[this.state.number].services ? 
@@ -75,6 +88,7 @@ export class AddService extends React.PureComponent {
               name: this.props.navigation.bufferService.name,
               date: this.state.date,
             })
+            // If if is the first time the guest orders services we should initialize first
           : guests[this.state.number].services = [{
               name: this.props.navigation.bufferService.name,
               date: this.state.date,
@@ -94,24 +108,26 @@ export class AddService extends React.PureComponent {
         localStorage.removeItem('guests');
         localStorage.setItem('guests', guests);
 
+        // Clearing state back to initial state
         this.setState(this.initialState)
         this.props.outModals();
       }
     }
   }
 
-
+  
   handleChange(event) {
 
+    // Saving current value in the state
     this.setState({
       [event.target.name]: event.target.value,
     })
 
-    
+    // Find all non-numericals 
     let nonNumericals = /\D/ig;
     
     
-    
+    // If input is number, non-numerical characters are prohibited
     if (event.target.name === 'number') {
       this.setState({
         number: event.target.value.replace(nonNumericals, ''),
@@ -128,7 +144,7 @@ export class AddService extends React.PureComponent {
       <div id='add_service' className = {'add_service modal_window ' + (this.props.modals.addService ? '' : ' hidden') }> 
         <form onSubmit = {this.handleSubmit} id = 'add_service_form' className = 'container'>
           <label className = 'row'>
-            <div className = 'mg-b-5'>Choose desirable date</div>
+            <div className = 'mg-b-5 input_note'>Choose desirable date</div>
             <input onChange = {this.handleChange} min = {this.formatDate(date)} 
                    type='date' 
                    className = 'form-control'
@@ -137,9 +153,11 @@ export class AddService extends React.PureComponent {
                    required ></input>
           </label>
           {
+
+            // If user is not logged (dealing with guest) we'll additionally request telephone number
             this.props.user.loged ? <></>
             : <label className = 'row mg-t-15'>
-                  <div className = 'mg-b-5'>Leave your telephone number</div>
+                  <div className = 'mg-b-5 input_note'>Leave your telephone number</div>
                   <input 
                    onChange = {this.handleChange}
                    value={this.state.number}

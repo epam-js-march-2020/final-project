@@ -11,7 +11,7 @@ import { createStore, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { combineReducers } from 'redux';
 
-
+// Importing authentication actions
 import { 
   logIn, 
   logOut, 
@@ -24,7 +24,7 @@ import {
   changeEmail 
 } from './actions/auth_actions';
 
-
+// Importing navigation actions
 import { 
   toHome, 
   toProfile, 
@@ -32,6 +32,7 @@ import {
   toService 
 } from './actions/navigation_actions';
 
+// Importing modal actions
 import { 
   toSignUp, 
   toLogIn, 
@@ -41,15 +42,12 @@ import {
   toChangeEmail, 
   outModals } from './actions/modal_actions';
 
-
+// Importing reducers
 import { reducerAuth } from './reducers/auth_reducer';
 import { reducerNavigation } from './reducers/navigation_reducer';
 import { reducerModals } from './reducers/modal_reducer';
 
-import { defaultState } from './default_state';
-
-
-
+// Combining reducers accordingly to their "domains"
 const rootReducer = combineReducers({
   user: reducerAuth,
   navigation: reducerNavigation,
@@ -59,6 +57,7 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer);
 
+// Mapping state to props as it is
 const mapStateToProps = (state) => {
   return {
     navigation: state.navigation,
@@ -67,6 +66,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+// Mapping actions to props as they are
 const mapActionsToProps = (dispatch) => {
   return {
     addService: bindActionCreators(addService, dispatch),
@@ -92,10 +92,16 @@ const mapActionsToProps = (dispatch) => {
   }
 }
 
+// Connecting redux and react via wrapping
 const WrappedApp = connect(mapStateToProps, mapActionsToProps)(App);
 
+// Fetching to DB company info (contacts, decsription)
 localStorage.setItem('companyInfo', JSON.stringify(companyInfo));
+
+// Fetching to DB services list 
 localStorage.setItem('services', JSON.stringify(serviceList));
+
+// Initializing guests object in local storage
 localStorage.setItem('guests', JSON.stringify({})); 
 
 ReactDOM.render(

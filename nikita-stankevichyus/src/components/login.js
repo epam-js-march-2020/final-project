@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Initial state
 const clearState = {
   email: '',
   password: '',
@@ -7,6 +8,7 @@ const clearState = {
   wrongPassword: false,
 }
 
+// Capitalizes the first letter in the string
 const capitalizeFirst = (string) =>{
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -21,8 +23,12 @@ export class LogIn extends React.Component {
   }
 
   handleChange(event) {
+
+    // Saving current inputs' value
     this.setState({
       [event.target.name]: event.target.value,
+
+      // e.g. ['wrongName']
       ['wrong' + capitalizeFirst(event.target.name)]: false,
     })
 
@@ -34,9 +40,15 @@ export class LogIn extends React.Component {
 
     let user = localStorage.getItem(this.state.email);
     
+    // If such account exists
     if (user !== undefined && user !== '' && user !== null) {
+
       user = JSON.parse(user);
+
+      // If password is right
       if(user['password'] === this.state.password){
+
+        // Fetching info from DB to state
         this.props.logIn(
           user['name'],
           user['secondName'],
@@ -44,6 +56,7 @@ export class LogIn extends React.Component {
           user['services'],
         );
         
+        // Clearing state
         this.setState(clearState);
         this.props.outModals();
 
@@ -60,8 +73,9 @@ export class LogIn extends React.Component {
     
   }
 
+  // When canceled
   handleClick(event) {
-    this.setState({ clearState });
+    this.setState(clearState);
     this.props.outModals(); 
   }
 
@@ -73,7 +87,7 @@ export class LogIn extends React.Component {
         <form onSubmit = {this.handleSubmit} id='sign_up_form container'>
 
             <label className = 'row mg-b-15'>
-              <div className = 'mg-b-5'>Enter your email</div>
+              <div className = 'mg-b-5 input_note'>Enter your email</div>
               <input onChange = {this.handleChange} name = 'email' 
                 className = {'form-control' + (this.state.wrongEmail ? ' invalid_input' : '')} 
                 type = 'email'
@@ -87,7 +101,7 @@ export class LogIn extends React.Component {
             </label>
 
             <label className = 'row mg-b-15'>
-              <div className = 'mg-b-5 text-header'>Enter your password</div>
+              <div className = 'mg-b-5 text-header input_note'>Enter your password</div>
               <input onChange = {this.handleChange} name = 'password' 
                 className = {'form-control' + (this.state.wrongPassword ? ' invalid_input' : '')} 
                 type = 'password'
