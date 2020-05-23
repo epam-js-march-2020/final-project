@@ -39,9 +39,9 @@ export default class Footer extends React.Component {
               <div><a href={"mailto:" + this.state.EmailOfBusiness} className="text-info">📧 {this.state.EmailOfBusiness}</a> </div>
             </Col>
             <Col className="text-center">
-              <div><a href={"https://www.vk.com" + this.state.vkSocialAddress} className="text-secondary"><FontAwesomeIcon icon={ faVk } size="1x" /> {this.state.vkSocialAddress}</a></div>
-              <div><a href={"https://www.instagram.com" + this.state.InstagramSocialAddress} className="text-secondary"><FontAwesomeIcon icon={ faInstagramSquare } size="lg" /> {this.state.InstagramSocialAddress}</a></div>
-              <div><a href={"https://www.facebook.com" + this.state.FacebookSocialAddress} className="text-secondary"><FontAwesomeIcon icon={ faFacebookSquare } size="lg" /> {this.state.FacebookSocialAddress}</a></div></Col>
+              <div><a href={"https://www.vk.com" + this.state.vkSocialAddress}  target="_blank" className="text-secondary"><FontAwesomeIcon icon={ faVk } size="1x" /> {this.state.vkSocialAddress}</a></div>
+              <div><a href={"https://www.instagram.com" + this.state.InstagramSocialAddress}  target="_blank" className="text-secondary"><FontAwesomeIcon icon={ faInstagramSquare } size="lg" /> {this.state.InstagramSocialAddress}</a></div>
+              <div><a href={"https://www.facebook.com" + this.state.FacebookSocialAddress}  target="_blank" className="text-secondary"><FontAwesomeIcon icon={ faFacebookSquare } size="lg" /> {this.state.FacebookSocialAddress}</a></div></Col>
           </Row>
         </Container>
       </div>

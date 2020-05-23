@@ -68,7 +68,8 @@ class App extends React.Component {
           </Route>
           <Route
             path="/services/:id"
-            render={(props) => <Service {...props} isAuth={this.state.auth} />}
+            render={(props) => <Service {...props} isAuth={this.state.auth} userData={this.state.userData}  handleLoginLogout={this.handleLoginLogout}
+                                        setData={this.setData}/>}
           />
           <Route path="/services">
             <Services />

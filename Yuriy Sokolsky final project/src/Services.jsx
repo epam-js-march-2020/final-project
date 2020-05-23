@@ -1,9 +1,6 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
+import {Container, Row, Col, Modal, Button ,Form} from "react-bootstrap";
 import $ from "jquery";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 import "./componentStyles/servicesContent.css";
 import "./componentStyles/fancyBorder.css";
 import { Link } from "react-router-dom";

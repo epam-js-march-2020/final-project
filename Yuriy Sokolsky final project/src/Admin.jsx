@@ -1,12 +1,7 @@
 import React, { useState } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Alert from "react-bootstrap/Alert";
-import Table from "react-bootstrap/Table";
-import Modal from "react-bootstrap/Modal";
+
+import {Container, Row, Col, Modal, Button ,Form,Alert,Table} from "react-bootstrap";
+
 import $ from "jquery";
 
 //::TODO  удаление и редактирование
