@@ -9,7 +9,6 @@ import User from './User';
 import Appointment from './Appointment'
 import NotFound from './NotFound';
 
-import pic from '../../../img/stuff/3.jpg'
 import { connect } from 'react-redux';
 
 
@@ -23,8 +22,6 @@ class Main extends React.Component {
 
                     <Route exact path='/services' component={Services} />
                     <Route path='/services/:name' component={Services} />
-
-                    <Route exact path='/craft' component={Craft} />
                     <Route exact path='/contacts' component={Contacts} />
 
                     <Route exact path='/user'  render={() => (
@@ -44,18 +41,6 @@ class Main extends React.Component {
         )
     }
     
-}
-  
-  
-class Craft extends React.Component{
-  
-    render() {
-      return (
-        <div className='container_craft'>
-          <img alt='stuff' className='stuff_image' src={pic} />
-        </div>
-      )
-    }
 }
 
 const propMap = ({user}) => ( {user} )

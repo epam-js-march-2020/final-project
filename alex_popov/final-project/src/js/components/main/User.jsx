@@ -10,6 +10,7 @@ import * as actions from '../../actions/actions'
 class User extends React.Component {
 
     render() {
+        console.log( JSON.parse( localStorage.getItem('users')))
         return (
             <>
             <div className="container_main">
@@ -28,11 +29,6 @@ const propsMap = (user) => (
 
 const actionsMap = (dispatch) =>({
     logout: () => dispatch(actions.logOut())
-})
-
-// const actionsMap = (dispatch) => ({
-//     activate: () => dispatch(activate()),
-//     login: (user) => dispatch(login(user))
-//   });
+});
 
 export default connect(propsMap, actionsMap)( User );

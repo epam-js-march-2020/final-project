@@ -61,13 +61,13 @@ class Login extends WithFormChecker {
     login(phone, pass) {
         const users = JSON.parse( localStorage.getItem('users'));
         const userId = this.phoneChecker(users, phone);
-        
+        console.log(users[userId])
         if (userId !== -1) {
             if ( users[userId].pass === pass) {
                 
                 const user = {
                     ...users[userId],
-                    appointments: users[userId].appointments.slice(),
+                    // appointments: users[userId].appointments.slice(),
                     code: this.cookier(userId)
                 }
 

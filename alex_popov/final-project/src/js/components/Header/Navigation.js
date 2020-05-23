@@ -29,9 +29,9 @@ const Navigation = () => {
                 <NavLink 
                     activeClassName='header_link-active' 
                     className='header_link' 
-                    to='/craft'
+                    to='/appointment'
                 >
-                    craft
+                    Booking
                 </NavLink>
                 <NavLink 
                     activeClassName='header_link-active' 

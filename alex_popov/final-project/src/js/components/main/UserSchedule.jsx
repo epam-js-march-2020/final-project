@@ -11,6 +11,7 @@ class UserSchedule extends WithFormChecker {
             id: this.props.user.id,
             date: '',
             time: '',
+            service: '',
             schedule: []
         }
 
@@ -80,12 +81,14 @@ class UserSchedule extends WithFormChecker {
     }
 
     onClickDeleteItem(ev) {
-        console.log('asdff')
-        console.log(ev.currentTarget.dataset)
-        const {date, time} =ev.currentTarget.dataset;
+        // console.log('asdff')
+        // console.log(ev.currentTarget.dataset)
+        const {date, time, service} =ev.currentTarget.dataset;
+        // console.log(date, time, service)
         this.setState({
             date,
-            time
+            time,
+            service
         })
 
         // const schedule = JSON.parse( localStorage.getItem('appointments') );
@@ -98,16 +101,42 @@ class UserSchedule extends WithFormChecker {
     }
 
     onClickDeleteModal() {
-        console.log("delte")
+        // console.log("delte")
+
+        const schedule = JSON.parse( localStorage.getItem('appointments') );
+        console.log(schedule)
+        const dayId = schedule.findIndex( (el) => {
+            return el.date === this.state.date
+        })
+        if (dayId !== -1) {
+            schedule[dayId].appointments[this.state.time] = 0;
+            localStorage.setItem('appointments', JSON.stringify(schedule));
+            this.setState({
+                schedule: this.filterSchedule(this.state.id, schedule),
+                time: '',
+                date: '',
+                service: ''
+            })
+        }
+        // console.log(schedule[dayId].appointments[this.state.time])
     }
+
     onClickCancelModal() {
         console.log('cancel')
+        this.setState({
+            date: '',
+            service: '',
+            time: ''
+        })
     }
 
     render() {
         // console.log(this.props)
         console.log(this.state)
-        const list = this.getAppointments()
+        const list = this.getAppointments();
+        const month = this.state.date ? (new Date(this.state.date)).getMonth() : '';
+        const date = this.state.date ? (new Date(this.state.date)).getDate() : '';
+        console.log(month)
         // console.log(list)
         if (list) {
             return (
@@ -118,7 +147,17 @@ class UserSchedule extends WithFormChecker {
                         list
                     }
                 </div>
-                {this.state.date ? <DeleteConfirmation month='month' date='date' time='time' type='type' onCancel={this.onClickCancelModal} onDelte={this.onClickDeleteModal} />: null}
+                {
+                    this.state.date ? 
+                        <DeleteConfirmation 
+                            month={this.monthFull[month]} 
+                            date={date} 
+                            time={this.state.time} 
+                            type={this.state.service} 
+                            onCancel={this.onClickCancelModal} 
+                            onDelte={this.onClickDeleteModal} 
+                        /> 
+                    : null}
                 </>
             )
         } else {
@@ -132,18 +171,22 @@ class DeleteConfirmation extends React.Component {
     render() {
         const {month, date, time, type, onCancel, onDelte} = this.props
         return(
+            <>
+            <div className='deleteConfirmation_background'></div>
             <div className="deleteConfirmation_container">
+                
                 <div className='deleteconrifmation_info'>
                     <h3 className='delteConfirmation_header'>You are roing to delete your appointment.</h3>
                     <p>{type}</p>
                     <p>the {date} of {month} at {time}</p>
-                    <div className='delteConfirmation_buttons'>
-                        <button onClick={onDelte} >Delete</button>
-                        <button onClick={onCancel} >Cancel</button>
+                    <div className='delteConfirmation_buttons form_buttonsContainer'>
+                        <button onClick={onDelte} className='form_button' >Delete</button>
+                        <button onClick={onCancel} className='form_button' >Cancel</button>
                     </div>
 
                 </div>
             </div>
+            </>
         )
         
     }
@@ -154,9 +197,9 @@ function Appointment({month, date, time, service, delHandle, dayId}) {
         <div key={`${month}${date}${time}`} className='appointments_item'>
 
             <div className="appointments_information">
-                <h3 className='appoints_header'>the {date} of {month}</h3>
-                <p className='appointments_day'>{time} hours</p>
-                <p className='appointments_day'>{service}</p>
+                <h3 className='appoints_header'>the {date} of {month} at {time}:00</h3>
+                {/* <p className='appointments_day'>{time} hours</p> */}
+                <p className='appointments_day'>Service type: {service}</p>
             </div>
 
             <div 
@@ -164,6 +207,7 @@ function Appointment({month, date, time, service, delHandle, dayId}) {
                 className='delete_icon'
                 data-date={dayId}
                 data-time={time}
+                data-service={service}
             >
                 <DelIcon />
             </div>

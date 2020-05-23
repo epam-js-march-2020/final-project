@@ -2,7 +2,15 @@ export function loadData() {
     const users = localStorage.getItem('users');
     // console.log(JSON.parse(users)[0].apointmets )
     if (!users) {
-        localStorage.setItem('users', JSON.stringify([]))
+        const startValue = [{
+          code: '',
+          id: 'admin',
+          name: 'Den',
+          pass: '77777',
+          phone: '7777777777',
+          appointments: []
+        }]
+        localStorage.setItem('users', JSON.stringify(startValue));
         console.log( 'users arr loaded in the LS' )
     }
 
@@ -14,13 +22,23 @@ export function loadData() {
         localStorage.setItem('appointments', JSON.stringify(list))
     } else {
       // console.log( listChecker(JSON.parse(appointments)) )
+      const data = JSON.parse(appointments);
+      const firstDay = new Date(data[0].date)
+      const now = new Date()
+      if ( firstDay.getDate() !== (now.getDate() +1) ) {
+        console.log(firstDay.getFullYear(), 'The schedule is updated')
+        const newData = listFiller( listChecker(JSON.parse(appointments)) );
+        localStorage.setItem('appointments', JSON.stringify(newData))
+
+      }
+      
 
       // const newData = listFiller( listChecker(JSON.parse(appointments)) );
-      // console.log(newData)
+      // localStorage.setItem('appointments', JSON.stringify(newData))
+      // console.log( JSON.parse( JSON.stringify( newData )) )
 
       // console.log(listFiller( listChecker(JSON.parse(appointments)) ) )
     }
-    // console.log( JSON.parse(localStorage.getItem('appointments')) )
 }
 
 function createClearDay() {
@@ -31,7 +49,7 @@ function createClearDay() {
     return day;
   }
   
-  function createList() {
+function createList() {
     const list = []
     const now = new Date();
     for (let i = 1; i < 31; i++) {
@@ -42,7 +60,27 @@ function createClearDay() {
       list.push(day)
     }
     return list
-  }
+}
+
+function listFiller(list) {
+    if (list.length < 30) {
+        const last = new Date( list[list.length - 1].date )
+        const year = last.getFullYear();
+        const month = last.getMonth();
+        const date = last.getDate();
+    
+        for (let i = 1; list.length < 30; i++) {
+            
+            const day = {
+            date: new Date(year, month, date + i),
+            appointments: createClearDay()
+            }
+            list.push(day);
+        }
+    }
+    // console.log(new Date( list[0].date ).getDate(), new Date( list[0].date ).getMonth())
+    return list;
+}
   
   // function createList() {
   //   const list = []
@@ -59,37 +97,18 @@ function createClearDay() {
 
 
   
-// function listChecker(list) {
-//     const now = new Date();
-//     const newList = []
+function listChecker(list) {
+    const now = new Date();
+    const newList = []
   
-//     list.forEach( (el) => {
-//       const date = new Date( el.date);
-//       // console.log( date )
-//       if (date.getMonth() >= now.getMonth() && date.getFullYear() >= now.getFullYear()) {
-//         if ( date.getDate() > now.getDate() || date.getMonth() > now.getMonth() || date.getFullYear() > now.getFullYear())
-//         newList.push(el)
-//       }
-//     })
-//     return newList;
-// }
+    list.forEach( (el) => {
+      const date = new Date( el.date);
+      // console.log( date )
+      if (date.getMonth() >= now.getMonth() && date.getFullYear() >= now.getFullYear()) {
+        if ( date.getDate() > now.getDate() || date.getMonth() > now.getMonth() || date.getFullYear() > now.getFullYear())
+        newList.push(el)
+      }
+    })
+    return newList;
+}
   
-// function listFiller(list) {
-//     if (list.length < 30) {
-//         const last = new Date( list[list.length - 1].date )
-//         const year = last.getFullYear();
-//         const month = last.getMonth();
-//         const date = last.getDate();
-    
-//         for (let i = 1; list.length < 30; i++) {
-            
-//             const day = {
-//             date: new Date(year, month, date + i),
-//             appointments: createClearDay()
-//             }
-//             list.push(day);
-//         }
-//     }
-//     // console.log(new Date( list[0].date ).getDate(), new Date( list[0].date ).getMonth())
-//     return list;
-// }

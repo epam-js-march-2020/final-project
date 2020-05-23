@@ -140,8 +140,9 @@ class Appointment extends WithFormChecker {
                 // console.log(this.props)
                 this.setState({
                     list: schedule.slice(),
-                    date: date
-                })
+                    date: date,
+                    time: 0
+                });
 
                 this.showMessage(date, time)
             }
@@ -174,7 +175,7 @@ class Appointment extends WithFormChecker {
         return (
             <>
             <div className='container pt-xxxl'>
-                <h2>Make an appointment</h2>
+                <h2>Book time</h2>
                 <h3>Choose a day</h3>
                 <div id='date' onClick={this.onClickContainer} className='appointments_dateContainer'>
                     {this.monthSchedule()}
@@ -238,12 +239,15 @@ class ServiceSelect extends React.Component {
         const {onChangeService} = this.props
         // console.log(onChangeService)
         return (
-            <select id='serviceType' onChange={onChangeService} defaultValue={this.props.activeService}>
-                <option>choose service</option>
+            <>
+            <label className='form_label' htmlFor='phone'>Choose a service</label>
+            <select className='form_input' id='serviceType' onChange={onChangeService} defaultValue={this.props.activeService}>
+                <option className='input_options'>choose service</option>
                 {Object.keys(this.services).map( (el) => {
-                    return <option key={el} value={el}>{this.services[el].name}</option>
+                    return <option className='input_options' key={el} value={el}>{this.services[el].name}</option>
                 })}
             </select>
+            </>
         )
     }
 }
