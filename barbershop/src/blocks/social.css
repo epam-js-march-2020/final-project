@@ -1,0 +1,44 @@
+.social {
+    width: 100%;
+    font-family: 'Wallpoet', cursive;
+    font-size: 24px;
+    color:white;
+}
+
+.social__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 700px;
+    margin: auto;
+}
+
+.social__link {
+    color: white;
+}
+
+.social__link:hover {
+    box-shadow: 0px 1px 20px 4px white;
+}
+
+
+.social__link svg {
+    height: 60px;
+    width: 60px;
+}
+
+
+
+@media screen and (max-width: 420px) {
+    .social__link svg {
+        height: 30px;
+        width: 30px;
+    }
+    .social__list {
+        max-width: 300px;
+        margin: auto;
+    }
+   }
