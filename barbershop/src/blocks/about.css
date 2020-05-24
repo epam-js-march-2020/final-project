@@ -1,0 +1,84 @@
+.about {
+    position: relative;
+    height: calc(100vh - 144px);
+    background-image: url(../images/about-bg2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Special Elite', cursive;
+    font-size: 24px;
+}
+
+.about__wrapper {
+    max-width: 1146px;
+    margin: auto;
+    padding-top: 30px;
+}
+
+
+.about__title {
+    margin: 0;
+    width: max-content;
+    line-height: 45px;
+    background-color: white;
+    color: black;
+}
+
+
+.about__text--main {
+    background-color: white;
+    color: black;
+}
+
+.about__text--main, .about__text--description {
+    width: max-content;
+    line-height: 34px;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.about__text--description {
+    max-width: 700px;
+}
+.about__text--description span {
+    margin-top: 5px;
+    background-color: white;
+    color: black;
+}
+
+
+
+
+@media screen and (max-width: 1280px) {
+    .about__wrapper {
+        width: calc(100% - 150px);
+    }
+}
+
+
+@media screen and (max-width: 1024px) {
+ .about__wrapper {
+    width: calc(100% - 60px);
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .about__wrapper {
+        width: calc(100% - 40px);
+        text-align: center;
+       }
+    .about__title, 
+    .about__text--main, .about__text--description {
+        width: 100%;
+        max-width: initial;
+    }
+}
+
+
+@media screen and (max-width: 450px) {
+    .about {
+        height: calc(100vh - 60px);
+        font-size: 18px;
+    }
+}
