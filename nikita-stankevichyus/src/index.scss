@@ -323,6 +323,15 @@ a{
   }
 }
 
+.header--hidden {
+  @media (max-width: 1050px){
+    transform: rotate(180deg) translateY(300px);
+    .toggler {
+      transform: rotate(180deg);
+    }
+  }
+}
+
 .sign_up {
   padding: 35px;
   // height: 550px;
@@ -595,8 +604,11 @@ a{
   * {
     color: map-get(map-get($colors, header), text-main);
   }
+
+
   background-color: map-get(map-get($colors, header), background);
   height: 250px;
   width: 250px;
   z-index: 10;
 }
+

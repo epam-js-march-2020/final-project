@@ -2,7 +2,9 @@ import {
   TO_HOME, 
   TO_PROFILE, 
   TO_SERVICES, 
-  TO_SERVICE 
+  TO_SERVICE,
+  HIDE_BAR,
+  SHOW_BAR
 } from '../actions_types/actions_types.js';
 
 // Dispatched when user/guest opens home page
@@ -31,5 +33,17 @@ export function toService(service) {
 export function toServices() {
   return {
     type: TO_SERVICES,
+  }
+}
+
+export function hideBar() {
+  return {
+    type: HIDE_BAR,
+  }
+}
+
+export function showBar() {
+  return {
+    type: SHOW_BAR,
   }
 }

@@ -4,6 +4,7 @@ export const defaultState = {
     atProfile: false,
     atServices: false,
     atService: false,
+    barShown: true,
     bufferService: {},
   },
   user: {

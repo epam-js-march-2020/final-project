@@ -53,7 +53,9 @@ class App extends React.Component {
         {/* Top element for '#home' anchor */}
         <div id = 'home'></div>
 
-        <header className='header header--fixed container--flex'>
+        <header 
+          className= {'header header--fixed container--flex' 
+                      + (this.props.navigation.barShown ? '' : ' header--hidden')}>
 
           {/* Horizontal responsive navigation bar */}
           <NavBar 
@@ -63,6 +65,9 @@ class App extends React.Component {
             toServices = {this.props.toServices}
             toSignUp = {this.props.toSignUp}
             toLogIn = {this.props.toLogIn}
+            hideBar = {this.props.hideBar}
+            showBar = {this.props.showBar}
+            navigation = {this.props.navigation}
           />
         </header>
 

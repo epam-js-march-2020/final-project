@@ -29,7 +29,9 @@ import {
   toHome, 
   toProfile, 
   toServices, 
-  toService 
+  toService,
+  hideBar,
+  showBar,
 } from './actions/navigation_actions';
 
 // Importing modal actions
@@ -82,6 +84,8 @@ const mapActionsToProps = (dispatch) => {
     toProfile: bindActionCreators(toProfile, dispatch),
     toServices: bindActionCreators(toServices, dispatch),
     toService: bindActionCreators(toService, dispatch),
+    hideBar: bindActionCreators(hideBar, dispatch),
+    showBar: bindActionCreators(showBar, dispatch),
     toSignUp: bindActionCreators(toSignUp, dispatch), 
     toLogIn: bindActionCreators(toLogIn, dispatch),
     toAddService: bindActionCreators(toAddService, dispatch),
