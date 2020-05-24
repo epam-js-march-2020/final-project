@@ -332,6 +332,15 @@ a{
   }
 }
 
+.header--hidden--logged {
+  @media (max-width: 1050px){
+    transform: rotate(180deg) translateY(292px);
+    .toggler {
+      transform: rotate(180deg);
+    }
+  }
+}
+
 .sign_up {
   padding: 35px;
   // height: 550px;

@@ -55,7 +55,10 @@ class App extends React.Component {
 
         <header 
           className= {'header header--fixed container--flex' 
-                      + (this.props.navigation.barShown ? '' : ' header--hidden')}>
+                      + (this.props.navigation.barShown ? '' 
+                      : this.props.user.logged ?
+                        ' header--hidden--logged'
+                      : ' header--hidden')}>
 
           {/* Horizontal responsive navigation bar */}
           <NavBar 
