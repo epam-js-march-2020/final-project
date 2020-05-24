@@ -40,17 +40,6 @@ class App extends React.Component {
   }
 }
 
-// const mapStateToProps = state => ({
-//   currentUser: state.login
-// })
-
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     logOut: () => dispatch(logoutRequest())
-//   }
-// }
-
 
 
 
