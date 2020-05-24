@@ -10,12 +10,18 @@ app.set("port", process.env.PORT || 80);
 const mongodb = require("mongodb");
 const dburl = "mongodb://Admin:-9wm4GEKqnEnRq@ds062818.mlab.com:62818/haircut";
 const mongo = mongodb.MongoClient;
+const querystring = require("querystring");
 
 const moment = require("moment");
-
+const { ObjectId } = require("mongodb");
 const sha1 = require("sha1");
 const cryptoRandomString = require("crypto-random-string");
 
+const sessionToken =  getSha1000Times(cryptoRandomString({
+  length: Math.floor(Math.random() * 100) + 15,
+})); //sessionToken only for example,it must be unique
+cookieParser = require("cookie-parser");
+app.use(cookieParser());
 let server = app.listen(app.get("port"), function () {
   //identification
 
@@ -25,18 +31,18 @@ let server = app.listen(app.get("port"), function () {
       "  Ctrl-C to terminate"
   );
 });
-app.get("/servicesList", function (req, res) {
+app.get("/services-list", function (req, res) {
   mongo.connect(dburl, function (err, db) {
     db.collection("services")
       .find()
       .toArray(function (err, results) {
-        res.json(results);
         db.close();
+        res.json(results);
       });
   });
 });
 
-app.get("/mastersList", function (req, res) {
+app.get("/masters-list", function (req, res) {
   mongo.connect(dburl, function (err, db) {
     db.collection("masters")
       .find()
@@ -47,8 +53,8 @@ app.get("/mastersList", function (req, res) {
   });
 });
 
-app.post("/AppointmentsByMasterDateAndTime", function (req, res) {
-  const { selectedMasterID, date, serviceID } = req.body;
+app.get("/appointments-by-master-and-date", function (req, res) {
+  const { selectedMasterID, date, serviceID } = req.query;
   mongo.connect(dburl, function (err, db) {
     db.collection("appointment").findOne(
       { masterID: parseInt(selectedMasterID) },
@@ -74,7 +80,7 @@ app.post("/AppointmentsByMasterDateAndTime", function (req, res) {
   });
 });
 
-app.get("/servicesList/:id", function (req, res) {
+app.get("/services-list/:id", function (req, res) {
   mongo.connect(dburl, function (err, db) {
     db.collection("services").findOne(
       { id: parseInt(req.params.id) },
@@ -86,61 +92,13 @@ app.get("/servicesList/:id", function (req, res) {
   });
 });
 
-app.post("/adminLogin", function (req, res) {
-  if (checkAdminLoginPas(req.body.login, req.body.password)) {
-    mongo.connect(dburl, function (err, db) {
-      let allCollections = [];
-      db.listCollections().toArray(function (err, collInfos) {
-        collInfos.forEach((eachCollectionDetails) => {
-          allCollections.push(eachCollectionDetails.name);
-        });
-        res.json(allCollections);
-      });
-    });
-  } else res.json(false);
-});
 
-app.get("/collection/:name", function (req, res) {
-  mongo.connect(dburl, function (err, db) {
-    db.collection(req.params.name)
-      .find()
-      .toArray(function (err, results) {
-        res.json(results);
-        db.close();
-      });
-  });
-});
 
-app.post("/collectionAddNewItem", function (req, res) {
-  if (
-    checkAdminLoginPas(req.body.loginPass.login, req.body.loginPass.password)
-  ) {
-    Object.keys(req.body.newElement).forEach(function (el) {
-      if (!/[^\d\.]/g.test(req.body.newElement[el]))
-        req.body.newElement[el] = parseFloat(req.body.newElement[el]);
-    });
-    mongo.connect(dburl, function (err, db) {
-      db.collection(req.body.collectionName).insertOne(
-        req.body.newElement,
-        function (err, result) {
-          console.log(
-            `В таблицу ${req.body.collectionName} добавлена запись с id ${req.body.newElement.id}  `
-          );
-          db.close();
-          res.json(req.body.newElement.id);
-        }
-      );
-    });
-  } else res.json(false);
-});
 
-app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "static/index.html"));
-});
 
 app.post("/registration", function (req, res) {
   const { login, password } = req.body;
-  checkUserExist(login)
+  checkUserExistAndReturnNew(login)
     .then((newId) => {
       const hashedPassword = hashPassword(password);
       const newUser = {
@@ -175,11 +133,6 @@ app.post("/registration", function (req, res) {
     });
 });
 
-function checkAdminLoginPas(login, pas) {
-  if (login === "admin" && pas === "admin") {
-    return true;
-  } else return false;
-}
 app.post("/login", function (req, res) {
   const { login, password } = req.body;
   checkUserLogPas(login, password)
@@ -190,58 +143,62 @@ app.post("/login", function (req, res) {
           { $set: { last_login: moment().format() } }
         );
       });
-      delete result["password"];
-      result.password = password;
-      delete result["salt"];
-      res.json(result);
+      res.cookie("_id=" + result._id + "; HttpOnly");
+      res.cookie("sessionToken=" + sessionToken + "; HttpOnly"); //sessionToken only for example,it must be unique
+      res.json(removePasswordAndSalt(result));
     })
     .catch((error) => {
       res.json(error);
     });
 });
 
-app.post("/updateProfile", function (req, res) {
-  const { login, password } = req.body;
-  const { name, surname, phone, email } = req.body;
-  checkUserLogPas(login, password)
-    .then((result) => {
-      mongo.connect(dburl, function (err, db) {
-        db.collection("users")
-          .findOneAndUpdate(
-            { _id: result._id },
-            {
-              $set: {
-                name: name,
-                surname: surname,
-                phone: phone,
-                email: email,
-              },
-            },
-            { returnOriginal: false }
-          )
-          .then((doc) => {
-            delete doc.value["password"];
-            doc.value.password = password;
-            delete doc.value["salt"];
-            res.json(doc.value);
-          });
+app.post("/logout", function (req, res) {
+  const { sessionToken, _id } = req.cookies;
+  checkSessionToken(_id, sessionToken)
+      .then((user) => {
+        res.clearCookie('_id');
+        res.clearCookie('sessionToken');
+        res.json("logout");
+      })
+      .catch((error) => {
+        res.json(error);
       });
-    })
-    .catch((error) => {
-      res.json(error);
-    });
 });
-app.post("/sendNewAppointment", function (req, res) {
-  console.log(req.body);
+
+app.put("/update-profile", function (req, res) {
+  const { name, surname, phone, email } = req.query;
+  const { sessionToken, _id } = req.cookies;
+  checkSessionToken(_id, sessionToken)
+      .then((user) => {
+    mongo.connect(dburl, function (err, db) {
+      db.collection("users")
+        .findOneAndUpdate(
+          { _id: ObjectId(_id) },
+          {
+            $set: {
+              name: name,
+              surname: surname,
+              phone: phone,
+              email: email,
+            },
+          },
+          { returnOriginal: false }
+        )
+        .then((doc) => {
+          res.json(removePasswordAndSalt(doc.value));
+        });
+    });
+  }).catch((error) => {res.json(error)});
+});
+app.put("/send-new-appointment", function (req, res) {
   const {
-    userLogin,
-    userPassword,
     selectedMasterID,
     serviceID,
     date,
     time,
-  } = req.body;
-  checkUserLogPas(userLogin, userPassword)
+  } = req.query;
+  const { sessionToken, _id } = req.cookies;
+  checkSessionToken(_id, sessionToken)
     .then((user) => {
       new Promise((resolve, reject) => {
         mongo.connect(dburl, function (err, db) {
@@ -354,6 +311,7 @@ app.post("/sendNewAppointment", function (req, res) {
       res.json(error);
     });
 });
+
 function checkUserLogPas(login, password) {
   return new Promise((resolve, reject) => {
     if (login != "")
@@ -374,7 +332,7 @@ function checkUserLogPas(login, password) {
   });
 }
 
-function checkUserExist(login) {
+function checkUserExistAndReturnNew(login) {
   return new Promise((resolve, reject) => {
     if (login != "")
       mongo.connect(dburl, function (err, db) {
@@ -420,3 +378,87 @@ function checkUserPassword(userPass, userSalt, checkingPass) {
   const hashedSaltedPassword = getSha1000Times(saltedPassword);
   return hashedSaltedPassword === userPass;
 }
+
+app.post("/adminLogin", function (req, res) {
+  if (checkAdminLoginPas(req.body.login, req.body.password)) {
+    mongo.connect(dburl, function (err, db) {
+      let allCollections = [];
+      db.listCollections().toArray(function (err, collInfos) {
+        collInfos.map((eachCollectionDetails) => {
+          allCollections.push(eachCollectionDetails.name);
+        });
+        res.json(allCollections);
+      });
+    });
+  } else res.json(false);
+});
+
+app.post("/collectionAddNewItem", function (req, res) {
+  if (
+    checkAdminLoginPas(req.body.loginPass.login, req.body.loginPass.password)
+  ) {
+    Object.keys(req.body.newElement).forEach(function (el) {
+      if (!/[^\d\.]/g.test(req.body.newElement[el]))
+        req.body.newElement[el] = parseFloat(req.body.newElement[el]);
+    });
+    mongo.connect(dburl, function (err, db) {
+      db.collection(req.body.collectionName).insertOne(
+        req.body.newElement,
+        function (err, result) {
+          console.log(
+            `В таблицу ${req.body.collectionName} добавлена запись с id ${req.body.newElement.id}  `
+          );
+          db.close();
+          res.json(req.body.newElement.id);
+        }
+      );
+    });
+  } else res.json(false);
+});
+app.get("/collection/:name", function (req, res) {
+  console.log(req.params.name)
+  mongo.connect(dburl, function (err, db) {
+    db.collection(req.params.name)
+        .find()
+        .toArray(function (err, results) {
+          console.log(results)
+          res.json(results);
+          db.close();
+        });
+  });
+});
+function checkAdminLoginPas(login, pas) {
+  if (login === "admin" && pas === "admin") {
+    return true;
+  } else return false;
+}
+
+function checkSessionToken(id,token){
+  return new Promise((resolve, reject) => {
+    if (id)
+      if(token==sessionToken)
+      mongo.connect(dburl, function (err, db) {
+
+        db.collection("users").findOne({ _id: ObjectId(id) }, function (err, doc) {
+          db.close();
+          if (doc) {
+            resolve(doc);
+          }
+        });
+      });
+    else reject(false);
+    else reject(false);
+  });
+
+}
+
+
+function removePasswordAndSalt(a){
+  delete a["password"]
+  delete a["salt"]
+  return a
+}
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "static/index.html"));
+});

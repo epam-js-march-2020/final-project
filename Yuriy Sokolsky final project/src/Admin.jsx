@@ -56,21 +56,20 @@ export default class Admin extends React.Component {
     );
   }
   onSelectCollectionChange(event) {
+      console.log(event)
     if (event) {
       this.setState({
         selectedCollection: event.target.value,
-      });
-      fetch(`/collection/${event.target.value}`)
-        .then((response) => response.json())
-        .then((collection) => {
-          this.setState({ collection });
-        });
+      },
+          () => {
+              fetch(`/collection/${this.state.selectedCollection}`)
+                  .then((response) => response.json())
+                  .then((collection) => {
+                      this.setState({ collection });
+                  });
+          });
     } else {
-      fetch(`/collection/${this.state.selectedCollection}`)
-        .then((response) => response.json())
-        .then((collection) => {
-          this.setState({ collection });
-        });
+
     }
   }
 

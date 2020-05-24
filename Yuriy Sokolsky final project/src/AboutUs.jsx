@@ -11,7 +11,7 @@ export default class AboutUs extends React.Component {
     componentDidMount() {
         $.when(
             $.ajax({
-                url: "/mastersList/",
+                url: "/masters-list/",
                 type: "GET",
                 contentType: "application/json",
                 dataType: "json",

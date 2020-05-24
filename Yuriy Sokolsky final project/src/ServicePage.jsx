@@ -7,12 +7,14 @@ import DatePicker from "react-datepicker";
 import ru from "date-fns/locale/ru";
 import {
   addMonths,
+    addDays,
   setHours,
   setMinutes,
   format,
   parse,
   getTime,
   isToday,
+    getHours
 } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import Alert from "react-bootstrap/Alert";
@@ -27,7 +29,7 @@ export default class Service extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/servicesList/${this.props.match.params.id}`)
+    fetch(`/services-list/${this.props.match.params.id}`)
       .then((response) => response.json())
       .then((service) => {
         if (service === true) {
@@ -61,7 +63,7 @@ export class ServicesContent extends React.Component {
       showModalWithLoginLogon: false,
       mastersList: [],
       selectedMasterID: "stub",
-      datePickerValue: new Date(),
+      datePickerValue: (getHours(new Date())>21) ? addDays(new Date(),1) : (new Date()),
       timePickerValue: getTime(new Date()),
       minTime: setHours(setMinutes(new Date(), 0), 10),
       maxTime: setHours(setMinutes(new Date(), 0), 22),
@@ -70,6 +72,7 @@ export class ServicesContent extends React.Component {
       displayCalendar: false,
       disableButtons: false,
       successApp: false,
+        minDate:new Date(),
     };
     this.showModal = this.showModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -105,7 +108,7 @@ export class ServicesContent extends React.Component {
   componentDidMount() {
     $.when(
       $.ajax({
-        url: "/mastersList/",
+        url: "/masters-list/",
         type: "GET",
         contentType: "application/json",
         dataType: "json",
@@ -136,19 +139,29 @@ export class ServicesContent extends React.Component {
   searchAppointments() {
     $.when(
       $.ajax({
-        url: "/AppointmentsByMasterDateAndTime/",
-        type: "POST",
-        data: JSON.stringify({
-          selectedMasterID: this.state.selectedMasterID,
-          date: format(this.state.datePickerValue, "dd.MM.yyyy"),
-          //time: format(this.state.timePickerValue, "HH:MM"),
-          serviceID: this.props.serviceID,
-        }),
-        contentType: "application/json",
+        url:
+          "/appointments-by-master-and-date?selectedMasterID=" +
+          this.state.selectedMasterID +
+          "&selectedMasterID=" +
+          this.state.selectedMasterID +
+          "&date=" +
+          format(this.state.datePickerValue, "dd.MM.yyyy") +
+          "&serviceID=" +
+          this.props.serviceID,
+        type: "GET",
+        contentType: "text/plain",
         dataType: "json",
+        processData: false,
       })
     ).then(
       function (data, textStatus, jqXHR) {
+        if(getHours(new Date())>21){
+            this.setState({
+                minDate: addDays(new Date(),1),
+
+            });
+        }
+
         if (this.props.service.duration)
           this.setState({
             maxTime: setHours(
@@ -160,7 +173,7 @@ export class ServicesContent extends React.Component {
             ),
             timeIntervals: Number(this.props.service.duration.slice(-2)),
           });
-        if (isToday(this.state.datePickerValue)) {
+        if (isToday(this.state.datePickerValue) && getHours(new Date())<21) {
           this.setState({
             minTime: new Date(),
           });
@@ -189,19 +202,19 @@ export class ServicesContent extends React.Component {
     });
     $.when(
       $.ajax({
-        url: "/sendNewAppointment/",
-        type: "POST",
-        data: JSON.stringify({
-          selectedMasterID: this.state.selectedMasterID,
-          serviceID: this.props.serviceID,
-          serviceDuration: this.props.service.duration,
-          date: format(this.state.datePickerValue, "dd.MM.yyyy"),
-          time: format(this.state.timePickerValue, "HH:mm"),
-          userLogin: this.props.userData.login,
-          userPassword: this.props.userData.password,
-        }),
-        contentType: "application/json",
+        url:
+          "/send-new-appointment?selectedMasterID=" +
+          this.state.selectedMasterID +
+          "&serviceID=" +
+          this.props.serviceID +
+          "&date=" +
+          format(this.state.datePickerValue, "dd.MM.yyyy") +
+          "&time=" +
+          format(this.state.timePickerValue, "HH:mm"),
+        type: "PUT",
+        contentType: "text/plain",
         dataType: "json",
+        processData: false,
       })
     ).then(
       function (data, textStatus, jqXHR) {
@@ -315,7 +328,7 @@ export class ServicesContent extends React.Component {
                             <DatePicker
                               selected={this.state.datePickerValue}
                               onChange={this.datePickerChange}
-                              minDate={new Date()}
+                              minDate={this.state.minDate}
                               maxDate={addMonths(new Date(), 3)}
                               locale={ru}
                               inline

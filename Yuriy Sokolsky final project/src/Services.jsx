@@ -19,7 +19,7 @@ export default class Services extends React.Component {
     componentDidMount() {
         $.when(
             $.ajax({
-                url: "/servicesList/",
+                url: "/services-list/",
                 type: "GET",
                 contentType: "application/json",
                 dataType: "json",

@@ -71,18 +71,11 @@ export class ProfileLoggedIn extends React.Component {
     event.preventDefault();
     $.when(
       $.ajax({
-        url: "/updateProfile/",
-        type: "POST",
-        data: JSON.stringify({
-          login: this.props.userData.login,
-          password: this.props.userData.password,
-          name: this.state.name,
-          surname: this.state.surname,
-          phone: this.state.phone,
-          email: this.state.email,
-        }),
-        contentType: "application/json",
+        url: "/update-profile?name="+this.state.name+"&surname="+this.state.surname+"&phone="+this.state.phone+"&email="+this.state.email,
+        type: "PUT",
+        contentType: "text/plain",
         dataType: "json",
+        processData: false,
       })
     ).then(
       function (data, textStatus, jqXHR) {
