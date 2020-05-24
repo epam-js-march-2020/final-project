@@ -1,11 +1,13 @@
 import React from 'react';
 import { validateNumber } from './validation';
+import { ModalMessage } from './modal_message'
 
 // State before any changes
 const initialState = {
   date: '',
   number: '',
   wrongNumber: false,
+  message: false,
 }
 
 export class AddService extends React.PureComponent {
@@ -17,6 +19,7 @@ export class AddService extends React.PureComponent {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.closeMessage = this.closeMessage.bind(this);
   }
 
   // Formatting date string to YYMMDD format for 'input' 'min' attribute
@@ -65,7 +68,10 @@ export class AddService extends React.PureComponent {
         user = JSON.stringify(user);
 
         localStorage[this.props.user.email] = user;
-        this.setState(this.initialState)
+        
+        this.setState({
+          message: true,
+        })
         this.props.outModals();
       
         // If we are dealing with guest
@@ -108,8 +114,12 @@ export class AddService extends React.PureComponent {
         localStorage.removeItem('guests');
         localStorage.setItem('guests', guests);
 
+        this.setState({
+          message: true,
+        })
+
         // Clearing state back to initial state
-        this.setState(this.initialState)
+        // this.setState(this.initialState)
         this.props.outModals();
       }
     }
@@ -137,10 +147,20 @@ export class AddService extends React.PureComponent {
     
   }
 
+  closeMessage() {
+    // this.props.outModals();
+    this.setState(initialState)
+  }
+
   render() {
     let date = new Date();
     
     return (
+      <>
+      {this.state.message ? 
+        <ModalMessage text = "Service ordered!" onClick = {this.closeMessage}/>
+        : null
+      }
       <div id='add_service' className = {'add_service modal_window ' + (this.props.modals.addService ? '' : ' hidden') }> 
         <form onSubmit = {this.handleSubmit} id = 'add_service_form' className = 'container'>
           <label className = 'row'>
@@ -179,6 +199,7 @@ export class AddService extends React.PureComponent {
           </div>
         </form>
       </div>
+      </>
     )
   }
 }

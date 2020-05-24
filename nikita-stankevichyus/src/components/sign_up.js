@@ -1,5 +1,6 @@
 import React from 'react';
 import { validateName, validatePassword, validateEmail } from './validation.js';
+import { ModalMessage } from './modal_message';
 
 // Initial state
 const clearState = {
@@ -11,6 +12,7 @@ const clearState = {
   validSecondName: true,
   validEmail: true,
   validPassword: true,
+  message: false,
 }
 
 // Capitalizes first letter
@@ -28,6 +30,7 @@ export class SignUp extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.closeMessage = this.closeMessage.bind(this);
   }
 
   // Returns true if every input data is valid
@@ -106,9 +109,10 @@ export class SignUp extends React.Component {
           })
         )
         
-    
-        this.setState(clearState);
         this.props.outModals();
+        this.setState({
+          message: true,
+        })
 
       } else {
 
@@ -127,9 +131,22 @@ export class SignUp extends React.Component {
     this.props.outModals(); 
   }
 
+  closeMessage() {
+    this.setState(clearState);
+  }
+
   render() {
-    console.log(this.state.validName);
     return (
+      <>
+      {this.state.message ? 
+      
+        <ModalMessage 
+          text = 'Account registered!'
+          onClick = {this.closeMessage}
+        /> 
+        : null 
+
+      }
       <div id='sign_up' className = { this.props.modals.signUp ? 'sign_up modal_window' : 'sign_up modal_window hidden'}>
         <form onSubmit = {this.handleSubmit} id='sign_up_form container' className = 'needs-validation' novalidate>
           <div className = 'form-row'>
@@ -220,6 +237,7 @@ export class SignUp extends React.Component {
             </div>
         </form>
       </div>
+      </>
     )
   }
 }

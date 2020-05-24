@@ -1,4 +1,6 @@
 import React from 'react';
+import { ModalMessage } from './modal_message'
+import { ModalEnsurance } from './modal_ensurance'
 
 // Element that represents an ordered service by user 
 import { ServiceProfile } from './service_profile';
@@ -27,6 +29,10 @@ export class Profile extends React.PureComponent{
       wrongSecondName: false,
       wrongEmail: false,
       takenEmail: false,
+      message: false,
+      ensurance: false,
+      onCommit: null,
+      onCancel: null,
     }
 
     this.state = initialState;
@@ -38,6 +44,9 @@ export class Profile extends React.PureComponent{
     this.editEmail = this.editEmail.bind(this);
     this.outModals = this.outModals.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.closeMessage = this.closeMessage.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
+    this.cancelLogOut = this.cancelLogOut.bind(this);
   }
 
   // Handles each change in inputs
@@ -84,6 +93,10 @@ export class Profile extends React.PureComponent{
 
       this.props.changeName(this.state.name);
       this.props.outModals();
+      
+      this.setState({
+        message: true,
+      })
     }
 
   }
@@ -105,6 +118,10 @@ export class Profile extends React.PureComponent{
 
       this.props.changeSecondName(this.state.secondName);
       this.props.outModals();
+
+      this.setState({
+        message: true,
+      })
     }
   }
 
@@ -133,6 +150,9 @@ export class Profile extends React.PureComponent{
           localStorage.removeItem(this.props.user.email);
 
           this.props.outModals();
+          this.setState({
+            message: true,
+          })
 
         } else {
           this.setState({
@@ -147,10 +167,36 @@ export class Profile extends React.PureComponent{
     this.props.outModals();
   }
 
-  // On log out 
+  // Cancel log out
+  cancelLogOut() {
+    this.setState({
+      ensurance: false,
+      onCommit: null,
+      onCancel: null,
+    })
+  }
+
+  // On log out
+  handleLogOut() {
+    this.outModals();
+    this.setState({
+      ensurance: true,
+      onCommit: this.logOut,
+      onCancel: this.cancelLogOut,
+    })
+  }
+
+  // Loggin out
   logOut() {
     this.props.logOut();
     this.props.toHome();
+  }
+
+  // Success message
+  closeMessage() {
+    this.setState({
+      message: false,
+    })
   }
 
   render () {
@@ -173,7 +219,25 @@ export class Profile extends React.PureComponent{
 
   return (
     <>
+    {
+      this.state.message ?
+      <ModalMessage 
+        text = 'Edit succesfull!'
+        onClick = {this.closeMessage}
+      />
+      : null
+    }
 
+    {
+      this.state.ensurance ?
+      <ModalEnsurance
+        text = 'Are you sure?'
+        onCommit = {this.state.onCommit}
+        onCancel = {this.state.onCancel}
+      />
+      : null
+    }
+  
     {/* Name edit modal window */}
     <div id = 'edit_name' 
       className = {'modal_window edit_name ' + (this.props.modals.changeName ? '' : 'hidden')}>
@@ -264,7 +328,7 @@ export class Profile extends React.PureComponent{
               <button onClick ={this.props.toChangeEmail} className = 'col-8 button_project button_project--primary'>EDIT EMAIL</button>
             </div>
             <div className = 'row col-12'>
-              <button onClick={this.logOut} className = 'col-8 button_project button_project--dark'>LOG OUT</button>
+              <button onClick={this.handleLogOut} className = 'col-8 button_project button_project--dark'>LOG OUT</button>
             </div>
           </div>
         </div>

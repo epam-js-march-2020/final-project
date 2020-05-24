@@ -1,12 +1,22 @@
 import React from 'react';
-
+import { ModalEnsurance } from './modal_ensurance';
 
 
 export class ServiceProfile extends React.PureComponent {
   constructor(props) {
     super(props);
-
+    this.state = {
+      ensurance: false,
+    }
+    this.handleDelete = this.handleDelete.bind(this);
     this.deleteService = this.deleteService.bind(this);
+    this.cancelDelete = this.cancelDelete.bind(this);
+  }
+
+  handleDelete = () => {
+    this.setState({
+      ensurance: true,
+    })
   }
 
   deleteService = () => {
@@ -21,24 +31,46 @@ export class ServiceProfile extends React.PureComponent {
     user = JSON.stringify(user);
     localStorage[this.props.user.email] = user;
 
+    this.setState({
+      ensurance: false,
+    })
+
+  }
+
+  cancelDelete = () => {
+    this.setState({
+      ensurance: false,
+    })
   }
 
   render() {
     console.log(this.props.date);
   return (
-    <div className = 'mg-b-10 profile_service service container row'>
-      <div className = 'service_name col-4 container row justify-content-center align-items-center align-content-center'>
-        {this.props.name}
-      </div>
-      <div className = 'service_date col-4 container row justify-content-center align-items-center align-content-center'>
-        {this.props.date}
-      </div>
-      <div className = 'col-4'>
-        <button onClick = {this.deleteService} className = 'col-12 button_project button_project--dark service_cancel'>
+    <>
+      {
+        this.state.ensurance ? 
+          <ModalEnsurance 
+            text = 'Are you sure?'
+            onCommit = {this.deleteService}
+            onCancel = {this.cancelDelete}
+          />
+          : null
+      }
+
+      <div className = 'mg-b-10 profile_service justify-content-center service container row'>
+        <div className = 'service_name col-12 col-md-4 container row justify-content-center align-items-center align-content-center'>
+          {this.props.name}
+        </div>
+        <div className = 'service_date col-12 col-md-4 container row justify-content-center align-items-center align-content-center'>
+          {this.props.date}
+        </div>
+     
+        <button onClick = {this.handleDelete} className = 'col-12 col-md-4 button_project button_project--dark service_cancel'>
           Cancel
         </button>
+     
       </div>
-    </div>
+    </>
   )
   }
 }
