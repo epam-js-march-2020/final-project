@@ -1,7 +1,7 @@
 import React from "react";
 import $ from "jquery";
 
-import {Container, Row, Col, Alert, Button ,Form} from "react-bootstrap";
+import { Container, Row, Col, Alert, Button, Form } from "react-bootstrap";
 import "../componentStyles/ProfileContent.css";
 
 export default class LoginLogonForm extends React.Component {
@@ -13,7 +13,7 @@ export default class LoginLogonForm extends React.Component {
       passwordValue: "",
       errorMessage: "",
       disableButtons: false,
-      success:false
+      success: false,
     };
     this.login = this.login.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -99,7 +99,6 @@ export default class LoginLogonForm extends React.Component {
   render() {
     return (
       <>
-
         <Alert
           show={this.state.showLoginFailAlert}
           onClose={() =>
@@ -113,63 +112,63 @@ export default class LoginLogonForm extends React.Component {
           <Alert.Heading>{this.state.errorMessage}</Alert.Heading>
           <p>Проверьте правильность введенных данных</p>
         </Alert>
-        {!this.state.success &&
-        <Container>
-          <Row className="justify-content-md-center">
-            <Col md="auto">
-              <div className="text-center">
-                Введите логин и пароль, или придумайте если вы здесь впервые
-              </div>
-              <Form>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Логин</Form.Label>
-                  <Form.Control
+        {!this.state.success && (
+          <Container>
+            <Row className="justify-content-md-center">
+              <Col md="auto">
+                <div className="text-center">
+                  Введите логин и пароль, или придумайте если вы здесь впервые
+                </div>
+                <Form>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Логин</Form.Label>
+                    <Form.Control
                       type="text"
                       placeholder="Введите Логин с учетом регистра "
                       name="loginValue"
                       value={this.state.loginValue}
                       onChange={this.handleInputChange}
-                  />
-                </Form.Group>
+                    />
+                  </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Пароль</Form.Label>
-                  <Form.Control
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Пароль</Form.Label>
+                    <Form.Control
                       type="password"
                       placeholder="Пароль"
                       name="passwordValue"
                       value={this.state.passwordValue}
                       onChange={this.handleInputChange}
-                  />
-                </Form.Group>
-                <Row>
-                  <Col>
-                    {" "}
-                    <Button
+                    />
+                  </Form.Group>
+                  <Row>
+                    <Col>
+                      {" "}
+                      <Button
                         variant="primary"
                         type="submit"
                         onClick={this.registration}
                         disabled={this.state.disableButtons}
-                    >
-                      Зарегестрироваться
-                    </Button>
-                  </Col>
-                  <Col className="text-right">
-                    <Button
+                      >
+                        Зарегестрироваться
+                      </Button>
+                    </Col>
+                    <Col className="text-right">
+                      <Button
                         variant="primary"
                         type="submit"
                         onClick={this.login}
                         disabled={this.state.disableButtons}
-                    >
-                      Войти
-                    </Button>
-                  </Col>
-                </Row>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-        }
+                      >
+                        Войти
+                      </Button>
+                    </Col>
+                  </Row>
+                </Form>
+              </Col>
+            </Row>
+          </Container>
+        )}
         {this.state.success && <div> Успешная авторизация!</div>}
       </>
     );

@@ -22,3 +22,7 @@
     border-bottom-left-radius: 100px;
     border-top-left-radius: 100px;
 }
+
+.react-datepicker__time-list-item--disabled{
+    display: none;
+}

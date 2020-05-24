@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Container, Row, Col, Modal, Button, Form } from "react-bootstrap";
 import $ from "jquery";
@@ -6,9 +5,17 @@ import "./componentStyles/servicesContent.css";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import ru from "date-fns/locale/ru";
-import { addMonths, setHours, setMinutes, format, parse } from "date-fns";
+import {
+  addMonths,
+  setHours,
+  setMinutes,
+  format,
+  parse,
+  getTime,
+  isToday,
+} from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
-
+import Alert from "react-bootstrap/Alert";
 import LoginLogonForm from "./components/LoginLogonForm.jsx";
 
 export default class Service extends React.Component {
@@ -55,10 +62,14 @@ export class ServicesContent extends React.Component {
       mastersList: [],
       selectedMasterID: "stub",
       datePickerValue: new Date(),
-      timePickerValue: setHours(setMinutes(new Date(), 0), 10),
+      timePickerValue: getTime(new Date()),
+      minTime: setHours(setMinutes(new Date(), 0), 10),
+      maxTime: setHours(setMinutes(new Date(), 0), 22),
       excludeTimes: [],
       timeIntervals: 30,
-      displayCalendar:false
+      displayCalendar: false,
+      disableButtons: false,
+      successApp: false,
     };
     this.showModal = this.showModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -66,6 +77,7 @@ export class ServicesContent extends React.Component {
     this.datePickerChange = this.datePickerChange.bind(this);
     this.searchAppointments = this.searchAppointments.bind(this);
     this.timePickerChange = this.timePickerChange.bind(this);
+    this.sendNewAppointment = this.sendNewAppointment.bind(this);
   }
   showModal() {
     this.setState({
@@ -79,9 +91,12 @@ export class ServicesContent extends React.Component {
   }
   onSelectMasterChange(event) {
     if (event) {
+      let index = event.nativeEvent.target.selectedIndex;
+
       this.setState(
         {
           selectedMasterID: event.target.value,
+          selectedMasterNameSurname: event.nativeEvent.target[index].text,
         },
         this.searchAppointments
       );
@@ -117,6 +132,7 @@ export class ServicesContent extends React.Component {
       timePickerValue: value,
     });
   }
+
   searchAppointments() {
     $.when(
       $.ajax({
@@ -135,8 +151,24 @@ export class ServicesContent extends React.Component {
       function (data, textStatus, jqXHR) {
         if (this.props.service.duration)
           this.setState({
+            maxTime: setHours(
+              setMinutes(
+                new Date(),
+                60 - Number(this.props.service.duration.slice(-2))
+              ),
+              21
+            ),
             timeIntervals: Number(this.props.service.duration.slice(-2)),
           });
+        if (isToday(this.state.datePickerValue)) {
+          this.setState({
+            minTime: new Date(),
+          });
+        } else {
+          this.setState({
+            minTime: setHours(setMinutes(new Date(), 0), 10),
+          });
+        }
         let busyTime = [];
         console.log(data);
         data.map(function (e) {
@@ -145,17 +177,70 @@ export class ServicesContent extends React.Component {
           });
         });
         this.setState({
-          displayCalendar:true,
           excludeTimes: busyTime,
+          displayCalendar: true,
         });
       }.bind(this)
     );
   }
+  sendNewAppointment() {
+    this.setState({
+      disableButtons: true,
+    });
+    $.when(
+      $.ajax({
+        url: "/sendNewAppointment/",
+        type: "POST",
+        data: JSON.stringify({
+          selectedMasterID: this.state.selectedMasterID,
+          serviceID: this.props.serviceID,
+          serviceDuration: this.props.service.duration,
+          date: format(this.state.datePickerValue, "dd.MM.yyyy"),
+          time: format(this.state.timePickerValue, "HH:mm"),
+          userLogin: this.props.userData.login,
+          userPassword: this.props.userData.password,
+        }),
+        contentType: "application/json",
+        dataType: "json",
+      })
+    ).then(
+      function (data, textStatus, jqXHR) {
+        this.setState({
+          disableButtons: false,
+        });
+        if (data) {
+          this.setState({
+            successApp: true,
+          });
+        }
+        console.log(data);
+      }.bind(this)
+    );
+  }
+
   render() {
     return (
       <>
         <div className="servicesPageBackground">
           <Container>
+            <Alert
+              show={this.state.successApp}
+              onClose={() =>
+                this.setState({
+                  successApp: false,
+                })
+              }
+              variant="success"
+              dismissible
+            >
+              <Alert.Heading>Успешная запись!</Alert.Heading>
+              <p>
+                Вы записались на {this.props.service.name}{" "}
+                {format(this.state.datePickerValue, "dd.MM.yyyy")} на{" "}
+                {format(this.state.timePickerValue, "HH:mm")} к{" "}
+                {this.state.selectedMasterNameSurname}
+              </p>
+            </Alert>
             <Modal
               show={this.state.showModalWithLoginLogon}
               onHide={this.closeModal}
@@ -200,14 +285,13 @@ export class ServicesContent extends React.Component {
                     </Row>
                   </Container>
                 </div>
-
               </Col>
               <Col>
                 <Row className="pt-3">
                   {!this.props.isAuth && (
-                      <Button type="button" onClick={this.showModal}>
-                        Зарегистрируйтесь или войдите что бы записаться
-                      </Button>
+                    <Button type="button" onClick={this.showModal}>
+                      Зарегистрируйтесь или войдите что бы записаться
+                    </Button>
                   )}
                 </Row>
                 {this.props.isAuth && this.state.mastersList != [] && (
@@ -245,8 +329,8 @@ export class ServicesContent extends React.Component {
                               showTimeSelect
                               showTimeSelectOnly
                               dateFormat="HH:mm"
-                              minTime={setHours(setMinutes(new Date(), 0), 10)}
-                              maxTime={setHours(setMinutes(new Date(), 0), 22)}
+                              minTime={this.state.minTime}
+                              maxTime={this.state.maxTime}
                               timeIntervals={this.state.timeIntervals}
                               locale={ru}
                               timeCaption="Время"
@@ -256,7 +340,11 @@ export class ServicesContent extends React.Component {
                         </Row>
                         <Row>
                           <Col className="text-right">
-                            <Button type="submit" name="submit">
+                            <Button
+                              type="button"
+                              onClick={this.sendNewAppointment}
+                              disabled={this.state.disableButtons}
+                            >
                               Записаться
                             </Button>
                           </Col>

@@ -48,27 +48,29 @@ app.get("/mastersList", function (req, res) {
 });
 
 app.post("/AppointmentsByMasterDateAndTime", function (req, res) {
-  const { selectedMasterID,date,serviceID } = req.body;
-  console.log(selectedMasterID);
-  console.log(serviceID);
+  const { selectedMasterID, date, serviceID } = req.body;
   mongo.connect(dburl, function (err, db) {
-    db.collection("appointment")
-        .findOne({"master.masterId":parseInt(selectedMasterID)},
-            function (err, results) {
-              db.close();
-              let resArr=[];
-              if(results.master)
-              results.master.users.map(function (user) {
-                let serviceInUser =user.serivces.find(x => parseInt(x.serivceid) === parseInt(serviceID));
-                if(serviceInUser) {
-                  let dateInserviceInUser =serviceInUser.date.find(x => x.date === date)
-                  if(dateInserviceInUser)
-                    resArr.push(dateInserviceInUser.times)
-                }
-              })
-              res.json(resArr)
-            })
-
+    db.collection("appointment").findOne(
+      { masterID: parseInt(selectedMasterID) },
+      function (err, results) {
+        db.close();
+        let resArr = [];
+        if (results)
+          if (results)
+            results.users.map(function (user) {
+              let serviceInUser = user.services.find(
+                (x) => parseInt(x.serviceID) === parseInt(serviceID)
+              );
+              if (serviceInUser) {
+                let dateInserviceInUser = serviceInUser.date.find(
+                  (x) => x.date === date
+                );
+                if (dateInserviceInUser) resArr.push(dateInserviceInUser.times);
+              }
+            });
+        res.json(resArr);
+      }
+    );
   });
 });
 
@@ -229,7 +231,129 @@ app.post("/updateProfile", function (req, res) {
       res.json(error);
     });
 });
+app.post("/sendNewAppointment", function (req, res) {
+  console.log(req.body);
+  const {
+    userLogin,
+    userPassword,
+    selectedMasterID,
+    serviceID,
+    date,
+    time,
+  } = req.body;
+  checkUserLogPas(userLogin, userPassword)
+    .then((user) => {
+      new Promise((resolve, reject) => {
+        mongo.connect(dburl, function (err, db) {
+          db.collection("appointment").findOne(
+            { masterID: parseInt(selectedMasterID) },
+            function (err, results) {
+              db.close();
+              console.log(results);
+              if (results) {
+                let userIDinMaster = results.users.findIndex(
+                  (x) => parseInt(x.userID) === parseInt(user.id)
+                );
 
+                if (userIDinMaster >= 0) {
+                  let serviceIDinUser = results.users[
+                    userIDinMaster
+                  ].services.findIndex(
+                    (x) => parseInt(x.serviceID) === parseInt(serviceID)
+                  );
+                  if (serviceIDinUser >= 0) {
+                    let dateIDinService = results.users[
+                      userIDinMaster
+                    ].services[serviceIDinUser].date.findIndex(
+                      (x) => x.date === date
+                    );
+                    if (dateIDinService >= 0) {
+                      results.users[userIDinMaster].services[
+                        serviceIDinUser
+                      ].date[dateIDinService].times.push({ timeStart: time });
+
+                      db.close();
+                    } else {
+                      console.log("create date");
+                      results.users[userIDinMaster].services[
+                        serviceIDinUser
+                      ].date.push({ date: date, times: [{ timeStart: time }] });
+                    }
+                  } else {
+                    console.log("create service");
+                    results.users[userIDinMaster].services.push({
+                      serviceID: parseInt(serviceID),
+                      date: [{ date: date, times: [{ timeStart: time }] }],
+                    });
+                  }
+                } else {
+                  console.log("create user at master");
+                  results.users.push({
+                    userID: parseInt(user.id),
+                    services: [
+                      {
+                        serviceID: parseInt(serviceID),
+                        date: [{ date: date, times: [{ timeStart: time }] }],
+                      },
+                    ],
+                  });
+                }
+              } else {
+                console.log("Created new Master");
+                reject("Created new Master");
+              }
+              resolve(results);
+            }
+          );
+        });
+      })
+        .then((value) => {
+          mongo.connect(dburl, function (err, db) {
+            db.collection("appointment").replaceOne(
+              {
+                masterID: value.masterID,
+              },
+              {
+                masterID: value.masterID,
+                users: value.users,
+              }
+            );
+          });
+          res.json(true);
+        })
+        .catch((error) => {
+          mongo.connect(dburl, function (err, db) {
+            db.collection("appointment").insertOne({
+              masterID: parseInt(selectedMasterID),
+              users: [
+                {
+                  userID: parseInt(user.id),
+                  services: [
+                    {
+                      serviceID: parseInt(serviceID),
+                      date: [
+                        {
+                          date: date,
+                          times: [
+                            {
+                              timeStart: time,
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            });
+          });
+          res.json(true);
+        });
+    })
+    .catch((error) => {
+      res.json(error);
+    });
+});
 function checkUserLogPas(login, password) {
   return new Promise((resolve, reject) => {
     if (login != "")

@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, Row, Col, Modal, Button ,Form} from "react-bootstrap";
+import { Container, Row, Col, Modal, Button, Form } from "react-bootstrap";
 import $ from "jquery";
 import "./componentStyles/ProfileContent.css";
 import LoginLogonForm from "./components/LoginLogonForm.jsx";
@@ -22,7 +22,10 @@ export default class Profile extends React.Component {
               />
             )}
             {this.props.isAuth && (
-              <ProfileLoggedIn userData={this.props.userData}  setData={this.props.setData}/>
+              <ProfileLoggedIn
+                userData={this.props.userData}
+                setData={this.props.setData}
+              />
             )}
           </Container>
         </div>
@@ -37,19 +40,19 @@ export class ProfileLoggedIn extends React.Component {
     this.state = {
       name: this.props.userData.name || "",
       surname: this.props.userData.surname || "",
-      email:this.props.userData.email || "",
+      email: this.props.userData.email || "",
       phone: this.props.userData.phone || "",
-      disableButtons:false
+      disableButtons: false,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.saveUserData = this.saveUserData.bind(this);
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.userData!==this.props.userData){
+    if (prevProps.userData !== this.props.userData) {
       this.setState({
         name: this.props.userData.name,
         surname: this.props.userData.surname,
-        email:this.props.userData.email,
+        email: this.props.userData.email,
         phone: this.props.userData.phone,
       });
     }
@@ -61,37 +64,36 @@ export class ProfileLoggedIn extends React.Component {
       [name]: event.target.value,
     });
   }
-  saveUserData(event){
+  saveUserData(event) {
     this.setState({
       disableButtons: true,
     });
     event.preventDefault();
     $.when(
-        $.ajax({
-          url: "/updateProfile/",
-          type: "POST",
-          data: JSON.stringify({
-            login: this.props.userData.login,
-            password: this.props.userData.password,
-            name:this.state.name,
-            surname:this.state.surname,
-            phone:this.state.phone,
-            email:this.state.email,
-          }),
-          contentType: "application/json",
-          dataType: "json",
-        })
+      $.ajax({
+        url: "/updateProfile/",
+        type: "POST",
+        data: JSON.stringify({
+          login: this.props.userData.login,
+          password: this.props.userData.password,
+          name: this.state.name,
+          surname: this.state.surname,
+          phone: this.state.phone,
+          email: this.state.email,
+        }),
+        contentType: "application/json",
+        dataType: "json",
+      })
     ).then(
-        function (data, textStatus, jqXHR) {
-            this.props.setData(data);
-          this.setState({
-            disableButtons: false,
-          });
-        }.bind(this)
+      function (data, textStatus, jqXHR) {
+        this.props.setData(data);
+        this.setState({
+          disableButtons: false,
+        });
+      }.bind(this)
     );
   }
   render() {
-
     return (
       <>
         <Row>
@@ -114,7 +116,7 @@ export class ProfileLoggedIn extends React.Component {
                 <Form.Control
                   type="text"
                   placeholder="Введите имя"
-                  value={this.state.name }
+                  value={this.state.name}
                   name="name"
                   onChange={this.handleInputChange}
                 />
@@ -146,15 +148,15 @@ export class ProfileLoggedIn extends React.Component {
                   country={"ru"}
                   name="phone"
                   value={this.state.phone}
-                  onChange={phone => this.setState({ phone })}
+                  onChange={(phone) => this.setState({ phone })}
                 />
               </Form.Group>
               <Button
-                  variant="primary"
-                  type="submit"
-                  onClick={this.saveUserData}
-                  disabled={this.state.disableButtons}
-                 >
+                variant="primary"
+                type="submit"
+                onClick={this.saveUserData}
+                disabled={this.state.disableButtons}
+              >
                 Сохранить
               </Button>
             </Form>
