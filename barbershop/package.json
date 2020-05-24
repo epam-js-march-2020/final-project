@@ -38,7 +38,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "gh-pages": "~2.0.1"
   },
-  "homepage": "http://MariannaSpb.github.io"
+  "homepage": "https://mariannaspb.github.io/final-project/"
 }
