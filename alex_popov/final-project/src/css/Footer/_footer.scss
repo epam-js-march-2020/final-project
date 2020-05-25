@@ -3,13 +3,13 @@ $theme-foorer-dark: (
     background-color: rgb(41, 41, 41),
 );
 
-.footer {
-    padding-top: 25px;
-    padding-bottom: 25px;
-}
+// .footer {
+//     // padding-top: 25px;
+//     // padding-bottom: 25px;
+// }
 
 .footer-contacts {
-    @extend .footer;
+    // @extend .footer;
     position: absolute;
     top: 15vh;
     right: 3vw;

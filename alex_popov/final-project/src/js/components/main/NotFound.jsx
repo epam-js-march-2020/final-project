@@ -1,14 +1,12 @@
 import React from 'react';
 
-const NotFound = () => {
-    return (
-        <div className='notFoundContainer'>
-          <div className='notFoundContainer_text'>
+const NotFound = () => (
+    <div className='notFoundContainer'>
+        <div className='notFoundContainer_text'>
             <h3>Somthing went wrong</h3>
             <a className='notFoundContainer_link-yellow' href='/'>try again</a>
-          </div>
         </div>
-    )
-}
+    </div>
+)
 
 export default NotFound;

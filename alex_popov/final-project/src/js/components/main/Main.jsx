@@ -1,13 +1,13 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import Home from './Home';
-import Services from './Services';
-import Contacts from './Contacts';
-import Login from './Login';
-import User from './User';
-import Appointment from './Appointment'
-import NotFound from './NotFound';
+import Home from './Home.jsx';
+import Services from './Services.jsx';
+import Contacts from './Contacts.jsx';
+import Login from './Login.jsx';
+import User from './User.jsx';
+import Appointment from './Appointment.jsx'
+import NotFound from './NotFound.jsx';
 
 import { connect } from 'react-redux';
 

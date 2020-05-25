@@ -2,7 +2,7 @@ import React from 'react';
 
 import UserInformation from './UserInformation';
 import UserSchedule from './UserSchedule';
-import Footer from '../Footer/Footer';
+import Footer from '../Footer/Footer.jsx';
 
 class User extends React.Component {
 

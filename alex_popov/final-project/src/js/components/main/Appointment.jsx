@@ -1,6 +1,6 @@
 import React from 'react';
 import WithFormChecker from './WithFormChecker';
-import Footer from '../Footer/Footer'
+import Footer from '../Footer/Footer.jsx'
 
 import {connect} from 'react-redux';
 import * as actions from '../../actions/actions';
@@ -97,7 +97,6 @@ class Appointment extends WithFormChecker {
                     response.push(<p className={lassName} key={key} data-schedule={key}>{key}</p>)
                 }
             }
-
             return response.length > 0 ? response : <p className='appointment_item appointment_item-active'>There is no time available this day. Sorry.</p> ;
         }
     }
@@ -123,10 +122,7 @@ class Appointment extends WithFormChecker {
     }
 
     onClickBook() {
-        // console.log('book');
-
         const { date, time } = this.state;
-
         const schedule = JSON.parse( localStorage.getItem('appointments') );
         
         const dayId = schedule.findIndex( (el) => {
@@ -167,7 +163,6 @@ class Appointment extends WithFormChecker {
     }
 
     onChangeService(ev) {
-        // console.log(ev.target)
         this.setState({[ev.target.id]: ev.target.value})
     }
 

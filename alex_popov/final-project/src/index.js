@@ -5,7 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 
 import './css/index.scss'
 
-import App from './js/App';
+// import App from './js/components/App.jsx';
+// import App from './js/components/App.jsx';
+// import App from './js/App';
+import App from './js/App'
 
 import * as serviceWorker from './serviceWorker';
 

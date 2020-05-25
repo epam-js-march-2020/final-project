@@ -1,6 +1,6 @@
 export function loadData() {
     const users = localStorage.getItem('users');
-    // console.log(JSON.parse(users)[0].apointmets )
+
     if (!users) {
         const startValue = [{
           code: '',
@@ -12,33 +12,24 @@ export function loadData() {
           admin: true
         }]
         localStorage.setItem('users', JSON.stringify(startValue));
-        console.log( 'users arr loaded in the LS' )
+        console.log( 'users data was loaded in the LS' )
     }
 
     const appointments = localStorage.getItem('appointments');
     if (!appointments) {
         console.log('the list of appoinments created')
         const list = createList()
-        console.log(list)
         localStorage.setItem('appointments', JSON.stringify(list))
     } else {
-      // console.log( listChecker(JSON.parse(appointments)) )
       const data = JSON.parse(appointments);
       const firstDay = new Date(data[0].date)
       const now = new Date()
       if ( firstDay.getDate() !== (now.getDate() +1) ) {
-        console.log(firstDay.getFullYear(), 'The schedule is updated')
+        console.log('the schedule datat have been apdated')
+
         const newData = listFiller( listChecker(JSON.parse(appointments)) );
         localStorage.setItem('appointments', JSON.stringify(newData))
-
       }
-      
-
-      // const newData = listFiller( listChecker(JSON.parse(appointments)) );
-      // localStorage.setItem('appointments', JSON.stringify(newData))
-      // console.log( JSON.parse( JSON.stringify( newData )) )
-
-      // console.log(listFiller( listChecker(JSON.parse(appointments)) ) )
     }
 }
 
@@ -79,25 +70,9 @@ function listFiller(list) {
             list.push(day);
         }
     }
-    // console.log(new Date( list[0].date ).getDate(), new Date( list[0].date ).getMonth())
     return list;
 }
-  
-  // function createList() {
-  //   const list = []
-  //   const now = new Date();
-  //   for (let i = -1; i < 29; i++) {
-  //     const day = {
-  //       date: new Date(now.getFullYear(), now.getMonth(), now.getDate() + i),
-  //       appointments: createClearDay()
-  //     }
-  //     list.push(day)
-  //   }
-  //   return list
-  // }
 
-
-  
 function listChecker(list) {
     const now = new Date();
     const newList = []
@@ -112,4 +87,3 @@ function listChecker(list) {
     })
     return newList;
 }
-  

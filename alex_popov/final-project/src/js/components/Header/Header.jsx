@@ -1,13 +1,21 @@
 import React from 'react';
 
-import Logo from '../Logo';
-import Navigation from './Navigation';
+import Logo from '../Logo.jsx';
+import Navigation from './Navigation.jsx';
 
 class Header extends React.Component {
+    /**
+     * add events that used for show and hide menu on small screens
+     * by clicks by the menu icon and the menu items
+     */
     componentDidMount() {
-        // console.log('did')
-        document.querySelector('#menuIcon').addEventListener('click', this.toggleMenu)
-        document.querySelector('#header_mobileMenu').addEventListener('click', this.menuHider)
+        document.querySelector('#menuIcon').addEventListener('click', this.toggleMenu);
+        document.querySelector('#header_mobileMenu').addEventListener('click', this.menuHider);
+    }
+
+    componentWillUnmount() {
+        document.querySelector('#menuIcon').removeEventListener('click', this.toggleMenu);
+        document.querySelector('#header_mobileMenu').removeEventListener('click', this.menuHider);
     }
 
     menuHider() {
