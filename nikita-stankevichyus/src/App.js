@@ -24,11 +24,10 @@ class App extends React.Component {
 
   render() {
 
-    const outModals = this.props.outModals;
 
-    document.onkeydown = function(e) {
-      if (e.key === "Escape") { // escape key maps to keycode `27`
-         outModals();
+    document.onkeydown = (event) => {
+      if (event.key === "Escape") { 
+         this.props.outModals();
      }
     };
     
