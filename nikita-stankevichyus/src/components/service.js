@@ -1,4 +1,5 @@
 import React from 'react';
+import { HashLink as Link } from 'react-router-hash-link';
 
 export class Service extends React.PureComponent{
   constructor(props) {
@@ -19,11 +20,16 @@ export class Service extends React.PureComponent{
 
   render() {
   return(
+    
     <tr onClick = {this.handleClick} className = 'service'>
-        <td className = 'text-color-light align-middle'>{this.props.name}</td>
-        <td className = 'text-color-light align-middle'>${this.props.price}</td>
-        <td className = 'text-color-light'>
+     
+        <td className = 'text-color-light align-middle'>
+          <Link to={'service_'+this.props.name}>{this.props.name}</Link>
         </td>
+        <td className = 'text-color-light align-middle'>
+          <Link to={'service_'+this.props.name}>${this.props.price}</Link>
+        </td>
+     
     </tr>
   )
   }

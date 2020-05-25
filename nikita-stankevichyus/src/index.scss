@@ -513,6 +513,12 @@ a{
     color: white;
   }
 
+  a {
+    font-style: normal;
+    text-decoration: normal;
+    font-size: 16px;
+  }
+
   table {
     background-color: rgba(map-get(map-get($colors, header), background), 0.7) !important;
     width: 75%;
@@ -531,7 +537,7 @@ a{
     thead tr{
       cursor: unset;
     }
-    tr:hover td{
+    tr:hover td a{
       color: map-get(map-get($colors, header), text-link);
     }
   }
@@ -648,4 +654,9 @@ a{
 
 .width-vw-100 {
   width: 105vw !important;
+}
+
+a {
+  text-decoration: none;
+  font-style: normal !important;
 }

@@ -84,18 +84,16 @@ class App extends React.Component {
         </header>
 
         <main className="main">
+          
           <Switch>
-        { 
-          this.props.navigation.atHome ?
 
-              // Home page
               <Route path='/home'>
                 <HomePage />
               </Route>
-        // <Route path='/home' component= {<HomePage />} /> 
-          : this.props.navigation.atProfile ? 
-
-              // User's profile page
+        
+            {
+              // Profile is accessable only if user is logged
+              this.props.user.loged ?
               <Route path='/profile'>
                 <Profile 
                   user = {this.props.user}
@@ -112,9 +110,12 @@ class App extends React.Component {
                   logOut = {this.props.logOut}               
                 />
               </Route>
-          : this.props.navigation.atServices ?
+              : null
+            }
+            
+         
 
-              // Services list page
+              {/* Services list page */}
               <Route path = '/services'>
                 <Services 
                   addService = {this.props.toAddService}
@@ -122,8 +123,8 @@ class App extends React.Component {
                   user = {this.props.user}
                 />
               </Route>
-          : 
-              // ServicePage page
+  
+              {/* ServicePage page */}
               <Route path = {'/service_'+this.props.navigation.bufferService.name}>
                 <ServicePage
                   navigation = {this.props.navigation}
@@ -132,7 +133,7 @@ class App extends React.Component {
                 />
               </Route>
         
-        }
+        
           <Redirect from='/' to='/home' />
         </Switch>
       </main>
