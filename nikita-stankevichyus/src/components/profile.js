@@ -309,29 +309,18 @@ export class Profile extends React.PureComponent{
     {/* Profile itself */}
     <div className = 'container-fluid row profile justify-content-center align-items-center align-content-between'>
       <div className = 'row container-fluid profile_header justify-content-center justify-content-md-start'>
-        <h1 className = 'row col-12 mg-l-15 justify-content-center justify-content-md-start'>{this.props.user.name + ' ' + this.props.user.secondName}</h1>
-        <p className = 'row col-12 mg-l-15 mg-t-5 justify-content-center justify-content-md-start'>{this.props.user.email}</p>
+        <h1 className = 'row col-12 mg-l-15 justify-content-start'>{this.props.user.name + ' ' + this.props.user.secondName}</h1>
+        <p className = 'row col-12 mg-l-15 mg-t-5 justify-content-start'>{this.props.user.email}</p>
       </div>
       <div className = 'row col-xl-6 col-12 justify-content-md-start justify-content-center'>
-        {/* <div className = 'row col-xl-6 col-12 mg-b-25'> */}
-          {/* <div className = 'row col-12 justify-content-center justify-content-md-start'> */}
-            <h1 className = 'col-12 row justify-content-center justify-content-md-start mg-b-10'>Manage your profile: </h1>
-          {/* </div> */}
-          {/* <div className = 'row col-12'> */}
-            {/* <div className = 'row col-12 mg-t-25 mg-b-15 justify-content-center justify-content-md-start'> */}
-              <button onClick = {this.props.toChangeName} className = 'col-12 row button_project button_project--primary mg-b-5'>EDIT NAME</button>
-            {/* </div> */}
-            {/* <div className = 'row col-12 mg-b-15 justify-content-center justify-content-md-start'> */}
-              <button onClick = {this.props.toChangeSecondName} className = 'col-12 row button_project button_project--primary mg-b-5'>EDIT SECOND NAME</button>
-            {/* </div> */}
-            {/* <div className = 'row col-12 mg-b-15 justify-content-center justify-content-md-start'> */}
-              <button onClick ={this.props.toChangeEmail} className = 'col-12 row button_project button_project--primary mg-b-5'>EDIT EMAIL</button>
-            {/* </div> */}
-            {/* <div className = 'row col-12 justify-content-center justify-content-md-start'> */}
-              <button onClick={this.handleLogOut} className = 'col-12 row button_project button_project--dark mg-b-5'>LOG OUT</button>
-            {/* </div> */}
-          {/* </div> */}
-        {/* </div> */}
+
+        <h1 className = 'col-12 row justify-content-center justify-content-md-start mg-b-10'>Manage your profile: </h1>
+
+        <button onClick = {this.props.toChangeName} className = 'col-12 row button_project button_project--primary mg-b-5'>EDIT NAME</button>
+        <button onClick = {this.props.toChangeSecondName} className = 'col-12 row button_project button_project--primary mg-b-5'>EDIT SECOND NAME</button>    
+        <button onClick ={this.props.toChangeEmail} className = 'col-12 row button_project button_project--primary mg-b-5'>EDIT EMAIL</button>  
+        <button onClick={this.handleLogOut} className = 'col-12 row button_project button_project--dark mg-b-5'>LOG OUT</button>
+           
       </div>
       <div className = 'row col-xl-6 col-12 align-content-start align-items-start'>
        
