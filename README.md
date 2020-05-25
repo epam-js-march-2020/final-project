@@ -2,7 +2,7 @@
 # Usage
 ```
 git clone https://github.com/Lana2683/final-project.git
-cd final-project
+cd final-project/SVETLANA_SAT
 npm install
 npm start
 ```
