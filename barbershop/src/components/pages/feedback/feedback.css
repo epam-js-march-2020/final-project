@@ -1,0 +1,42 @@
+.feedback {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    display: block;
+    text-align: center;
+}
+
+
+.image {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    border-radius: 50%;
+}
+
+
+
+   textarea {
+    margin-top: 10px;
+    width: 400px;
+    height: 100px;
+    padding: 15px 22px;
+    box-sizing: border-box;
+    border: 4px solid #ccc;
+    border-radius: 5px;
+    /* background-color: gray; */
+    resize: both; 
+   }
+
+   .login {
+       margin-left: auto;
+       margin-right: auto;
+       display: block;
+   }
+
+   .login  {
+       text-decoration: none;
+   }

@@ -1,0 +1,17 @@
+.feedback-render {
+    display: inline-block;
+    width: 100%;
+}
+
+.feedback-image {
+    width: 100px;
+    float: left;
+    height: 100px;
+margin-right: 20px;    
+margin-bottom: 40px;    
+    border-radius: 50%;
+}
+
+.comment {
+    font-style: italic;
+}

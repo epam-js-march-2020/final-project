@@ -1,0 +1,12 @@
+.home {
+    width: 800px;
+	max-width: 100%;
+    margin: 0 auto;
+}
+
+.caliostro {
+    font-family: 'Cagliostro', sans-serif;
+  font-size: 22px;
+  text-align: center;
+
+}

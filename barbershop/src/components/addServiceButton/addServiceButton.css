@@ -1,0 +1,12 @@
+.center  {
+    text-align: left;
+}
+
+.added {
+    display: flex;
+    margin-top: 20px;
+}
+
+.added button {
+    margin-left: 10px;
+}
