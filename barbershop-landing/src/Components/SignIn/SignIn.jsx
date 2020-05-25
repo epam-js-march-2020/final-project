@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Modal from 'react-bootstrap/Modal';
@@ -14,38 +14,57 @@ const SignIn = (props) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
+    const [users, setUsers] = useState([]);
 
     const jsonBin = {
         root: 'https://api.jsonbin.io',
         binId: '5ec5b7d7bbaf1f258943dec4', 
         binVersion: 'latest',
-        key: '$2b$10$ltjATMhqY0JfYN5Mi1k1nOVTEQIGJwabv1R6Fb9CUjOUl7jTe6PwG',
+        key: '$2b$10$ltjATMhqY0JfYN5Mi1k1nOVTEQIGJwabv1R6Fb9CUjOUl7jTe6PwG'
     };
 
-    async function fetchUserData(userData) {
-        console.log('fetchUsersData');
-        let users = [];
+    async function getUsersData() {
         const response = await fetch([jsonBin.root, 'b', jsonBin.binId, jsonBin.binVersion].join('/'), {
-            type: 'GET',
+            method: 'GET',
             headers: {
-                'secret-key': jsonBin.key,
-            },
+                'secret-key': jsonBin.key
+            }
         });
         await response
             .json()
-            .then(res => {
-                users = [...res, userData];
-            });
+            .then(res => setUsers(res));
+    };
 
-        await fetch([jsonBin.root, 'b', jsonBin.binId].join('/'), {
+    async function updateUsersData(user) {
+        const response = await fetch([jsonBin.root, 'b', jsonBin.binId].join('/'), {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'secret-key': jsonBin.key,
+                'secret-key': jsonBin.key
             },
-            body: JSON.stringify(users)
-        })
-        .then(() => document.querySelector('#submitRegistration').disabled = true);
+            body: JSON.stringify([...users, { email: user.email, pass: user.pass, id: user.id }])
+        });
+        await response
+            .json()
+            .then(res => setUsers(res.data));
+    };
+
+    async function createNewUser(user) {
+        user.services = [];
+        const response = await fetch([jsonBin.root, 'b'].join('/'), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'secret-key': jsonBin.key
+            },
+            body: JSON.stringify(user)
+        });
+        await response
+            .json()
+            .then(res => user.id = res.id)
+            .then(() => updateUsersData(user))
+            .then(() => document.querySelector('#submitRegistration').disabled = true);
+        return user;
     };
 
     const handleName = (e) => {
@@ -62,33 +81,57 @@ const SignIn = (props) => {
         const submitRegistration = document.querySelector('#submitRegistration');
         if (e.target.value !== registerPasswordConfirm.value) {
             registerPasswordConfirm.classList.add('border', 'border-danger');
-            e.target.classList.add('border', 'border-danger');
             submitRegistration.disabled = true;
         } else {
             registerPasswordConfirm.classList.remove('border', 'border-danger');
-            e.target.classList.remove('border', 'border-danger');
             submitRegistration.disabled = false;
         }
     };
 
     const handlePassConfirm = (e) => {
         const submitRegistration = document.querySelector('#submitRegistration');
-        const registerPassword = document.querySelector('#registerPassword');
         if (e.target.value !== pass) {
-            registerPassword.classList.add('border', 'border-danger');
             e.target.classList.add('border', 'border-danger');
             submitRegistration.disabled = true;
         } else {
-            registerPassword.classList.remove('border', 'border-danger');
             e.target.classList.remove('border', 'border-danger');
             submitRegistration.disabled = false;
         }
     }
 
+    useEffect(() => {
+        getUsersData();
+// eslint-disable-next-line
+    }, []);
+
     const registrationSubmit = (e) => {
         e.preventDefault();
         const user = { name, email, pass };
-        fetchUserData(user);
+        console.log(users);
+        const noSuchUser = users.filter((u) => u.email === user.email).length === 0;
+        if (noSuchUser) {
+            createNewUser(user);
+        } else {
+            alert('Email already used!')
+        }
+    };
+
+    const signInSubmit = (e) => {
+        e.preventDefault();
+        const user = { email, pass };
+        const success = users.filter((u) => u.email === user.email && u.password === user.pass).length === 1;
+        if (success) {
+            alert('Success')
+        } else {
+            alert('Login error')
+        }
+    };
+
+    const clearFields = () => {
+        setEmail("");
+        setPass("");
+        setName("");
+        document.querySelector('#registerPasswordConfirm').value = "";
     };
 
     return(
@@ -97,20 +140,20 @@ const SignIn = (props) => {
                 <Modal.Title>{t('signIn.title')}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Tabs defaultActiveKey="create" className="flex-row">
+                <Tabs defaultActiveKey="create" className="flex-row"  onSelect={clearFields}>
                     <Tab eventKey="create" title={t('signIn.createTab')}>
                         <Form id="registrationForm" onSubmit={registrationSubmit}>
                             <Form.Group controlId="registerName" className="mt-2">
                                 <Form.Label>{t('signIn.name')}</Form.Label>
-                                <Form.Control type="text" placeholder="Enter name" onChange={handleName} required/>
+                                <Form.Control type="text" placeholder="Enter name" onChange={handleName} value={name} required/>
                             </Form.Group>
                             <Form.Group controlId="registerEmail">
                                 <Form.Label>{t('signIn.email')}</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" onChange={handleEmail} required/>
+                                <Form.Control type="email" placeholder="Enter email" onChange={handleEmail} value={email} required/>
                             </Form.Group>
                             <Form.Group controlId="registerPassword">
                                 <Form.Label>{t('signIn.password')}</Form.Label>
-                                <Form.Control type="password" placeholder="Password" onChange={handlePass} required/>
+                                <Form.Control type="password" placeholder="Password" onChange={handlePass} value={pass} required/>
                             </Form.Group>
                             <Form.Group controlId="registerPasswordConfirm">
                                 <Form.Label>{t('signIn.passwordConfirm')}</Form.Label>
@@ -126,14 +169,14 @@ const SignIn = (props) => {
                     </Tab>
 
                     <Tab eventKey="signIn" title={t('signIn.signInTab')}>
-                        <Form id="signInForm">
+                        <Form id="signInForm" onSubmit={signInSubmit}>
                             <Form.Group controlId="signInEmail" className="mt-2">
                                 <Form.Label>{t('signIn.email')}</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" />
+                                <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmail}/>
                             </Form.Group>
                             <Form.Group controlId="signInPassword">
                                 <Form.Label>{t('signIn.password')}</Form.Label>
-                                <Form.Control type="password" placeholder="Password" />
+                                <Form.Control type="password" placeholder="Password" value={pass} onChange={handlePass}/>
                             </Form.Group>
                             <Button variant="primary" type="submit" className="mr-2">
                                 {t('signIn.signInTab')}
