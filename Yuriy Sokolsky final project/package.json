@@ -31,7 +31,6 @@
     "express": "^4.17.1",
     "history": "^4.10.1",
     "jquery": "^3.5.1",
-    "moment": "^2.25.3",
     "moment-duration-format": "^2.3.2",
     "moment-locales-webpack-plugin": "^1.2.0",
     "moment-with-locales-es6": "^1.0.1",
@@ -48,6 +47,7 @@
     "react-router-dom": "^5.2.0",
     "sha1": "^1.1.1",
     "style-loader": "^1.2.1",
+    "universal-cookie": "^4.0.3",
     "webpack-cli": "^3.3.11"
   },
   "devDependencies": {

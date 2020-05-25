@@ -1,0 +1,7 @@
+export const WorkHours = {
+  START_HOURS: 10,
+  START_MINUTES: 0,
+  STOP_HOURS: 22,
+  STOP_MINUTES: 0,
+    END_OF_RECORDING:21
+};

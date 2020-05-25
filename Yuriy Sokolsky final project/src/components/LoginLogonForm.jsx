@@ -5,6 +5,7 @@ import { Container, Row, Col, Alert, Button, Form } from "react-bootstrap";
 import "../componentStyles/ProfileContent.css";
 
 export default class LoginLogonForm extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +27,7 @@ export default class LoginLogonForm extends React.Component {
     event.preventDefault();
     $.when(
       $.ajax({
-        url: "/login/",
+        url: "/api/login/",
         type: "POST",
         data: JSON.stringify({
           login: this.state.loginValue,
@@ -53,12 +54,13 @@ export default class LoginLogonForm extends React.Component {
       }.bind(this)
     );
   }
+
   registration(event) {
     this.disableButtons();
     event.preventDefault();
     $.when(
       $.ajax({
-        url: "/registration/",
+        url: "/api/registration/",
         type: "POST",
         data: JSON.stringify({
           login: this.state.loginValue,
@@ -85,6 +87,7 @@ export default class LoginLogonForm extends React.Component {
       }.bind(this)
     );
   }
+
   disableButtons() {
     this.setState({
       disableButtons: true,
@@ -96,6 +99,7 @@ export default class LoginLogonForm extends React.Component {
       [name]: event.target.value,
     });
   }
+
   render() {
     return (
       <>

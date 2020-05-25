@@ -5,7 +5,9 @@ import Col from "react-bootstrap/Col";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVk, faInstagramSquare,faFacebookSquare } from '@fortawesome/free-brands-svg-icons'
 import "../componentStyles/Footer.css";
+
 export default class Footer extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -19,6 +21,7 @@ export default class Footer extends React.Component {
       InstagramSocialAddress:"/Haircut"
     };
   }
+
   render() {
     return (
       <div className="footerContainer">

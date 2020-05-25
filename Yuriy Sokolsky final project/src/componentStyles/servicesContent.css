@@ -1,4 +1,4 @@
-.servicesPageBackground{
+.services-page-background{
     position: relative;
     height: 85vh;
     overflow: auto;
@@ -8,15 +8,15 @@
     padding-top: 80px;
     color:whitesmoke;
 }
-.servicesPageContainerList{
+.services-page-container-list{
     overflow-y: auto;
 
 }
-.servicesPageContainerPreview{
+.services-page-container-preview{
     margin-left: 10px;
 }
 
-.servicesPageItem{
+.services-page-item{
     margin-bottom: 5px;
     padding:10px;
     border-bottom-left-radius: 100px;

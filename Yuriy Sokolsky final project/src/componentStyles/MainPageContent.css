@@ -1,15 +1,15 @@
-.mainPageBackground, .mainPageMainBlock{
+.main-page-background, .main-page-main-block{
     position: relative;
 }
 
-.mainPageBackground{
+.main-page-background{
     height: 85vh;
     width: 100%;
     background:linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url("/images/logos/background.png");
     background-size:cover;
 }
 
-.mainPageMainBlock{
+.main-page-main-block{
     top:50%;
     transform:translateY(-50%);
     width: 20vw;
@@ -17,7 +17,7 @@
     height: 12vw;
 }
 
-.mainPageMainBlockNameDiv, .mainPageMainBlockAddressDiv{
+.main-page-main-block-name-div, .main-page-main-block-address-div{
     border:3px solid black;
     text-align: center;
     font-family: Ruso One;
@@ -25,12 +25,12 @@
 
 }
 
-.mainPageMainBlockNameDiv>span, .mainPageMainBlockAddressDiv >span{
+.main-page-main-block-name-div>span, .main-page-main-block-address-div >span{
     position: relative;
     top: 11%;
 }
 
-.mainPageMainBlockNameDiv{
+.main-page-main-block-name-div{
     position: absolute;
     width: 100%;
     height: 80%;
@@ -39,7 +39,7 @@
     font-size: 1.91vw;
 }
 
-.mainPageMainBlockAddressDiv{
+.main-page-main-block-address-div{
     position: relative;
     margin: 0 auto;
     background: rgba(245, 245, 245, .7);

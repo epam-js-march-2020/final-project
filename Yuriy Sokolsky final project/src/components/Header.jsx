@@ -6,13 +6,16 @@ import "../componentStyles/Header.css";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+
 export default class Header extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
       LogoImgURL: "../images/logos/logoHairCut.png",
     };
   }
+
   render() {
     return (
       <>
