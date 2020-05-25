@@ -23,6 +23,16 @@ class App extends React.Component {
   
 
   render() {
+
+    const outModals = this.props.outModals;
+
+    document.onkeydown = function(e) {
+      if (e.key === "Escape") { // escape key maps to keycode `27`
+         outModals();
+     }
+    };
+    
+
     return (
       <div className="App body">
         {/* Modal fade that is shown "behind" modal windows during interaction */}
