@@ -38,13 +38,11 @@ class App extends React.Component {
             })
         ).then(
             function (data, textStatus, jqXHR) {
-                if (data) {
+                if (data._id!=null) {
                     this.setState({
                         auth: true,
                         userData: data,
                     });
-                } else {
-                    console.log("first time")
                 }
             }.bind(this)
         );

@@ -238,7 +238,7 @@ app.post("/api/runtime", function (req, res) {
         })
         .catch((error) => {
             console.log(error)
-            res.json(false);
+            res.json({});
         });
 });
 
