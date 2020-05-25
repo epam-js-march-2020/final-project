@@ -146,7 +146,7 @@ export class ServiceContent extends React.Component {
             });
         if (
             isToday(this.state.datePickerValue) &&
-            getHours(new Date()) < WorkHours.END_OF_RECORDING
+            getHours(new Date()) < WorkHours.END_OF_RECORDING && getHours(new Date()) > WorkHours.START_HOURS
         ) {
             this.setState({
                 minTime: new Date(),

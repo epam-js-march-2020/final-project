@@ -40,6 +40,7 @@ export class ProfileLoggedIn extends React.Component {
             function (data, textStatus, jqXHR) {
                 this.setState({
                     appointments: data,
+                    disableButtons:false
                 });
             }.bind(this)
         );
@@ -95,6 +96,9 @@ export class ProfileLoggedIn extends React.Component {
     }
 
     cancelAppointment(masterID, userID, serviceID, date, time) {
+        this.setState({
+            disableButtons:true
+        })
         $.when(
             $.ajax({
                 url:
@@ -112,8 +116,13 @@ export class ProfileLoggedIn extends React.Component {
                 processData: false,
             })
         )
-            .then(this.getAppointments())
-            .bind(this);
+            .then(
+                function () {
+                    this.getAppointments();
+                }.bind(this)
+
+            )
+
     }
 
     render() {
@@ -194,7 +203,7 @@ export class ProfileLoggedIn extends React.Component {
                                 </Col>
                             </Row>
 
-                            <AppointmentsRender appointments={this.state.appointments}/>
+                            <AppointmentsRender appointments={this.state.appointments} cancelAppointment={this.cancelAppointment} disableButtons={this.state.disableButtons}/>
                         </Container>
                     </Col>
                 </Row>

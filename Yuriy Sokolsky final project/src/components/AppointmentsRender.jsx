@@ -23,8 +23,9 @@ export let AppointmentsRender = (props) =>
                                     {appointment.masterName} {appointment.masterSurName}{" "}
                                     {service.name} :{date.date} {time.timeStart}
                                     <Button
+                                        disabled={props.disableButtons}
                                         onClick={() =>
-                                            this.cancelAppointment(
+                                            props.cancelAppointment(
                                                 appointment.masterID,
                                                 appointment.user.userID,
                                                 service.serviceID,

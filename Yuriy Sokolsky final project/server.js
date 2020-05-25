@@ -88,10 +88,10 @@ app.delete("/api/appointment/delete", function (req, res) {
                             function (err, results) {
                                 db.close();
                                 let userIndex = results.users.findIndex(
-                                    (x) => x.userID === parseInt(userID)
+                                    (x) => parseInt(x.userID) === parseInt(userID)
                                 );
                                 let servicesIndex = results.users[userIndex].services.findIndex(
-                                    (x) => x.serviceID === parseInt(serviceID)
+                                    (x) => parseInt(x.serviceID) === parseInt(serviceID)
                                 );
                                 let dateIndex = results.users[userIndex].services[
                                     servicesIndex
