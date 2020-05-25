@@ -1,0 +1,26 @@
+.btn-cancel {
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    margin: 10px 0 ;
+    background-color:  #403F3D;   
+}
+
+.btn-cancel:hover {
+    background-color: #DE5E4A;
+}
+
+.serv-name {
+    list-style-type: none;
+    border-bottom: 1px solid rgb(126, 126, 126);
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.serv-list {
+    margin-bottom: 40px;
+}

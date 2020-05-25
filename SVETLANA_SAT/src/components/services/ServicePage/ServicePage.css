@@ -1,0 +1,19 @@
+.arrow {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    justify-content: flex-end;
+}
+
+.btn:hover {
+    background-color: #DE5E4A;
+}

@@ -1,0 +1,11 @@
+export const GET_SERVICES = 'GET_SERVICES';
+export const GET_SERVICE = 'GET_SERVICE';
+export const GET_USERS = 'GET_USERS';
+export const CHECK_USER = 'CHECK_USER';
+export const LOG_OUT = 'LOG_OUT';
+export const ADD_USER = 'ADD_USER';
+export const GET_USER_SERVICES = 'GET_USER_SERVICES';
+export const ADD_GUEST = 'ADD_GUEST';
+export const ADD_USER_SERVICE = 'ADD_USER_SERVICE';
+export const DELETE_USER_SERVICE = 'DELETE_USER_SERVICE';
+export const UPDATE_USER = 'UPDATE_USER'

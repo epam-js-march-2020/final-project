@@ -1,0 +1,17 @@
+.about {
+    display: flex;
+    justify-content: space-around;
+}
+
+.info {
+    font-size: 18px;
+    margin-right: 20px;
+    max-width: 50%;
+    text-align: left;
+}
+
+.main {
+    margin: auto;
+    margin-bottom: 40px;
+    text-align: center;
+}

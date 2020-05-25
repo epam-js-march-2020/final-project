@@ -1,0 +1,9 @@
+.service {
+    width: 40%;
+    list-style-type: none;
+}
+
+.services {
+    display: flex;
+    justify-content: space-around;    
+}

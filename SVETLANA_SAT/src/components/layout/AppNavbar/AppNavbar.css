@@ -1,0 +1,47 @@
+.brand {
+    color:white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    line-height: 0;
+    margin-left: 20px;
+    text-align: center;
+    text-decoration: none;   
+}
+
+.brand:hover {
+    color:#DE5E4A;
+}
+
+.hr-bottom {
+    margin-bottom: 30px;
+}
+
+.info-links {
+    display: flex;
+}
+
+.link {
+    color: white;
+    cursor: pointer;
+    margin-right: 40px;
+    text-decoration: none;
+}
+
+.link:hover {
+    color:#DE5E4A;
+}
+
+.navbar {
+    margin-bottom: 40px;
+}
+
+.navbar-nav {
+    display: flex;
+    font-size: 20px;  
+    justify-content: space-around;
+    list-style-type: none;
+}
+
+.private-page {
+    display: flex;
+}

@@ -1,4 +1,14 @@
-# final_project
+## final_project
+# Usage
+```
+git clone https://github.com/Lana2683/final-project.git
+cd final-project/SVETLANA_SAT
+npm install
+npm start
+```
+Go to  http://localhost:3000
+
+# Descripton
 
 Задание: сайт-визитка для барбершопа/парикмахерской/салона красоты.
 

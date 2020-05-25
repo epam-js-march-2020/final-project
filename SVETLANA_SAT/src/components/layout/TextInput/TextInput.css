@@ -1,0 +1,23 @@
+.form-group {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.input {
+    padding: 10px 20px;
+    border: 2px solid white;
+    background-color: #403F3D;
+    outline-color: #DE5E4A;
+    min-width: 300px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.label {
+    margin-bottom: 5px;
+    background-color: #403F3D;
+}

@@ -1,0 +1,105 @@
+.canc-s {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.canc-btn {
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid white;
+    color: white;
+    margin-left: 20px;
+    text-align: center;
+}
+
+.canc-btn:hover {
+    background-color: #DE5E4A;
+}
+
+.close {
+    cursor: pointer;
+    display: flex;
+    justify-self: flex-end;
+    font-size: 40px;
+    margin-left: 90%;
+    width: 40px;
+}
+
+.close:hover {
+    color:  #DE5E4A;;
+}
+
+.descr {
+    border: 1px solid #797979;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.desc-form {
+    line-height: 1.5;
+    font-size: 20px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.description {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.img {
+    opacity:0.9;
+}
+
+
+.modal-bkgd {
+    position: fixed; 
+    margin: auto;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+    background-color: #403F3D;
+    margin:auto; 
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.photo {
+    width: 300px;
+    box-shadow: 0 0 20px rgba(2, 2, 2, 0.8);
+    border-radius: 8px;
+}
+
+.service-btn {
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid white;
+    color: white;
+    width: 100px;
+    text-align: center;
+    margin-left: 75%;
+}
+
+.service-btn:hover {
+    background-color: #DE5E4A;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 60px;
+}
