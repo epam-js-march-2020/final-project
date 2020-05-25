@@ -1,2 +1,5 @@
-export const TOGGLE_TODO = 'TOGGLE_TODO';
-export const ADD_TODO = 'ADD_TODO';
+export const LOAD_USERS = 'LOAD_USERS';
+export const LOAD_USER_DATA = 'LOAD_USER_DATA';
+export const REGISTER_USER = 'REGISTER_USER';
+export const ADD_APPOINTMENT = 'ADD_APPOINTMENT';
+export const REMOVE_APPOINTMENT = 'REMOVE_APPOINTMENT';
