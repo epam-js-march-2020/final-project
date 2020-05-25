@@ -1,0 +1,20 @@
+.haircuts {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.haircut img {
+    
+    height: 200px;
+    margin: 5px;
+}
+
+.haircut {
+    display: flex-column;
+    }
+
+.clients {
+    font-family: 'Cagliostro', sans-serif;
+    font-size: 22px;
+}

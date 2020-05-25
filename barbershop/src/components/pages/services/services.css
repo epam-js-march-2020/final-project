@@ -1,0 +1,29 @@
+/* .services {
+    display: flex;
+    justify-content: center;
+
+} */
+
+.services {
+    /* margin: 10px; */
+    text-align: center;
+}
+
+.services img {
+    height: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+ 
+.service-category {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: left; */
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+} 
+
+
+
