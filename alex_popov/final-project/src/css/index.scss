@@ -73,8 +73,9 @@ p {
   margin: auto;
   padding-left: 15px;
   padding-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
-
 
 .margin-top {
   margin-top: map-get($header, 'height' );
@@ -85,7 +86,6 @@ p {
   position: relative;
   width: 100wv;
   height: calc(100vh - #{map-get($header, 'height')} );
-  // margin-top: map-get($header, 'height' );
 }
 
 .fixwdScreen {

@@ -14,7 +14,6 @@ import { connect } from 'react-redux';
 
 class Main extends React.Component {
     render() {
-        // console.log(this.props.user)
         return (
             <main>
                 <Switch>

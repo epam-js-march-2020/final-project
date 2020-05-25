@@ -123,10 +123,9 @@ class Appointment extends WithFormChecker {
     }
 
     onClickBook() {
-        console.log('book');
+        // console.log('book');
 
-        const { date, time } = this.state.date;
-        // const time = this.state.time;
+        const { date, time } = this.state;
 
         const schedule = JSON.parse( localStorage.getItem('appointments') );
         
@@ -168,7 +167,7 @@ class Appointment extends WithFormChecker {
     }
 
     onChangeService(ev) {
-        console.log(ev.target)
+        // console.log(ev.target)
         this.setState({[ev.target.id]: ev.target.value})
     }
 
@@ -184,7 +183,7 @@ class Appointment extends WithFormChecker {
         const formClassName = this.props.user ? 'login_form user_login_form' : 'login_form user_login_form login_form-phone'
         return (
             <>
-            <div className='container pt-xxxl'>
+            <div className='container margin-top'>
                 <h2>Book time</h2>
 
                 <h3>Choose a day</h3>
@@ -206,7 +205,11 @@ class Appointment extends WithFormChecker {
                         </>
                     }
                     
-                    <ServiceSelect onChangeService={this.onChangeService} activeService={this.state.serviceType} serviceList={this.services} />
+                    <ServiceSelect 
+                        onChangeService={this.onChangeService} 
+                        activeService={this.state.serviceType} 
+                        serviceList={this.services} 
+                    />
 
                     <div className='form_buttonsContainer'>
                         <button id='book' disabled={!this.formCheck()} onClick={this.onClickBook} className={bookButtonClassName} >Book</button>
@@ -225,15 +228,36 @@ class Appointment extends WithFormChecker {
 
 class ServiceSelect extends React.Component {
     render() {
-        const { onChangeService, serviceList } = this.props
+        const { onChangeService, serviceList, activeService } = this.props;
+        // console.log(activeService)
+        const selectClassName = activeService === 'choose service' ? 
+            'form_input form_input-yellow form_input-invalid' : 
+            'form_input form_input-yellow' ;
+
+        const labelClassName = activeService === 'choose service' ? 
+            'form_label form_label-invalid' : 
+            'form_label';
+
+        // console.log(selectClassName)
         return (
             <>
-            <label className='form_label' htmlFor='phone'>Choose a service</label>
-            <select className='form_input form_input-yellow' id='serviceType' onChange={onChangeService} defaultValue={this.props.activeService}>
+            <label className={labelClassName} htmlFor='phone'>Choose a service</label>
+            <select 
+                className={selectClassName}
+                id='serviceType' 
+                onChange={onChangeService}
+                defaultValue={activeService}
+            >
                 <option className='input_options'>choose service</option>
 
                 {Object.keys(serviceList).map( (el) => {
-                    return <option className='input_options' key={el} value={serviceList[el].name}>{serviceList[el].name}</option>
+                    return <option 
+                                className='input_options' 
+                                key={el} 
+                                value={serviceList[el].name}
+                            >  
+                                {serviceList[el].name}
+                            </option>
                 })}
                 
             </select>

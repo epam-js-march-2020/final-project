@@ -63,7 +63,7 @@ class Login extends WithFormChecker {
     login(phone, pass) {
         const users = JSON.parse( localStorage.getItem('users'));
         const userId = this.phoneChecker(users, phone);
-        console.log(users[userId])
+        // console.log(users[userId])
         if (userId !== -1) {
             if ( users[userId].pass === pass) {
                 
@@ -121,12 +121,12 @@ class Login extends WithFormChecker {
         return (
             <div className="container_login">
                 <h2 className='login_header'>Join the Barbers Den Club</h2>
-                <div className='login_form login_login_form login_form-phone'>
+                <div className='login_form login_form-phone'>
     
                     <label className='form_label' htmlFor='phone'>Phone number 10 digits</label>
                     <input onInput={this.onInput} id='phone' className='form_input form_input-yellow' type="text"/>
     
-                    <label htmlFor='pass'>Password 5 characters min, max - 15</label>
+                    <label className='form_label' htmlFor='pass'>Password 5 characters min, max - 15</label>
                     <input onInput={this.onInput} id='pass' className='form_input form_input-yellow' type="password"/>
     
                     <div className='form_buttonsContainer'>

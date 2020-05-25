@@ -128,10 +128,10 @@ class UserInformation extends WithFormChecker {
                 <label className='form_label' htmlFor='phone'>Phone number 10 digits</label>
                 <input onInput={this.onInput} placeholder={this.props.user.phone} id='phone' className='form_input form_input-yellow' type="text"/>
         
-                <label htmlFor='pass'>Password 5 characters min, max - 15</label>
+                <label className='form_label' htmlFor='pass'>Password 5 characters min, max - 15</label>
                 <input onInput={this.onInput} id='pass' className='form_input form_input-yellow' type="password"/>
 
-                <label htmlFor='name'>Name {this.minLen.name} characters min, max - {this.len.name} </label>
+                <label className='form_label' htmlFor='name'>Name {this.minLen.name} characters min, max - {this.len.name} </label>
                 <input onInput={this.onInput} placeholder={this.props.user.name} id='name' className='form_input form_input-yellow' type="text"/>
                         
                 <div className='form_buttonsContainer'>

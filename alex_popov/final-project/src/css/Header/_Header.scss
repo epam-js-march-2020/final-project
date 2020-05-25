@@ -21,7 +21,9 @@ $header: (
     top: 0;
     left: 0;
     right: 0;
-    padding-top: 5px;
+    @media (max-width: 425px) {
+        padding-top: 12px;
+    }
 }
 
 .header-yellow {
@@ -29,12 +31,28 @@ $header: (
     color:map-get($theme-header-yellow , 'font-color' );
 }
 
+.header_container {
+    display: flex;
+    align-items: center;
+    max-width: 1000px;
+    margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 .header_logo {
     height: 50px;
+    @media (max-width: 425px) {
+        display: none;
+    }
 }
 
 .header-links {
-    width: calc( 100% - #{map-get($sizes, 'header-logo-width')} );
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 10;
 }
 
 .header_link {
@@ -42,7 +60,12 @@ $header: (
     text-transform: uppercase;
     font-family: 'Open Sans';
     font-weight: 400;
-    margin-left: 60px;
+    margin-left: 3vw;
+    border-bottom: 2px solid transparent;
+    // margin-left: 60px;
+    @media (max-width: 700px) {
+        margin-top: 30px;
+    }
 }
 
 .header_link-active {
@@ -55,4 +78,47 @@ $header: (
 
 .header_loginIcon-active {
     fill: map-get($theme-header-yellow, 'main-color');
+}
+
+.header_mobileMenu {
+    display: none;
+    height: 25px;
+    @media (max-width: 425px) {
+        display: block;
+    }
+}
+
+.header_mainNav {
+    @media (max-width: 425px) {
+        display: none;
+    }
+}
+
+.header_mainNav-mobile {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    font-size: 2em;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    z-index: 5;
+}
+
+.header_mainNav-mobile:after {
+    content: "phone: 01480 458334";
+    position: absolute;
+    bottom: 40px;
+    font-size: 0.6em;
+    color: rgb(202, 201, 201);
+}
+
+.header_mobileMenu-active {
+    fill: map-get($theme-header-yellow, 'main-color')
 }

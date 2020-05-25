@@ -19,6 +19,13 @@ $services-yellow-theme: (
     background-size: cover;
     background-color:  map-get($services-yellow-theme, 'photo-alt-color');
     background-position: -250px;
+    @media (max-width: 670px) {
+        background-position: -10px;
+    }
+    @media (max-width: 470px) {
+        background-position: -150px;
+    }
+    
 }
 
 .container_service {
@@ -30,10 +37,11 @@ $services-yellow-theme: (
 }
 
 .services_links {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     position: absolute;
     width: 280px;
+    height: 250px;
     top: 150px;
     left: 50%;
     padding-top: 15px;
@@ -41,11 +49,20 @@ $services-yellow-theme: (
     padding-bottom: 15px;
     padding-left: 15px;
     font-size: 1.9em;
+
+    @media (max-width: 670px) {
+        left:3%;
+    }
+}
+
+.services_links_background {
+    @extend .services_links;
+    border-radius: 7px;
+    opacity: 0.7;
+    background-color: map-get($services-yellow-theme , 'background-color' );
 }
 
 .services_links-white {
-    border-radius: 15px;
-    background-color: map-get($services-yellow-theme , 'background-color' );
     color: map-get($services-yellow-theme, 'passive-color' );
     font-weight: 200;
 }
