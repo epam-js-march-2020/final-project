@@ -2,15 +2,12 @@ import React from 'react';
 import './App.css';
 import './index.scss';
 
-import { Router } from "react-router-dom";
-import { createBrowserHistory } from 'history';
 import {
   Route,
   Switch,
   Redirect,
   withRouter
 } from "react-router-dom";
-import { Link } from 'react-router-dom';
 
 import { NavBar } from './components/nav_bar.js';
 import { HomePage } from './components/home_page.js';
@@ -84,7 +81,7 @@ class App extends React.Component {
         </header>
 
         <main className="main">
-          
+
           <Switch>
 
               <Route path='/home'>

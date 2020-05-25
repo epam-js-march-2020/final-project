@@ -7,14 +7,6 @@ import { companyInfo } from './company_info';
 
 import { Router } from "react-router-dom"
 import { createBrowserHistory } from 'history'
-import {
-  Route,
-  Switch,
-  Redirect,
-  withRouter
-} from "react-router-dom"
-
-
 
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';

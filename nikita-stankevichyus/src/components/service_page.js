@@ -20,7 +20,7 @@ export class ServicePage extends React.PureComponent {
           <h1>{this.props.navigation.bufferService.name}</h1>
           <p className = 'mg-t-25'>{this.props.navigation.bufferService.description}</p>
         </div>
-        <img src = {image} alt = 'Service Image' className = 'service_image'></img>
+        <img src = {image} alt = 'Service' className = 'service_image'></img>
         <div  className = 'row col-12 justify-content-center'>
           <button onClick = {this.handleClick} className = 'button_project button_project--light'>ORDER FOR ${this.props.navigation.bufferService.price}</button>
         </div>
