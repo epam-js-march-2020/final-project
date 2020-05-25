@@ -1,0 +1,15 @@
+.edit-profile {
+    width: 75%;
+    margin: auto;
+}
+
+.btn-change {
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    margin: 10px 0 ;
+    background-color: #DE5E4A;  
+    font-size: 18px; 
+}

@@ -1,0 +1,44 @@
+.box {
+    text-align: center;
+    /* margin-top: auto; */
+    /* align-self: center; */
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    /* margin-right: 20px; */
+}
+
+.btn-book {
+    float: right;
+    padding: 10px;
+    width: 100%;
+    margin-top: 30px;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    background-color: #DE5E4A;
+    font-size: 18px;
+    /* background-color: #DE5E4A; */
+}
+
+.btn-book:hover {
+    background-color: rgb(253, 83, 56);
+    cursor: pointer;
+    /* color: #252525; */
+}
+.input {
+    padding: 10px 20px;
+    /* border: 1px solid #403F3D; */
+    border: 2px solid white;
+    background-color: #403F3D;
+    outline-color: #DE5E4A;
+    /* box-shadow: 0 0 10px rgba(0,0,0,0.5); */
+    /* margin-left: 20px; */
+    min-width: 300px;
+}
+
+.select-serv {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}

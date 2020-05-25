@@ -1,0 +1,15 @@
+.home {
+    /* width: fit-content;  */
+    /* display: table; */
+    max-width: 65%;
+    /* border: 2px solid white; */
+    margin: auto;
+    padding: 40px;
+    border-radius: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 1);
+    /* box-shadow: inset rgba(0,0,0,0.5) 8px  8px 18px 5px,
+                inset    rgba(255,255,255,0.2)   -8px -8px 18px 5px, 
+                rgba(255,255,255,0.1)   -8px -8px 18px 5px,
+                rgba(0,0,0,0.5) 8px  8px 18px 5px;  */
+ } 

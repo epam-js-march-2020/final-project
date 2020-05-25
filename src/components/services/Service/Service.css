@@ -1,0 +1,13 @@
+.serv-item {
+    padding: 20px 10px;
+    border-bottom: 2px solid white;
+}
+
+.serv-item:hover {
+    background-color: #DE5E4A;
+}
+
+.item {
+    text-decoration: none;
+    color: white;
+}

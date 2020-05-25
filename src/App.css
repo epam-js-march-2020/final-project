@@ -1,0 +1,53 @@
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #403F3D;
+    color: white;
+}
+
+.container {
+    width: 75%;
+    margin: auto;
+}
+
+
+@media (max-width: 1380px) {
+    .scissors {
+width: 400px;
+height: 500px;
+
+    }
+.lead {
+    height: 100%;
+}
+}
+
+@media (max-width: 1120px) {
+    .home {
+        width: 90%;
+        margin: auto;
+    }
+    .scissors {
+        width: 300px;
+        height: 400px;
+    }
+    .foto-img {
+        height: 200px;
+    }
+
+}
+
+@media (max-width:800px) {
+    .scissors {
+        display: none;
+    }
+    .box {
+        background-image: url(./components/layout/4.jpg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+        width: 100%;
+    }
+    .service {
+        width: 100%;
+    }
+}

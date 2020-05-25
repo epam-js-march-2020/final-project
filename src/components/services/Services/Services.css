@@ -1,0 +1,11 @@
+.services {
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.service {
+    width: 40%;
+    list-style-type: none;
+}
+
