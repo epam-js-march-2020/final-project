@@ -32,11 +32,13 @@ const Header = () => {
     const [t] = useTranslation();
     const [showModal, setShowModal] = useState(false);
     const toggleModal = () => setShowModal(!showModal);
+
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <span ref={ref} onClick={(e) => { e.preventDefault(); onClick(e); }}>
-          {children}
+            {children}
         </span>
-      ));
+    ));
+    
     return (
         <>
             <Navbar collapseOnSelect expand="md" className="flex-md-row-reverse px-0">

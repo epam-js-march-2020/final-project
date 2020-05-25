@@ -18,7 +18,6 @@ const Gallery = () => {
   };
 
   async function fetchData() {
-    console.log('fetchGalery');
     const response = await fetch([jsonBin.root, 'b', jsonBin.binId, jsonBin.binVersion].join('/'), {
       type: 'GET',
       headers: {

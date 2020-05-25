@@ -20,7 +20,6 @@ const About = () => {
   };
 
   async function fetchEmployeeData() {
-    console.log('fetchEmployeeData');
     const response = await fetch([jsonBin.root, 'b', jsonBin.binIdEmployee, jsonBin.binVersion].join('/'), {
       type: 'GET',
       headers: {
@@ -41,7 +40,6 @@ const About = () => {
   };
 
   async function fetchCarouselData() {
-    console.log('fetchCarouselData');
     const response = await fetch([jsonBin.root, 'b', jsonBin.binIdCarousel, jsonBin.binVersion].join('/'), {
       type: 'GET',
       headers: {
