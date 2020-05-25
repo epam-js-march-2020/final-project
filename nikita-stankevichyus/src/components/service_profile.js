@@ -57,7 +57,7 @@ export class ServiceProfile extends React.PureComponent {
           : null
       }
 
-      <div className = 'mg-b-10 profile_service justify-content-center service container row'>
+      <div className = 'mg-b-10 profile_service justify-content-center service container row mg-h-auto'>
         <div className = 'service_name col-12 col-md-4 container row justify-content-center align-items-center align-content-center'>
           {this.props.name}
         </div>

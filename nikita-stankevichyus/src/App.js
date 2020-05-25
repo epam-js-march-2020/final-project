@@ -2,6 +2,16 @@ import React from 'react';
 import './App.css';
 import './index.scss';
 
+import { Router } from "react-router-dom";
+import { createBrowserHistory } from 'history';
+import {
+  Route,
+  Switch,
+  Redirect,
+  withRouter
+} from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 import { NavBar } from './components/nav_bar.js';
 import { HomePage } from './components/home_page.js';
 import { Profile } from './components/profile.js';
@@ -18,7 +28,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="App body">
-
         {/* Modal fade that is shown "behind" modal windows during interaction */}
         <div 
           className={this.props.modals.fadeOn ? 
@@ -74,54 +83,66 @@ class App extends React.Component {
           />
         </header>
 
-        <main className="main">  
+        <main className="main">
+          <Switch>
         { 
           this.props.navigation.atHome ?
 
               // Home page
-              <HomePage />
+              <Route path='/home'>
+                <HomePage />
+              </Route>
+        // <Route path='/home' component= {<HomePage />} /> 
           : this.props.navigation.atProfile ? 
 
               // User's profile page
-              <Profile 
-                user = {this.props.user}
-                modals = {this.props.modals}
-                deleteService = {this.props.deleteService}
-                changeName = {this.props.changeName}
-                changeSecondName = {this.props.changeSecondName}
-                changeEmail = {this.props.changeEmail}
-                toHome = {this.props.toHome}
-                toChangeName = {this.props.toChangeName}
-                toChangeSecondName = {this.props.toChangeSecondName}
-                toChangeEmail = {this.props.toChangeEmail}
-                outModals = {this.props.outModals}
-                logOut = {this.props.logOut}               
-              />
+              <Route path='/profile'>
+                <Profile 
+                  user = {this.props.user}
+                  modals = {this.props.modals}
+                  deleteService = {this.props.deleteService}
+                  changeName = {this.props.changeName}
+                  changeSecondName = {this.props.changeSecondName}
+                  changeEmail = {this.props.changeEmail}
+                  toHome = {this.props.toHome}
+                  toChangeName = {this.props.toChangeName}
+                  toChangeSecondName = {this.props.toChangeSecondName}
+                  toChangeEmail = {this.props.toChangeEmail}
+                  outModals = {this.props.outModals}
+                  logOut = {this.props.logOut}               
+                />
+              </Route>
           : this.props.navigation.atServices ?
 
               // Services list page
-              <Services 
-                addService = {this.props.toAddService}
-                toService = {this.props.toService}
-                user = {this.props.user}
+              <Route path = '/services'>
+                <Services 
+                  addService = {this.props.toAddService}
+                  toService = {this.props.toService}
+                  user = {this.props.user}
                 />
+              </Route>
           : 
               // ServicePage page
-              <ServicePage
-                navigation = {this.props.navigation}
-                user = {this.props.user}
-                toAddService = {this.props.toAddService}
-              />
+              <Route path = {'/service_'+this.props.navigation.bufferService.name}>
+                <ServicePage
+                  navigation = {this.props.navigation}
+                  user = {this.props.user}
+                  toAddService = {this.props.toAddService}
+                />
+              </Route>
+        
         }
+          <Redirect from='/' to='/home' />
+        </Switch>
       </main>
       
       <footer className = 'footer'>
         <span className = 'text-color-muted mg-b-5 mg-l-5'>Stankevichyus Nikita, React Project. 2020</span>
       </footer>
-
     </div>
   );
   }
 }
 
-export default App;
+export default withRouter(App);

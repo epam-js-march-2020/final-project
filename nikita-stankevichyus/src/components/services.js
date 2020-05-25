@@ -15,6 +15,7 @@ export class Services extends React.PureComponent {
         name = {element.name}
         price = {element.price}
         description = {element.description}
+        photo = {element.photo}
         addService = {this.props.addService}
         toService = {this.props.toService}
         user = {this.props.user}

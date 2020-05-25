@@ -6,25 +6,30 @@ export const serviceList = [
     name: 'shaving',
     price: 1245,
     description: LOREM_IPSUM,
+    photo: 'shaving.jpg'
   },
   {
     name: 'grooming',
     price: 345,
     description: LOREM_IPSUM,
+    photo: 'grooming.jpg',
   },
   {
     name: 'massage',
     price: 687,
     description: LOREM_IPSUM,
+    photo: 'massage.jpg',
   },
   {
     name: 'haircut',
     price: 999,
     description: LOREM_IPSUM,
+    photo: 'haircut.jpg'
   },
   {
     name: 'ale',
     price: 49.9,
     description: LOREM_IPSUM,
+    photo: 'ale.jpg',
   },
 ]

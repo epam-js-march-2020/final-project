@@ -13,6 +13,7 @@ export class Service extends React.PureComponent{
       name: this.props.name,
       price: this.props.price,
       description: this.props.description,
+      photo: this.props.photo,
     })
   }
 

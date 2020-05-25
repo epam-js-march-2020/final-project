@@ -5,6 +5,17 @@ import App from './App';
 import { serviceList } from './service_list';
 import { companyInfo } from './company_info';
 
+import { Router } from "react-router-dom"
+import { createBrowserHistory } from 'history'
+import {
+  Route,
+  Switch,
+  Redirect,
+  withRouter
+} from "react-router-dom"
+
+
+
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { createStore, bindActionCreators } from 'redux';
@@ -108,10 +119,14 @@ localStorage.setItem('services', JSON.stringify(serviceList));
 // Initializing guests object in local storage
 localStorage.setItem('guests', JSON.stringify({})); 
 
+const history = createBrowserHistory();
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <WrappedApp />
+      <Router history={history}>
+        <WrappedApp />
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

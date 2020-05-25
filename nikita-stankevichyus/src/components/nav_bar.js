@@ -1,17 +1,19 @@
 import React from 'react';
-
+import { HashLink as Link } from 'react-router-hash-link';
 
 // Component representing element of the navbar
 function NavLink(props) {
   return (
     <li className = {'nav_link' + (props.shown ? '' : ' transparent')}>
-      <a 
-        onClick = {props.onClick}
-        href = {props.href}
+      <Link to= {props.to}>
+        <a 
+          onClick = {props.onClick}
+          href = {props.href}
         >
           <i className={props.icon + ' mg-l--15'}/>
           <span className='mg-l-5'>{props.text}</span>
-      </a>
+        </a>
+      </Link>
     </li>
   )
 }
@@ -57,28 +59,37 @@ export class NavBar extends React.Component{
               href = '#home' 
               icon = 'fas fa-home' 
               shown = {this.state.barShown} 
-              text='Home'/>
+              text='Home'
+              to = '/home#home'
+            />
+
               
             <NavLink 
               onClick = {this.props.toHome} 
               href = '#contacts' 
               icon = 'fas fa-phone-alt' 
               shown = {this.state.barShown} 
-              text='Contacts'/>
+              text='Contacts'
+              to='/home#contacts'
+            />
 
             <NavLink 
               onClick = {this.props.toHome} 
               href = '#examples' 
               icon = 'fas fa-portrait' 
               shown = {this.state.barShown} 
-              text='Work Examples'/>
+              text='Work Examples'
+              to='/home#examples'
+            />
 
             <NavLink 
               onClick = {this.props.toServices} 
               href = '#home' 
               icon = 'fas fa-cut'
               shown = {this.state.barShown} 
-              text='Services'/>
+              text='Services'
+              to='/services#home'
+            />
 
             {
               // If user logged instead of 'log in' and 'sign up' buttons only 'profile' button will be shown
@@ -88,7 +99,9 @@ export class NavBar extends React.Component{
                 href='#home' 
                 icon = 'fas fa-user text' 
                 shown = {this.state.barShown} 
-                text = 'Profile'/>
+                text = 'Profile'
+                to='/profile#home'
+              />
               : 
               <>
                 <NavLink 
@@ -96,7 +109,8 @@ export class NavBar extends React.Component{
                   href='#' 
                   icon = 'fas fa-sign-in-alt text' 
                   shown = {this.state.barShown} 
-                  text = 'Log In'/>
+                  text = 'Log In'
+                />
                 <NavLink 
                   onClick = {this.props.toSignUp} 
                   href='#' 
