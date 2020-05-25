@@ -39,7 +39,7 @@ class Profile extends Component {
             } else {
                 alert('Please, check your password')
             }
-        }else{ updateUser(userInfo);
+        } else { updateUser(userInfo);
             this.setState({
                 userName: '',
                 email: '',
