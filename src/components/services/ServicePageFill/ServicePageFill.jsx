@@ -10,9 +10,6 @@ class ServicePageFill extends Component {
         showBooking: false,
         deleted: false
     };
-    // componentDidMount()  {
-    //     this.props.getUserServices()
-    // };
     render() {
         const { title, img, description } = this.props.service;
         const { showBooking, deleted } = this.state;
@@ -23,7 +20,7 @@ class ServicePageFill extends Component {
                 <h2 className="title">{ title }</h2>
                     <div className="description">
                         <div className="img">
-                        <img src={ img } className="foto"/>
+                        <img src={ img } alt="service" className="foto"/>
                         </div>
                         <div className="desc-form">
                             <span className="descr">{ description }</span>

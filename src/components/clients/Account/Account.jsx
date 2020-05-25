@@ -17,8 +17,7 @@ class Account extends Component {
                 <h4 className="my-serv">MY SERVICES:</h4>
                 {auth ? (
                     <ul>
-                        {/* {console.log(users)} */}
-                        {users.map(user => (user!=undefined&&user.auth === true)?
+                        {users.map(user => (user!==undefined&&user.auth === true)?
                                 (<MyService key={ user.id } 
                                 user={ user }
                                 />):null)} 
@@ -27,7 +26,7 @@ class Account extends Component {
                 <h4 className="my-serv">EDIT PROFILE:</h4>
                 {auth ? (
                     <ul>
-                        {users.map(user => (user!=undefined&&user.auth === true)?
+                        {users.map(user => (user!==undefined&&user.auth === true)?
                                 (<Profile key={ user.id } 
                                 user={ user }
                                 />):null)} 

@@ -27,7 +27,7 @@ class LogIn extends Component {
         });
         users.map(user=>{
             if(user.auth===true){
-                this.props.updateData(true, user.email);
+                return this.props.updateData(true, user.email);
             }else{
                 return null
             }

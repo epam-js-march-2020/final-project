@@ -85,13 +85,6 @@ export default function(state = initialState, action) {
                 ...state,
                 users: state.users.map(user => {
                     if(user.auth === true) {
-                        // user.myServices.map(item => {
-                        //     if(item.service === action.payload.service) {
-                        //        return user.myServices
-                        //     } else {
-                        //         user.myServices.push(action.payload); 
-                        //     }
-                        // })
                         if(user.myServices.some(item => item.service === action.payload.service)){
                             return user
                         } else {

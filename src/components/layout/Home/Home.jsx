@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Logo from '../Logo'
-import Header from '../Header/Header';
+// import Header from '../Header/Header';
 import Booking from '../Booking/Booking';
-import About from '../About/About';
-// import Logo from '../Logo';
 import './Home.css'
 
 class Home extends Component {

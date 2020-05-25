@@ -1,6 +1,5 @@
 import React , { Component }from 'react';
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
-import { createBrowserHistory } from "history";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AppNavbar from './components/layout/AppNavbar/AppNavbar';
 import Home from './components/layout/Home/Home';
 import Services from './components/services/Services/Services';
@@ -14,11 +13,6 @@ import Account from './components/clients/Account/Account'
 import { Provider } from 'react-redux';
 
 import store from './store';
-// import {
-//   ReactReduxFirebaseProvider,
-//   firebaseReducer
-// } from 'react-redux-firebase'
-
 
 import './App.css';
 
@@ -27,13 +21,7 @@ class App extends Component  {
     isAuthenticated: false
   };
   updateData = (value, email) => {
-    // const history = useHistory();
-    // const history  = createBrowserHistory();
-    // history.push('/')
-    // window.location.href = '/'; 
-    // history.pushState('/')
     this.setState({ isAuthenticated: value, username: email });
-    // 
   }
   render() {
   const {isAuthenticated} = this.state

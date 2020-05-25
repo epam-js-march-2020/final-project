@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Textinput from '../../layout/TextInput/TextInput';
 import { addUser } from '../../../actions/userActions';
 import { connect } from 'react-redux';
-import validator from 'validator' 
 import { Link } from 'react-router-dom';
 import './SignUp.css';
 import uuid from 'react-uuid';

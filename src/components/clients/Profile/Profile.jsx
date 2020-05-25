@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Textinput from '../../layout/TextInput/TextInput';
 import { connect } from 'react-redux';
-import uuid from 'react-uuid';
 import { updateUser } from '../../../actions/userActions'
 import './Profile.css'
 

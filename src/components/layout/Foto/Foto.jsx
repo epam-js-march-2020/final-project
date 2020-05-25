@@ -3,9 +3,7 @@ import './Foto.css'
 class Foto extends Component {
     render() {
         return (
-            // <div className="foto-img">
-                <img className="foto-img" src={require('./1387.jpg')}/>
-            // </div>
+            <img className="foto-img" alt="barbershop" src={require('./1387.jpg')}/>
         )
     }
 }
