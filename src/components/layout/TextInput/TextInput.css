@@ -1,28 +1,23 @@
 .form-group {
     margin-bottom: 10px;
-    /* font-size: 18px; */
     display: flex;
     flex-direction: column;
     text-align: left;
     justify-content: flex-start;
-    
-    /* align-items: center; */
 }
-.label {
-    margin-bottom: 5px;
-    /* width: 120px; */
-    background-color: #403F3D;
-}
+
 .input {
     padding: 10px 20px;
-    /* border: 1px solid #403F3D; */
     border: 2px solid white;
     background-color: #403F3D;
     outline-color: #DE5E4A;
-    /* box-shadow: 0 0 10px rgba(0,0,0,0.5); */
-    /* margin-left: 20px; */
     min-width: 300px;
     color: white;
     font-size: 15px;
     font-weight: bold;
+}
+
+.label {
+    margin-bottom: 5px;
+    background-color: #403F3D;
 }

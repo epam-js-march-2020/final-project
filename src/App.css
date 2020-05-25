@@ -41,7 +41,7 @@ height: 500px;
         display: none;
     }
     .box {
-        background-image: url(./components/layout/4.jpg);
+        background-image: url(./components/layout/Logo/4.jpg);
         background-size: contain;
         background-repeat: no-repeat;
         background-position: right;

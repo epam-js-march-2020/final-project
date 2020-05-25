@@ -9,7 +9,7 @@ import { getUserServices } from '../../../actions/userActions'
 import './ServicePage.css'
 
 class ServicePage extends Component {
-    componentDidMount()  {
+    componentDidMount() {
         const name = this.props.match.params.name
         this.props.getService(name);
         this.props.getUserServices()
@@ -25,18 +25,15 @@ class ServicePage extends Component {
                      {
                         if(service.show === true) {
                             return <ServicePageFill 
-                            key = { service.id }
-                            service = { service }
-                            auth = { auth }
-                            myServices = { myServices[0] }
-                            />
+                                    key = { service.id }
+                                    service = { service }
+                                    auth = { auth }
+                                    myServices = { myServices[0] }
+                                    />
                         }
                         return null
                     })
                 }
-                   {/* <Link to="/" className="btn">
-                        Booking
-                    </Link> */}
                 </div>
         )
     }
@@ -47,8 +44,4 @@ const mapStateToProps = (state) => ({
     myServices: state.user.myServices
 });
 
-// console.log(ee)
-// export default connect(mapStateToProps, mapDispatchToProps)(ServicePage);
 export default connect(mapStateToProps, {  getService, getUserServices })( withRouter(ServicePage ));
-// export default ServicePage
-// 

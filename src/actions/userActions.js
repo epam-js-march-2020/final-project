@@ -1,13 +1,11 @@
 import { CHECK_USER, 
-         GET_USERS, 
-         GET_USER, 
+         GET_USERS,
          LOG_OUT, 
          ADD_USER, 
          GET_USER_SERVICES, 
          ADD_USER_SERVICE,
          DELETE_USER_SERVICE,
          UPDATE_USER } from './types';
-
 
 export const getUsers = () => {
     return {
@@ -19,13 +17,6 @@ export const checkUser = (user) => {
     return {
         type:  CHECK_USER,
         payload: user
-    } 
-};
-
-export const getUser = () => {
-    return {
-        type:  GET_USER,
-        // payload: user
     } 
 };
 

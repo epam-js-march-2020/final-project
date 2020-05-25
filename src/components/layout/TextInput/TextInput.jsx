@@ -1,6 +1,5 @@
 import React from 'react';
-// import classnames from 'classnames';
-import './TextInput.css'
+import './TextInput.css';
 
 const TextInput = ({
     name, 
@@ -12,19 +11,16 @@ const TextInput = ({
 }) => {
     return (
         <div className="form-group">
-            <label htmlFor={name} className="label">{title}</label>
+            <label htmlFor={ name } className="label">{ title }</label>
             <input 
             type={ type }
-            name = {name} 
+            name = { name } 
             className="input"  
             placeholder={ placeholder } 
-            value={ value } 
-            onChange={onChange}/>
+            value={ value }  
+            onChange={ onChange }/>
         </div>
     )
     }
 
-    TextInput.defaultProps = {
-        type: 'text'
-      };
 export default TextInput;

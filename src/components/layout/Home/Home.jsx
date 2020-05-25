@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Logo from '../Logo'
-// import Header from '../Header/Header';
+import Logo from '../Logo/Logo';
 import Booking from '../Booking/Booking';
 import './Home.css'
 
@@ -13,9 +12,6 @@ class Home extends Component {
                     <Logo />
                     <Booking auth={auth}/>
                 </div>
-                
-                {/* <Header /> */}
-                {/* <About /> */}
             </div>
         )
     }

@@ -1,3 +1,10 @@
+.arrow {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 20px;
+}
+
 .btn {
     padding: 10px 20px;
     border: 2px solid white;
@@ -9,12 +16,4 @@
 
 .btn:hover {
     background-color: #DE5E4A;
-    /* color: #252525; */
-}
-
-.arrow {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 20px;
 }

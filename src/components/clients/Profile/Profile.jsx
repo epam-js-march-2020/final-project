@@ -12,7 +12,9 @@ class Profile extends Component {
         mobile: '',
         rePassword:''
     };
+
     onChange = e => this.setState({[e.target.name]: e.target.value});
+
     onSubmit = e => {
         e.preventDefault();
         const { userName, mobile, email, password, rePassword } = this.state;
@@ -23,7 +25,7 @@ class Profile extends Component {
             mobile, 
             password
         };
-        // updateUser(userInfo);
+        
         if(password) {
             if(password=== rePassword) {
                 updateUser(userInfo);
@@ -46,6 +48,7 @@ class Profile extends Component {
                 rePassword: ''
             });}      
     }
+
     render() {
         const { userName, password, mobile, email,rePassword } = this.state;
         const { user } = this.props;
@@ -89,8 +92,6 @@ class Profile extends Component {
                         onChange = {this.onChange}
                         />
                         <input type="submit" value='Change Profile info' className="btn-change"/>
-                    
-            
                 </form>
             </div>
         )

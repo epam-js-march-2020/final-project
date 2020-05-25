@@ -1,6 +1,5 @@
 import { GET_USERS, 
          CHECK_USER, 
-         GET_USER, 
          LOG_OUT, 
          ADD_USER, 
          GET_USER_SERVICES,
@@ -43,13 +42,6 @@ export default function(state = initialState, action) {
         
             } 
 
-        case GET_USER:
-            return {
-                ...state,
-                users: state.users.filter(user => user.auth === true)
-        
-            } 
-
         case LOG_OUT:
             return {
                 ...state,
@@ -76,7 +68,7 @@ export default function(state = initialState, action) {
                     user => {
                         if(user.auth === true) {
                             return user.myServices
-                        } 
+                        } return user
                     })
             }
 

@@ -6,14 +6,14 @@ import './LogIn.css';
 import { getUsers, checkUser} from '../../../actions/userActions';
 
 class LogIn extends Component {
+    state = {
+        email: '',
+        password: ''
+    };
+
     componentDidMount() {
         this.props.getUsers()
     }
-    state = {
-        email: '',
-        password: '',
-        // isAuthenticated: false
-    };
 
     onSubmit = e => {
         e.preventDefault();
@@ -27,7 +27,7 @@ class LogIn extends Component {
         });
         users.map(user=>{
             if(user.auth===true){
-                return this.props.updateData(true, user.email);
+                return this.props.updateData(true);
             }else{
                 return null
             }
@@ -54,7 +54,6 @@ class LogIn extends Component {
                 <div>
                 <h2>Log in</h2>
                 <form onSubmit={this.onSubmit} >
-                    {/* <div className="inputs"> */}
                     <Textinput 
                         name="email"
                         placeholder = 'Enter Email'
@@ -69,16 +68,15 @@ class LogIn extends Component {
                         title = 'Password:'
                         value = { password }
                         onChange = {this.onChange}/>
-                    {/* </div> */}
                     <input type="submit" value='Log In' className="btn-log"/>
                 </form>
                 <span className="links">
-                <Link to="/signup" className="link-item">
-                    Don't have an account?
-                </Link>
-                <Link to="/" className="link-item">
-                    Forgot password?
-                </Link>
+                    <Link to="/signup" className="link-item">
+                        Don't have an account?
+                    </Link>
+                    <Link to="/" className="link-item">
+                        Forgot password?
+                    </Link>
                 </span>
                 </div>
                 }
@@ -89,6 +87,6 @@ class LogIn extends Component {
 
 const mapStateToProps = (state) => ({
     users: state.user.users
-  });
+});
 
 export default  connect( mapStateToProps,{ getUsers, checkUser})(LogIn);;

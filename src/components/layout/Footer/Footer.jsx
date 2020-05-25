@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css'
 
 class Footer extends Component {
     render() {
         return (
             <div className="footer">
-                <p>Lorem ipsum dolor 
-                    sit amet consectetur adipisicing elit.
-                     Pariatur, ut reprehenderit nostrum doloribus eaque
-                      dicta nesciunt facilis, eligendi labore veniam rerum. 
-                      Sit ratione consequatur maxime modi at quasi odit illo 
-                      saepe impedit, mollitia iure incidunt consectetur ipsam, 
-                      eos placeat quos tempora repellendus iusto inventore
-                       eligendi cum eius dignissimos a obcaecati? Blanditiis 
-                       totam dignissimos laborum explicabo consequatur libero 
-                       nisi cumque ullam iste architecto ad aspernatur, 
-                       aut at sunt reprehenderit. Sed magni expedita sint 
-                       aut consequatur harum, consectetur a laborum. Dolore 
-                       quae dolor voluptas obcaecati itaque earum molestias quasi libero magni quidem? 
-                    Quo excepturi esse quia? Impedit sunt explicabo autem accusamus illum.</p>
+                <div className="row">
+                    <div>
+                        &copy;&nbsp;
+                        <a href="http://www.freepik.com" className="copy">
+                            2019 logo by dgim-studio/photos by Freepik
+                        </a>
+                    </div>
+                    <div className="icons">
+                        <Link to="#" className="social facebook">
+                            <i className="fab fa-facebook"></i>
+                        </Link>
+                        <Link to="#" className="social instagram">
+                            <i className="fab fa-instagram"></i>
+                        </Link>
+                        <Link to="#" className="social youtube">
+                            <i className="fab fa-youtube-square"></i>
+                        </Link>
+                    </div>
+                </div>
             </div>
         )
     }

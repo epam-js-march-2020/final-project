@@ -8,21 +8,20 @@ import LogIn from './components/clients/LogIn/LogIn';
 import SignUp from './components/clients/SignUp/SignUp';
 import About from './components/layout/About/About'
 import Footer from './components/layout/Footer/Footer';
-import Account from './components/clients/Account/Account'
-
+import Account from './components/clients/Account/Account';
 import { Provider } from 'react-redux';
-
 import store from './store';
-
 import './App.css';
 
 class App extends Component  {
   state = {
     isAuthenticated: false
   };
-  updateData = (value, email) => {
-    this.setState({ isAuthenticated: value, username: email });
+
+  updateData = (value) => {
+    this.setState({ isAuthenticated: value});
   }
+
   render() {
   const {isAuthenticated} = this.state
   return (
@@ -30,20 +29,16 @@ class App extends Component  {
       <Router>
         <div className="App">
           <AppNavbar auth={isAuthenticated} updateData={this.updateData} />
-          {/* <div className=""> */}
             <Switch>
-            <Route exact  path="/"> <Home auth={isAuthenticated}/> </Route>
-            <Route exact path="/services" component={ Services } />
-            <Route exact path='/services/:name' render = {()=> <ServicePage auth={isAuthenticated}/> } />
-            {/* <Route exact path="/services/:name" component={ withRouter(ServicePage) } /> */}
-            <Route render = {()=> <LogIn updateData={this.updateData} auth={isAuthenticated} /> } exact path="/login" />
-            <Route exact path="/about" component={ About } />
-            <Route exact path="/signup" component={ SignUp } />
-            <Route render = {()=> <Account auth={isAuthenticated}/> } exact path="/account" />
-            {/* <Route exact path="/account" component={ Account } /> */}
+              <Route exact  path="/"> <Home auth={isAuthenticated}/> </Route>
+              <Route exact path="/services" component={ Services } />
+              <Route exact path='/services/:name' render = {()=> <ServicePage auth={isAuthenticated}/> } />
+              <Route render = {()=> <LogIn updateData={this.updateData} auth={isAuthenticated}/>} exact path="/login" />
+              <Route exact path="/about" component={ About } />
+              <Route exact path="/signup" component={ SignUp } />
+              <Route render = {()=> <Account auth={isAuthenticated}/> } exact path="/account" />
             </Switch>
-          {/* </div> */}
-          <Footer />
+            <Footer />
         </div>
       </Router>
     </Provider>

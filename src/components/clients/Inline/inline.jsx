@@ -9,7 +9,9 @@ class inline extends Component {
         return (
             <li className='serv-name'>
                 <span>{service}</span>
-                <button className="btn-cancel" onClick={()=>{deleteUserService(service)}}>Cancel service</button>          
+                <button className="btn-cancel" onClick={()=>{deleteUserService(service)}}>
+                    Cancel service
+                </button>          
             </li>
         )
     }

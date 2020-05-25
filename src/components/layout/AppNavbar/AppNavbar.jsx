@@ -5,9 +5,6 @@ import { getUsers, logOut } from '../../../actions/userActions';
 import './AppNavbar.css'
 
 class AppNavbar extends Component {
-    // state = {
-    //     isAuthenticated: false,
-    // };
     componentDidMount() {
         this.props.getUsers();
         this.props.logOut()
@@ -15,49 +12,46 @@ class AppNavbar extends Component {
     
     render() {
         const { auth, username } = this.props;
-        // const { users } = this.props;
-        // const { isAuthenticated } = this.state
         return (
             <nav className="navbar">
                 <Link to="/" className="brand">
                     <h1>BARBER SHOP</h1>
                 </Link>
-    
-                {/* </div> */}
                 <hr/>
                     <ul className="navbar-nav">
                         <div className='info-links'>
                         <li className="nav-item">
-                                <Link to="/" className="link">
-                                    Home
-                                </Link>
+                            <Link to="/" className="link">
+                                Home
+                            </Link>
                         </li>
                         <li className="nav-item">
-                        <Link to="/services" className="link">
-                                    Services
-                                </Link>
+                            <Link to="/services" className="link">
+                                Services
+                            </Link>
                         </li>
-                        
                         <li className="nav-item">
-                        <Link to="/about" className="link">
-                                    About
-                                </Link>
+                            <Link to="/about" className="link">
+                                About
+                            </Link>
                         </li>
                         </div>
                         
                         {auth ? (
-                <div className=" private-page">
-                  <Link to="/account" className="link">
-                      My account
-                    </Link>
-                        <li className="nav-item link" onClick={() => {this.props.logOut(username);this.props.updateData(false)}}>
-                       
-                                    Log out
-                        </li> 
-                        </div>
-                        ) : <Link to="/login" className="link">
-                        Log in/Sign up
-                    </Link>}
+                            <div className=" private-page">
+                            <Link to="/account" className="link">
+                                My account
+                            </Link>
+                            <li className="nav-item link" 
+                                onClick={() => {this.props.logOut(username);
+                                                this.props.updateData(false)}}>
+                                Log out
+                            </li> 
+                            </div>
+                            ) : <Link to="/login" className="link">
+                                Log in/Sign up
+                            </Link>
+                        }
                     </ul>
             </nav>
 
@@ -67,7 +61,6 @@ class AppNavbar extends Component {
 
 const mapStateToProps = state => ({
     users: state.user.users
-  });
+});
   
-
 export default connect(mapStateToProps,{ getUsers, logOut })(AppNavbar);

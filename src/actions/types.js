@@ -2,7 +2,6 @@ export const GET_SERVICES = 'GET_SERVICES';
 export const GET_SERVICE = 'GET_SERVICE';
 export const GET_USERS = 'GET_USERS';
 export const CHECK_USER = 'CHECK_USER';
-export const GET_USER = 'GET_USER';
 export const LOG_OUT = 'LOG_OUT';
 export const ADD_USER = 'ADD_USER';
 export const GET_USER_SERVICES = 'GET_USER_SERVICES';

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
 import Textinput from '../TextInput/TextInput';
-import uuid from 'react-uuid';
 import { connect } from 'react-redux';
-import {addGuest} from '../../../actions/guestActions'
-import { addUserService } from '../../../actions/userActions'
+import { addGuest } from '../../../actions/guestActions';
+import { addUserService } from '../../../actions/userActions';
+import uuid from 'react-uuid';
 import './Booking.css'
 
 class Booking extends Component {
@@ -15,6 +14,7 @@ class Booking extends Component {
         mobile: '',
         service: ''
     };
+    
     onChange = e => this.setState({[e.target.name]: e.target.value});
     onSubmit = e => {
         e.preventDefault();
@@ -31,7 +31,7 @@ class Booking extends Component {
             this.setState({ id:'', service: ''})
         } else {
             const { guestName, mobile, email, service } = this.state;
-            const { addGuest, title, selected } = this.props;
+            const { addGuest, title, selected, changeBooking } = this.props;
             const newGuest = {
                     id: uuid(),
                     guestName,
@@ -41,6 +41,9 @@ class Booking extends Component {
             }
             if(selected){newGuest.service=title}
               addGuest(newGuest);
+                if (changeBooking) {
+                    changeBooking(false)
+                }
               alert('You have successfully booked a service' )
                 this.setState({
                     id:'',
@@ -49,9 +52,9 @@ class Booking extends Component {
                     mobile: '',
                     service: ''
                 });
-        }    
-        
+        }     
     }
+    
     render() {
         const { auth, selected, title } = this.props
         const {  guestName, mobile, email, service } = this.state;

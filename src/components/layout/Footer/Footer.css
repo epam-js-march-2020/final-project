@@ -1,14 +1,31 @@
-.footer {
-    min-height: 300px;
-    border-top: 2px solid white;
-    background-color: #DE5E4A;
-    /* border-radius: 30px ; */
-    /* box-shadow: inset rgba(0,0,0,0.5) 8px  8px 18px 5px,
-                inset rgba(255,255,255,0.2)   -8px -8px 18px 5px,
-                      rgba(255,255,255,0.1)   -8px -8px 18px 5px,
-                      rgba(0,0,0,0.5) 8px  8px 18px 5px; */
+.copy {
+    color: white;
+    text-decoration: none;
 }
- p {
-     padding: 40px;
-     text-align: left;
- }
+
+
+.footer {
+    background-color: #DE5E4A;
+    border-top: 2px solid white;
+    display: flex;
+    align-items: flex-end;
+    min-height: 300px;
+}
+
+.row {
+    align-items: flex-end;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+}
+
+.social {
+    font-size: 30px;
+    color: white;
+    margin-left: 20px;
+}
+
+.social:hover {
+    color: #403F3D;
+}

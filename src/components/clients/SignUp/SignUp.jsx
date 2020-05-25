@@ -17,7 +17,9 @@ class SignUp extends Component {
         auth: false,
         isSignedUp: false
     };
+
     onChange = e => this.setState({[e.target.name]: e.target.value});
+    
     onSubmit = e => {
         e.preventDefault();
         const { userName, mobile, email, password, rePassword, auth } = this.state;
@@ -48,6 +50,7 @@ class SignUp extends Component {
             alert('Please, check your password')
         }
     }
+
     render() {
         const {  userName, mobile, email, password, rePassword, isSignedUp } = this.state;
         return (
@@ -61,56 +64,50 @@ class SignUp extends Component {
                             </Link>
                          </div> 
                    </div>) :
-            <div>
-            <h2>Sign Up</h2>
-            <form className="inputs" onSubmit={this.onSubmit} >
-                <Textinput 
-                    name="userName"
-                    placeholder = 'Enter Your name'
-                    type = 'text'
-                    title = 'Name:'
-                    value = {userName}
-                    onChange = {this.onChange}/>
-                <Textinput 
-                    name = "mobile"
-                    placeholder = 'Format: 8-333-333-33-33'
-                    type = 'tel'
-                    title = 'Your Mobile:'
-                    value = { mobile }
-                    onChange = {this.onChange}/>
-                <Textinput 
-                name="email"
-                    placeholder = 'Enter Email'
-                    type = 'email'
-                    title = 'Email:'
-                    value = {email}
-                    onChange = {this.onChange}/>
-                <Textinput 
-                    name = "password"
-                    placeholder = 'Enter Password'
-                    type = 'password'
-                    title = 'Password:'
-                    value = { password }
-                    onChange = {this.onChange}
-                    />
-                <Textinput  
-                    name = "rePassword"
-                    placeholder = 'Repeat Password'
-                    type = 'password'
-                    title = 'Repeat Password:'
-                    value = { rePassword }
-                    onChange = {this.onChange}/>
-                    <input type="submit" value='Create account' className="btn-signup"/>
-                
-           
-            </form>
-        </div>
-            
-    }
-            
-          
-            
-        </div>
+                    <div>
+                        <h2>Sign Up</h2>
+                        <form className="inputs" onSubmit={this.onSubmit} >
+                            <Textinput 
+                                name="userName"
+                                placeholder = 'Enter Your name'
+                                type = 'text'
+                                title = 'Name:'
+                                value = {userName}
+                                onChange = {this.onChange}/>
+                            <Textinput 
+                                name = "mobile"
+                                placeholder = 'Format: 8-333-333-33-33'
+                                type = 'tel'
+                                title = 'Your Mobile:'
+                                value = { mobile }
+                                onChange = {this.onChange}/>
+                            <Textinput 
+                            name="email"
+                                placeholder = 'Enter Email'
+                                type = 'email'
+                                title = 'Email:'
+                                value = {email}
+                                onChange = {this.onChange}/>
+                            <Textinput 
+                                name = "password"
+                                placeholder = 'Enter Password'
+                                type = 'password'
+                                title = 'Password:'
+                                value = { password }
+                                onChange = {this.onChange}
+                                />
+                            <Textinput  
+                                name = "rePassword"
+                                placeholder = 'Repeat Password'
+                                type = 'password'
+                                title = 'Repeat Password:'
+                                value = { rePassword }
+                                onChange = {this.onChange}/>
+                                <input type="submit" value='Create account' className="btn-signup"/>
+                        </form>
+                    </div>  
+                }    
+            </div>
         )
     }
 }

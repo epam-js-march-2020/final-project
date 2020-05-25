@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import Logo from '../../layout/Logo';
+import Logo from '../../layout/Logo/Logo';
 import Service from '../Service/Service';
 import { connect } from 'react-redux';
-// import { compose } from 'redux';
-// import { firestoreConnect } from 'react-redux-firebase';
 import { getServices } from '../../../actions/serviceActions'
 import './Services.css'
 
@@ -11,6 +9,7 @@ class Services extends Component {
     componentDidMount() {
         this.props.getServices();
     }
+    
     render() {
         const { services } = this.props;
         return (
@@ -26,10 +25,9 @@ class Services extends Component {
                         ))}
                     </ul>
                 </div>
-            </div>
-           
+            </div>  
         )
-}
+    }
 
 }
 
@@ -38,9 +36,3 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, {  getServices })(Services);
-// export default compose(
-//     firestoreConnect([{ collection: 'services'}]),
-//     connect((state, props) => ({
-//         services: state.firestore.ordered.services
-//     }))
-// )(Services)
