@@ -228,6 +228,20 @@ app.post("/api/registration", function (req, res) {
         });
 });
 
+app.post("/api/runtime", function (req, res) {
+    const {sessionToken, _id} = req.cookies;
+    checkSessionToken(_id, sessionToken)
+        .then((user) => {
+            res.cookie("_id=" + user._id + "; HttpOnly");
+            res.cookie("sessionToken=" + sessionToken + "; HttpOnly"); //sessionToken only for example,it must be unique
+            res.json(user);
+        })
+        .catch((error) => {
+            console.log(error)
+            res.json(false);
+        });
+});
+
 app.post("/api/login", function (req, res) {
     const {login, password} = req.body;
     checkUserLogPas(login, password)
@@ -483,6 +497,7 @@ function checkSessionToken(id, token) {
                         err,
                         doc
                     ) {
+
                         db.close();
                         if (doc) {
                             resolve(doc);

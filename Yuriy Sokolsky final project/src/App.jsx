@@ -14,18 +14,40 @@ import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import $ from "jquery";
 
-const cookies = new Cookies();
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            auth: JSON.parse(cookies.get("auth")) || false,
-            userData: cookies.get("userData") || {},
+            auth: false,
+            userData: {},
         };
         this.handleLoginLogout = this.handleLoginLogout.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+
         this.setData = this.setData.bind(this);
+    }
+    componentDidMount(){
+        $.when(
+            $.ajax({
+                url: "/api/runtime/",
+                type: "POST",
+                contentType: "application/json",
+                dataType: "json",
+            })
+        ).then(
+            function (data, textStatus, jqXHR) {
+                if (data) {
+                    this.setState({
+                        auth: true,
+                        userData: data,
+                    });
+                } else {
+                    console.log("first time")
+                }
+            }.bind(this)
+        );
     }
 
     handleLoginLogout() {
@@ -36,8 +58,6 @@ class App extends React.Component {
                     userData: {},
                 },
                 () => {
-                    cookies.set("auth", this.state.auth, {path: "/"});
-                    cookies.set("userData", {}, {path: "/"});
                     $.ajax({
                         url: "/api/logout/",
                         type: "POST",
@@ -50,7 +70,6 @@ class App extends React.Component {
             this.setState({
                 auth: true,
             });
-            cookies.set("auth", this.state.auth, {path: "/"});
         }
     }
 
@@ -58,11 +77,6 @@ class App extends React.Component {
         this.setState(
             {
                 userData: data,
-            },
-            () => {
-                cookies.set("userData", this.state.userData, {
-                    path: "/",
-                });
             }
         );
     }
