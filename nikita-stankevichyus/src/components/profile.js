@@ -307,7 +307,7 @@ export class Profile extends React.PureComponent{
     </div>
 
     {/* Profile itself */}
-    <div className = 'container-fluid row profile justify-content-center align-items-center align-content-between'>
+    <div className = 'container-fluid row profile justify-content-center align-items-center align-content-between align-content-xl-start'>
       <div className = 'row container-fluid profile_header justify-content-center justify-content-md-start'>
         <h1 className = 'row col-12 mg-l-15 justify-content-start'>{this.props.user.name + ' ' + this.props.user.secondName}</h1>
         <p className = 'row col-12 mg-l-15 mg-t-5 justify-content-start'>{this.props.user.email}</p>
@@ -333,7 +333,7 @@ export class Profile extends React.PureComponent{
           </div>
         
       
-    </div>
+      </div>
     </div>
     </>
   )
