@@ -282,6 +282,8 @@ formReset = ()  =>  {
       <Router> 
       <Header buttonInfo={this.state.buttons} username={this.state.name} />
       <Route exact path="/" render={(username) => <Home username={this.state.name} users={this.state.users} />} />
+      <Route exact path="/final-project" render={(username) => <Home username={this.state.name} users={this.state.users} />} />
+
       <Route exact path="/services" render={() =>  <Services name={this.state.name}  />
       } />
       <Route path="/services/:id" render={({match}) => <ServiceInfo 
