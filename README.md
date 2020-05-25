@@ -3,7 +3,7 @@ App demo here: https://alexfil1983.github.io/final-project/
 
 React, React Router, moment.js library, StarRating library
 
-You can login inside as client or admin (login: admin, password: admin) to see all bookings 
+You can login inside as client or admin (login: admin@admin.com, password: admin) to see all bookings 
  
 How to run:
 
