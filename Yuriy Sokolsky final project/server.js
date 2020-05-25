@@ -217,6 +217,8 @@ app.post("/api/registration", function (req, res) {
                         console.log("New user ", response.ops[0]);
                         response.ops[0].password = password;
                         delete response.ops[0]["salt"];
+                        res.cookie("_id=" +response.ops[0]._id + "; HttpOnly");
+                        res.cookie("sessionToken=" + sessionToken + "; HttpOnly"); //sessionToken only for example,it must be unique
                         res.json(response.ops[0]);
                         // return
                     }
