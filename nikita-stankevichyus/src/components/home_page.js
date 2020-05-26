@@ -5,6 +5,9 @@ import work2 from '../images/work-2.jpg';
 import work3 from '../images/work-3.jpg';
 
 export function HomePage(props) {
+
+  const companyInfo = JSON.parse(localStorage.getItem('companyInfo'));
+
   return (
     <div className = "container-fluid home">
           <section className = 'home_presentation row col-12 justify-content-center align-items-center align-content-center container'>
@@ -22,7 +25,7 @@ export function HomePage(props) {
                 <h2>Adress</h2>
                 <p className = 'mg-t-10'>
                   {
-                    JSON.parse(localStorage.getItem('companyInfo')).adress
+                    companyInfo.adress
                   }
                 </p>
               </div>
@@ -32,7 +35,7 @@ export function HomePage(props) {
                 <h2>Telephone Number</h2>
                 <p className = 'mg-t-10'>
                   {
-                    JSON.parse(localStorage.getItem('companyInfo')).telephone
+                    companyInfo.telephone
                   }
                 </p>
               </div>
@@ -42,9 +45,9 @@ export function HomePage(props) {
                 <h2>Work Hours</h2>
                 <p className = 'mg-t-10'>
                   {
-                    JSON.parse(localStorage.getItem('companyInfo')).workStart
+                    companyInfo.workStart
                     + ' — ' +
-                    JSON.parse(localStorage.getItem('companyInfo')).workEnd
+                    companyInfo.workEnd
                   }
                 </p>
               </div>
@@ -62,7 +65,7 @@ export function HomePage(props) {
               {/* Description */}
               <p className = "col-12 mg-t-15">
                 {
-                  JSON.parse(localStorage.getItem('companyInfo')).whyWe
+                  companyInfo.whyWe
                 }
               </p>
             </div>
