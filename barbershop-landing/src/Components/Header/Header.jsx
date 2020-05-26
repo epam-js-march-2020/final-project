@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
 import NavList from '../NavList/NavList';
 import SignIn from '../SignIn/SignIn';
+import UserAppointments from '../UserAppointments/UserAppointments';
 
 import userIcon from './user.svg';
 
@@ -30,8 +31,11 @@ const LanguageToggle = () => {
 
 const Header = () => {
     const [t] = useTranslation();
-    const [showModal, setShowModal] = useState(false);
-    const toggleModal = () => setShowModal(!showModal);
+    const [showSignModal, setShowSignModal] = useState(false);
+    const [showAppointModal, setShowAppointModal] = useState(false);
+
+    const toggleSignModal = () => setShowSignModal(!showSignModal);
+    const toggleAppointModal = () => setShowAppointModal(!showAppointModal);
 
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <span ref={ref} onClick={(e) => { e.preventDefault(); onClick(e); }}>
@@ -53,13 +57,14 @@ const Header = () => {
                             <img src={userIcon} alt="login icon" className="login-icon"/>
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item onClick={toggleModal}>{t('header.signIn')}</Dropdown.Item>
-                            <Dropdown.Item href="#/userAppointments">{t('header.userAppointments')}</Dropdown.Item>
+                            <Dropdown.Item onClick={toggleSignModal}>{t('header.signIn')}</Dropdown.Item>
+                            <Dropdown.Item onClick={toggleAppointModal}>{t('header.userAppointments')}</Dropdown.Item>
                             <Dropdown.Item href="#/userSettings">{t('header.userSettings')}</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
-                <SignIn show={showModal} handleClose={toggleModal}/>
+                <SignIn show={showSignModal} handleClose={toggleSignModal}/>
+                <UserAppointments show={showAppointModal} handleClose={toggleAppointModal}/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <NavList />
                 </Navbar.Collapse>

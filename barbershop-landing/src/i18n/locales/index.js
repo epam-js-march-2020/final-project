@@ -19,6 +19,8 @@ import appointmentEn from '../../Components/Appointment/locales/default.json';
 import appointmentRu from '../../Components/Appointment/locales/default.ru.json';
 import homeEn from '../../Components/Home/locales/default.json';
 import homeRu from '../../Components/Home/locales/default.ru.json';
+import userAppointmentsEn from '../../Components/UserAppointments/locales/default.json';
+import userAppointmentsRu from '../../Components/UserAppointments/locales/default.ru.json';
 
 ru['ru'].footer = footerRu['ru'];
 en['en'].footer = footerEn['en'];
@@ -38,6 +40,8 @@ ru['ru'].appointment = appointmentRu['ru'];
 en['en'].appointment = appointmentEn['en'];
 ru['ru'].home = homeRu['ru'];
 en['en'].home = homeEn['en'];
+ru['ru'].userAppointments = userAppointmentsRu['ru'];
+en['en'].userAppointments = userAppointmentsEn['en'];
 
 export {
   en,
