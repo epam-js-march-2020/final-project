@@ -1,0 +1,87 @@
+{
+  "services": [
+    {
+      "id": 1,
+      "name": "Мужская стрижка",
+      "desc": "В любом барбершопе нашей сети, вы получите ту стрижку, о которой давно мечтали.",
+      "price": "900 рублей",
+      "image": "https://images.unsplash.com/photo-1553519426-a7a24ef8f3bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+    },
+    {
+      "id": 2,
+      "name": "Моделирование бороды",
+      "desc": "Иметь бороду круто, а иметь ухоженную бороду, круто вдвойне. Скорее записывайся!",
+      "price": "500 рублей",
+      "image": "https://images.unsplash.com/photo-1532710093739-9470acff878f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+    },
+    {
+      "id": 3,
+      "name": "Камуфляж головы/бороды",
+      "desc": "Скрой изъяны своей шевелюры. Твои знакомые тебя не узнают, а говорят, что это к деньгам!",
+      "price": "700 рублей",
+      "image": "https://images.unsplash.com/photo-1521322714240-ee1d383eab62?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+    },
+    {
+      "id": 4,
+      "name": "Стрижка бороды",
+      "desc": "Какие бы не были у тебя планы на ближайшее время, качественно оформленная борода будет твоим плюсом.",
+      "price": "1000 рублей",
+      "image": "https://images.unsplash.com/photo-1565766046328-f5bdf3cccb67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80"
+    },
+    {
+      "id": 5,
+      "name": "Укладка",
+      "desc": "Мужская укладка волос от лучших мастеров в городе. Качественные материалы, большой опыт и отличный сервис. ",
+      "price": "321 рублей",
+      "image": "https://images.unsplash.com/photo-1551491165-d77a9f869e0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+    }
+  ],
+  "users": [
+    {
+      "email": "test1@ya.ru",
+      "firstName": "Wow",
+      "lastName": "Testing",
+      "password": "123"
+    },
+    {
+      "email": "test@ya.ru",
+      "firstName": "Tester",
+      "lastName": "Test",
+      "password": "321"
+    }
+  ],
+  "appointments": [
+    {
+      "id": 1,
+      "service_name": "Мужская стрижка",
+      "user_email": "test1@ya.ru",
+      "time": "10:00",
+      "date": "30/12/2020",
+      "address": "Профессора Попова, 6"
+    },
+    {
+      "id": 2,
+      "service_name": "Укладка",
+      "user_email": "test1@ya.ru",
+      "time": "16:00",
+      "date": "30/12/2020",
+      "address": "Профессора Попова, 6"
+    },
+    {
+      "id": 3,
+      "service_name": "Стрижка бороды",
+      "user_email": "test1@ya.ru",
+      "time": "12:00",
+      "date": "30/12/2020",
+      "address": "Профессора Попова, 6"
+    },
+    {
+      "id": 4,
+      "service_name": "Камуфляж головы/бороды",
+      "user_email": "test@ya.ru",
+      "time": "10:00",
+      "date": "3/5/2020",
+      "address": "Профессора Попова, 6"
+    }
+  ]
+}
