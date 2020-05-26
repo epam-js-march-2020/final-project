@@ -5,7 +5,7 @@ const options = {
   interpolation: {
     escapeValue: false,
   },
-  debug: true,
+  debug: false,
   lng: 'en',
   resources: {
     ru: {
