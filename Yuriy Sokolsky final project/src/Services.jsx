@@ -6,6 +6,7 @@ import "./componentStyles/fancyBorder.css";
 import {Link} from "react-router-dom";
 import {ServicePreviewRender} from "./components/ServicePreview.jsx";
 import {Loading} from "./components/Loading.jsx";
+
 export default class Services extends React.Component {
     constructor(props) {
         super(props);
@@ -47,7 +48,7 @@ export default class Services extends React.Component {
                 >
                     <Container>
                         <Row className="services-page-item fancy-border">
-                            <Col>{service.name}</Col>
+                           <Col> {service.name}</Col>
                             <Col className="text-right" md="auto">
                                 {service.price} &#x20bd;
                             </Col>
@@ -64,7 +65,7 @@ export default class Services extends React.Component {
                     <Container>
                         <Row>
                             <Col>
-                                <div className="services-page-container-list">
+                                <div className="services-page-container-list pt-5">
                                     <div>{serviceListRender}</div>
                                 </div>
                             </Col>

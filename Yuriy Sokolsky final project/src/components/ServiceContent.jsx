@@ -251,7 +251,7 @@ export class ServiceContent extends React.Component {
                             onHide={this.closeModal}
                         >
                             <Modal.Header closeButton>
-                                <Modal.Title>Вы не авторизированы.</Modal.Title>
+                                <Modal.Title>Авторизация.</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
                                 {" "}
@@ -330,6 +330,7 @@ export class ServiceContent extends React.Component {
                                                 <Row>
                                                     <Col className="text-right">
                                                         <Button
+                                                            variant="outline-light"
                                                             type="button"
                                                             onClick={this.sendNewAppointment}
                                                             disabled={this.state.disableButtons}
