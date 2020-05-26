@@ -1,3 +1,9 @@
+/*
+ * Those functions are separate
+ * Because it is supposed that
+ * Validation logic may become more complex in the future
+*/
+
 
 export const validateName = (name) => {
 
