@@ -1,10 +1,27 @@
-.profile-page-background{
+.profile-page-background {
     position: relative;
     height: 85vh;
     overflow: auto;
     width: 100%;
-    background:linear-gradient(0deg, rgba(17, 10, 1, 0.85), rgb(0, 0, 0));
-    background-size:cover;
+    background: linear-gradient(0deg, rgba(17, 10, 1, 0.85), rgb(0, 0, 0));
+    background-size: cover;
     padding-top: 80px;
-    color:whitesmoke;
+    color: whitesmoke;
+}
+
+.tabs-color > a {
+    background-color: #3939496e;
+    color: lightgray;
+    border: none !important;
+}
+
+.tabs-color > a:hover {
+    background-color: #95999c;
+}
+
+.tabs-color > a.active,
+.tabs-color > a.active :hover,
+.tabs-color > a.active :focus {
+    background-color: #454d55 !important;
+    color: lightgray !important;
 }

@@ -1,8 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReactDOM from "react-dom";
-import Cookies from "universal-cookie";
-import { BrowserRouter as Router, Route, Switch,Redirect} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import MainPage from "./MainPage.jsx";
 import Services from "./Services.jsx";
 import Service from "./Service.jsx";
@@ -14,6 +13,8 @@ import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import {Loading} from "./components/Loading.jsx";
 import AppointmentsRender from "./components/AppointmentsRender.jsx"
+import Authorization from "./components/Authorization.jsx"
+
 import $ from "jquery";
 
 class App extends React.Component {
@@ -38,17 +39,17 @@ class App extends React.Component {
         dataType: "json",
       })
     ).then(
-      function (data, textStatus, jqXHR) {
-        if (data._id != null) {
-          this.setState({
-            auth: true,
-            userData: data,
-            Loading: false,
-          });
-        } else {
-          this.setState({
-            Loading: false,
-          });
+        function (data) {
+          if (data._id != null) {
+            this.setState({
+              auth: true,
+              userData: data,
+              Loading: false,
+            });
+          } else {
+            this.setState({
+              Loading: false,
+            });
         }
       }.bind(this)
     );
@@ -98,30 +99,50 @@ class App extends React.Component {
             <Route
               path="/services/:id"
               render={(props) => (
-                <Service
-                  {...props}
-                  isAuth={this.state.auth}
-                  userData={this.state.userData}
-                  handleLoginLogout={this.handleLoginLogout}
-                  setData={this.setData}
-                />
+                  <Service
+                      {...props}
+                      isAuth={this.state.auth}
+                      userData={this.state.userData}
+                      handleLoginLogout={this.handleLoginLogout}
+                      setData={this.setData}
+                  />
               )}
             />
             <Route path="/services">
-              <Services />
+              <Services/>
             </Route>
             <Route path="/about">
-              <AboutUs />
+              <AboutUs/>
             </Route>
-            <Route path="/profile">
-              <Profile
-                isAuth={this.state.auth}
-                handleLoginLogout={this.handleLoginLogout}
-                setData={this.setData}
-                userData={this.state.userData}
-              />
-            </Route>
-            <Route exact path="/upcoming-appointments" render={() =>
+            <Route exact path="/authorization" render={() =>
+                this.state.auth ? (
+                    <Redirect
+                        to={{
+                          pathname: "/profile",
+                        }}
+                    />
+                ) : (
+                    <Authorization isAuth={this.state.auth}
+                                   handleLoginLogout={this.handleLoginLogout}
+                                   setData={this.setData}
+                                   userData={this.state.userData}/>
+                )}
+            />
+            <Route exact path="/profile" render={() =>
+                this.state.auth ? (
+                    <Profile
+                        setData={this.setData}
+                        userData={this.state.userData}
+                    />
+                ) : (
+                    <Redirect
+                        to={{
+                          pathname: "/authorization",
+                        }}
+                    />
+                )}
+            />
+            <Route exact path="/user-appointments" render={() =>
                 this.state.auth ? (
                     <AppointmentsRender userData={this.state.userData}/>
                 ) : (
@@ -133,10 +154,10 @@ class App extends React.Component {
                 )}
             />
             <Route path="/admin">
-              <Admin />
+              <Admin/>
             </Route>
 
-            <Route path="*" component={NoMatch} />
+            <Route path="*" component={NoMatch}/>
           </Switch>
         }
         {this.state.Loading && <Loading />}

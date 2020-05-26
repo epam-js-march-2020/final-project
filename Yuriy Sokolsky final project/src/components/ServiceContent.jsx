@@ -85,12 +85,13 @@ export class ServiceContent extends React.Component {
                 dataType: "json",
             })
         ).then(
-            function (data, textStatus, jqXHR) {
+            function (data) {
                 console.log(data);
 
                 this.setState({mastersList: data});
             }.bind(this)
         );
+        this.calculateIntervals()
     }
 
     datePickerChange(value) {
@@ -124,29 +125,45 @@ export class ServiceContent extends React.Component {
                 processData: false,
             })
         ).then(
-            function (data, textStatus, jqXHR) {
-                this.calculateIntervals(data);
+            function (data) {
+                let busyTime = [];
+                data.map(function (e) {
+                    busyTime.push(parse(e, "HH:mm", new Date()));
+                });
+                this.setState(
+                    {
+                        excludeTimes: busyTime,
+                    },
+                    () => {
+                        this.setState({
+                            displayCalendar: true,
+                            Loading: false,
+                        });
+                    }
+                );
+                if (this.props.service.duration)
+                    this.setState({
+                        maxTime: setHours(
+                            setMinutes(
+                                new Date(),
+                                60 - Number(this.props.service.duration.slice(-2))
+                            ),
+                            21
+                        )
+                    });
             }.bind(this)
         );
     }
 
-    calculateIntervals(data) {
-        if (getHours(new Date()) > WorkHours.END_OF_RECORDING) {
+    calculateIntervals() {
+        if (getHours(new Date()) >= WorkHours.END_OF_RECORDING) {
             this.setState({
                 minDate: addDays(new Date(), 1),
+                datePickerValue: addDays(new Date(), 1)
             });
         }
 
-        if (this.props.service.duration)
-            this.setState({
-                maxTime: setHours(
-                    setMinutes(
-                        new Date(),
-                        60 - Number(this.props.service.duration.slice(-2))
-                    ),
-                    21
-                )
-            });
+
         if (
             isToday(this.state.datePickerValue) &&
             getHours(new Date()) < WorkHours.END_OF_RECORDING &&
@@ -163,21 +180,7 @@ export class ServiceContent extends React.Component {
                 ),
             });
         }
-        let busyTime = [];
-        data.map(function (e) {
-            busyTime.push(parse(e, "HH:mm", new Date()));
-        });
-        this.setState(
-            {
-                excludeTimes: busyTime,
-            },
-            () => {
-                this.setState({
-                    displayCalendar: true,
-                    Loading: false,
-                });
-            }
-        );
+
     }
 
     sendNewAppointment() {
@@ -205,7 +208,7 @@ export class ServiceContent extends React.Component {
                 processData: false,
             })
         ).then(
-            function (data, textStatus, jqXHR) {
+            function (data) {
                 this.setState({
                     disableButtons: false,
                 });

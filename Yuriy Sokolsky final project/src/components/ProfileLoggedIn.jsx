@@ -1,11 +1,7 @@
 import React from "react";
 import $ from "jquery";
-import {isBefore, parseISO} from "date-fns";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Col, Form, Row} from "react-bootstrap";
 import PhoneInput from "react-phone-input-2";
-import {AppointmentsRender} from './AppointmentsRender.jsx'
-
-import {Loading} from "./Loading.jsx";
 import {Link} from "react-router-dom";
 
 export class ProfileLoggedIn extends React.Component {
@@ -65,12 +61,12 @@ export class ProfileLoggedIn extends React.Component {
                 processData: false,
             })
         ).then(
-            function (data, textStatus, jqXHR) {
-                    this.props.setData(data);
-                    this.setState({
-                        disableButtons: false,
-                    });
-                }.bind(this)
+            function (data) {
+                this.props.setData(data);
+                this.setState({
+                    disableButtons: false,
+                });
+            }.bind(this)
         );
     }
 
@@ -145,15 +141,13 @@ export class ProfileLoggedIn extends React.Component {
                     </Col>
 
                     <Col>
-                        <Container>
-                            <Row>
-                                <Col className="text-center">
-                                    <Link to={`/upcoming-appointments`} className="btn btn-outline-light">
-                                        Просмотор предстоящик сеансов
-                                    </Link>
-                                </Col>
-                            </Row>
-                        </Container>
+                        <Row className="h-100 ">
+                            <Col className="text-center my-auto">
+                                <Link to={`/user-appointments`} className="btn btn-outline-light">
+                                    Просмотор предстоящик сеансов
+                                </Link>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </>
