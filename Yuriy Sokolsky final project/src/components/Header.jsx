@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
+import {LogoImgURL} from "../consts.js"
 export default class Header extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      LogoImgURL: "../images/logos/logoHairCut.png",
     };
   }
 
@@ -29,7 +29,7 @@ export default class Header extends React.Component {
                 width={128}
                 height={81}
                 className="mr-3 position-absolute HeaderImageBackground"
-                src={this.state.LogoImgURL}
+                src={LogoImgURL}
                 alt="Logo"
               />
             </Col>

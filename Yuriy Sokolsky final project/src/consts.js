@@ -6,7 +6,7 @@ export const WorkHours = {
   END_OF_RECORDING: 21,
 };
 
-export const LogoImgURL= "../images/logos/logoHairCut.png";
+export const LogoImgURL= "/images/logos/logoHairCut.png";
 export const NameOfBusiness= "Haircut by Yuriy"
 export const AddressOfBusiness = "г. Санкт-Петербург. ул. Бассейная д. 61";
 export const PhoneOfBusiness = "8(333) 333-22-22";
