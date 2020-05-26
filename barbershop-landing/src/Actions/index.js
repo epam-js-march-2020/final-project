@@ -1,27 +1,23 @@
-import { 
-    LOAD_USERS,
-    LOAD_USER_DATA,
-    REGISTER_USER,
-    ADD_APPOINTMENT,
-    REMOVE_APPOINTMENT
-} from "./actionTypes";
+export const FETCH_PRODUCTS_PENDING = 'FETCH_PRODUCTS_PENDING';
+export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
+export const FETCH_PRODUCTS_ERROR = 'FETCH_PRODUCTS_ERROR';
 
-export const loadUsers = () => ({
-    type: LOAD_USERS
-});
+function fetchProductsPending() {
+    return {
+        type: FETCH_PRODUCTS_PENDING
+    }
+}
 
-export const loadUserData = () => ({
-    type: LOAD_USER_DATA
-});
+function fetchProductsSuccess(products) {
+    return {
+        type: FETCH_PRODUCTS_SUCCESS,
+        products: products
+    }
+}
 
-export const registerUser = () => ({
-    type: REGISTER_USER
-});
-
-export const addAppointment = () => ({
-    type: ADD_APPOINTMENT
-});
-
-export const removeAppointment = () => ({
-    type: REMOVE_APPOINTMENT
-});
+function fetchProductsError(error) {
+    return {
+        type: FETCH_PRODUCTS_ERROR,
+        error: error
+    }
+}
