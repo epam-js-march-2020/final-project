@@ -13,7 +13,7 @@ function NavLink(props) {
       </li>
     : 
     <li className = {'nav_link'}>
-        <a href={props.to} onClick = {props.onClick}>
+        <a onClick = {props.onClick}>
             <i className={props.icon + ' mg-l--15'}/>
             <span className='mg-l-5'>{props.text}</span>
         </a>
