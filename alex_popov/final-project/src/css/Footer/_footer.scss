@@ -1,0 +1,51 @@
+$theme-foorer-dark: (
+    text-color: rgb(255, 255, 255),
+    background-color: rgb(41, 41, 41),
+);
+
+// .footer {
+//     // padding-top: 25px;
+//     // padding-bottom: 25px;
+// }
+
+.footer-contacts {
+    // @extend .footer;
+    position: absolute;
+    top: 15vh;
+    right: 3vw;
+    padding-right: 32px;
+    padding-left: 32px;
+    border-radius: 15px;
+    @media (max-width: 1100px) {
+        position: static;
+        border-radius: 0;
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+}
+
+.footer-dark {
+    color: map-get($theme-foorer-dark, 'text-color');
+    background-color: map-get($theme-foorer-dark, 'background-color');
+}
+
+.footer_logo {
+    width: 150px;
+}
+
+.footer_socialIcon {
+    height: 30px;
+    width: 30px;
+}
+
+.socialIcon-facebook {
+    background-image: url('../../img/social/facebook.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.socialIcon-twitter {
+    background-image: url('../../img/social/twitter.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}

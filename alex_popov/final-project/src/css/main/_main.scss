@@ -1,0 +1,30 @@
+@import './about';
+@import './cervices';
+@import './appointment';
+@import './login';
+@import './notFound';
+
+// .container_main {
+//     padding-top: 80px;
+//     padding-bottom: 80px;
+// }
+
+.main_contacts_map {
+    @extend .fullScreen;
+    background-color: #d8cdc9;
+    width: 100%;
+}
+
+.container_main {
+    @extend .container;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.user_form {
+    display: flex;
+    flex-direction: column;
+}
+

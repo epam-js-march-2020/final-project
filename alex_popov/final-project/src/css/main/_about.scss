@@ -1,0 +1,10 @@
+.about_player {
+    position: relative;
+    width: 100%;    
+    top: 0;
+    border-bottom: 1px solid rgb(88, 88, 88);
+
+    @media (max-width: 850px) {
+        margin-top: 60px;
+    }
+}

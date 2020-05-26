@@ -1,0 +1,144 @@
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Light.ttf');
+  font-weight: 200;
+  font-style: normal
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@import './data';
+@import './atoms/_borders.scss';
+@import './atoms/flex';
+
+@import './Header/Header';
+@import './main/main';
+@import './Footer/footer';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 30px;
+}
+
+main {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans';
+  color: white;
+  background-color: black;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style-type: none;
+}
+
+p {
+  margin-top: 20px;
+}
+
+
+.margin-top {
+  margin-top: map-get($header, 'height' );
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.margin-top {
+  margin-top: map-get($header, 'height' );
+}
+
+.fullScreen {
+  @extend .margin-top;
+  position: relative;
+  width: 100wv;
+  height: calc(100vh - #{map-get($header, 'height')} );
+}
+
+.fixwdScreen {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.transparent {
+  opacity: 0;
+}
+
+.message {
+  margin-top: 45px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: 0.7s
+}
+
+.message-valid {
+  color: greenyellow;
+}
+
+.message-invalid {
+  color: red;
+}
+
+.deleteConfirmation_container {
+  @extend .fixwdScreen;
+  
+  display: flex;
+  justify-content: space-around;
+  z-index: 9;
+  padding-top: 200px;
+}
+
+.deleteConfirmation_background {
+  @extend .fixwdScreen;
+
+  background-color: rgba(51, 50, 50, 0.8);
+}
+
+.deleteconrifmation_info {
+  width: 50%;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delteConfirmation_buttons {
+  width: 100%;
+}

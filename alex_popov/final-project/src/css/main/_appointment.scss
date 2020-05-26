@@ -1,0 +1,39 @@
+.appointments_dateContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.appoinments_daysContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.appointment_item {
+    transition: 0.7s;
+    cursor: pointer;
+}
+
+.appointment_item-active {
+    color: red;
+}
+
+.appointments_item {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgb(255, 222, 32);
+    @media (max-width: 426px) {
+        width: 100%;
+    }
+}
+
+.appointments_day {
+    margin-top: 5px;
+}
+
+.delete_icon {
+    cursor: pointer;
+}

@@ -1,0 +1,21 @@
+.notFoundContainer {
+    @extend .fullScreen;
+    background-image: url('../../img/404/404.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.notFoundContainer_text {
+    position: absolute;
+    padding-left: 15px;
+    padding-right: 15px;
+    top: 20%;
+    right: 15%;
+    font-size: 1.4em;
+}
+
+.notFoundContainer_link-yellow {
+    font-size: 2em;
+    text-decoration: underline;
+    color: rgb(255, 222, 32);
+}
