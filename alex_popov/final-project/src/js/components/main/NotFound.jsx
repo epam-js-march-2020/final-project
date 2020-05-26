@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * 404 page
+ */
 const NotFound = () => (
     <div className='notFoundContainer'>
         <div className='notFoundContainer_text'>

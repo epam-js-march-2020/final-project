@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * the icon used for renderind main menu on phones
+ */
 const BurgerMenu = () => (
     <div id='menuIcon' className='header_mobileMenu'>
         <svg 

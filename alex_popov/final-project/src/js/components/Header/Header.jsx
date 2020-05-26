@@ -27,6 +27,7 @@ class Header extends React.Component {
         document.querySelector('#menuLogo').classList.toggle('header_mobileMenu-active');
         document.querySelector('#header_mobileMenu').classList.toggle('header_mainNav-mobile')
     }
+    
     render() {
         return (
             <header className='header header-yellow'>

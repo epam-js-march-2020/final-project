@@ -1,15 +1,26 @@
 import React from 'react';
 
+/**
+ * the abstract class is parent class for components that have inputs.
+ * constain information that needed for that classes
+ * and methids that change the information in the sore.
+ */
 class WithFormChecker extends React.Component {
     constructor(props) {
         super(props)
 
+        /**
+         * regExps for checking information
+         */
         this.regExps = {
             phone: /\D/g,
             pass: /\*/,
             name: /\*/
         }
 
+        /**
+         * max and min length for fields
+         */
         this.len = {
             phone: 10,
             pass: 15,
@@ -24,8 +35,6 @@ class WithFormChecker extends React.Component {
 
         this.month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         this.monthFull = ['January', 'February', 'March', 'April', 'May', 'June', 'Jule', 'August', 'September', 'October', 'November', 'December'];
-       
-
     }
 
     onInput(ev) {
@@ -46,10 +55,12 @@ class WithFormChecker extends React.Component {
         }
 
         if ( val !== this.state[id]) {
-            // console.log('change')
             this.setState({[id]: val});
         }
+    }
 
+    onChangeService(ev) {
+        this.setState({[ev.target.id]: ev.target.value})
     }
 
     messageRender(messageId, messageText, isCorrect) {

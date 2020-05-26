@@ -14,6 +14,13 @@ class App extends React.Component {
         }
     }
 
+    /**
+     * after a user have logged the application create a code 
+     * that is stored in the database. the dame code is stored
+     * in coockes for one hour. If there is the coded the app 
+     * automaticaly make the user logged
+     */
+    
     loginer() {
         const cookie = document.cookie;
         const code = cookie.split('=')[1];

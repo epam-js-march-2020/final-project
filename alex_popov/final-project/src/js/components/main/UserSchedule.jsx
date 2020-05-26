@@ -1,12 +1,20 @@
 import React from 'react';
 import WithFormChecker from './WithFormChecker';
+import AppointmentItem from './AppointmentItem.jsx';
 
 import {connect} from 'react-redux';
 import * as actions from '../../actions/actions';
 
+/**
+ * renders the information about user's appointments
+ */
 class UserSchedule extends WithFormChecker {
     constructor(props) {
         super(props)
+        //date, time , service fiealds show the information about the appointment
+        // that user wants to delete
+        //schedule - an array of users appointments
+        // if the admin is logged contains all the appointments
         this.state = {
             id: this.props.user.id,
             date: '',
@@ -20,25 +28,30 @@ class UserSchedule extends WithFormChecker {
         this.onClickCancelModal = this.onClickCancelModal.bind(this);
     }
 
+    /**
+     * inserts the information in the store about user and appointments
+     */
     componentDidMount() {
-        // console.log('did mount');
         const schedule = JSON.parse( localStorage.getItem('appointments') );
-        // console.log(this.state)
-        const userAppointments = this.state.id === 1 ? this.filterScheduleAdmin(schedule) : this.filterSchedule(this.state.id, schedule);
-        // console.log(userAppointments)
+        const userAppointments = this.state.id === 1 ? 
+            this.filterScheduleAdmin(schedule) : 
+            this.filterSchedule(this.state.id, schedule);
+        
         this.setState({schedule: userAppointments})
     }
-
+    /**
+     * filter the appointments for the admin
+     * @param {array} list
+     * @return {arra}
+     */
     filterScheduleAdmin(list) {
-        // console.log('asdf')
         const response = [];
+
         list.forEach( (el) => {
-            // console.log(el.appointments)
             const hours = Object.keys(el.appointments)
-            // console.log(hours)
+            
             hours.forEach( (hour) => {
                 if (el.appointments[hour] !== 0) {
-                    // console.log(el.appointments[hour])
                     response.push({
                         date: el.date,
                         hour: hour,
@@ -48,19 +61,24 @@ class UserSchedule extends WithFormChecker {
                 }
             })
         });
+
         return response;
     }
 
+    /**
+     * filter the appointmentsfor an user
+     * @param {number} id 
+     * @param {array} list 
+     * @return {array}
+     */
     filterSchedule(id, list) {
-        // console.log(id, list)
         const response = [];
+
         list.forEach( (el) => {
-            // console.log(el.appointments)
             const hours = Object.keys(el.appointments)
-            // console.log(hours)
+            
             hours.forEach( (hour) => {
                 if (el.appointments[hour].id === id) {
-                    // console.log(el.appointments[hour], el.date)
                     response.push({
                         date: el.date,
                         hour: hour,
@@ -69,24 +87,27 @@ class UserSchedule extends WithFormChecker {
                 }
             })
         });
+
         return response;
     }
 
+    /**
+     * makes react components of the appointments
+     * @return {array}
+     */
     getAppointments() {
         const schedule = this.state.schedule.slice()
         if (schedule.length > 0) {
             
             return schedule.map( (el) => {
-                // console.log(el)
                 const dateObj = new Date(el.date)
-                // console.log(dateObj)
+                
                 const month = dateObj.getMonth()
                 const date = dateObj.getDate()
                 const time = el.hour
-                // console.log(month, date, time)
 
                 return (
-                    <Appointment 
+                    <AppointmentItem 
                         key={`${month}${date}${time}`} 
                         month={this.monthFull[month]} 
                         date={date} 
@@ -103,6 +124,10 @@ class UserSchedule extends WithFormChecker {
         return null;
     }
 
+    /**
+     * treatss clicks on the delte item 
+     * insert information about delted item in the store 
+     */
     onClickDeleteItem(ev) {
         const {date, time, service} =ev.currentTarget.dataset;
         
@@ -113,14 +138,17 @@ class UserSchedule extends WithFormChecker {
         })
     }
 
+    /**
+     * treats clicks on the delete button of the modal window
+     * delte information about the appointment from the base
+     */
     onClickDeleteModal() {
-        // console.log("delte")
-
         const schedule = JSON.parse( localStorage.getItem('appointments') );
-        console.log(schedule)
+
         const dayId = schedule.findIndex( (el) => {
             return el.date === this.state.date
         })
+
         if (dayId !== -1) {
             schedule[dayId].appointments[this.state.time] = 0;
             localStorage.setItem('appointments', JSON.stringify(schedule));
@@ -133,6 +161,10 @@ class UserSchedule extends WithFormChecker {
         }
     }
 
+    /**
+     * treats click on the cancel button of modal window
+     * insert default information in the state
+     */
     onClickCancelModal() {
         console.log('cancel')
         this.setState({
@@ -143,33 +175,31 @@ class UserSchedule extends WithFormChecker {
     }
 
     render() {
-        // console.log(this.props)
-        // console.log(this.state)
         const list = this.getAppointments();
         const month = this.state.date ? (new Date(this.state.date)).getMonth() : '';
         const date = this.state.date ? (new Date(this.state.date)).getDate() : '';
-        // console.log(month)
-        // console.log(list)
+
         if (list) {
             return (
                 <>
-                <div id='appointmentsList' onClick={this.onClickAppointmentsList} className='userInformation_appointments'>
-                    <h2>You booked:</h2>
-                    {
-                        list
-                    }
-                </div>
-                {
-                    this.state.date ? 
-                        <DeleteConfirmation 
-                            month={this.monthFull[month]} 
-                            date={date} 
-                            time={this.state.time} 
-                            type={this.state.service} 
-                            onCancel={this.onClickCancelModal} 
-                            onDelte={this.onClickDeleteModal} 
-                        /> 
-                    : null}
+                    <div id='appointmentsList' onClick={this.onClickAppointmentsList} className='userInformation_appointments'>
+                        <h2>You booked:</h2>
+                        {
+                            list
+                        }
+                    </div>
+
+                    { //renders the modal window if the state has information abolut a delte item
+                        this.state.date ? 
+                            <ModalConfirmation 
+                                month={this.monthFull[month]} 
+                                date={date} 
+                                time={this.state.time} 
+                                type={this.state.service} 
+                                onCancel={this.onClickCancelModal} 
+                                onDelte={this.onClickDeleteModal} 
+                            /> 
+                        : null}
                 </>
             )
         } else {
@@ -179,7 +209,7 @@ class UserSchedule extends WithFormChecker {
     }
 }
 
-class DeleteConfirmation extends React.Component {
+class ModalConfirmation extends React.Component {
     render() {
         const {month, date, time, type, onCancel, onDelte} = this.props
         return(
@@ -202,50 +232,6 @@ class DeleteConfirmation extends React.Component {
         )
         
     }
-}
-
-function Appointment({month, date, time, service, phone, delHandle, dayId}) {
-    return (
-        <div key={`${month}${date}${time}`} className='appointments_item'>
-
-            <div className="appointments_information">
-                <h3 className='appoints_header'>the {date} of {month} at {time}:00</h3>
-                <p className='appointments_day'>Service type: {service}</p>
-                {phone ? <p className='appointments_day'>client's phone: {phone}</p>: null }
-            </div>
-
-            <div 
-                onClick={delHandle} 
-                className='delete_icon'
-                data-date={dayId}
-                data-time={time}
-                data-service={service}
-            >
-                <DelIcon />
-            </div>
-
-        </div>
-    )
-}
-
-function DelIcon() {
-    return (
-        <svg 
-            fill="white"
-            xmlns="http://www.w3.org/2000/svg" 
-            height="24" 
-            viewBox="0 0 24 24" 
-            width="24"
-        >
-            <path 
-                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-            />
-            <path 
-                d="M0 0h24v24H0z"  
-                fill="none"
-            />
-        </svg>
-    )
 }
 
 const propsMap = (user) => (

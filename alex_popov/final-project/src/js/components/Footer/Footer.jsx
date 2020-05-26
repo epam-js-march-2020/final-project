@@ -1,17 +1,14 @@
 import React from 'react';
 
+import SocialIcon from '../SocialIcon';
 import Logo from '../Logo.jsx';
 
 import facebook from '../../../img/social/facebook.png';
 import twitter from '../../../img/social/twitter.png';
 
-
-const SocialIcon = ({ link, source, altname }) => (
-    <a href={link} className='px-s' >
-        <img className='footer_socialIcon' alt={altname} src={source} />
-    </a>
-)
-
+/**
+ * as the footer can looks different it receves the class name
+ */
 const Footer = ({footerClassName}) => {
     return (
         <footer className={footerClassName}>

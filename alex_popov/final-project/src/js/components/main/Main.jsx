@@ -11,7 +11,9 @@ import NotFound from './NotFound.jsx';
 
 import { connect } from 'react-redux';
 
-
+/**
+ * main elemetns that treat routes
+ */
 class Main extends React.Component {
     render() {
         return (

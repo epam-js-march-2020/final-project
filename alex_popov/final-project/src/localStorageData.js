@@ -1,4 +1,5 @@
 export function loadData() {
+
     const users = localStorage.getItem('users');
 
     if (!users) {
@@ -16,6 +17,7 @@ export function loadData() {
     }
 
     const appointments = localStorage.getItem('appointments');
+
     if (!appointments) {
         console.log('the list of appoinments created')
         const list = createList()
@@ -25,7 +27,7 @@ export function loadData() {
       const firstDay = new Date(data[0].date)
       const now = new Date()
       if ( firstDay.getDate() !== (now.getDate() +1) ) {
-        console.log('the schedule datat have been apdated')
+        console.log('the schedule data have been apdated')
 
         const newData = listFiller( listChecker(JSON.parse(appointments)) );
         localStorage.setItem('appointments', JSON.stringify(newData))

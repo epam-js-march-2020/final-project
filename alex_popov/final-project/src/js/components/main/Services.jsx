@@ -1,26 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const ServiceNav = ({ links, activeService }) => (
-    <>
-        {
-        Object.keys(links).map( (link) => {
-            const price = link === activeService ? <span> {`£ ${links[link].price}`} </span> : null ; 
-            const containerClassName = link === activeService ? 'services_linkContainer services_linkContainer-active' : 'services_linkContainer';
-            return (
-                <div key={links[link].name} className={containerClassName} >
-                    <NavLink  className='service_link' to={links[link].path}> {links[link].name}</NavLink>
-                    {price}
-                </div>
-            )
-        })
-        }
-    </>
-)
+import ServiceNav from './ServiceNav';
 
+/**
+ * renders different content about services
+ */
 class Services extends React.Component{
     constructor(props) {
         super(props)
+
+        // information about prices, roots and  name of cervices
         this.prices = {
             cut: {
                 price: 25,
@@ -46,13 +36,22 @@ class Services extends React.Component{
     } 
 
     render() {
-        const serviceName = this.props.match.params.name ? this.props.match.params.name : 'default';
-        const appointmentLink = this.props.match.params.name ? `/${this.props.match.params.name}` : '';
+        const appointmentLink = this.props.match.params.name ? 
+            `/${this.props.match.params.name}` : 
+            '';
+
+        const serviceName = this.props.match.params.name ? 
+            this.props.match.params.name : 
+            'default';
+
         const className = `container_service container_service-${serviceName}`;
         
+        // if the component have no information about the choosen service
+        // or the link is wrong redirects to 404 page
         if ( !( serviceName in this.prices ) && serviceName !== 'default') {
             this.props.history.push('/404')
         }
+
         return (
             <div className={className}>
                 <div className='services_links_background'></div>
@@ -65,7 +64,6 @@ class Services extends React.Component{
             </div>
         )
     }
-    
 }
 
 export default Services;

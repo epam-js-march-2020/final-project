@@ -1,6 +1,7 @@
 import React from 'react';
 import WithFormChecker from './WithFormChecker';
-import Footer from '../Footer/Footer.jsx'
+import ServiceSelect from './ServiceSelect';
+import Footer from '../Footer/Footer.jsx';
 
 import {connect} from 'react-redux';
 import * as actions from '../../actions/actions';
@@ -9,7 +10,8 @@ import * as actions from '../../actions/actions';
 class Appointment extends WithFormChecker {
     constructor(props) {
         super(props);
-
+        
+        // the name of the services
         this.services = {
             cut: {
                 name: 'Hair cut',
@@ -25,6 +27,12 @@ class Appointment extends WithFormChecker {
             }
         }
 
+        // list - array of days in the schedule
+        //date - chossen date
+        //choosen time for an appointment
+        // name and phone - information about a person
+        // if a user is logged the app get the information from his profile
+        // type of the service that user want to make an appointment
         this.state = {
             list: [],
             date: '',
@@ -40,6 +48,9 @@ class Appointment extends WithFormChecker {
         this.onChangeService = this.onChangeService.bind(this);
     }
 
+    /**
+     * get schedule and put it into the state
+     */
     componentDidMount() {
         const list = JSON.parse( localStorage.getItem('appointments') );
         this.setState({
@@ -48,6 +59,9 @@ class Appointment extends WithFormChecker {
         })
     }
 
+    /**
+     * refreshes the information about a user in the storage
+     */
     componentDidUpdate() {
         const newState = {}
         if ( this.props.user && this.props.user.phone !== this.state.phone) {
@@ -61,6 +75,9 @@ class Appointment extends WithFormChecker {
         }
     }
 
+    /**
+     * returns arrau of date for renderirn
+     */
     monthSchedule() {
         return this.state.list.map( (el) => {
             const date = new Date(el.date);
@@ -80,6 +97,9 @@ class Appointment extends WithFormChecker {
         })
     }
 
+    /**
+     * returns an array of elements for rendering a day schedule
+     */
     daySchedule() {
 
         const dayId = this.state.list.findIndex( (el) => {
@@ -88,6 +108,7 @@ class Appointment extends WithFormChecker {
 
         if (dayId !== -1) {
             const response = [];
+
             for (let key in this.state.list[dayId].appointments) {
 
                 if (this.state.list[dayId].appointments[key] === 0) {
@@ -97,10 +118,19 @@ class Appointment extends WithFormChecker {
                     response.push(<p className={lassName} key={key} data-schedule={key}>{key}</p>)
                 }
             }
-            return response.length > 0 ? response : <p className='appointment_item appointment_item-active'>There is no time available this day. Sorry.</p> ;
+
+            return response.length > 0 ? response : 
+                <p 
+                    className='appointment_item appointment_item-active'
+                >
+                    There is no time available this day. Sorry.
+                </p> ;
         }
     }
 
+    /**
+     * marks a chosen date and time and changes the information in the state
+     */
     onClickContainer(ev) {
         if (ev.target.classList.contains('appointment_item')) {
             const id = ev.target.parentElement.id
@@ -114,6 +144,10 @@ class Appointment extends WithFormChecker {
         }
     }
 
+    /**
+     * check the information in the state
+     * return boolean
+     */
     formCheck() {
         return !!this.state.date && 
                 !!this.state.time && 
@@ -121,6 +155,10 @@ class Appointment extends WithFormChecker {
                 this.state.serviceType !== 'choose service';
     }
 
+    /**
+     * if the booked tiem is free, insert the information about the applintment in the databese
+     * and clears the store
+     */
     onClickBook() {
         const { date, time } = this.state;
         const schedule = JSON.parse( localStorage.getItem('appointments') );
@@ -130,7 +168,8 @@ class Appointment extends WithFormChecker {
         });
         
         if (dayId !== -1) {
-            const scheduleDay = schedule[dayId]
+            const scheduleDay = schedule[dayId];
+
             if (time in scheduleDay.appointments && scheduleDay.appointments[time] === 0) {
 
                 scheduleDay.appointments[time] = {
@@ -153,6 +192,9 @@ class Appointment extends WithFormChecker {
         }
     }
 
+    /**
+     * render the message for an user
+     */
     showMessage(date, time) {
         const month = this.monthFull[new Date(date).getMonth()];
         const day = new Date(date).getDate();
@@ -162,20 +204,10 @@ class Appointment extends WithFormChecker {
         document.querySelector('#message').innerText = `we are wiating for you on ${day}th of ${month} at ${time}`; 
     }
 
-    onChangeService(ev) {
-        this.setState({[ev.target.id]: ev.target.value})
-    }
-
     render() {
-        // const serviceType = this.props.match.params.name ? this.props.match.params.name : '';
-        // const serviceType = this.state.serviceType ? this.state.serviceType : '';
-        // console.log(serviceType)
-        // console.log(this.state.serviceType)
-        // console.log(this.props)
-        // console.log(this.formCheck())
-
         const bookButtonClassName = this.formCheck() ? 'form_button' : 'form_button form_button-disabled';
         const formClassName = this.props.user ? 'login_form user_login_form' : 'login_form user_login_form login_form-phone'
+        
         return (
             <>
             <div className='container margin-top'>
@@ -192,7 +224,7 @@ class Appointment extends WithFormChecker {
                 </div>
 
                 <div className={formClassName}>
-
+                    {/* if a user is logged the app get the phone number from his profile */}
                     {this.props.user ? null : 
                         <>
                         <label className='form_label' htmlFor='phone'>Phone number 10 digits</label>
@@ -216,46 +248,6 @@ class Appointment extends WithFormChecker {
 
             </div>
             <Footer footerClassName='footer footer-dark' />
-            </>
-        )
-    }
-}
-
-class ServiceSelect extends React.Component {
-    render() {
-        const { onChangeService, serviceList, activeService } = this.props;
-        // console.log(activeService)
-        const selectClassName = activeService === 'choose service' ? 
-            'form_input form_input-yellow form_input-invalid' : 
-            'form_input form_input-yellow' ;
-
-        const labelClassName = activeService === 'choose service' ? 
-            'form_label form_label-invalid' : 
-            'form_label';
-
-        // console.log(selectClassName)
-        return (
-            <>
-            <label className={labelClassName} htmlFor='phone'>Choose a service</label>
-            <select 
-                className={selectClassName}
-                id='serviceType' 
-                onChange={onChangeService}
-                defaultValue={activeService}
-            >
-                <option className='input_options'>choose service</option>
-
-                {Object.keys(serviceList).map( (el) => {
-                    return <option 
-                                className='input_options' 
-                                key={el} 
-                                value={serviceList[el].name}
-                            >  
-                                {serviceList[el].name}
-                            </option>
-                })}
-                
-            </select>
             </>
         )
     }

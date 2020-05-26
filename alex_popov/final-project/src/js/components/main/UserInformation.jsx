@@ -4,9 +4,15 @@ import WithFormChecker from './WithFormChecker';
 import {connect} from 'react-redux';
 import * as actions from '../../actions/actions';
 
+/**
+ * renders information about the user 
+ * and form for changing the information
+ */
 class UserInformation extends WithFormChecker {
     constructor(props) {
         super(props);
+        
+        //contain the information about the current user
         this.state = {
             id: this.props.user.id,
             name: '',
@@ -20,11 +26,23 @@ class UserInformation extends WithFormChecker {
         this.onClickChangeInformation = this.onClickChangeInformation.bind(this);
     }
 
+    /**
+     * name the user logged out
+     */
     onClickLogOut() {
         this.props.logout();
         document.cookie = `session=; expires=-1`;
     }
 
+    /**
+     * check if the user entered the same information 
+     * information should be unique
+     * chck the information in the base
+     * @param {string} value 
+     * @param {strin} parametrName 
+     * @param {boolean} isUnique 
+     * @return {boolean}
+     */
     valueChacker(value, parametrName, isUnique = false) {
 
         if (value === this.props.user[parametrName]) {
@@ -47,6 +65,14 @@ class UserInformation extends WithFormChecker {
         return true;
     }
 
+    /**
+     * insert new information about the user in the base
+     * @param {number} id 
+     * @param {array} users 
+     * @param {string} name 
+     * @param {string} phone 
+     * @param {string} pass 
+     */
     loadInformation(id, users, name, phone, pass) {
         const userId = users.findIndex( (el) => {
             return el.id === id
@@ -66,6 +92,10 @@ class UserInformation extends WithFormChecker {
         this.props.login(newInformation);
     }
 
+    /**
+     * checks the entered information
+     * if the information velid insert the information in the base
+     */
     onClickChangeInformation() {
 
         if ( this.formCheck() ) {
@@ -76,8 +106,6 @@ class UserInformation extends WithFormChecker {
             
             document.querySelector('#message').classList.remove('message-valid', 'message-invalid');
 
-            
-            
             if (isInformationValid) {
                 const users = JSON.parse( localStorage.getItem('users') );
                 this.loadInformation(id, users, name, phone, pass)
@@ -87,6 +115,9 @@ class UserInformation extends WithFormChecker {
         }
     }
 
+    /**
+     * cleand the form and the state
+     */
     fromCleaner() {
         document.querySelector('#phone').value = '';
         document.querySelector('#pass').value = '';
@@ -100,6 +131,10 @@ class UserInformation extends WithFormChecker {
 
     }
 
+    /***
+     * checks the information in the form
+     * @return {boolean}
+     */
     formCheck() {
         if (this.state.phone === '' && this.state.name === '' && this.state.pass === '') {
             return false;
@@ -108,6 +143,10 @@ class UserInformation extends WithFormChecker {
         }
     }
 
+    /**
+     * checs the infromation in the state
+     * @param {string} el 
+     */
     elCheck(el) {
         if( this.state[el] !== '' && this.state[el].length < this.minLen[el]) {
             return false;
@@ -116,10 +155,6 @@ class UserInformation extends WithFormChecker {
     }
 
     render() {
-        // const appointments = this.getAppointments()
-        // console.log(appointments)
-        // console.log(this.state)
-        // console.log(this.props)
         const changeButtonClassName = this.formCheck() ? 'form_button' : 'form_button form_button-disabled';
 
         return (

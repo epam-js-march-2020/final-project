@@ -3,6 +3,9 @@ import React from 'react';
 import Player from './Player.jsx';
 import Footer from '../Footer/Footer.jsx';
 
+/**
+ * home page
+ */
 const Home= () => (
     <>
         <Player />

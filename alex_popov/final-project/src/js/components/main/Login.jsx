@@ -5,9 +5,13 @@ import WithFormChecker from './WithFormChecker';
 import {connect} from 'react-redux';
 import * as actions from '../../actions/actions';
 
+/**
+ * login page
+ */
 class Login extends WithFormChecker {
     constructor(props) {
-        super(props)
+        super(props);
+
         this.state = {
             phone: '',
             pass: ''
@@ -20,19 +24,32 @@ class Login extends WithFormChecker {
         this.login = this.login.bind(this);
     }
 
+    /**
+     * chek the information in the store 
+     * return boolen
+     */
     formCheck(phone, pass) {
         if (phone.length === this.minLen.phone && pass.length >= this.minLen.pass ) {
             return true;
         }
         return false;
     }
-
+    
+    /**
+     * check the entered phone
+     * return the index of the users information in the base
+     */
     phoneChecker(arr, phone) {
         return arr.findIndex( (el) => {
             return el.phone ===  phone;
         })
     }
 
+    /**
+     * insert the information about new account the base
+     * make the user looged
+     * if the phone number is used renders the message
+     */
     signUp(phone, pass) {
         
         const users = JSON.parse( localStorage.getItem('users') );
@@ -49,7 +66,7 @@ class Login extends WithFormChecker {
                 appointments: [],
                 code: this.cookier()
             };
-            // console.log( newUser )
+            
             this.props.login(newUser);
             users.push(newUser);
             
@@ -60,10 +77,14 @@ class Login extends WithFormChecker {
         }
     }
 
+    /**
+     * makes the user logged if the entered information is correct
+     * or renderes messages
+     */
     login(phone, pass) {
         const users = JSON.parse( localStorage.getItem('users'));
         const userId = this.phoneChecker(users, phone);
-        // console.log(users[userId])
+        
         if (userId !== -1) {
             if ( users[userId].pass === pass) {
                 
@@ -84,6 +105,10 @@ class Login extends WithFormChecker {
         
     }
 
+    /**
+     * whe user have logged saves the code in the coocke
+     * and return it
+     */
     cookier(userId) {
         const code = Date.now();
         const till = new Date(code + 3600000 ).toUTCString();
@@ -100,8 +125,10 @@ class Login extends WithFormChecker {
         return code;
     }
 
+    /**
+     * treats click on the buttons
+     */
     onClickButton(ev) {
-
         const phone = this.state.phone;
         const pass = this.state.pass;
         
@@ -137,8 +164,7 @@ class Login extends WithFormChecker {
                 </div>
             </div>
         )
-    }
-    
+    }   
 }
 
 const propsMap = ({user}) => (
