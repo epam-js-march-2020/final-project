@@ -1,0 +1,20 @@
+.warning {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 25px;
+}
+@media (max-width: 991px) {
+  .warning {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+@media (min-width: 992px) {
+  .warning {
+    align-items: center;
+    img {
+      margin-right: 2rem;
+    }
+    margin: auto;
+  }
+}
