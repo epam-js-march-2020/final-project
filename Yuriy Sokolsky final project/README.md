@@ -29,7 +29,7 @@ and a few others
 
 ### REST API 
 
-GET `/api/services1` - get serivces collection
+GET `/api/services` - get serivces collection
 
 GET `/api/services/:id` -get service by id
 
