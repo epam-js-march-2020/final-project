@@ -1,7 +1,7 @@
 import React from "react";
 import $ from "jquery";
 
-import { Container, Row, Col, Alert, Button, Form } from "react-bootstrap";
+import {Alert, Button, Col, Container, Form, Row} from "react-bootstrap";
 import "../componentStyles/ProfileContent.css";
 
 export default class LoginLogonForm extends React.Component {
@@ -155,11 +155,11 @@ export default class LoginLogonForm extends React.Component {
                     <Col>
                       {" "}
                       <Button
-                        variant="primary"
-                        type="submit"
-                        name="registration"
-                        disabled={this.state.disableButtons}
-                        onClick={() =>
+                          variant="outline-light"
+                          type="submit"
+                          name="registration"
+                          disabled={this.state.disableButtons}
+                          onClick={() =>
                           this.setState({
                             clickedButton: "registration",
                           })
@@ -170,11 +170,11 @@ export default class LoginLogonForm extends React.Component {
                     </Col>
                     <Col className="text-right">
                       <Button
-                        variant="primary"
-                        type="submit"
-                        name="login"
-                        disabled={this.state.disableButtons}
-                        onClick={() =>
+                          variant="outline-light"
+                          type="submit"
+                          name="login"
+                          disabled={this.state.disableButtons}
+                          onClick={() =>
                           this.setState({
                             clickedButton: "login",
                           })

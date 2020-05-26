@@ -131,7 +131,7 @@ export class ProfileLoggedIn extends React.Component {
                                 />
                             </Form.Group>
                             <Button
-                                variant="primary"
+                                variant="outline-light"
                                 type="submit"
                                 disabled={this.state.disableButtons}
                             >
