@@ -32,8 +32,6 @@ class BookModal extends Component {
     this.onDayChange = this.onDayChange.bind(this);
   }
   onChange(e) {
-    console.log(e.target.name);
-    console.log(e.target.value);
     this.setState({ [e.target.name]: e.target.value });
   }
   onDayChange(day) {
@@ -44,9 +42,6 @@ class BookModal extends Component {
   }
   handleAddAppointment() {
     const date = new Date(this.state.date);
-    console.log(
-      date.getDate() + '/' + Number(date.getMonth()) + '/' + date.getFullYear()
-    );
     this.props.addAppointment({
       id: Math.random(),
       service_name: this.props.service,

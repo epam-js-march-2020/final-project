@@ -29,7 +29,6 @@ class Account extends Component {
   onSubmit(e) {
     const { email, password, firstName, lastName } = this.state;
     e.preventDefault();
-    console.log(this.state);
     if (true) {
       updateUser({ email, password, firstName, lastName });
     } else {

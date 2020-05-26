@@ -29,7 +29,7 @@ const authReducer = (state = initState, action) => {
         isLogged: false,
         user: { email: '', password: '', firstName: '', lastName: '' },
       });
-      console.log(newState);
+
       setLocalStorage('auth', newState);
       return newState;
     default:

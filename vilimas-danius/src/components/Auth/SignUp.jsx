@@ -33,7 +33,6 @@ class SignUp extends Component {
   onSubmit(e) {
     const { email, password, firstName, lastName } = this.state;
     e.preventDefault();
-    console.log(this.state);
     const user = this.props.users.users.filter(
       (u) => u.email === this.state.email
     )[0];
