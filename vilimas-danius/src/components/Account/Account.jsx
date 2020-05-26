@@ -30,8 +30,8 @@ class Account extends Component {
     const { email, password, firstName, lastName } = this.state;
     e.preventDefault();
     if (true) {
+      alert('Вы успешно записались!');
       updateUser({ email, password, firstName, lastName });
-    } else {
     }
   }
   onChange(e) {
@@ -47,21 +47,25 @@ class Account extends Component {
           <div className='col dash'>
             <h3 className='text-center'>Ваши записи</h3>
             <div className='d-flex justify-content-around'>
-              <table className='table table-responsive table-striped '>
-                <thead>
-                  <tr>
-                    <th scope='col'>Услуга</th>
-                    <th scope='col'>Дата и Время</th>
-                    <th scope='col'>Адрес</th>
-                    <th scope='col'>Отменить</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.map((el) => (
-                    <AppointmentCard item={el} key={el.id} />
-                  ))}
-                </tbody>
-              </table>
+              {filtered.length > 0 ? (
+                <table className='table table-responsive table-striped '>
+                  <thead>
+                    <tr>
+                      <th scope='col'>Услуга</th>
+                      <th scope='col'>Дата и Время</th>
+                      <th scope='col'>Адрес</th>
+                      <th scope='col'>Отменить</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filtered.map((el) => (
+                      <AppointmentCard item={el} key={el.id} />
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <h4 className='noAppointments'>У вас нет записей</h4>
+              )}
             </div>
           </div>
           <div className='col col-xl-5 dash'>
