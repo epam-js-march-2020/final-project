@@ -7,3 +7,6 @@ export function loginSuccess(payload) {
 export function loginFailure() {
   return { type: 'LOGIN_FAILURE' };
 }
+export function log_Out() {
+  return { type: 'LOGIN_OUT' };
+}

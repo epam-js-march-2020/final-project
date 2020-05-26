@@ -1,5 +1,6 @@
+import { setLocalStorage, getLocalStorage } from './../helpers';
 const initState = localStorage.getItem('auth')
-  ? JSON.parse(localStorage.getItem('auth'))
+  ? getLocalStorage('auth')
   : {
       isLoading: false,
       isLogged: false,
@@ -7,35 +8,30 @@ const initState = localStorage.getItem('auth')
     };
 
 const authReducer = (state = initState, action) => {
+  var newState;
   switch (action.type) {
     case 'LOGIN_SUCCESS':
-      localStorage.setItem(
-        'auth',
-        JSON.stringify(
-          Object.assign({}, state, {
-            isLogged: true,
-            user: action.payload,
-          })
-        )
-      );
-      return Object.assign({}, state, {
+      newState = Object.assign({}, state, {
         isLogged: true,
         user: action.payload,
       });
+      setLocalStorage('auth', newState);
+      return newState;
     case 'LOGIN_FAILURE':
-      localStorage.setItem(
-        'auth',
-        JSON.stringify(
-          Object.assign({}, state, {
-            isLogged: false,
-            user: { email: '', password: '', firstName: '', lastName: '' },
-          })
-        )
-      );
-      return Object.assign({}, state, {
+      newState = Object.assign({}, state, {
         isLogged: false,
         user: { email: '', password: '', firstName: '', lastName: '' },
       });
+      setLocalStorage('auth', newState);
+      return newState;
+    case 'LOGIN_OUT':
+      newState = Object.assign({}, state, {
+        isLogged: false,
+        user: { email: '', password: '', firstName: '', lastName: '' },
+      });
+      console.log(newState);
+      setLocalStorage('auth', newState);
+      return newState;
     default:
       return state;
   }

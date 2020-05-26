@@ -19,3 +19,20 @@
     text-align: center;
   }
 }
+form {
+  input[type='text'],
+  input[type='email'],
+  input[type='password'] {
+    // покажите успех!
+    &:valid {
+      background: url(../../assets//img/correct.svg);
+      background-size: 20px;
+      background-repeat: no-repeat;
+      background-position: 98%;
+      // продолжаем прятать label
+      & + label {
+        opacity: 0;
+      }
+    }
+  }
+}

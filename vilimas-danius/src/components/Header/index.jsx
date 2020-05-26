@@ -4,14 +4,14 @@ import { NavLink } from 'react-router-dom';
 
 import logo from '../../assets/img/logo.png';
 import './Header.scss';
-import { loginFailure } from '../../store/actions/login';
+import { log_Out } from '../../store/actions/login';
 const Header = (props) => {
   const isLogged = useSelector((state) => state.auth.isLogged);
   const dispatch = useDispatch();
-  const logOut = (ev) => {
+  const handleLogOut = (ev) => {
     ev.preventDefault();
 
-    dispatch(loginFailure());
+    dispatch(log_Out());
     props.history.push('/');
   };
   function AuthButtons() {
@@ -24,7 +24,7 @@ const Header = (props) => {
         >
           Мои заказы
         </NavLink>
-        <button className='btn btn-info' onClick={logOut}>
+        <button className='btn btn-info' onClick={handleLogOut}>
           Выйти
         </button>
       </>

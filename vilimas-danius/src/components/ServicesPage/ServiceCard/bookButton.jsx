@@ -1,20 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addAppointment } from './../../../store/actions/account';
+import { activateBooking } from '../../../store/actions/booking';
 
 function BookButton(props) {
-  const email = useSelector((state) => state.auth.user.email);
   const isLogged = useSelector((state) => state.auth.isLogged);
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(
-      addAppointment({
-        id: Math.random(),
-        service_name: props.service,
-        user_email: email,
-        time: '12:00',
-      })
-    );
+    dispatch(activateBooking(props.service));
   };
   return (
     <button

@@ -53,27 +53,35 @@
   "appointments": [
     {
       "id": 1,
-      "service_name": "Стрижка",
+      "service_name": "Мужская стрижка",
       "user_email": "danvil97@yandex.ru",
-      "time": "10:00"
+      "time": "10:00",
+      "date": "30/12/2020",
+      "address": "Профессора Попова, 6"
     },
     {
       "id": 2,
-      "service_name": "Иголочки",
+      "service_name": "Укладка",
       "user_email": "danvil97@yandex.ru",
-      "time": "16:00"
+      "time": "16:00",
+      "date": "30/12/2020",
+      "address": "Профессора Попова, 6"
     },
     {
       "id": 3,
-      "service_name": "Стрижка",
+      "service_name": "Стрижка бороды",
       "user_email": "danvil97@yandex.ru",
-      "time": "12:00"
+      "time": "12:00",
+      "date": "30/12/2020",
+      "address": "Профессора Попова, 6"
     },
     {
       "id": 4,
-      "service_name": "Стрижка",
+      "service_name": "Камуфляж головы/бороды",
       "user_email": "test@ya.ru",
-      "time": "10:00"
+      "time": "10:00",
+      "date": "3/5/2020",
+      "address": "Профессора Попова, 6"
     }
   ]
 }

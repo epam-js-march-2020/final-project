@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { loginSuccess, loginFailure } from '../../store/actions/login';
 import { connect } from 'react-redux';
-import { users } from '../../assets/db.json';
+
 import './Auth.scss';
 const mapStateToProps = (state) => {
-  return { auth: state.auth };
+  return { auth: state.auth, users: state.users };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     loginSuccess: (auth) => dispatch(loginSuccess(auth)),
-    loginFailure: (auth) => dispatch(loginFailure()),
+    loginFailure: () => dispatch(loginFailure()),
   };
 };
 
@@ -29,11 +29,14 @@ class SignIn extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    const user = users.filter(
+    const user = this.props.users.users.filter(
       (u) => u.email === this.state.email && u.password === this.state.password
     )[0];
-    user ? this.props.loginSuccess(user) : this.props.loginFailure();
-    this.props.history.push('/orders');
+    if (user) {
+      this.props.loginSuccess(user);
+      this.props.history.push('/orders');
+      alert('Вы успешно вошли!');
+    } else this.props.loginFailure();
   }
   render() {
     return (
