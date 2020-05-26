@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux'
 
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -7,10 +8,13 @@ import Button from 'react-bootstrap/Button';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
+//import { loadUsers } from '../../Actions'
+
 import './SignIn.css';
 
 const SignIn = (props) => {
     const [t] = useTranslation();
+    const { dispatch } = props;
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
@@ -23,17 +27,17 @@ const SignIn = (props) => {
         key: '$2b$10$ltjATMhqY0JfYN5Mi1k1nOVTEQIGJwabv1R6Fb9CUjOUl7jTe6PwG'
     };
 
-    async function getUsersData() {
-        const response = await fetch([jsonBin.root, 'b', jsonBin.binId, jsonBin.binVersion].join('/'), {
-            method: 'GET',
-            headers: {
-                'secret-key': jsonBin.key
-            }
-        });
-        await response
-            .json()
-            .then(res => setUsers(res));
-    };
+    // async function getUsersData() {
+    //     const response = await fetch([jsonBin.root, 'b', jsonBin.binId, jsonBin.binVersion].join('/'), {
+    //         method: 'GET',
+    //         headers: {
+    //             'secret-key': jsonBin.key
+    //         }
+    //     });
+    //     await response
+    //         .json()
+    //         .then(res => setUsers(res));
+    // };
 
     async function updateUsersData(user) {
         const response = await fetch([jsonBin.root, 'b', jsonBin.binId].join('/'), {
@@ -100,7 +104,7 @@ const SignIn = (props) => {
     }
 
     useEffect(() => {
-        getUsersData();
+//        getUsersData();
 // eslint-disable-next-line
     }, []);
 
@@ -192,4 +196,4 @@ const SignIn = (props) => {
     );
 }
 
-export default SignIn;
+export default connect()(SignIn);

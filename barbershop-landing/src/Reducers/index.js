@@ -1,33 +1,37 @@
-import { combineReducers } from 'redux';
+import { FETCH_PRODUCTS_PENDING, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_ERROR } from '../Actions';
 
-const todos = (state = [], action) => {
-    switch (action.type) {
-        case 'ADD_TODO':
-            return [
+const initialState = {
+    pending: false,
+    products: [],
+    error: null
+}
+
+export function productsReducer(state = initialState, action) {
+    switch(action.type) {
+        case FETCH_PRODUCTS_PENDING: 
+            return {
                 ...state,
-                {
-                    id: action.id,
-                    text: action.text,
-                    completed: false
-                }
-            ]
-        case 'TOGGLE_TODO':
-            return state.map(todo =>
-            (todo.id === action.id)
-                ? {...todo, completed: !todo.completed}
-                : todo
-            )
-        default:
-            return state
+                pending: true
+            }
+        case FETCH_PRODUCTS_SUCCESS:
+            return {
+                ...state,
+                pending: false,
+                products: action.payload
+            }
+        case FETCH_PRODUCTS_ERROR:
+            return {
+                ...state,
+                pending: false,
+                error: action.error
+            }
+        default: 
+            return state;
     }
 }
 
-function todosReducer(state = {}, action) {
+export default function App(state = {}, action) {
     return {
-        todos: todos(state.todos, action)
+        products: productsReducer(state.todos, action)
     }
-}
-
-export default combineReducers({
-    todos: todosReducer,
-});
+  }
