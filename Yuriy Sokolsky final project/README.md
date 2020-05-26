@@ -14,6 +14,18 @@ $ npm start        //to start server
 
 ### Server will start on localhost:80
 
+### Used dependencies:
+- mongodb  (database)
+- express   (server)
+- React(react-dom,react-phone-input-2,react-datepicker etc.) (client)
+- react-router  (client)
+- react-bootstrap   (client)
+- webpack   (client)
+- date-fns  (client)
+- cookie-parser (server)
+- fontawesome   (client)
+
+and a few others
 
 ### REST API 
 
