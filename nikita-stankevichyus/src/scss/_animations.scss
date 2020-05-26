@@ -1,0 +1,39 @@
+@import "./vars";
+
+$general-colors: (
+  primary: $primary,
+  secondary: $secondary,
+  success: $success,
+  danger: $danger,
+  warning: $warning,
+  info: $info,
+  light: $light,
+  dark: $dark,
+  muted: $muted
+);
+
+@each $name, $value in $general-colors {
+  .hover-bgColor--#{$name} {
+    transition: background-color 0.5s;
+  }
+
+  .hover-textColor--#{$name} {
+    transition: color 0.5s;
+  }
+
+  .hover-borderColor--#{$name} {
+    transition: border-color 0.5s;
+  }
+  
+  .hover-bgColor--#{$name}:hover {
+    background-color: $value;
+  }
+
+  .hover-textColor--#{$name}:hover {
+    color: $value;
+  }
+
+  .hover-borderColor--#{$name}:hover {
+    border-color: $value;
+  }
+}

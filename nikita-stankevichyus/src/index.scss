@@ -1,0 +1,664 @@
+@import "scss/fonts";
+@import "scss/grid";
+@import "scss/mixins";
+@import "scss/normalize";
+@import "scss/positioning";
+@import "scss/reset";
+@import "scss/templates";
+@import "scss/vars";
+@import "scss/margins-paddings";
+@import "scss/colors";
+@import "scss/animations";
+@import "scss/fonts/FontAwesome/fontawesome.scss";
+@import "scss/fonts/FontAwesome/solid.scss";
+// @import "../node_modules/bootstrap/dist/css/bootstrap-grid.css";
+// @import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+html {
+  height: 100%;
+}
+
+// Setting data from vars.scss for each part of the page (header, main, aside, footer)
+// Or, if there universal parameters, they'll be setted to everything
+@if $use-universal != true {
+
+  body * {
+    font-family: map-get(map-get($fonts, main), font-main);
+  }
+  // COLORS
+  @each $part, $data in $colors {
+    #{$part} {
+      background-color: map-get($data, background);
+      border-color: map-get($data, border);
+      .text-main, p, * {
+        color: map-get($data, text-main);
+      }
+      .text-header, h1, h2, h3, h4, h5, h6 {
+        color: map-get($data, text-header);
+      }
+      .text-link, a, link {
+        color: map-get($data, text-link);
+      }
+      // button {
+      //   padding: 10px;
+      //   background-color: map-get($data, text-link);
+      //   border: 1px solid map-get($data, text-link);
+      //   border-radius: 5px;
+      //   color: map-get($data, background);
+      //   -webkit-transition: background-color 0.5s, color 0.5s;
+      //   transition: background-color 0.5s, color 0.5s;
+      // }
+
+      // button:hover, button:active {
+      //   background-color: desaturate(map-get($data, background), 50%);
+      //   color: map-get($data, text-link);
+      // }
+
+      input {
+        background-color: white;
+        border: 3px solid map-get($data, border);
+        color: #333;
+        border-radius: 5px;
+        padding: 10px;
+      }
+    }
+  }
+
+  // SIZES
+  @each $part, $data in $sizes {
+    #{$part} {
+      .text-main, p{
+        font-size: map-get($data, font-main);
+      }
+
+      @each $header, $size in map-get($data, font-header) {
+        #{$header} {
+          font-size: $size;
+        }
+      }
+
+      .text-link, a, link {
+        font-size: map-get($data, font-link);
+      }
+    }
+  }
+
+  // FONTS
+  @each $part, $data in $fonts {
+    #{$part} {
+      .text-main, p , *{
+        font-family: map-get($data, font-main);
+        font-weight: map-get($data, font-weight-main);
+        font-style: map-get($data, font-style-main);
+      }
+      .text-header, h1, h2, h3, h4, h5, h6 {
+        font-family: map-get($data, font-header);
+        font-weight: map-get($data, font-weight-header);
+        font-style: map-get($data, font-style-header);
+      }
+      .text-link, a, link{
+        font-family: map-get($data, font-link);
+        font-weight: map-get($data, font-weight-link);
+        font-style: map-get($data, font-style-link);
+      }
+    }
+  }
+} @else {
+
+  $parts: (header, main, aside, footer);
+
+  // COLORS
+  @each $part in $parts {
+
+    #{$part} {
+      background-color: map-get(map-get($universal, colors), background);
+      border-color: map-get(map-get($universal, colors), border);
+      .text-main, p, * {
+        color: map-get(map-get($universal, colors), text-main);
+      }
+      .text-header, h1, h2, h3, h4, h5, h6 {
+        color: map-get(map-get($universal, colors), text-header);
+      }
+      .text-link, a, link {
+        color: map-get(map-get($universal, colors), text-link);
+      }
+    }
+  
+
+  // SIZES
+  
+    #{$part} {
+
+      .text-main, p{
+        font-size: map-get(map-get($universal, font), font-main);
+      }
+
+      @each $header, $size in map-get(map-get($universal, size), font-header) {
+        #{$header} {
+          font-size: $size;
+        }
+      }
+
+      .text-link, a, link {
+        font-size: map-get($universal, font-link);
+      }
+    }
+  
+
+  // FONTS
+  
+    #{$part} {
+      .text-main, p, *{
+        font-family: map-get(map-get($universal, font), font-main);
+        font-weight: map-get(map-get($universal, font), font-weight-main);
+        font-style: map-get(map-get($universal, font), font-style-main);
+      }
+      .text-header, h1, h2, h3, h4, h5, h6 {
+        font-family: map-get(map-get($universal, font), font-header);
+        font-weight:  map-get(map-get($universal, font), font-weight-header);
+        font-style:  map-get(map-get($universal, font), font-style-header);
+      }
+      .text-link, a, link {
+        font-family: map-get(map-get($universal, font), font-link);
+        font-weight: map-get(map-get($universal, font), font-weight-link);
+        font-style: map-get(map-get($universal, font), font-style-link);
+      }
+    }
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+  overflow-x: hidden !important;
+}
+
+.text-link, a, link {
+  display: block;
+  text-decoration: underline;
+}
+
+
+code {
+  background-color: $light;
+  color: map-get(map-get($colors, main), font-main);
+  font-family: 'JetBrains Mono';
+  padding: 5px;
+}
+
+.main_presentation, header  {
+  h1, h2, h3, h4, h5, h6 {
+    @include text-gradient(45deg, #071013, 40%, #23B5D3, 90%);
+    
+  }
+
+}
+
+* {
+  scroll-behavior: smooth !important;
+}
+
+// aside h1, footer h1 {
+//   @include text-gradient(135deg, #2b5876   , 10%,  #4e4376, 70%);
+// }
+
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+
+.logo {
+  width: 20%;
+  @media(max-height: 580px) {
+    display: none;
+  }
+}
+
+
+ul {
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  > * {
+    margin-bottom: 10px;
+  }
+}
+.examples > *{
+  margin-top: 15px;
+}
+
+.test-modal {
+  background-color: white;
+  width: 200px;
+  height: 200px;
+  border: 2px solid orange;
+  border-radius: 5px;
+}
+
+
+.info {
+  width: 95%;
+ 
+  &_number {
+  
+  }
+}
+
+
+.main {
+  &_content {
+    height: 230vh;
+  }
+  &_presentation {
+    min-height: 50%;
+
+  }
+  &_whyWe {
+    // background-color: map-get(map-get($colors, main), text-link);
+    min-height: 50%;
+    width: 100% !important;
+    h1, p {
+      color: #DFE0E2 !important;
+    }
+    @include gradient(0deg, #071013, -10%, #23B5D3, 125%);
+    .works {
+      .work {
+        width: 33%;
+        
+      }
+    }
+  }
+}
+
+body {
+  min-height: 100vh;
+  height: max-content !important;
+}
+
+a{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.header {
+  @media (min-width: 1050px) {
+    .toggler {
+      display: none !important;
+      position: absolute !important;
+      pointer-events: none !important;
+    }
+    .nav--horizontal {
+      .transparent {
+        opacity: 1 !important;
+	      pointer-events: all !important;
+      }
+    }
+  }
+  @media (max-width: 1050px){
+  
+    background: none;
+    + main {
+      margin-top: 0 !important;
+    }
+    width: 200px;
+    height: 350px;
+    .nav--horizontal{
+      height: 100%;
+      margin-top: 0 !important;
+    }
+    
+    .nav--horizontal ul{
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: space-between !important;
+      height: 100%;
+    }
+
+  }
+}
+
+.header--hidden {
+  @media (max-width: 1050px){
+    transform: rotate(180deg) translateY(300px);
+    .toggler {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.header--hidden--logged {
+  @media (max-width: 1050px){
+    transform: rotate(180deg) translateY(292px);
+    .toggler {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.sign_up {
+  padding: 35px;
+  // height: 550px;
+  min-height: max-content;
+  width: 300px;
+  background-color: map-get(map-get($colors, header), background);
+  color: map-get(map-get($colors, header), text-main);
+}
+.log_in {
+  padding: 35px;
+  min-height: max-content; 
+  width: 300px;
+  background-color: map-get(map-get($colors, header), background);
+  color: map-get(map-get($colors, header), text-main);
+}
+
+.add_service {
+  padding: 35px;
+  min-height: max-content;
+  width: 300px;
+  background-color: map-get(map-get($colors, header), background);
+  color: map-get(map-get($colors, header), text-main);
+}
+
+.edit_name, .edit_second_name, .edit_email {
+  padding: 25px;
+  min-height: max-content;
+  width: 300px;
+  background-color: map-get(map-get($colors, header), background);
+  color: map-get(map-get($colors, header), text-main);
+}
+
+.invalid_note {
+  color:rgba(255, 50, 50, 1);
+}
+
+.invalid_input {
+  border: 3px solid rgba(255, 0, 0, 0.5) !important;
+}
+
+.transparent {
+  opacity: 0;
+  pointer-events: none !important;
+}
+
+.semi-transparent {
+  background-color: rgba(255, 0, 0, 0) !important;
+  @include text-gradient(45deg, #071013, 40%, #23B5D3, 50%);
+  
+}
+
+.semi-transparent:hover {
+  opacity: 1;
+}
+
+.home {
+  height: max-content;
+  flex: 1 0 auto;
+  &_presentation {
+    @media(min-width: 1050px) {
+      padding-top: 140px;
+    }
+    max-width: 100vw !important;
+    min-height: max-content;
+    
+    width: max-content;
+    h1, h2, h3, h4, h5, h6 {
+      @include text-gradient(45deg, #071013, 40%, #23B5D3, 90%);
+      
+    }
+  }
+
+  &_whyWe {
+    min-height: max-content;
+    max-width: 100vw;
+    h1, p {
+      color: #DFE0E2 !important;
+    }
+    @include gradient(0deg, #071013, -10%, #23B5D3, 125%);
+  }
+}
+
+.footer {
+  height: 100px;
+  flex-shrink: -1;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.button_project {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-weight: 500;
+  font-size: 18px;
+  min-width: max-content;
+  width: 200px;
+	box-sizing: border-box;
+  padding: 15px;
+  border: 0px;
+  border-radius: 0px;
+  -webkit-transition: background-color 0.5s, color 0.5s;
+  transition: background-color 0.5s, color 0.5s;
+	
+
+}
+
+.button_project--dark {
+  background-color: map-get(map-get($colors, header), background) !important;
+  color: map-get(map-get($colors, header), text-link) !important;
+}
+
+.button_project--dark:hover, .button_project--dark:active {
+  background-color: map-get(map-get($colors, header), text-link) !important;
+  color: map-get(map-get($colors, header), background) !important;
+}
+
+.button_project--primary {
+  background-color: map-get(map-get($colors, header), text-link) !important;
+  color: map-get(map-get($colors, header), background) !important;
+}
+
+.button_project--primary:hover, .button_project--primary:active {
+  background-color: map-get(map-get($colors, header), background) !important;
+  color: map-get(map-get($colors, header), text-link) !important;
+}
+
+.button_project--light {
+  background-color: map-get(map-get($colors, header), text-main) !important;
+  color: map-get(map-get($colors, header), background) !important;
+}
+
+.button_project--light:hover, .button_project--primary:active {
+  background-color: map-get(map-get($colors, header), background) !important;
+  color: map-get(map-get($colors, header), text-main) !important;
+}
+
+.button_project--alternative {
+  border: 1px solid map-get(map-get($colors, header), text-main);
+  background-color: map-get(map-get($colors, header), background) !important;
+  color: map-get(map-get($colors, header), text-main) !important;
+
+}
+
+.button_project--alternative:hover, .button_project--primary:active {
+  border: 1px solid map-get(map-get($colors, header), background);
+  background-color: map-get(map-get($colors, header), text-main) !important;
+  color: map-get(map-get($colors, header), background) !important;
+}
+
+.form-control {
+  border-radius: 0px !important;
+}
+
+.services {
+  min-height: 100vh;
+  @include gradient(0deg, #071013, -10%, #23B5D3, 125%);
+  flex: 1 0 auto;
+  width: 100vw;
+  margin: 0 auto;
+  * {
+    color: white;
+  }
+
+  a {
+    font-style: normal;
+    text-decoration: normal;
+    font-size: 16px;
+  }
+
+  table {
+    background-color: rgba(map-get(map-get($colors, header), background), 0.7) !important;
+    width: 75%;
+    height: 60vh;
+    text-transform: uppercase;
+    border-color: map-get(map-get($colors, header), background) !important;
+    border-collapse: collapse;
+    border-style: none;
+    border-width: 0;
+    * {
+      border: 0 solid red !important;
+    }
+    tr {
+      cursor: pointer;
+    }
+    thead tr{
+      cursor: unset;
+    }
+    tr:hover td a{
+      color: map-get(map-get($colors, header), text-link);
+    }
+  }
+  
+
+  thead tr th{
+    font-weight: bold;
+    
+  }
+
+  
+}
+
+
+.main {
+  width: 100vw !important;
+}
+
+.service_page {
+  flex: 1 0 auto;
+  min-height: 100vh;
+  @include gradient(0deg, #071013, -10%, #23B5D3, 125%);
+  * {
+    color: map-get(map-get($colors, header), text-main);
+  }
+
+  h1, h3 {
+    text-transform: uppercase;
+  }
+  width: 102vw;
+}
+
+.profile {
+  overflow-y: scroll;
+  flex: 1;
+  min-height: max-content;
+  height: 100vh;
+  max-height: 100vh;
+  padding-bottom: 15px;
+  &_header {
+    margin-right: -25px;
+    width: 105vw !important;
+    padding: 15px;
+    @media(min-width: 1050px){
+      margin-top: 70px;
+      margin-bottom: 25px;
+    }
+    @include gradient(0deg, #071013, -10%, #23B5D3, 125%);
+    * {
+      color: map-get(map-get($colors, header), text-main);
+    }
+  }
+
+  .ordered_services {
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7) inset;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    @include gradient(0deg, #071013, -10%, #23B5D3, 125%);
+    // background-color: rgba(map-get(map-get($colors, header), background), 0.7);
+    min-height: 30vh;
+	  height: max-content;
+	  max-height: 60vh;
+    overflow: scroll;
+    width: max-content;
+    .profile_service {
+      // width: 500px;
+      margin-left: 5px;
+      // box-shadow: 5px 5px 5px rgba(0,0,0, 0.7);
+    }
+    .profile_service *{
+      
+     
+      text-transform: uppercase;
+      background-color: map-get(map-get($colors, header), text-link);
+    }
+  }
+}
+
+.logo_text {
+  font-family: 'Norse';
+  font-weight: bold;
+  font-size: 50px;
+  @media (max-width: 500px) {
+    font-size: 35px;
+  }
+}
+
+.input_note {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.modal_message {
+  
+  
+  * {
+    color: map-get(map-get($colors, header), text-main);
+  }
+
+
+  background-color: map-get(map-get($colors, header), background);
+  height: 250px;
+  width: 250px;
+  z-index: 10;
+}
+
+.service_image {
+  width: 33%;
+
+  @media(max-width: 500px) {
+    width: 50%;
+  }
+}
+
+.width-vw-100 {
+  width: 105vw !important;
+}
+
+a {
+  text-decoration: none;
+  font-style: normal !important;
+}

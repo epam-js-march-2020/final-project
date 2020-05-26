@@ -1,0 +1,242 @@
+/*
+ * PREFIXES/STANDALONE NAMES:
+ * 
+ * 
+*/
+
+/*
+ * POSTFIXES:
+ * 
+ * main -- general elements, text by default and elements with corresponding classes
+ * header -- <h#>, and elements with corresponding classes
+ * link -- <a>, <link> and elements with corresponding classes
+*/
+
+// COLORS
+
+$colors: (
+
+  // header
+  header: (
+    background: #071013,
+    border: #23B5D3,
+    shadow: #23B5D3,
+    text-main: #DFE0E2,
+    text-header: #75ABBC,
+    text-link: #75ABBC,
+  ),
+
+  // main
+  main: (
+    background: #DFE0E2,
+    border: #75ABBC,
+    shadow: #75ABBC,
+    text-main: #071013,
+    text-header: #071013,
+    text-link: #23B5D3,
+  ),
+
+  // aside
+  aside: (
+    background: #fc8101,
+    border: indigo,
+    shadow: #3F3,
+    text-main: #333,
+    text-header: indigo,
+    text-link: #FFF,
+  ),
+
+  // footer
+  footer: (
+    background: #071013,
+    border: #38423B,
+    shadow: #0F0,
+    text-main: #071013,
+    text-header: #23B5D3,
+    text-link: #23B5D3,
+  ),
+);
+
+// general
+// Those are made in fashion of bootstrap. Usage is arbitrary
+$primary: blue;
+$secondary: indigo;
+$success: green;
+$danger: red;
+$warning: orange;
+$info: lightblue;
+$light: lightgrey;
+$dark: #333;
+$muted: darkgrey;
+
+
+
+// SIZES
+
+$sizes: (
+
+  // header
+  header: (
+    font-main: 14px,
+    font-header: (
+      h1: 36px,
+      h2: 32px,
+      h3: 27px,
+      h4: 25px,
+      h5: 21px,
+      h6: 19px,
+    ),
+    font-link: 12px,
+  ),
+
+  // main
+  main: (
+    font-main: 18px,
+    font-header: (
+      h1: 36px,
+      h2: 32px,
+      h3: 27px,
+      h4: 25px,
+      h5: 21px,
+      h6: 19px,
+    ),
+    font-link: 12px,
+  ),
+
+  // aside
+  aside: (
+    font-main: 14px,
+    font-header: (
+      h1: 36px,
+      h2: 32px,
+      h3: 27px,
+      h4: 25px,
+      h5: 21px,
+      h6: 19px,
+    ),
+    font-link: 12px,
+  ),
+
+  // footer
+  footer: (
+    font-main: 14px,
+    font-header: (
+      h1: 36px,
+      h2: 32px,
+      h3: 27px,
+      h4: 25px,
+      h5: 21px,
+      h6: 19px,
+    ),
+    font-link: 12px,
+  ),
+
+);
+
+// FONTS
+$fonts: (
+
+  // header
+  header: (
+    font-main: 'Roboto',
+    font-header: 'Roboto',
+    font-link: 'Roboto',
+
+    font-weight-main: 500,
+    font-weight-header: 700,
+    font-weight-link: 400,
+
+    font-style-main: normal,
+    font-style-header: normal,
+    font-style-link: italic,
+  ),
+
+  // main
+  main: (
+    font-main: 'Roboto',
+    font-header: 'Roboto',
+    font-link: 'Roboto',
+
+    font-weight-main: 400,
+    font-weight-header: 700,
+    font-weight-link: 400,
+
+    font-style-main: normal,
+    font-style-header: normal,
+    font-style-link: italic,
+  ),
+
+  // aside
+  aside: (
+    font-main: 'Roboto',
+    font-header: 'Roboto',
+    font-link: 'Roboto',
+
+    font-weight-main: 500,
+    font-weight-header: 700,
+    font-weight-link: 400,
+
+    font-style-main: normal,
+    font-style-header: normal,
+    font-style-link: italic,
+  ),
+
+  // footer
+  footer: (
+    font-main: 'Roboto',
+    font-header: 'Roboto',
+    font-link: 'Roboto',
+
+    font-weight-main: 500,
+    font-weight-header: 700,
+    font-weight-link: 400,
+
+    font-style-main: normal,
+    font-style-header: normal,
+    font-style-link: italic,
+  ),
+
+);
+
+// If true, parameters below will be applied to all parts
+$use-universal: false;
+
+// Universal parameters
+$universal: (
+
+  colors: (
+    background: #333,
+    border: #AA0,
+    shadow: #A0A,
+    text-main: #FFF,
+    text-header: #fc8101,
+    text-link: #0290f9,
+  ),
+
+  size: (
+    font-main: 14px,
+    font-header: (
+      h1: 36px,
+      h2: 32px,
+      h3: 27px,
+      h4: 25px,
+      h5: 21px,
+      h6: 19px,
+    ),
+    font-link: 12px,
+  ),
+
+  font: (
+    font-main: 'Roboto',
+    font-header: 'Roboto',
+    font-link: 'Roboto',
+
+    font-weight-main: 500,
+    font-weight-header: 700,
+    font-weight-link: 400,
+
+    font-style-main: normal,
+    font-style-header: normal,
+    font-style-link: italic,
+  ),
+)

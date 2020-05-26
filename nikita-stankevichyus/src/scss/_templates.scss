@@ -1,0 +1,204 @@
+@import "./vars";
+
+$general-colors: (
+  primary: $primary,
+  secondary: $secondary,
+  success: $success,
+  danger: $danger,
+  warning: $warning,
+  info: $info,
+  light: $light,
+  dark: $dark,
+  muted: $muted
+);
+
+.header--fixed {
+	$xl-height: 175px;
+	$lg-height: 190px;
+	$md-height: 200px;
+	$sm-height: 215px;
+	$xs-height: 230px;
+	$accumulator: 4px;
+	$margin-accumulator: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 999 !important;
+	.container {
+		height: 100%;
+		width: 100%;
+	}
+
+	height: 70px;
+	// + main {
+	// 	margin-top: 10vh;
+	// }
+
+	// @for $i from 1 through 20 {
+	// 	@media (max-width: $i * 100px) {
+	// 		$height: $i * $accumulator;
+	// 		height: $height;
+			
+	// 		+ main {
+	// 			margin-top: $height + $margin-accumulator * $accumulator;
+	// 		}
+	// 	}
+	// }
+
+	
+}
+
+.header--regular {
+	// min-height: max-content;
+	max-height: max-content;
+	flex: 1;
+	.container {
+		height: 100%;
+		width: 100%;
+	}
+}
+
+.main--regular {
+	min-height: min-content;
+	display: flex;
+	flex: 1 0 auto;
+	@media (max-width: 576.5px){
+		flex-direction: column;
+		> * {
+			width: 100% !important;
+		}
+
+		.content {
+			order: -3;
+		}
+	}
+}
+
+.aside--toRight  {
+	order: 2;
+	width: 25%;
+	min-width: min-content;
+}
+
+.aside--toLeft  {
+	order: -1;
+	width: 25%;
+	min-width: min-content;
+}
+
+.footer--regular {
+	min-height: min-content;
+}
+
+.footer--fixed {
+	min-height: min-content;
+	flex-shrink: 0;	
+}
+
+.nav--horizontal {
+	min-height: max-content;
+	height: 70%;
+	width: 100%;
+	margin: 0 auto;
+	
+	// display: flex;
+	// justify-content: center;
+	> ul {
+		height: 100%;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+		flex-wrap: wrap;
+	}
+	.nav_link {
+		height: 100%;
+		min-width: max-content;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		background-color: map-get(map-get($colors, header), background);
+		flex: 1;
+		margin-right: 0.25%;
+		margin-left: 0.25%;
+		a {
+			
+			text-align: center;
+			text-decoration: none;
+			font-style: normal;
+			font-size: 21px;
+			color: map-get(map-get($colors, header), text-link);
+
+			* {
+				color: map-get(map-get($colors, header), text-link);
+			}
+		}
+		cursor: pointer;
+		transition: background-color 0.5s, color 0.5s, opacity 0.5s;
+	}
+
+	.nav_link:hover {
+		background-color: map-get(map-get($colors, header), text-link);
+		a {
+			color: map-get(map-get($colors, header), background);
+			* {
+				color: map-get(map-get($colors, header), background);
+			}
+		}
+	}
+	
+}
+
+@each $color-name, $color-value in $general-colors {
+	.button--#{$color-name} {
+		box-sizing: border-box;
+		padding: 10px;
+    background-color: $color-value;
+    border: 1px solid $color-value;
+    border-radius: 5px;
+    color: #FFF;
+    -webkit-transition: background-color 0.5s, color 0.5s;
+    transition: background-color 0.5s, color 0.5s;
+	}
+	.button--#{$color-name}:hover, .button--#{$color-name}:active {
+		background-color: #FFF;
+		color: $color-value;
+		border: 1px solid $color-value;
+	}
+}
+
+
+.modal_fade:before {
+  display: none;
+	content: '';
+	background: $dark;
+	position: fixed; 
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%;
+	opacity: 0.7;
+	z-index: 1000 !important;
+}
+
+.modal_fade_trick:before{
+  display: block;
+}
+
+.modal_window {
+  display: block;
+	position: fixed;
+	top: 50vh;
+	left: 50vw;
+	transform: translate(-50%, -50%);
+	z-index: 1001 !important;
+	opacity: 1;	
+}
+
+.hidden {
+	display: none !important;
+	position: absolute !important;
+	pointer-events: none !important;
+}

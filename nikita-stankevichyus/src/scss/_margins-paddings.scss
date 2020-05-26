@@ -1,0 +1,129 @@
+// MARGINS
+
+// Setting margins for each side (and horizontal/vertical/all) from -200px to 200px
+@for $i from -200 through 200 {
+  .mg-r-#{$i} { margin-right: $i * 1px !important; }
+}
+
+@for $i from -200 through 200 {
+  .mg-l-#{$i} { margin-left: $i * 1px !important; }
+}
+
+@for $i from -200 through 200 {
+  .mg-t-#{$i} { margin-top: $i * 1px !important; }
+}
+
+@for $i from -200 through 200 {
+  .mg-b-#{$i} { margin-bottom: $i * 1px !important; }
+}
+
+@for $i from -200 through 200 {
+  .mg-h-#{$i} { margin-right: $i * 1px !important; 
+                margin-left: $i * 1px !important; }
+}
+
+@for $i from -200 through 200 {
+  .mg-v-#{$i} { margin-top: $i * 1px !important; 
+                margin-bottom: $i * 1px !important; }
+}
+
+@for $i from -200 through 200 {
+  .mg-#{$i} { margin: $i * 1px !important; }
+}
+
+// Auto margins for each side (and horizontal/vertical/all)
+.mg-r-auto {
+  margin-right: auto !important;
+}
+
+.mg-l-auto {
+  margin-left: auto !important;
+}
+
+.mg-t-auto {
+  margin-top: auto !important;
+}
+
+.mg-b-auto {
+  margin-bottom: auto !important;
+}
+
+.mg-h-auto {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.mg-v-auto {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+
+.mg-auto {
+  margin: auto !important;
+}
+
+
+// PADDINGS
+
+// Setting paddings for each side (and horizontal/vertical/all) from -200px to 200px
+@for $i from -200 through 200 {
+  .pd-r-#{$i} { padding-right: $i * 1px !important; }
+}
+
+@for $i from -200 through 200 {
+  .pd-l-#{$i} { padding-left: $i * 1px !important; }
+}
+
+@for $i from -200 through 200 {
+  .pd-t-#{$i} { padding-top: $i * 1px !important; }
+}
+
+@for $i from -200 through 200 {
+  .pd-b-#{$i} { padding-bottom: $i * 1px !important; }
+}
+
+@for $i from -200 through 200 {
+  .pd-h-#{$i} { padding-right: $i * 1px !important; 
+                padding-left: $i * 1px !important; }
+}
+
+@for $i from -200 through 200 {
+  .pd-v-#{$i} { padding-top: $i * 1px !important; 
+                padding-bottom: $i * 1px !important; }
+}
+
+@for $i from -200 through 200 {
+  .pd-#{$i} { padding: $i * 1px !important; }
+}
+
+
+// Auto paddings for each side (and horizontal/vertical/all)
+.pd-r-auto {
+  padding-right: auto !important;
+}
+
+.pd-l-auto {
+  padding-left: auto !important;
+}
+
+.pd-t-auto {
+  padding-top: auto !important;
+}
+
+.pd-b-auto {
+  padding-bottom: auto !important;
+}
+
+.pd-h-auto {
+  padding-right: auto !important;
+  padding-left: auto !important;
+}
+
+.pd-v-auto {
+  padding-top: auto !important;
+  padding-bottom: auto !important;
+}
+
+.pd-auto {
+  padding: auto !important;
+}
