@@ -273,9 +273,9 @@ export class ServiceContent extends React.Component {
                                 )}
                             </Col>
                             <Col>
-                                <Row className="pt-3">
+                                <Row className="pt-5">
                                     {!this.props.isAuth && (
-                                        <Button type="button" onClick={this.showModal}>
+                                        <Button type="button" variant="outline-light" onClick={this.showModal}>
                                             Зарегистрируйтесь или войдите что бы записаться
                                         </Button>
                                     )}

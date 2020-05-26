@@ -21,8 +21,8 @@
     padding: 10px;
     border-bottom-left-radius: 100px;
     border-top-left-radius: 100px;
-    height: 83px;
-    padding-top: 22px;
+    height: 61px;
+    padding-top: 15px;
 }
 
 .react-datepicker__time-list-item--disabled{

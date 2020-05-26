@@ -155,7 +155,7 @@ export default class LoginLogonForm extends React.Component {
                     <Col>
                       {" "}
                       <Button
-                          variant="outline-light"
+                          variant="secondary"
                           type="submit"
                           name="registration"
                           disabled={this.state.disableButtons}
@@ -170,7 +170,7 @@ export default class LoginLogonForm extends React.Component {
                     </Col>
                     <Col className="text-right">
                       <Button
-                          variant="outline-light"
+                          variant="secondary"
                           type="submit"
                           name="login"
                           disabled={this.state.disableButtons}
