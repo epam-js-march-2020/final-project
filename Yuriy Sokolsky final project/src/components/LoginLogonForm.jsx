@@ -5,7 +5,6 @@ import { Container, Row, Col, Alert, Button, Form } from "react-bootstrap";
 import "../componentStyles/ProfileContent.css";
 
 export default class LoginLogonForm extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -15,16 +14,18 @@ export default class LoginLogonForm extends React.Component {
       errorMessage: "",
       disableButtons: false,
       success: false,
+      clickedButton: "none",
     };
     this.login = this.login.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.registration = this.registration.bind(this);
     this.disableButtons = this.disableButtons.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  login(event) {
+  login() {
     this.disableButtons();
-    event.preventDefault();
+
     $.when(
       $.ajax({
         url: "/api/login/",
@@ -45,19 +46,18 @@ export default class LoginLogonForm extends React.Component {
             disableButtons: false,
           });
         } else {
-          this.props.handleLoginLogout();
-          this.props.setData(data);
           this.setState({
             success: true,
           });
+          this.props.handleLoginLogout();
+          this.props.setData(data);
         }
       }.bind(this)
     );
   }
 
-  registration(event) {
+  registration() {
     this.disableButtons();
-    event.preventDefault();
     $.when(
       $.ajax({
         url: "/api/registration/",
@@ -99,7 +99,11 @@ export default class LoginLogonForm extends React.Component {
       [name]: event.target.value,
     });
   }
-
+  handleSubmit(event) {
+      event.preventDefault();
+    if (this.state.clickedButton === "registration") this.registration();
+    else if (this.state.clickedButton === "login") this.login();
+  }
   render() {
     return (
       <>
@@ -123,7 +127,7 @@ export default class LoginLogonForm extends React.Component {
                 <div className="text-center">
                   Введите логин и пароль, или придумайте если вы здесь впервые
                 </div>
-                <Form>
+                <Form onSubmit={ this.handleSubmit}>
                   <Form.Group controlId="formBasicEmail">
                     <Form.Label>Логин</Form.Label>
                     <Form.Control
@@ -132,6 +136,7 @@ export default class LoginLogonForm extends React.Component {
                       name="loginValue"
                       value={this.state.loginValue}
                       onChange={this.handleInputChange}
+                      required={true}
                     />
                   </Form.Group>
 
@@ -143,6 +148,7 @@ export default class LoginLogonForm extends React.Component {
                       name="passwordValue"
                       value={this.state.passwordValue}
                       onChange={this.handleInputChange}
+                      required={true}
                     />
                   </Form.Group>
                   <Row>
@@ -151,8 +157,13 @@ export default class LoginLogonForm extends React.Component {
                       <Button
                         variant="primary"
                         type="submit"
-                        onClick={this.registration}
+                        name="registration"
                         disabled={this.state.disableButtons}
+                        onClick={() =>
+                          this.setState({
+                            clickedButton: "registration",
+                          })
+                        }
                       >
                         Зарегестрироваться
                       </Button>
@@ -161,8 +172,13 @@ export default class LoginLogonForm extends React.Component {
                       <Button
                         variant="primary"
                         type="submit"
-                        onClick={this.login}
+                        name="login"
                         disabled={this.state.disableButtons}
+                        onClick={() =>
+                          this.setState({
+                            clickedButton: "login",
+                          })
+                        }
                       >
                         Войти
                       </Button>

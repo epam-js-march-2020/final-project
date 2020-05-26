@@ -17,7 +17,7 @@ export default class Profile extends React.Component {
     render() {
         return (
             <>
-                <div className="ProfilePageBackground">
+                <div className="profile-page-background">
                     <Container>
                         {!this.props.isAuth && (
                             <LoginLogonForm

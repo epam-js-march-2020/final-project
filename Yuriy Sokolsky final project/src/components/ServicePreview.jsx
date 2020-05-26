@@ -23,7 +23,7 @@ ServicePreviewRender = (props) => (
                         Длительность сеанса:
                         {format(
                             parse(props.servicePreview.duration ||"00:00", "HH:mm", new Date()),
-                            "mm 'Минут'"
+                            " mm 'минут'"
                         )}
                     </h6>
                 </Col>

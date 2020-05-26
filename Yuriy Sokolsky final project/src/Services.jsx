@@ -5,13 +5,14 @@ import "./componentStyles/servicesContent.css";
 import "./componentStyles/fancyBorder.css";
 import {Link} from "react-router-dom";
 import {ServicePreviewRender} from "./components/ServicePreview.jsx";
-
+import {Loading} from "./components/Loading.jsx";
 export default class Services extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             serviceList: [],
             servicePreview: {},
+            Loading:true
         };
     }
 
@@ -25,7 +26,7 @@ export default class Services extends React.Component {
             })
         ).then(
             function (data, textStatus, jqXHR) {
-                this.setState({serviceList: data});
+                this.setState({serviceList: data,Loading:false});
             }.bind(this)
         );
     }
@@ -58,7 +59,8 @@ export default class Services extends React.Component {
 
         return (
             <>
-                <div className="services-page-background">
+                {this.state.Loading && <Loading/>}
+                {!this.state.Loading && <div className="services-page-background">
                     <Container>
                         <Row>
                             <Col>
@@ -74,7 +76,7 @@ export default class Services extends React.Component {
                             </Col>
                         </Row>
                     </Container>
-                </div>
+                </div>}
             </>
         );
     }

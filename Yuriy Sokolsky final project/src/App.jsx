@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReactDOM from "react-dom";
 import Cookies from "universal-cookie";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch,Redirect} from "react-router-dom";
 import MainPage from "./MainPage.jsx";
 import Services from "./Services.jsx";
 import Service from "./Service.jsx";
@@ -12,120 +12,138 @@ import Profile from "./Profile.jsx";
 import NoMatch from "./NoMatch.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
+import {Loading} from "./components/Loading.jsx";
+import AppointmentsRender from "./components/AppointmentsRender.jsx"
 import $ from "jquery";
 
-
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      auth: false,
+      userData: {},
+      Loading: true,
+    };
+    this.handleLoginLogout = this.handleLoginLogout.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            auth: false,
-            userData: {},
-        };
-        this.handleLoginLogout = this.handleLoginLogout.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this);
-
-        this.setData = this.setData.bind(this);
-    }
-    componentDidMount(){
-        $.when(
-            $.ajax({
-                url: "/api/runtime/",
-                type: "POST",
-                contentType: "application/json",
-                dataType: "json",
-            })
-        ).then(
-            function (data, textStatus, jqXHR) {
-                if (data._id!=null) {
-                    this.setState({
-                        auth: true,
-                        userData: data,
-                    });
-                }
-            }.bind(this)
-        );
-    }
-
-    handleLoginLogout() {
-        if (this.state.auth) {
-            this.setState(
-                {
-                    auth: false,
-                    userData: {},
-                },
-                () => {
-                    $.ajax({
-                        url: "/api/logout/",
-                        type: "POST",
-                        contentType: "application/json",
-                        dataType: "json",
-                    });
-                }
-            );
+    this.setData = this.setData.bind(this);
+  }
+  componentDidMount() {
+    $.when(
+      $.ajax({
+        url: "/api/runtime/",
+        type: "POST",
+        contentType: "application/json",
+        dataType: "json",
+      })
+    ).then(
+      function (data, textStatus, jqXHR) {
+        if (data._id != null) {
+          this.setState({
+            auth: true,
+            userData: data,
+            Loading: false,
+          });
         } else {
-            this.setState({
-                auth: true,
-            });
+          this.setState({
+            Loading: false,
+          });
         }
-    }
+      }.bind(this)
+    );
+  }
 
-    setData(data) {
-        this.setState(
-            {
-                userData: data,
-            }
-        );
+  handleLoginLogout() {
+    if (this.state.auth) {
+      this.setState(
+        {
+          auth: false,
+          userData: {},
+        },
+        () => {
+          $.ajax({
+            url: "/api/logout/",
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+          });
+        }
+      );
+    } else {
+      this.setState({
+        auth: true,
+      });
     }
+  }
 
-    render() {
-        return (
-            <Router>
-                <Header
-                    isAuth={this.state.auth}
-                    handleLoginLogout={this.handleLoginLogout}
+  setData(data) {
+    this.setState({
+      userData: data,
+    });
+  }
+
+  render() {
+    return (
+      <Router>
+        <Header
+          isAuth={this.state.auth}
+          handleLoginLogout={this.handleLoginLogout}
+        />
+        {!this.state.Loading &&
+          <Switch>
+            <Route exact path="/">
+              <MainPage />
+            </Route>
+            <Route
+              path="/services/:id"
+              render={(props) => (
+                <Service
+                  {...props}
+                  isAuth={this.state.auth}
+                  userData={this.state.userData}
+                  handleLoginLogout={this.handleLoginLogout}
+                  setData={this.setData}
                 />
-                <Switch>
-                    <Route exact path="/">
-                        <MainPage/>
-                    </Route>
-                    <Route
-                        path="/services/:id"
-                        render={(props) => (
-                            <Service
-                                {...props}
-                                isAuth={this.state.auth}
-                                userData={this.state.userData}
-                                handleLoginLogout={this.handleLoginLogout}
-                                setData={this.setData}
-                            />
-                        )}
+              )}
+            />
+            <Route path="/services">
+              <Services />
+            </Route>
+            <Route path="/about">
+              <AboutUs />
+            </Route>
+            <Route path="/profile">
+              <Profile
+                isAuth={this.state.auth}
+                handleLoginLogout={this.handleLoginLogout}
+                setData={this.setData}
+                userData={this.state.userData}
+              />
+            </Route>
+            <Route exact path="/upcoming-appointments" render={() =>
+                this.state.auth ? (
+                    <AppointmentsRender userData={this.state.userData}/>
+                ) : (
+                    <Redirect
+                        to={{
+                          pathname: "/profile",
+                        }}
                     />
-                    <Route path="/services">
-                        <Services/>
-                    </Route>
-                    <Route path="/about">
-                        <AboutUs/>
-                    </Route>
-                    <Route path="/profile">
-                        <Profile
-                            isAuth={this.state.auth}
-                            handleLoginLogout={this.handleLoginLogout}
-                            setData={this.setData}
-                            userData={this.state.userData}
-                        />
-                    </Route>
-                    <Route path="/admin">
-                        <Admin/>
-                    </Route>
+                )}
+            />
+            <Route path="/admin">
+              <Admin />
+            </Route>
 
-                    <Route path="*" component={NoMatch}/>
-                </Switch>
-                <Footer/>
-            </Router>
-        );
-    }
+            <Route path="*" component={NoMatch} />
+          </Switch>
+        }
+        {this.state.Loading && <Loading />}
+        <Footer />
+      </Router>
+    );
+  }
 }
 
 ReactDOM.render(

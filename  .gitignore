@@ -1,7 +1,3 @@
 # ignore node modules
 /Yuriy Sokolsky final project/node_modules
-# ignore bundles
-/Yuriy Sokolsky final project/static/app.bundle.js
-/Yuriy Sokolsky final project/static/app.bundle.js.map
-/Yuriy Sokolsky final project/static/vendor.bundle.js
-/Yuriy Sokolsky final project/static/vendor.bundle.js.map
+

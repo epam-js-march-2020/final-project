@@ -5,6 +5,9 @@ import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import PhoneInput from "react-phone-input-2";
 import {AppointmentsRender} from './AppointmentsRender.jsx'
 
+import {Loading} from "./Loading.jsx";
+import {Link} from "react-router-dom";
+
 export class ProfileLoggedIn extends React.Component {
 
     constructor(props) {
@@ -14,37 +17,13 @@ export class ProfileLoggedIn extends React.Component {
             surname: this.props.userData.surname || "",
             email: this.props.userData.email || "",
             phone: this.props.userData.phone || "",
-            disableButtons: false,
-            appointments: [],
+            Loading:true,
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.saveUserData = this.saveUserData.bind(this);
-        this.cancelAppointment = this.cancelAppointment.bind(this);
-        this.getAppointments = this.getAppointments.bind(this);
+
     }
 
-    componentDidMount() {
-        this.getAppointments();
-    }
-
-    getAppointments() {
-        $.when(
-            $.ajax({
-                url: "/api/appointments/search-by-user?userID=" + this.props.userData.id,
-                type: "GET",
-                contentType: "text/plain",
-                dataType: "json",
-                processData: false,
-            })
-        ).then(
-            function (data, textStatus, jqXHR) {
-                this.setState({
-                    appointments: data,
-                    disableButtons:false
-                });
-            }.bind(this)
-        );
-    }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.userData !== this.props.userData) {
@@ -87,43 +66,15 @@ export class ProfileLoggedIn extends React.Component {
             })
         ).then(
             function (data, textStatus, jqXHR) {
-                this.props.setData(data);
-                this.setState({
-                    disableButtons: false,
-                });
-            }.bind(this)
+                    this.props.setData(data);
+                    this.setState({
+                        disableButtons: false,
+                    });
+                }.bind(this)
         );
     }
 
-    cancelAppointment(masterID, userID, serviceID, date, time) {
-        this.setState({
-            disableButtons:true
-        })
-        $.when(
-            $.ajax({
-                url:
-                    "/api/appointment/delete?" +
-                    $.param({
-                        masterID: masterID,
-                        userID: userID,
-                        serviceID: serviceID,
-                        date: date,
-                        time: time,
-                    }),
-                type: "DELETE",
-                contentType: "text/plain",
-                dataType: "json",
-                processData: false,
-            })
-        )
-            .then(
-                function () {
-                    this.getAppointments();
-                }.bind(this)
 
-            )
-
-    }
 
     render() {
 
@@ -143,7 +94,7 @@ export class ProfileLoggedIn extends React.Component {
                 </Row>
                 <Row>
                     <Col>
-                        <Form>
+                        <Form onSubmit={this.saveUserData}>
                             <Form.Group controlId="formGroupUserName">
                                 <Form.Label>Имя</Form.Label>
                                 <Form.Control
@@ -168,7 +119,6 @@ export class ProfileLoggedIn extends React.Component {
                                 <Form.Label>Email адресс</Form.Label>
                                 <Form.Control
                                     type="email"
-                                    pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"
                                     name="email"
                                     placeholder="Введите email"
                                     value={this.state.email}
@@ -187,7 +137,6 @@ export class ProfileLoggedIn extends React.Component {
                             <Button
                                 variant="primary"
                                 type="submit"
-                                onClick={this.saveUserData}
                                 disabled={this.state.disableButtons}
                             >
                                 Сохранить
@@ -199,11 +148,11 @@ export class ProfileLoggedIn extends React.Component {
                         <Container>
                             <Row>
                                 <Col className="text-center">
-                                    <h5>Предстоящие сеансы:</h5>
+                                    <Link to={`/upcoming-appointments`} className="btn btn-outline-light">
+                                        Просмотор предстоящик сеансов
+                                    </Link>
                                 </Col>
                             </Row>
-
-                            <AppointmentsRender appointments={this.state.appointments} cancelAppointment={this.cancelAppointment} disableButtons={this.state.disableButtons}/>
                         </Container>
                     </Col>
                 </Row>

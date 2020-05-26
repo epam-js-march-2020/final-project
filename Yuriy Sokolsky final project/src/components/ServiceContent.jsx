@@ -9,11 +9,13 @@ import DatePicker from "react-datepicker";
 import ru from "date-fns/locale/ru";
 import {WorkHours} from "../consts";
 import {MastersList} from "./MastersList.jsx";
+import {Loading} from "./Loading.jsx";
 
 export class ServiceContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            Loading: false,
             showModalWithLoginLogon: false,
             mastersList: [],
             selectedMasterID: "stub",
@@ -31,7 +33,7 @@ export class ServiceContent extends React.Component {
                 WorkHours.STOP_HOURS
             ),
             excludeTimes: [],
-            timeIntervals: 30,
+            timeIntervals: 60,
             displayCalendar: false,
             disableButtons: false,
             successApp: false,
@@ -66,6 +68,8 @@ export class ServiceContent extends React.Component {
                 {
                     selectedMasterID: event.target.value,
                     selectedMasterNameSurname: event.nativeEvent.target[index].text,
+                    displayCalendar:false,
+                    Loading: true,
                 },
                 this.searchAppointments
             );
@@ -141,12 +145,12 @@ export class ServiceContent extends React.Component {
                         60 - Number(this.props.service.duration.slice(-2))
                     ),
                     21
-                ),
-                timeIntervals: Number(this.props.service.duration.slice(-2)),
+                )
             });
         if (
             isToday(this.state.datePickerValue) &&
-            getHours(new Date()) < WorkHours.END_OF_RECORDING && getHours(new Date()) > WorkHours.START_HOURS
+            getHours(new Date()) < WorkHours.END_OF_RECORDING &&
+            getHours(new Date()) > WorkHours.START_HOURS
         ) {
             this.setState({
                 minTime: new Date(),
@@ -161,10 +165,7 @@ export class ServiceContent extends React.Component {
         }
         let busyTime = [];
         data.map(function (e) {
-            e.map(function (a) {
-                if (a.timeStart !== "canceled")
-                    busyTime.push(parse(a.timeStart, "HH:mm", new Date()));
-            });
+            busyTime.push(parse(e, "HH:mm", new Date()));
         });
         this.setState(
             {
@@ -173,6 +174,7 @@ export class ServiceContent extends React.Component {
             () => {
                 this.setState({
                     displayCalendar: true,
+                    Loading: false,
                 });
             }
         );
@@ -192,7 +194,11 @@ export class ServiceContent extends React.Component {
                     "&date=" +
                     format(this.state.datePickerValue, "dd.MM.yyyy") +
                     "&time=" +
-                    format(this.state.timePickerValue, "HH:mm"),
+                    format(this.state.timePickerValue, "HH:mm")+
+                    "&masterNameSurname="+this.state.selectedMasterNameSurname+
+                    "&serviceName="+this.props.service.name+
+                    "&servicePrice="+this.props.service.price
+                ,
                 type: "PUT",
                 contentType: "text/plain",
                 dataType: "json",
@@ -231,9 +237,9 @@ export class ServiceContent extends React.Component {
                         >
                             <Alert.Heading>Успешная запись!</Alert.Heading>
                             <p>
-                                Вы записались на {this.props.service.name}{" "}
-                                {format(this.state.datePickerValue, "dd.MM.yyyy")} на{" "}
-                                {format(this.state.timePickerValue, "HH:mm")} к{" "}
+                                Вы записались на процедуру "{this.props.service.name}"{" "}
+                                {format(this.state.datePickerValue, "dd.MM.yyyy")} в{" "}
+                                {format(this.state.timePickerValue, "HH:mm")} , мастер -{" "}
                                 {this.state.selectedMasterNameSurname}
                             </p>
                         </Alert>
@@ -285,6 +291,9 @@ export class ServiceContent extends React.Component {
                                                 />
                                             </Col>
                                         </Row>
+                                        {this.state.Loading && (
+                                            <Loading style={{height: "100%", background: "none"}}/>
+                                        )}
                                         {this.state.displayCalendar && (
                                             <>
                                                 <Row className="pt-2">
