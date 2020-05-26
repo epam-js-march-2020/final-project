@@ -4,123 +4,119 @@ import { HashLink as Link } from 'react-router-hash-link';
 // Component representing element of the navbar
 function NavLink(props) {
   return (
-    <li className = {'nav_link' + (props.shown ? '' : ' transparent')}>
-      <Link to= {props.to}>
-        <a 
-          onClick = {props.onClick}
-          href = {props.href}
-        >
-          <i className={props.icon + ' mg-l--15'}/>
-          <span className='mg-l-5'>{props.text}</span>
+    props.to !== '#' ?
+      <li className = {'nav_link'}>
+        <Link to= {props.to} onClick = {props.onClick}>
+            <i className={props.icon + ' mg-l--15'}/>
+            <span className='mg-l-5'>{props.text}</span>
+        </Link>
+      </li>
+    : 
+    <li className = {'nav_link'}>
+        <a href={props.to} onClick = {props.onClick}>
+            <i className={props.icon + ' mg-l--15'}/>
+            <span className='mg-l-5'>{props.text}</span>
         </a>
-      </Link>
     </li>
+
   )
 }
 
-const initialState = {
-  barShown: true,
-}
+export function NavBar(props){
+  
 
-export class NavBar extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = initialState;
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    if (this.props.navigation.barShown) {
-      this.props.hideBar();
+  const handleClick = () => {
+    if (props.navigation.barShown) {
+      props.hideBar();
     } else {
-      this.props.showBar();
+      props.showBar();
     }
-    // this.setState({
-    //   barShown: !this.state.barShown,
-    // })
   }
 
   
-  render() {
+
   return (
     <nav className='nav--horizontal container--flex justify-content--center mg-t-15'>
           <ul className = 'container--flex'>
-          <li className = {'nav_link toggler' + (this.props.navigation.barShown ? '' : ' semi-transparent')}>
+          <li className = {'nav_link toggler' + (props.navigation.barShown ? '' : ' semi-transparent')}>
             <a 
-              onClick = {this.handleClick}
+              onClick = {handleClick}
               href = '#'
             >
-              <i className={(this.props.navigation.barShown ? 'fas fa-times' : 'fas fa-bars') + ' mg-l--15'}/>
+              <i className={(props.navigation.barShown ? 'fas fa-times' : 'fas fa-bars') + ' mg-l--15'}/>
             </a>
           </li>
             
             <NavLink 
-              onClick = {this.props.toHome} 
+              onClick = {props.toHome} 
               href = '#home' 
               icon = 'fas fa-home' 
-              shown = {this.state.barShown} 
+              // shown = {state.barShown} 
               text='Home'
               to = '/home#home'
             />
 
               
             <NavLink 
-              onClick = {this.props.toHome} 
+              onClick = {props.toHome} 
               href = '#contacts' 
               icon = 'fas fa-phone-alt' 
-              shown = {this.state.barShown} 
+              // shown = {state.barShown} 
               text='Contacts'
               to='/home#contacts'
             />
 
             <NavLink 
-              onClick = {this.props.toHome} 
+              onClick = {props.toHome} 
               href = '#examples' 
               icon = 'fas fa-portrait' 
-              shown = {this.state.barShown} 
+              // shown = {state.barShown} 
               text='Work Examples'
               to='/home#examples'
             />
 
             <NavLink 
-              onClick = {this.props.toServices} 
+              onClick = {props.toServices} 
               href = '#home' 
               icon = 'fas fa-cut'
-              shown = {this.state.barShown} 
+              // shown = {state.barShown} 
               text='Services'
               to='/services#home'
             />
 
             {
               // If user logged instead of 'log in' and 'sign up' buttons only 'profile' button will be shown
-              this.props.user.loged ?
+              props.user.loged ?
               <NavLink 
-                onClick = {this.props.toProfile} 
+                onClick = {props.toProfile} 
                 href='#home' 
                 icon = 'fas fa-user text' 
-                shown = {this.state.barShown} 
+                // shown = {state.barShown} 
                 text = 'Profile'
                 to='/profile#home'
               />
               : 
               <>
                 <NavLink 
-                  onClick = {this.props.toLogIn} 
+                  onClick = {props.toLogIn} 
                   href='#' 
                   icon = 'fas fa-sign-in-alt text' 
-                  shown = {this.state.barShown} 
+                  // shown = {state.barShown} 
                   text = 'Log In'
+                  to='#'
                 />
                 <NavLink 
-                  onClick = {this.props.toSignUp} 
+                  onClick = {props.toSignUp} 
                   href='#' 
                   icon = 'fas fa-user-plus text' 
-                  shown = {this.state.barShown} 
+                  // shown = {state.barShown} 
+                  to='#'
                   text = 'Sign Up'/>
+                  
               </>
             }
           </ul>
     </nav>
   )
-          }
+          
 }

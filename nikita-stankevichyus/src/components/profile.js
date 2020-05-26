@@ -15,7 +15,7 @@ const capitalizeFirst = (string) =>{
 }
 
 
-export class Profile extends React.PureComponent{
+export class Profile extends React.Component{
   
   constructor(props) {
     super(props);

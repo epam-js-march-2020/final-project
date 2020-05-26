@@ -1,6 +1,13 @@
 import React from 'react';
 
 export function ModalEnsurance(props) {
+
+  document.onkeydown = (event) => {
+    if (event.key === "Escape") { 
+        props.onCancel();
+   }
+  };
+  
   return (
     <>
     <div className='modal_fade modal_fade_trick'>

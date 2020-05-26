@@ -1,6 +1,17 @@
 import React from 'react';
 
 export function ModalMessage(props) {
+
+  document.onkeydown = (event) => {
+    if (event.key === "Escape") { 
+        props.onClick();
+    }
+
+    if (event.key === "Enter") {
+        props.onClick();
+    }
+  };
+
   return (
     <>
     <div className='modal_fade modal_fade_trick'>

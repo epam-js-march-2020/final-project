@@ -1,42 +1,40 @@
 import React from 'react';
 import { Service } from './service';
 
-export class Services extends React.PureComponent {
+export function Services(props) {
 
-  constructor(props) {
-    super(props);
-
-    this.serviceList = JSON.parse(localStorage.getItem('services'));
+  
+    const serviceList = JSON.parse(localStorage.getItem('services'));
 
     // Mapping each available service from DB
-    this.services = this.serviceList.map((element)=>{
+    const services = serviceList.map((element)=>{
       return <Service
         key = {element.name}
         name = {element.name}
         price = {element.price}
         description = {element.description}
         photo = {element.photo}
-        addService = {this.props.addService}
-        toService = {this.props.toService}
-        user = {this.props.user}
+        addService = {props.addService}
+        toService = {props.toService}
+        user = {props.user}
       />
-})
-  }
-  render () {
+    })
+  
+  
   return (
     <div className = 'services row container-fluid justify-content-center align-content-center'>
     <table className="table">
       <thead>
         <tr>
-          <th colspan='1'>SERVICE</th>
-          <th colspan='1'>PRICE</th>
+          <th colSpan='1'>SERVICE</th>
+          <th colSpan='1'>PRICE</th>
         </tr>
       </thead>
       <tbody>
-        {this.services}
+        {services}
       </tbody>
     </table>
     </div> 
   )
-  }
+  
 }

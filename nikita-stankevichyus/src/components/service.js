@@ -1,36 +1,33 @@
 import React from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 
-export class Service extends React.PureComponent{
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
+export function Service(props){
+  
 
-  handleClick = () => {
+  const handleClick = () => {
 
     // Dispatching action
-    this.props.toService({
-      name: this.props.name,
-      price: this.props.price,
-      description: this.props.description,
-      photo: this.props.photo,
+    props.toService({
+      name: props.name,
+      price: props.price,
+      description: props.description,
+      photo: props.photo,
     })
   }
 
-  render() {
-  return(
+  
+    return(
     
-    <tr onClick = {this.handleClick} className = 'service'>
+    <tr onClick = {handleClick} className = 'service'>
      
         <td className = 'text-color-light align-middle'>
-          <Link to={'service_'+this.props.name}>{this.props.name}</Link>
+          <Link to={'service_'+props.name}>{props.name}</Link>
         </td>
         <td className = 'text-color-light align-middle'>
-          <Link to={'service_'+this.props.name}>${this.props.price}</Link>
+          <Link to={'service_'+props.name}>${props.price}</Link>
         </td>
      
     </tr>
   )
-  }
+  
 }

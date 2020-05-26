@@ -19,15 +19,13 @@ import { AddService } from './components/add_service.js';
 import { ServicePage } from './components/service_page.js';
 
 
-class App extends React.Component {
+function App(props){
   
-
-  render() {
 
 
     document.onkeydown = (event) => {
       if (event.key === "Escape") { 
-         this.props.outModals();
+          props.outModals();
      }
     };
     
@@ -36,33 +34,33 @@ class App extends React.Component {
       <div className="App body">
         {/* Modal fade that is shown "behind" modal windows during interaction */}
         <div 
-          className={this.props.modals.fadeOn ? 
+          className={props.modals.fadeOn ? 
                     'modal_fade modal_fade_trick' 
                   : 'modal_fade'}>
         </div>
         
         {/* Sign up modal window */}
         <SignUp 
-          modals = {this.props.modals}
-          outModals = {this.props.outModals}
+          modals = {props.modals}
+          outModals = {props.outModals}
         />
 
         {/* Log in modal window */}
         <LogIn
-          logIn = {this.props.logIn}
-          modals = {this.props.modals}
-          outModals = {this.props.outModals}
+          logIn = {props.logIn}
+          modals = {props.modals}
+          outModals = {props.outModals}
         />
 
         {/* Service adding modal window */}
         <AddService 
-          toAddService = {this.props.toAddService}
-          outModals = {this.props.outModals}
-          addService = {this.props.addService}
-          addGuestService = {this.props.addGuestService}
-          modals = {this.props.modals}
-          navigation = {this.props.navigation}
-          user = {this.props.user}
+          toAddService = {props.toAddService}
+          outModals = {props.outModals}
+          addService = {props.addService}
+          addGuestService = {props.addGuestService}
+          modals = {props.modals}
+          navigation = {props.navigation}
+          user = {props.user}
         />
 
         {/* Top element for '#home' anchor */}
@@ -70,22 +68,22 @@ class App extends React.Component {
 
         <header 
           className= {'header header--fixed container--flex' 
-                      + (this.props.navigation.barShown ? '' 
-                      : this.props.user.logged ?
+                      + (props.navigation.barShown ? '' 
+                      : props.user.logged ?
                         ' header--hidden--logged'
                       : ' header--hidden')}>
 
           {/* Horizontal responsive navigation bar */}
           <NavBar 
-            user = {this.props.user} 
-            toHome = {this.props.toHome}
-            toProfile = {this.props.toProfile}
-            toServices = {this.props.toServices}
-            toSignUp = {this.props.toSignUp}
-            toLogIn = {this.props.toLogIn}
-            hideBar = {this.props.hideBar}
-            showBar = {this.props.showBar}
-            navigation = {this.props.navigation}
+            user = {props.user} 
+            toHome = {props.toHome}
+            toProfile = {props.toProfile}
+            toServices = {props.toServices}
+            toSignUp = {props.toSignUp}
+            toLogIn = {props.toLogIn}
+            hideBar = {props.hideBar}
+            showBar = {props.showBar}
+            navigation = {props.navigation}
           />
         </header>
 
@@ -99,21 +97,21 @@ class App extends React.Component {
         
             {
               // Profile is accessable only if user is logged
-              this.props.user.loged ?
+              props.user.loged ?
               <Route path='/profile'>
                 <Profile 
-                  user = {this.props.user}
-                  modals = {this.props.modals}
-                  deleteService = {this.props.deleteService}
-                  changeName = {this.props.changeName}
-                  changeSecondName = {this.props.changeSecondName}
-                  changeEmail = {this.props.changeEmail}
-                  toHome = {this.props.toHome}
-                  toChangeName = {this.props.toChangeName}
-                  toChangeSecondName = {this.props.toChangeSecondName}
-                  toChangeEmail = {this.props.toChangeEmail}
-                  outModals = {this.props.outModals}
-                  logOut = {this.props.logOut}               
+                  user = {props.user}
+                  modals = {props.modals}
+                  deleteService = {props.deleteService}
+                  changeName = {props.changeName}
+                  changeSecondName = {props.changeSecondName}
+                  changeEmail = {props.changeEmail}
+                  toHome = {props.toHome}
+                  toChangeName = {props.toChangeName}
+                  toChangeSecondName = {props.toChangeSecondName}
+                  toChangeEmail = {props.toChangeEmail}
+                  outModals = {props.outModals}
+                  logOut = {props.logOut}               
                 />
               </Route>
               : null
@@ -124,18 +122,18 @@ class App extends React.Component {
               {/* Services list page */}
               <Route path = '/services'>
                 <Services 
-                  addService = {this.props.toAddService}
-                  toService = {this.props.toService}
-                  user = {this.props.user}
+                  addService = {props.toAddService}
+                  toService = {props.toService}
+                  user = {props.user}
                 />
               </Route>
   
               {/* ServicePage page */}
-              <Route path = {'/service_'+this.props.navigation.bufferService.name}>
+              <Route path = {'/service_'+props.navigation.bufferService.name}>
                 <ServicePage
-                  navigation = {this.props.navigation}
-                  user = {this.props.user}
-                  toAddService = {this.props.toAddService}
+                  navigation = {props.navigation}
+                  user = {props.user}
+                  toAddService = {props.toAddService}
                 />
               </Route>
         
@@ -149,7 +147,6 @@ class App extends React.Component {
       </footer>
     </div>
   );
-  }
 }
 
 export default withRouter(App);

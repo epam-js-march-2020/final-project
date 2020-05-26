@@ -10,7 +10,7 @@ const initialState = {
   message: false,
 }
 
-export class AddService extends React.PureComponent {
+export class AddService extends React.Component {
   constructor(props) {
     super(props);
     

@@ -44,7 +44,6 @@ export class ServiceProfile extends React.PureComponent {
   }
 
   render() {
-    console.log(this.props.date);
   return (
     <>
       {
