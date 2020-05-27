@@ -35,7 +35,7 @@ const SignIn = (props) => {
         await response
             .json()
             .then(res => {
-                console.log(res)
+                console.log("All registred users: ",res)
                 setUsers(res)
             });
     };
@@ -52,7 +52,7 @@ const SignIn = (props) => {
         await response
             .json()
             .then(res => {
-                console.log(res.data)
+                console.log("All registred users after update: ", res.data)
                 setUsers(res.data)
             });
     };
@@ -71,7 +71,7 @@ const SignIn = (props) => {
             .json()
             .then(res => user.id = res.id)
             .then(() => {
-                console.log(user)
+                console.log("New created user: ", user)
                 updateUsersData(user)
             })
             .then(() => document.querySelector('#submitRegistration').disabled = true);

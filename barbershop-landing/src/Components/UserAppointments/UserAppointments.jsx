@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import i18n from 'i18next';
 
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
@@ -28,7 +27,7 @@ const UserAppointments = (props) => {
                     { isEmpty(props.currentUser) ? null : props.currentUser.services.map((service, i) => (
                         <tr key={i}>
                             <td>{i + 1}</td>
-                            <td>{service.name[i18n.language]}</td>
+                            <td>{service.name}</td>
                             <td>{service.time}</td>
                             <td><Button variant="warning">Remove</Button></td>
                         </tr>
