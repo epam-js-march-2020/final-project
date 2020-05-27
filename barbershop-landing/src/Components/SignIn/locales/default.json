@@ -1,0 +1,13 @@
+{
+    "en": {
+        "title": "Sign In or Create Account",
+        "createTab": "Create Account",
+        "signInTab": "Sign In",
+        "email": "Email address",
+        "password": "Password",
+        "passwordConfirm": "Confirm Password",
+        "close": "Close",
+        "name": "Your Name",
+        "success": "Successfully registered"
+    }
+}

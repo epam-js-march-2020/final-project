@@ -1,0 +1,23 @@
+{
+    "en": {
+        "title": "Our Contacts",
+        "contact": "Contact Us",
+        "email": "Email",
+        "emailAddress": "barber@shop.com",
+        "phone": "Phone",
+        "phoneNumber": "+7-999-123-456-78",
+        "address": "Naberezhnaya Chornoy Rechki, 41к7",
+        "entrance": "Entrance from the yard",
+        "day": "Day",
+        "time": "Time",
+        "closed": "Closed",
+        "hours": "10AM-8PM",
+        "mon": "Monday",
+        "tue": "Tuesday",
+        "wed": "Wednesday",
+        "thu": "Thursday",
+        "fri": "Friday",
+        "sat": "Saturday",
+        "sun": "Sunday"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "en": {
+        "title": "What would you like",
+        "man": "Man Haircut",
+        "woman": "Woman Haircut",
+        "dyeing": "Hair Dyeing",
+        "styling": "Hair Styling",
+        "beard": "Beard Styling",
+        "confirm": "Make Appointment",
+        "cancel": "Cancel",
+        "selectTime": "Select Date and Time",
+        "alert": {
+            "title": "You Must Sign In First",
+            "body": "To make an appointment, you must first register or log in to your account"
+        }
+    }
+}
