@@ -46,14 +46,20 @@ const ProductModal = (props) => {
   );
 }
 
-const Appointment = () => {
+const Appointment = (props) => {
   const [t] = useTranslation();
   const [selectedService, setSelectedService] = useState({});
 
+  const isEmpty = (obj) => Object.keys(obj).length === 0 && obj.constructor === Object;
+
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = (service) => {
-    setShowModal(true);
-    setSelectedService(service)
+    if (isEmpty(props.currentUser)) {
+      alert("You must login first")
+    } else {
+      setShowModal(true);
+      setSelectedService(service)
+    }
   }
   const handleCloseModal = () => setShowModal(false)
 

@@ -3,6 +3,7 @@
         "brand": "Барбершоп",
         "signIn": "Войти",
         "userAppointments": "Мои записи",
-        "userSettings": "Настройки"
+        "userSettings": "Настройки",
+        "signInAs": "Вы вошли как"
     }
 }

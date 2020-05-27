@@ -29,13 +29,22 @@ const LanguageToggle = () => {
     )
 }
 
-const Header = () => {
+const Header = (props) => {
     const [t] = useTranslation();
+
+    const isEmpty = (obj) => Object.keys(obj).length === 0 && obj.constructor === Object;
+
     const [showSignModal, setShowSignModal] = useState(false);
     const [showAppointModal, setShowAppointModal] = useState(false);
 
     const toggleSignModal = () => setShowSignModal(!showSignModal);
-    const toggleAppointModal = () => setShowAppointModal(!showAppointModal);
+    const toggleAppointModal = () => {
+        if(isEmpty(props.currentUser)) {
+            toggleSignModal();
+        } else {
+            setShowAppointModal(!showAppointModal)
+        }
+    };
 
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <span ref={ref} onClick={(e) => { e.preventDefault(); onClick(e); }}>
@@ -57,14 +66,18 @@ const Header = () => {
                             <img src={userIcon} alt="login icon" className="login-icon"/>
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item onClick={toggleSignModal}>{t('header.signIn')}</Dropdown.Item>
+                            {
+                                isEmpty(props.currentUser) ? 
+                                <Dropdown.Item onClick={toggleSignModal}>{t('header.signIn')}</Dropdown.Item> : 
+                                <Dropdown.Item>{t('header.signInAs')} {props.currentUser.name}</Dropdown.Item>
+                            }
                             <Dropdown.Item onClick={toggleAppointModal}>{t('header.userAppointments')}</Dropdown.Item>
                             <Dropdown.Item href="#/userSettings">{t('header.userSettings')}</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
-                <SignIn show={showSignModal} handleClose={toggleSignModal}/>
-                <UserAppointments show={showAppointModal} handleClose={toggleAppointModal}/>
+                <SignIn show={showSignModal} handleClose={toggleSignModal} setCurrentUser={props.setCurrentUser}/>
+                <UserAppointments show={showAppointModal} handleClose={toggleAppointModal} currentUser={props.currentUser}/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <NavList />
                 </Navbar.Collapse>

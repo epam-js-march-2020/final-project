@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux'
 
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -14,7 +13,6 @@ import './SignIn.css';
 
 const SignIn = (props) => {
     const [t] = useTranslation();
-    const { dispatch } = props;
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
@@ -27,17 +25,20 @@ const SignIn = (props) => {
         key: '$2b$10$ltjATMhqY0JfYN5Mi1k1nOVTEQIGJwabv1R6Fb9CUjOUl7jTe6PwG'
     };
 
-    // async function getUsersData() {
-    //     const response = await fetch([jsonBin.root, 'b', jsonBin.binId, jsonBin.binVersion].join('/'), {
-    //         method: 'GET',
-    //         headers: {
-    //             'secret-key': jsonBin.key
-    //         }
-    //     });
-    //     await response
-    //         .json()
-    //         .then(res => setUsers(res));
-    // };
+    async function getUsersData() {
+        const response = await fetch([jsonBin.root, 'b', jsonBin.binId, jsonBin.binVersion].join('/'), {
+            method: 'GET',
+            headers: {
+                'secret-key': jsonBin.key
+            }
+        });
+        await response
+            .json()
+            .then(res => {
+                console.log(res)
+                setUsers(res)
+            });
+    };
 
     async function updateUsersData(user) {
         const response = await fetch([jsonBin.root, 'b', jsonBin.binId].join('/'), {
@@ -50,7 +51,10 @@ const SignIn = (props) => {
         });
         await response
             .json()
-            .then(res => setUsers(res.data));
+            .then(res => {
+                console.log(res.data)
+                setUsers(res.data)
+            });
     };
 
     async function createNewUser(user) {
@@ -66,9 +70,11 @@ const SignIn = (props) => {
         await response
             .json()
             .then(res => user.id = res.id)
-            .then(() => updateUsersData(user))
+            .then(() => {
+                console.log(user)
+                updateUsersData(user)
+            })
             .then(() => document.querySelector('#submitRegistration').disabled = true);
-        return user;
     };
 
     const handleName = (e) => {
@@ -104,14 +110,13 @@ const SignIn = (props) => {
     }
 
     useEffect(() => {
-//        getUsersData();
+        getUsersData();
 // eslint-disable-next-line
     }, []);
 
     const registrationSubmit = (e) => {
         e.preventDefault();
         const user = { name, email, pass };
-        console.log(users);
         const noSuchUser = users.filter((u) => u.email === user.email).length === 0;
         if (noSuchUser) {
             createNewUser(user);
@@ -123,9 +128,10 @@ const SignIn = (props) => {
     const signInSubmit = (e) => {
         e.preventDefault();
         const user = { email, pass };
-        const success = users.filter((u) => u.email === user.email && u.password === user.pass).length === 1;
-        if (success) {
-            alert('Success')
+        const loggedUser = users.filter((u) => u.email === user.email && u.pass === user.pass);
+        if (loggedUser.length === 1) {
+            props.setCurrentUser(loggedUser[0]);
+            props.handleClose();
         } else {
             alert('Login error')
         }
@@ -196,4 +202,4 @@ const SignIn = (props) => {
     );
 }
 
-export default connect()(SignIn);
+export default SignIn;
