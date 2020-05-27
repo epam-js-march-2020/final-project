@@ -10,7 +10,6 @@ const Service = (props) => {
       <div>{service && <h3>{service.title}</h3>}</div>
       <div>
         <Booking service={service}/>
-        {isAuth && <button>Cancel book</button>}
       </div>
     </div>
   );

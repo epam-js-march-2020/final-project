@@ -26,19 +26,19 @@ const NavigationBar = (props) => {
         <NavLink to="/services" className="nav_bar_link">
           Services
         </NavLink>
-        {isAuth
-          ? [
-              <NavLink to="/profile" className="nav_bar_link" key="Profile">
-                Profile
-              </NavLink>,
-              <a href="#" onClick={logOut} key="Logout">
-                Logout
-              </a>,
-            ]
-          : [
-              <SignIn updateAuth={updateAuth} key="SignIn" />,
-              <SignUp key="SignUp" />,
-            ]}
+        <NavLink to="/profile" className="nav_bar_link">
+          Profile
+        </NavLink>
+        {isAuth ? (
+          <a href="#" onClick={logOut} key="Logout">
+            Logout
+          </a>
+        ) : (
+          [
+            <SignIn updateAuth={updateAuth} key="SignIn" />,
+            <SignUp key="SignUp" />,
+          ]
+        )}
       </nav>
     </div>
   );
