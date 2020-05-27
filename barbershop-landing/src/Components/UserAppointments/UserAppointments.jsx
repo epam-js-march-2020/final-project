@@ -6,9 +6,16 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 const UserAppointments = (props) => {
+    //const [user, setUser] = useState(Object.assign({}, props.currentUser))
     const [t] = useTranslation();
 
     const isEmpty = (obj) => Object.keys(obj).length === 0 && obj.constructor === Object;
+
+    const removeAppointment = (index) => {
+        const user = Object.assign({}, props.currentUser);
+        user.services.splice(index, 1);
+        //props.updateCurrentUser(user);
+    }
 
     return(
         <Modal show={props.show} onHide={props.handleClose} animation={false}>
@@ -29,7 +36,7 @@ const UserAppointments = (props) => {
                             <td>{i + 1}</td>
                             <td>{service.name}</td>
                             <td>{service.time}</td>
-                            <td><Button variant="warning">Remove</Button></td>
+                            <td><Button variant="warning" onClick={() => removeAppointment(i)}>Remove</Button></td>
                         </tr>
                     ))}
                 </thead>

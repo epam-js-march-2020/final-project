@@ -45,6 +45,7 @@ function App() {
   }
 
   const updateCurrentUser = (user) => {
+    console.log("Current user after update: ", user);
     _setCurrentUser(user);
   }
 
@@ -53,7 +54,7 @@ function App() {
       <ScrollTotop />
       <Container>
         <I18nextProvider i18n={i18n}>
-          <Header currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+          <Header currentUser={currentUser} setCurrentUser={setCurrentUser} updateCurrentUser={updateCurrentUser}/>
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route path='/about' component={About}/>

@@ -77,7 +77,7 @@ const Header = (props) => {
                     </Dropdown>
                 </div>
                 <SignIn show={showSignModal} handleClose={toggleSignModal} setCurrentUser={props.setCurrentUser}/>
-                <UserAppointments show={showAppointModal} handleClose={toggleAppointModal} currentUser={props.currentUser}/>
+                <UserAppointments show={showAppointModal} handleClose={toggleAppointModal} currentUser={props.currentUser} updateCurrentUser={props.updateCurrentUser}/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <NavList />
                 </Navbar.Collapse>
