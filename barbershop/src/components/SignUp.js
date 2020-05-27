@@ -54,7 +54,9 @@ class SignUp extends React.Component {
                   onChange={this.handleInputChange}
                 />
                 <button type="submit">Sign Up</button>
-                <button onClick={() => this.setState({ isOpen: false })}>Cancel</button>
+                <button onClick={() => this.setState({ isOpen: false })}>
+                  Cancel
+                </button>
               </form>
             </div>
           </div>

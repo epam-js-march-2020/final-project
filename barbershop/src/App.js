@@ -5,11 +5,15 @@ import Header from './components/Header';
 import NavigationBar from './components/NavigationBar';
 import Home from './components/Home';
 import ServicesList from './components/ServicesList';
-import Service from "./components/Service";
+import Service from './components/Service';
 import Footer from './components/Footer';
-import Profile from "./components/Profile";
+import Profile from './components/Profile';
 
 function App() {
+  // localStorage.setItem('login', '');
+  // localStorage.setItem('password', '');
+  // localStorage.setItem('isAuth', false);
+
   return (
     <BrowserRouter>
       <div className="container">

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { withRouter } from 'react-router';
 
 class SignIn extends React.Component {
   state = {
@@ -13,17 +13,22 @@ class SignIn extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleSignIn = (event) => {
-    const { login, password } = this.state;
+  redirectToHome = () => {
+    this.props.history.push('/home');
+  };
 
+  handleSignIn = (event) => {
     event.preventDefault();
 
+    const { login, password } = this.state;
     const localStorageLogin = localStorage.getItem('login');
     const localStoragePassword = localStorage.getItem('password');
 
     if (localStorageLogin === login && localStoragePassword === password) {
       localStorage.setItem('isAuth', true);
       this.setState({ isAuth: true, isOpen: false });
+      this.props.updateAuth(true);
+      this.redirectToHome();
     } else {
       alert('Login or password incorrect. Try again!');
     }
@@ -62,7 +67,9 @@ class SignIn extends React.Component {
                   onChange={this.handleInputChange}
                 />
                 <button type="submit">Sign In</button>
-                <button onClick={() => this.setState({ isOpen: false })}>Cancel</button>
+                <button onClick={() => this.setState({ isOpen: false })}>
+                  Cancel
+                </button>
               </form>
             </div>
           </div>
@@ -72,4 +79,5 @@ class SignIn extends React.Component {
   }
 }
 
+SignIn = withRouter(SignIn);
 export default SignIn;
