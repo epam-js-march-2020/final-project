@@ -1,0 +1,30 @@
+.services-page-background{
+    position: relative;
+    height: 85vh;
+    overflow: auto;
+    width: 100%;
+    background:linear-gradient(0deg, rgba(17, 10, 1, 0.85), rgb(0, 0, 0));
+    background-size:cover;
+    padding-top: 80px;
+    color:whitesmoke;
+}
+.services-page-container-list{
+    overflow-y: auto;
+
+}
+.services-page-container-preview{
+    margin-left: 10px;
+}
+
+.services-page-item{
+    margin-bottom: 5px;
+    padding: 10px;
+    border-bottom-left-radius: 100px;
+    border-top-left-radius: 100px;
+    height: 61px;
+    padding-top: 15px;
+}
+
+.react-datepicker__time-list-item--disabled{
+    display: none;
+}

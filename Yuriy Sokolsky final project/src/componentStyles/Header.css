@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Ruso One";
+    src: url("/fonts/19015.ttf");
+}
+body{
+
+}
+.HeaderContainer{
+    background: rgba(0,0,0,.7);
+    z-index: 5;
+    color:whitesmoke !important;
+    font-family: Ruso One;
+    letter-spacing: 0.15em;
+    text-align: center;
+}
+.HeaderImageBackground {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.8939950980392157) 0%, rgb(5, 5, 9) 48%, rgba(0, 0, 0, 0) 100%);
+}
