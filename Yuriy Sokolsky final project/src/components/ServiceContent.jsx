@@ -47,6 +47,12 @@ export class ServiceContent extends React.Component {
         this.timePickerChange = this.timePickerChange.bind(this);
         this.sendNewAppointment = this.sendNewAppointment.bind(this);
         this.calculateIntervals = this.calculateIntervals.bind(this);
+        if (getHours(new Date()) >= WorkHours.END_OF_RECORDING) {
+            this.setState({
+                minDate: addDays(new Date(), 1),
+                datePickerValue: addDays(new Date(), 1)
+            });
+        }
     }
 
     showModal() {
@@ -141,34 +147,20 @@ export class ServiceContent extends React.Component {
                         });
                     }
                 );
-                if (this.props.service.duration)
-                    this.setState({
-                        maxTime: setHours(
-                            setMinutes(
-                                new Date(),
-                                60 - Number(this.props.service.duration.slice(-2))
-                            ),
-                            21
-                        )
-                    });
+                this.calculateIntervals()
+
             }.bind(this)
         );
     }
 
     calculateIntervals() {
-        if (getHours(new Date()) >= WorkHours.END_OF_RECORDING) {
-            this.setState({
-                minDate: addDays(new Date(), 1),
-                datePickerValue: addDays(new Date(), 1)
-            });
-        }
-
 
         if (
             isToday(this.state.datePickerValue) &&
             getHours(new Date()) < WorkHours.END_OF_RECORDING &&
             getHours(new Date()) > WorkHours.START_HOURS
         ) {
+
             this.setState({
                 minTime: new Date(),
             });
@@ -180,6 +172,17 @@ export class ServiceContent extends React.Component {
                 ),
             });
         }
+        if (this.props.service.duration)
+            this.setState({
+                maxTime: setHours(
+                    setMinutes(
+                        new Date(),
+                        60 - Number(this.props.service.duration.slice(-2))
+                    ),
+                    21
+                )
+            });
+
 
     }
 
