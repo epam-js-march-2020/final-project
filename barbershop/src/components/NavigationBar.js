@@ -3,11 +3,10 @@ import { NavLink } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
-const NavigationBar = () => {
+const NavigationBar = (props) => {
   const [isAuth, setIsAuth] = React.useState(
     localStorage.getItem('isAuth') === 'true'
   );
-  console.log(isAuth);
 
   const updateAuth = (value) => {
     setIsAuth(value);
@@ -25,7 +24,7 @@ const NavigationBar = () => {
           Home
         </NavLink>
         <NavLink to="/services" className="nav_bar_link">
-          Sevices
+          Services
         </NavLink>
         {isAuth
           ? [

@@ -13,6 +13,15 @@ function App() {
   // localStorage.setItem('login', '');
   // localStorage.setItem('password', '');
   // localStorage.setItem('isAuth', false);
+  // localStorage.setItem(
+  //   'servicesList',
+  //   JSON.stringify([
+  //     { id: 1, title: 'Man haircut', price: 1000 },
+  //     { id: 2, title: 'Beard shave', price: 500 },
+  //     { id: 3, title: 'Woman haircut', price: 2000 },
+  //   ])
+  // );
+  // localStorage.setItem('reservations', JSON.stringify([]));
 
   return (
     <BrowserRouter>

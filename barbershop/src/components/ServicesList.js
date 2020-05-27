@@ -2,11 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const ServicesList = () => {
-  const [services, setServices] = React.useState([
-    { id: 1, title: 'Man haircut', price: 1000 },
-    { id: 2, title: 'Beard shave', price: 500 },
-    { id: 3, title: 'Woman haircut', price: 2000 },
-  ]);
+  const services = JSON.parse(localStorage.getItem('servicesList'));
 
   return (
     <div id="servicesList" className="main_content">
