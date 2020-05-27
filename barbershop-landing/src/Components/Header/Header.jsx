@@ -72,7 +72,7 @@ const Header = (props) => {
                                 <Dropdown.Item>{t('header.signInAs')} {props.currentUser.name}</Dropdown.Item>
                             }
                             <Dropdown.Item onClick={toggleAppointModal}>{t('header.userAppointments')}</Dropdown.Item>
-                            <Dropdown.Item href="#/userSettings">{t('header.userSettings')}</Dropdown.Item>
+                            {/* <Dropdown.Item href="#/userSettings">{t('header.userSettings')}</Dropdown.Item> */}
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
