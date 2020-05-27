@@ -36,10 +36,16 @@ function App() {
       await response
           .json()
           .then(res => {
-              console.log(res)
-              _setCurrentUser(res)
+              const currentUser = Object.assign({}, res);
+              currentUser.id = user.id;
+              console.log("Current user: ", currentUser);
+              _setCurrentUser(currentUser)
           });
     })();
+  }
+
+  const updateCurrentUser = (user) => {
+    _setCurrentUser(user);
   }
 
   return (
@@ -57,7 +63,7 @@ function App() {
             <Route 
               path='/appointment' 
               //component={Appointment}
-              render={(props) => <Appointment {...props} currentUser={currentUser}/>}
+              render={(props) => <Appointment {...props} currentUser={currentUser} updateCurrentUser={updateCurrentUser}/>}
             />
           </Switch>
           <Footer />

@@ -21,6 +21,35 @@ const ProductModal = (props) => {
   const [t] = useTranslation();
   const [startDate, setStartDate] = useState(new Date());
 
+  const jsonBin = {
+    root: 'https://api.jsonbin.io',
+    key: '$2b$10$ltjATMhqY0JfYN5Mi1k1nOVTEQIGJwabv1R6Fb9CUjOUl7jTe6PwG'
+  };
+
+  async function updateUserData(user) {
+    const response = await fetch([jsonBin.root, 'b', user.id].join('/'), {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'secret-key': jsonBin.key
+        },
+        body: JSON.stringify(user)
+    });
+    await response
+        .json()
+        .then(res => {
+          console.log("Current user after update: ", res.data);
+            props.updateUser(res.data)
+        });
+  };
+
+  const addAppointment = (serviceName) => {
+    const user = Object.assign({}, props.user);
+    user.services.push({ name: serviceName, time: startDate.toLocaleString() });
+    updateUserData(user);
+    props.handleClose()
+  };
+
   return (
     <Modal show={props.show} onHide={props.handleClose} animation={false}>
       <Modal.Header closeButton >
@@ -40,7 +69,7 @@ const ProductModal = (props) => {
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary">{t('appointment.confirm')}</Button>
+        <Button variant="primary" onClick={() => addAppointment(props.service.name)}>{t('appointment.confirm')}</Button>
         <Button variant="secondary" onClick={props.handleClose}>{t('appointment.cancel')}</Button>
       </Modal.Footer>
     </Modal>
@@ -99,7 +128,7 @@ const Appointment = (props) => {
           </Card>
         )) }
       </Row>
-      <ProductModal show={showModal} handleClose={handleCloseModal} service={selectedService}/>
+      <ProductModal show={showModal} handleClose={handleCloseModal} service={selectedService} user={props.currentUser} updateUser={props.updateCurrentUser}/>
       <AlertModal show={showAlertModal} handleClose={handleCloseAlertModal}/>
     </Container>
   );
