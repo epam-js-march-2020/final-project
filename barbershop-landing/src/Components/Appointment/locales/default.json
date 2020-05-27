@@ -8,6 +8,10 @@
         "beard": "Beard Styling",
         "confirm": "Make Appointment",
         "cancel": "Cancel",
-        "selectTime": "Select Date and Time"
+        "selectTime": "Select Date and Time",
+        "alert": {
+            "title": "You Must Sign In First",
+            "body": "To make an appointment, you must first register or log in to your account"
+        }
     }
 }

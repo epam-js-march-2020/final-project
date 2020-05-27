@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import DatePicker from 'react-datepicker';
 
@@ -46,6 +47,20 @@ const ProductModal = (props) => {
   );
 }
 
+const AlertModal = (props) => {
+  const [t] = useTranslation();
+  return (
+    <Modal show={props.show} onHide={props.handleClose} animation={false}>
+      <Alert variant="danger" className="mb-0">
+      <Alert.Heading>{t("appointment.alert.title")}</Alert.Heading>
+        <p>
+          {t("appointment.alert.body")}
+        </p>
+      </Alert>
+    </Modal>
+  );
+}
+
 const Appointment = (props) => {
   const [t] = useTranslation();
   const [selectedService, setSelectedService] = useState({});
@@ -53,15 +68,18 @@ const Appointment = (props) => {
   const isEmpty = (obj) => Object.keys(obj).length === 0 && obj.constructor === Object;
 
   const [showModal, setShowModal] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
+
   const handleShowModal = (service) => {
     if (isEmpty(props.currentUser)) {
-      alert("You must login first")
+      setShowAlertModal(true);
     } else {
       setShowModal(true);
       setSelectedService(service)
     }
   }
-  const handleCloseModal = () => setShowModal(false)
+  const handleCloseModal = () => setShowModal(false);
+  const handleCloseAlertModal = () => setShowAlertModal(false)
 
   const services = [
     { name: t('appointment.man'), image: menHaircut },
@@ -82,6 +100,7 @@ const Appointment = (props) => {
         )) }
       </Row>
       <ProductModal show={showModal} handleClose={handleCloseModal} service={selectedService}/>
+      <AlertModal show={showAlertModal} handleClose={handleCloseAlertModal}/>
     </Container>
   );
 }
