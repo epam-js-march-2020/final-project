@@ -3,14 +3,24 @@ import Booking from './Booking';
 
 const Service = (props) => {
   const { service } = props.location;
-  const isAuth = localStorage.getItem('isAuth') === 'true';
 
   return (
     <div className="main_content">
-      <div>{service && <h3>{service.title}</h3>}</div>
-      <div>
-        <Booking service={service}/>
-      </div>
+      {service ? (
+        <div>
+          <div className="service_head">
+            <h1>{service.title}</h1>
+          </div>
+          <div className="service_body">
+            <p><img src={service.img_src} alt={service.title} /></p>
+            <p>{service.description}</p>
+            <p><strong>Price: {service.price}</strong></p>
+            <Booking service={service} />
+          </div>
+        </div>
+      ) : (
+        <div>Oops, something went wrong!</div>
+      )}
     </div>
   );
 };

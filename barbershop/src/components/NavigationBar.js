@@ -18,27 +18,33 @@ const NavigationBar = (props) => {
   };
 
   return (
-    <div className="navigation_bar">
+    <div className="nav_bar_background">
       <nav>
-        <NavLink to="/home" className="nav_bar_link">
-          Home
-        </NavLink>
-        <NavLink to="/services" className="nav_bar_link">
-          Services
-        </NavLink>
-        <NavLink to="/profile" className="nav_bar_link">
-          Profile
-        </NavLink>
-        {isAuth ? (
-          <a href="#" onClick={logOut} key="Logout">
-            Logout
-          </a>
-        ) : (
-          [
-            <SignIn updateAuth={updateAuth} key="SignIn" />,
-            <SignUp key="SignUp" />,
-          ]
-        )}
+        <div className="nav_bar">
+          <div>
+            <NavLink to="/home">
+              Home
+            </NavLink>
+            <NavLink to="/services">
+              Services
+            </NavLink>
+            <NavLink to="/profile">
+              Profile
+            </NavLink>
+          </div>
+          <div>
+            {isAuth ? (
+              <a href="#" onClick={logOut} key="Logout">
+                Logout
+              </a>
+            ) : (
+              [
+                <SignIn updateAuth={updateAuth} key="SignIn" />,
+                <SignUp key="SignUp" />,
+              ]
+            )}
+          </div>
+        </div>
       </nav>
     </div>
   );

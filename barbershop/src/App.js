@@ -16,9 +16,9 @@ function App() {
   // localStorage.setItem(
   //   'servicesList',
   //   JSON.stringify([
-  //     { id: 1, title: 'Man haircut', price: 1000 },
-  //     { id: 2, title: 'Beard shave', price: 500 },
-  //     { id: 3, title: 'Woman haircut', price: 2000 },
+  //     { id: 1, title: 'Man haircut', description: 'Different haircuts for all creatures of this world. NOT FOR HOBBITS!', price: 1000, img_src: "https://www.elvesdoitbetter.com/legolas/12.jpg" },
+  //     { id: 2, title: 'Hobbit haircut', description: 'Only ONE type of haircut for hobbits.', price: 500, img_src: "https://yt3.ggpht.com/a/AGF-l788IYws6inqRPerNZujfc8Ig0a_SH8E8huy=s900-c-k-c0xffffffff-no-rj-mo" },
+  //     { id: 3, title: 'Beard shave', description: 'Choose beard shave you like! For dwarfs price is doubled.', price: 5000, img_src: "https://pbs.twimg.com/media/CW6w33kUoAAeRxK.jpg" },
   //   ])
   // );
   // localStorage.setItem('reservations', JSON.stringify([]));

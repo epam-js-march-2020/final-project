@@ -46,12 +46,12 @@ class SignIn extends React.Component {
         </a>
 
         {this.state.isOpen && (
-          <div className="modal">
-            <div>
-              <h3>Sign In</h3>
-            </div>
-            <div className="modal_body">
-              <form onSubmit={this.handleSignIn}>
+          <div className="modal_fade">
+            <div className="modal_window">
+              <div className="modal_head">
+                <h3>Sign In</h3>
+              </div>
+              <form className="modal_body" onSubmit={this.handleSignIn}>
                 Enter login{' '}
                 <input
                   type="text"
@@ -66,10 +66,12 @@ class SignIn extends React.Component {
                   value={this.state.password}
                   onChange={this.handleInputChange}
                 />
-                <button type="submit">Sign In</button>
-                <button onClick={() => this.setState({ isOpen: false })}>
-                  Cancel
-                </button>
+                <div className="modal_buttons">
+                  <button className="button" type="submit">Sign In</button>
+                  <button className="button" onClick={() => this.setState({ isOpen: false })}>
+                    Cancel
+                  </button>
+                </div>
               </form>
             </div>
           </div>

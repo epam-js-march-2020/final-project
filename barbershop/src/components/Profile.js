@@ -7,48 +7,54 @@ const Profile = () => {
     JSON.parse(localStorage.getItem('reservations'))
   );
 
-  const getUserReservations = (reservations, user) => {
-    let userReservations = [];
-
-    reservations.forEach((reservation) => {
-      if (reservation.user === user) {
-        userReservations.push(reservation);
-      }
-    });
-    return userReservations;
+  const getUserReservations = (user) => {
+    return reservations.filter((res) => res.user === user);
   };
-
-  const userReservations = getUserReservations(reservations, user);
 
   const removeReservation = (reservation) => {
     setReservations(reservations.filter((res) => res !== reservation));
-    localStorage.setItem('reservations', JSON.stringify(reservations));
   };
 
+  const userReservations = getUserReservations(user);
+
+  localStorage.setItem('reservations', JSON.stringify(reservations));
+
   return (
-    <div>
-      <div>Welcome, {user}</div>
-      {userReservations.length > 0 ? (
-        <div>
-          <div>Your reservations:</div>
-          <ul>
+    <div className="main_content">
+      <div className="profile_head">
+        <h1>Welcome, {user}!</h1>
+      </div>
+      <div className="profile_body">
+        {userReservations.length > 0 ? (
+          <div>
+            <div>
+              <h3>Your reservations:</h3>
+            </div>
             {userReservations.map((reservation, index) => {
               return (
-                <li key={index}>
-                  <span>{reservation.service}</span>
+                <div key={index} className="profile_body_reservation">
+                  <span>
+                    <strong>{reservation.service}</strong>
+                  </span>
+                  <span>Date: {reservation.date}</span>
+                  <span>Time: {reservation.time}</span>
                   {isAuth && (
-                    <button onClick={() => removeReservation(reservation)}>
+                    <button
+                      className="button"
+                      onClick={() => removeReservation(reservation)}
+                    >
                       Cancel a reservation
                     </button>
                   )}
-                </li>
+                  <hr />
+                </div>
               );
             })}
-          </ul>
-        </div>
-      ) : (
-        <div>You have no reservations</div>
-      )}
+          </div>
+        ) : (
+          <div>You have no reservations</div>
+        )}
+      </div>
     </div>
   );
 };

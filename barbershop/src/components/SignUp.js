@@ -31,32 +31,38 @@ class SignUp extends React.Component {
         >
           Sign Up
         </a>
-
         {this.state.isOpen && (
-          <div className="modal">
-            <div>
-              <h3>Sign Up</h3>
-            </div>
-            <div className="modal_body">
-              <form onSubmit={this.handleSignUp}>
-                Enter login{' '}
+          <div className="modal_fade">
+            <div className="modal_window">
+              <div className="modal_head">
+                <h1>Sign Up</h1>
+              </div>
+              <form className="modal_body" onSubmit={this.handleSignUp}>
+                Enter login:
                 <input
                   type="text"
                   name="login"
                   value={this.state.login}
                   onChange={this.handleInputChange}
                 />
-                Enter password{' '}
+                Enter password:
                 <input
                   type="text"
                   name="password"
                   value={this.state.password}
                   onChange={this.handleInputChange}
                 />
-                <button type="submit">Sign Up</button>
-                <button onClick={() => this.setState({ isOpen: false })}>
-                  Cancel
-                </button>
+                <div className="modal_buttons">
+                  <button className="button" type="submit">
+                    Sign Up
+                  </button>
+                  <button
+                    className="button"
+                    onClick={() => this.setState({ isOpen: false })}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </form>
             </div>
           </div>
