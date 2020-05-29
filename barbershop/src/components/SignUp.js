@@ -14,11 +14,14 @@ class SignUp extends React.Component {
   handleSignUp = (event) => {
     event.preventDefault();
 
-    localStorage.setItem('login', this.state.login);
-    localStorage.setItem('password', this.state.password);
-    localStorage.setItem('isAuth', false);
-
-    this.setState({ isOpen: false });
+    if (this.state.login !== '' || this.state.password !== '') {
+      localStorage.setItem('login', this.state.login);
+      localStorage.setItem('password', this.state.password);
+      localStorage.setItem('isAuth', false);
+      this.setState({ isOpen: false });
+    } else {
+      alert ('login or password incorrect');
+    }
   };
 
   render() {
