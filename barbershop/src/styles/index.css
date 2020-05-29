@@ -1,0 +1,219 @@
+.container {
+  padding-top: 1rem;
+  margin: 0 auto;
+  width: 1000px;
+}
+
+.header {
+  height: 300px;
+  width: 100%;
+}
+
+.header_image {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+
+.nav_bar_background {
+  background: url('../components/static/nav_bar_bg.png');
+}
+
+.nav_bar {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.nav_bar a:link, a:visited {
+  margin: 0 20px;
+  color: darkorange;
+  font-size: 30px;
+  text-decoration: none;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.nav_bar a:hover {
+  color: red;
+}
+
+.main_content {
+  min-height: 500px;
+  width: 100%;
+  background: aliceblue;
+  border-radius: 0 0 10px 10px;
+}
+
+.home_head {
+  margin-top: 0;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.home_body {
+  padding: 0 100px 30px;
+  font-size: 20px;
+  display: inline-block;
+}
+
+.home_body img {
+  height: 150px;
+  width: 150px;
+  border-radius: 20px;
+  display:block;
+  margin:auto;
+}
+
+.home_body_img_caption {
+  text-align: center;
+  display: block;
+}
+
+.services_list_head {
+  margin-top: 0;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.services_list_body {
+  padding: 30px 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.services_list_service {
+  margin: 20px;
+  height: 300px;
+  width: 250px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.services_list_service_head {
+  margin-top: 0;
+  padding-top: 20px;
+  height: 15%;
+  text-align: center;
+}
+
+.services_list_service_body {
+  height: 75%;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.services_list_service_body a:link {
+  text-decoration: none;
+}
+
+.services_list_service_body a:hover {
+  color: red;
+}
+
+.services_list_service_body img {
+  height: 150px;
+  width: 150px;
+  border-radius: 5px;
+}
+
+.service_head {
+  margin-top: 0;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.service_body {
+  padding: 0 100px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.service_body img {
+  height: 300px;
+  width: 300px;
+  border-radius: 10px;
+}
+
+.profile_head {
+  margin-top: 0;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.profile_body {
+  padding: 0 100px;
+  font-size: 20px;
+  list-style: none;
+}
+
+.profile_body_reservation {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.button {
+  max-width: 200px;
+  min-height: 30px;
+  margin: 10px;
+  font-size: 15px;
+  background-color: white;
+  border: 1px solid blue;
+  border-radius: 12px;
+}
+
+.button:hover {
+  background-color: lightblue;
+}
+
+.modal_fade {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+}
+
+.modal_window {
+  margin-top: 100px;
+  width: 500px;
+  height: 300px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.modal_buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.modal_head {
+  margin-top: 0;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.modal_body {
+  padding: 0 50px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
