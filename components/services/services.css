@@ -1,0 +1,74 @@
+.services {
+    background-color: #fff;
+    padding: 95px 0 0;
+    width: 100%;
+  }
+  .titlenew {
+    color: #0e0905;
+    display: block;
+    font-family: DinPro-Black;
+    font-size: 36px;
+    padding-bottom: 60px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  .content {
+      position: relative;
+      display: flex;
+      flex-wrap: nowrap;
+  }
+  
+  .inner {
+      margin: 0 auto;
+      padding: 0 10px;
+      width: 960px;
+  }
+  
+  .content-left  {
+    color: #0e0905;
+    position: relative;
+    width: 50%;
+    z-index: 1;
+  }
+  
+  
+   .content-right {
+      align-items: center;
+      color: #0e0905;
+      display: flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: -webkit-flex;
+      font-family: DinPro-Bold;
+      font-size: 20px;
+      padding-left: 10px;
+      text-transform: uppercase;
+  }
+  .price {
+    width: 100%;
+  }
+  .price-item {
+    align-items: flex-start;
+    display: flex;
+    
+    display: -webkit-flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    line-height: 1.3;
+  }
+  .button {
+    background-color: #4CAF50 ; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .button2 {background-color: #008CBA;} /* Blue */
+  

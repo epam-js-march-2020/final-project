@@ -1,0 +1,38 @@
+.customer {
+    
+  color: black;
+  display: block;
+  font-size: 10px;
+  padding-bottom: 35px;
+  padding-top: 30px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top:0px;
+  background-color: black;
+  background-image:   url('/barber2.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 500px;
+  background-position: center;
+}
+.authorization {
+  width: 100px ;
+  float: left;
+  color: white;
+  margin-top: 20px;
+  margin-left: 10px;
+  font-size: 10px;
+}
+.newUser {
+  width: 100px ;
+  float: left;
+  color: white;
+  margin-top: 20px;
+  margin-left: 10px;
+  clear: left;;
+  
+}
+.customerLogin {
+  font-size: 15px;
+}
